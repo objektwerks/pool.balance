@@ -12,4 +12,4 @@ Test
 
 Resources
 ---------
-1. [JavaFx](https://openjfx.io/index.html)
+1. [JavaFX](https://openjfx.io/index.html)
