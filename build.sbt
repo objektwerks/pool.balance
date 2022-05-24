@@ -1,14 +1,9 @@
-enablePlugins(JmhPlugin)
-
-name := "quill"
+name := "pool.calc"
 organization := "objektwerks"
 version := "0.1-SNAPSHOT"
-scalaVersion := "2.13.8"
+scalaVersion := "3.1.2"
 libraryDependencies ++= {
-  val quillVersion = "3.10.0" // 3.11 contains dev.zio
   Seq(
-    "io.getquill" %% "quill-sql" % quillVersion,
-    "io.getquill" %% "quill-jdbc" % quillVersion,
     "com.h2database" % "h2" % "2.1.212",
     "com.typesafe" % "config" % "1.4.2",
     "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
