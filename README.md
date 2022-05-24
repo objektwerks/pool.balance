@@ -10,6 +10,10 @@ Test
 ----
 1. sbt clean test
 
+Run
+---
+1. sbt run
+
 Resources
 ---------
 1. [JavaFX](https://openjfx.io/index.html)
