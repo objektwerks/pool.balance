@@ -1,19 +1,24 @@
 package objektwerks
 
-import scalafx.Includes._
+import com.typesafe.config.ConfigFactory
+
 import scalafx.application.JFXApp3
 import scalafx.scene.Scene
 import scalafx.scene.paint.Color._
 import scalafx.scene.shape.Rectangle
+import scalafx.Includes._
 
 object App extends JFXApp3:
-  override def start(): Unit = {
+  val conf = ConfigFactory.load("app.conf")
+
+  override def start(): Unit =
     stage = new JFXApp3.PrimaryStage {
-      title.value = "Pool Calc"
-      width = 600
-      height = 400
-      scene = new Scene {
-        content = new Rectangle {}
-      }
+      val sceneGraph = new Scene {}
+      title = conf.getString("title")
+      minHeight = conf.getInt("height").toDouble
+      minWidth = conf.getInt("width").toDouble
+      icons.add(Images.appImage)
     }
+  
+  sys.addShutdownHook {
   }
