@@ -6,7 +6,7 @@ import scalafx.scene.Scene
 import scalafx.scene.paint.Color._
 import scalafx.scene.shape.Rectangle
 
-object App extends JFXApp3 {
+object App extends JFXApp3:
   override def start(): Unit = {
     stage = new JFXApp3.PrimaryStage {
       title.value = "Pool Calc"
@@ -19,4 +19,3 @@ object App extends JFXApp3 {
       }
     }
   }
-}
