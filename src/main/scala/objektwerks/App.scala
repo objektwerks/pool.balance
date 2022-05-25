@@ -13,9 +13,7 @@ object App extends JFXApp3:
       width = 600
       height = 450
       scene = new Scene {
-        fill = LightGreen
-        content = new Rectangle {
-        }
+        content = new Rectangle {}
       }
     }
   }
