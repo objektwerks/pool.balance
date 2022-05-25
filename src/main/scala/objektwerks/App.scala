@@ -17,7 +17,7 @@ object App extends JFXApp3:
       title = conf.getString("title")
       minHeight = conf.getInt("height").toDouble
       minWidth = conf.getInt("width").toDouble
-      icons.add(Images.appImage)
+      icons.add(Images.logo)
     }
   
   sys.addShutdownHook {
