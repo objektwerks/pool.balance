@@ -11,7 +11,7 @@ object App extends JFXApp3:
     stage = new JFXApp3.PrimaryStage {
       title.value = "Pool Calc"
       width = 600
-      height = 450
+      height = 400
       scene = new Scene {
         content = new Rectangle {}
       }
