@@ -1,5 +1,7 @@
 package objektwerks
 
+import com.typesafe.scalalogging.LazyLogging
+
 import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.geometry.Insets
@@ -8,7 +10,7 @@ import scalafx.scene.layout.VBox
 
 import Conf.*
 
-object App extends JFXApp3:
+object App extends JFXApp3 with LazyLogging:
   override def start(): Unit =
     stage = new JFXApp3.PrimaryStage {
       scene = new Scene {
@@ -25,5 +27,7 @@ object App extends JFXApp3:
       minHeight = windowHeight
       icons.add(Images.logo)
     }
+    logger.info("App started.")
 
-  override def stopApp(): Unit = ()
+  override def stopApp(): Unit =
+    logger.info("App stopped.")
