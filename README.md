@@ -16,9 +16,11 @@ Run
 
 Features
 --------
-1. measurements
-2. charts
-3. database
+1. dashboard
+2. measurements
+3. actions
+4. charts
+5. database
 
 Measurements
 ------------
