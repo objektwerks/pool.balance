@@ -13,21 +13,24 @@ import scalafx.scene.shape.Rectangle
 
 object App extends JFXApp3:
   private val conf = ConfigFactory.load("app.conf")
+  private val windowTitle = conf.getString("window.title")
+  private val windowWidth = conf.getInt("window.width").toDouble
+  private val windowHeight = conf.getInt("window.height").toDouble
 
   override def start(): Unit =
     stage = new JFXApp3.PrimaryStage {
       scene = new Scene {
         root = new VBox {
-          prefHeight = 600
-          prefWidth = 800
+          prefWidth = windowWidth
+          prefHeight = windowHeight
           spacing = 6
           padding = Insets(6)
           children = List()
         }
       }
-      title = conf.getString("title")
-      minHeight = conf.getInt("height").toDouble
-      minWidth = conf.getInt("width").toDouble
+      title = windowTitle
+      minWidth = windowWidth
+      minHeight = windowHeight
       icons.add(Images.logo)
     }
 
