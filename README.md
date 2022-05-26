@@ -1,6 +1,6 @@
 Pool Balance
 ------------
->Pool chemical balance measurement tool.
+>Pool chemical measurement and charting app.
 
 Build
 -----
