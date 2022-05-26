@@ -1,4 +1,4 @@
-name := "poolcalc"
+name := "pool.balance"
 organization := "objektwerks"
 version := "0.1-SNAPSHOT"
 scalaVersion := "3.1.2"
