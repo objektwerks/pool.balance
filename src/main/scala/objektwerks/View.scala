@@ -7,7 +7,7 @@ import scalafx.scene.layout.VBox
 import Conf.*
 
 object View:
-  val sceneGraph = new Scene {
+  val scene = new Scene {
     root = new VBox {
       prefWidth = windowWidth
       prefHeight = windowHeight

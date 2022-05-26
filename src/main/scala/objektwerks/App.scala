@@ -13,7 +13,7 @@ import Conf.*
 object App extends JFXApp3 with LazyLogging:
   override def start(): Unit =
     stage = new JFXApp3.PrimaryStage {
-      scene = View.sceneGraph
+      scene = View.scene
       title = windowTitle
       minWidth = windowWidth
       minHeight = windowHeight
