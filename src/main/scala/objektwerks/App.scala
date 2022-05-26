@@ -11,8 +11,8 @@ import scalafx.scene.layout.VBox
 object App extends JFXApp3:
   private val conf = ConfigFactory.load("app.conf")
   private val windowTitle = conf.getString("window.title")
-  private val windowWidth = conf.getInt("window.width").toDouble
-  private val windowHeight = conf.getInt("window.height").toDouble
+  private val windowWidth = conf.getDouble("window.width")
+  private val windowHeight = conf.getDouble("window.height")
 
   override def start(): Unit =
     stage = new JFXApp3.PrimaryStage {
