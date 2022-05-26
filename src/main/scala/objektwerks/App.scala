@@ -1,19 +1,14 @@
 package objektwerks
 
-import com.typesafe.config.ConfigFactory
-
 import scalafx.Includes.*
 import scalafx.application.JFXApp3
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.layout.VBox
 
-object App extends JFXApp3:
-  private val conf = ConfigFactory.load("app.conf")
-  private val windowTitle = conf.getString("window.title")
-  private val windowWidth = conf.getDouble("window.width")
-  private val windowHeight = conf.getDouble("window.height")
+import Conf.*
 
+object App extends JFXApp3:
   override def start(): Unit =
     stage = new JFXApp3.PrimaryStage {
       scene = new Scene {
