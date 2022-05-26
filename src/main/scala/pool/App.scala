@@ -1,4 +1,4 @@
-package poolcalc
+package pool
 
 import com.typesafe.scalalogging.LazyLogging
 

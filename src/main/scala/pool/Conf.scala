@@ -1,4 +1,4 @@
-package poolcalc
+package pool
 
 import com.typesafe.config.ConfigFactory
 import scalafx.scene.image.{Image, ImageView}

@@ -1,4 +1,4 @@
-package poolcalc
+package pool
 
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
