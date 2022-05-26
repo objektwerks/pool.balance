@@ -32,7 +32,7 @@ Execute
 Measurements
 ------------
 >Measured in ppm ( parts per million ).
-1. total chlorine (tc): 0 - 10, ok = 1 - 5, ideal = 3
+1. total chlorine (tc = fc + cc): 0 - 10, ok = 1 - 5, ideal = 3
 2. free chlorine (fc): 0 - 10, ok = 1 - 5, ideal = 3
 3. combined chlorine (cc = tc - fc): 0
 4. ph: 6.2 - 8.4, ok = 7.2 - 7.6, ideal = 7.4
