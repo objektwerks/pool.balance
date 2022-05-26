@@ -26,5 +26,4 @@ object App extends JFXApp3:
       icons.add(Images.logo)
     }
 
-  override def stopApp(): Unit =
-    super.stopApp()
+  override def stopApp(): Unit = ()
