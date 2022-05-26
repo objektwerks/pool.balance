@@ -30,6 +30,6 @@ object App extends JFXApp3:
       minWidth = conf.getInt("width").toDouble
       icons.add(Images.logo)
     }
-  
-  sys.addShutdownHook {
-  }
+
+  override def stopApp(): Unit =
+    super.stopApp()
