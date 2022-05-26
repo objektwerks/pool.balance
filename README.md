@@ -22,7 +22,7 @@ Package
 Install
 -------
 1. unzip ./target/universal/poolcalc-${version}.zip
-2. copy unzipped poolcalc-${version} directory to new ${poolcalc.directory}
+2. copy unzipped poolcalc-${version} directory to **new** ${poolcalc.directory}
 3. set executable permissions on ${poolcalc.directory}/poolcalc-${version}/bin/poolcalc
 
 Execute
