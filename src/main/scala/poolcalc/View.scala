@@ -1,4 +1,4 @@
-package objektwerks
+package poolcalc
 
 import scalafx.geometry.Insets
 import scalafx.scene.Scene

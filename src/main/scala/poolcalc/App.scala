@@ -1,4 +1,4 @@
-package objektwerks
+package poolcalc
 
 import com.typesafe.scalalogging.LazyLogging
 
