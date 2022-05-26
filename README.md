@@ -1,6 +1,6 @@
-Pool Calc
----------
->Pool calculator.
+Pool Balance
+------------
+>Pool chemical balance measurement tool.
 
 Build
 -----
