@@ -4,7 +4,7 @@ import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.layout.VBox
 
-final class View(conf: Conf):
+final class View(conf: Conf, model: Model):
   val scene = new Scene {
     root = new VBox {
       prefWidth = conf.windowWidth
