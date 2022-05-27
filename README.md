@@ -45,8 +45,8 @@ Tests
 8. total bromine (tb): 0 - 20, ok = 2 - 10, ideal = 5
 9. temperature: 0 - 100
 
-Model
------
+Entities
+--------
 1. Pool
 2. FreeChlorine
 3. CombinedChlorine
@@ -57,6 +57,13 @@ Model
 8. CyanuricAcid
 9. TotalBromine
 10. Temperature
+
+UI
+--
+* App 1 --> 1 Conf | Store | Model | View
+* Store 1 --> 1 Conf
+* Model 1 --> 1 Store
+* View 1 --> 1 Conf | Model
 
 Resources
 ---------
