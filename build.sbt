@@ -1,7 +1,7 @@
 name := "pool.balance"
 organization := "objektwerks"
 version := "0.1-SNAPSHOT"
-scalaVersion := "3.1.2"
+scalaVersion := "3.1.3-RC3"
 mainClass := Some("pool.App")
 assemblyJarName := "pool-balance-0.1.jar"
 libraryDependencies ++= {
