@@ -4,11 +4,11 @@ import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.layout.VBox
 
-final class View(conf: Conf, model: Model):
+final class View(context: Context):
   val scene = new Scene {
     root = new VBox {
-      prefWidth = conf.windowWidth
-      prefHeight = conf.windowHeight
+      prefWidth = context.windowWidth
+      prefHeight = context.windowHeight
       spacing = 6
       padding = Insets(6)
       children = List()
