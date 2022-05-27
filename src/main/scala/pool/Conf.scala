@@ -10,6 +10,10 @@ object Conf:
   val windowWidth = conf.getDouble("window.width")
   val windowHeight = conf.getDouble("window.height")
 
+  val url = conf.getString("db.url")
+  val user = conf.getString("db.user")
+  val password = conf.getString("db.password")
+
   val logo = new Image(Image.getClass.getResourceAsStream("/logo.white.png"))
 
   def loadImageView(path: String): ImageView = new ImageView {
