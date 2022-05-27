@@ -53,3 +53,9 @@ create table total_bromine (
   time_created time not null,
   value double not null
 );
+create table temperature (
+  id int primary key auto_increment,
+  date_created date not null,
+  time_created time not null,
+  value double not null
+);
