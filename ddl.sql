@@ -41,3 +41,9 @@ create table total_alkalinity (
   time_created time not null,
   value double not null
 );
+create table cyanuric_acid (
+  id int primary key auto_increment,
+  date_created date not null,
+  time_created time not null,
+  value double not null
+);
