@@ -13,7 +13,7 @@ object App extends JFXApp3 with LazyLogging:
   override def start(): Unit =
     val conf = Conf( ConfigFactory.load("app.conf") )
     val store = Store(conf)
-    val model = Model(store)
+    val model = Model(conf, store)
     val view = View(conf, model)
 
     stage = new JFXApp3.PrimaryStage {

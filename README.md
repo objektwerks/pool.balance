@@ -62,7 +62,7 @@ UI
 --
 * App 1 --> 1 Conf | Store | Model | View
 * Store 1 --> 1 Conf
-* Model 1 --> 1 Store
+* Model 1 --> 1 Conf | Store
 * View 1 --> 1 Conf | Model
 
 Resources
