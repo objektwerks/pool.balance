@@ -1,4 +1,3 @@
-drop all objects;
 create table pool (
   id int primary key auto_increment,
   date_created date not null,
