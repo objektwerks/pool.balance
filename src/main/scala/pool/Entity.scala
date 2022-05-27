@@ -34,3 +34,4 @@ final case class TotalAlkalinity(value: Double) extends Entity
 
 final case class CyanuricAcid(value: Double) extends Entity
 
+final case class TotalBromine(value: Double) extends Entity
