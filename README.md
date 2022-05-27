@@ -15,8 +15,9 @@ Run
 1. sbt run
 
 Assembly
--------
+--------
 1. sbt assembly
+>See: target/scala-3.1.2/pool-balance-0.1.jar
 
 Features
 --------
