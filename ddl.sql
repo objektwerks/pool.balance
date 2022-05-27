@@ -23,3 +23,9 @@ create table total_chlorine (
   time_created time not null,
   value double not null
 );
+create table ph (
+  id int primary key auto_increment,
+  date_created date not null,
+  time_created time not null,
+  value double not null
+);
