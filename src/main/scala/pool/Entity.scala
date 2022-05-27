@@ -3,12 +3,6 @@ package pool
 import java.time.{LocalDate, LocalTime}
 import java.time.format.DateTimeFormatter
 
-/*
-8. CyanuricAcid
-9. TotalBromine
-10. Temperature
-*/
-
 sealed trait Entity:
   val id: Int = 0
   val date: LocalDate = LocalDate.now
@@ -35,3 +29,5 @@ final case class TotalAlkalinity(value: Double) extends Entity
 final case class CyanuricAcid(value: Double) extends Entity
 
 final case class TotalBromine(value: Double) extends Entity
+
+final case class Temperature(value: Double) extends Entity
