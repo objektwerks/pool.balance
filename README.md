@@ -1,6 +1,6 @@
 Pool Balance
 ------------
->Pool chemical measurement and charting app.
+>Pool chemical measurement and charting app using ScalaFx and Scala 3.
 
 Build
 -----
