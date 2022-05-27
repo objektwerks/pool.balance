@@ -35,3 +35,9 @@ create table calcium_hardness (
   time_created time not null,
   value double not null
 );
+create table total_alkalinity (
+  id int primary key auto_increment,
+  date_created date not null,
+  time_created time not null,
+  value double not null
+);
