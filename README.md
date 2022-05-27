@@ -33,7 +33,20 @@ Measurements
 6. total alkalinity (ta): 0 - 240, ok = 80 - 120, ideal = 100
 7. cyanuric acid (cya): 0 - 300, ok = 30 - 100, ideal = 50
 8. total bromine (tb): 0 - 20, ok = 2 - 10, ideal = 5
-9. temp: 0 - 100
+9. temperature: 0 - 100
+
+Model
+-----
+1. Pool
+2. FreeChlorine
+3. CombinedChlorine
+4. TotalChlorine
+5. pH
+6. CalciumHardness
+7. TotalAlkalinity
+8. CyanuricAcid
+9. TotalBromine
+10. Temperature
 
 Package
 -------
