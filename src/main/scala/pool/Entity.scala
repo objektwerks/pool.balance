@@ -31,3 +31,5 @@ final case class TotalChlorine(value: Double) extends Entity
 final case class pH(value: Double) extends Entity
 
 final case class CalciumHardness(value: Double) extends Entity
+
+final case class TotalAlkalinity(value: Double) extends Entity
