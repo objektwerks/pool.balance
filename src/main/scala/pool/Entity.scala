@@ -9,27 +9,27 @@ sealed trait Entity:
 final case class Pool(volume: Int = 10000) extends Entity
 
 sealed trait Measurement extends Entity:
-  val value: Double = 0.0
+  val value: Double
   val dateCreated: LocalDate = LocalDate.now
   val timeCreated: LocalTime = LocalTime.now
 
   def newDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
   def newTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm")
   
-final case class FreeChlorine() extends Measurement
+final case class FreeChlorine(value: Double) extends Measurement
 
-final case class CombinedChlorine() extends Measurement
+final case class CombinedChlorine(value: Double) extends Measurement
 
-final case class TotalChlorine() extends Measurement
+final case class TotalChlorine(value: Double) extends Measurement
 
-final case class pH() extends Measurement
+final case class pH(value: Double) extends Measurement
 
-final case class CalciumHardness() extends Measurement
+final case class CalciumHardness(value: Double) extends Measurement
 
-final case class TotalAlkalinity() extends Measurement
+final case class TotalAlkalinity(value: Double) extends Measurement
 
-final case class CyanuricAcid() extends Measurement
+final case class CyanuricAcid(value: Double) extends Measurement
 
-final case class TotalBromine() extends Measurement
+final case class TotalBromine(value: Double) extends Measurement
 
-final case class Temperature() extends Measurement
+final case class Temperature(value: Double) extends Measurement
