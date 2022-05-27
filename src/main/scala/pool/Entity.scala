@@ -14,8 +14,8 @@ sealed trait Entity:
 
 final case class Pool(volume: Int = 10000) extends Entity
 
-final case class FreeChlorine(value: Double)
+final case class FreeChlorine(value: Double) extends Entity
 
-final case class CombinedChlorine(value: Double)
+final case class CombinedChlorine(value: Double) extends Entity
 
-final case class TotalChlorine(value: Double)
+final case class TotalChlorine(value: Double) extends Entity
