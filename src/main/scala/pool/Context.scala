@@ -16,7 +16,6 @@ final class Context(config: Config):
 
   val store = Store(this)
   val model = Model(this)
-  val view = View(this)
 
 object Conf:
   def loadImageView(path: String): ImageView = new ImageView {

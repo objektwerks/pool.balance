@@ -13,7 +13,8 @@ object App extends JFXApp3 with LazyLogging:
   override def start(): Unit =
     stage = new JFXApp3.PrimaryStage {
       val context = Context( ConfigFactory.load("app.conf") )
-      scene = context.view.scene
+      val view = View(context)
+      scene = view.scene
       title = context.windowTitle
       minWidth = context.windowWidth
       minHeight = context.windowHeight
