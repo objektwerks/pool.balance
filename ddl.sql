@@ -47,3 +47,9 @@ create table cyanuric_acid (
   time_created time not null,
   value double not null
 );
+create table total_bromine (
+  id int primary key auto_increment,
+  date_created date not null,
+  time_created time not null,
+  value double not null
+);
