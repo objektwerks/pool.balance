@@ -1,10 +1,15 @@
 package pool
 
 import java.time.{LocalDate, LocalTime}
+import java.time.format.DateTimeFormatter
 
 sealed trait Entity:
-  val id: Int
-  val date: LocalDate
-  val time: LocalTime
+  val id: Int = 0
+  val date: LocalDate = LocalDate.now
+  val time: LocalTime = LocalTime.now
 
-final case class Pool(id: Int, date: LocalDate, time: LocalTime, volume: Int) extends Entity
+  def newDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
+
+  def newTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm")
+
+final case class Pool(volume: Int = 0) extends Entity
