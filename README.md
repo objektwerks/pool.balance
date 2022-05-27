@@ -14,6 +14,10 @@ Run
 ---
 1. sbt run
 
+Assembly
+-------
+1. sbt assembly
+
 Features
 --------
 1. dashboard
@@ -52,21 +56,6 @@ Model
 8. CyanuricAcid
 9. TotalBromine
 10. Temperature
-
-Package
--------
-1. sbt clean test universal:packageBin
-2. verify ./target/universal/poolcalc-${version}.zip
-
-Install
--------
-1. unzip ./target/universal/poolcalc-${version}.zip
-2. copy unzipped poolcalc-${version} directory to **new** ${poolcalc.directory}
-3. set executable permissions on ${poolcalc.directory}/poolcalc-${version}/bin/poolcalc
-
-Execute
--------
-1. execute ${poolcalc-directory}/poolcalc-${version}/bin/poolcalc
 
 Resources
 ---------
