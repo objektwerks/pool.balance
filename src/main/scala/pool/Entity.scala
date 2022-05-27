@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter
 
 sealed trait Entity:
   val id: Int = 0
-  val date: LocalDate = LocalDate.now
-  val time: LocalTime = LocalTime.now
+  val dateCreated: LocalDate = LocalDate.now
+  val timeCreated: LocalTime = LocalTime.now
 
   def newDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
 
