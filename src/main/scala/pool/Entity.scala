@@ -19,3 +19,5 @@ final case class FreeChlorine(value: Double) extends Entity
 final case class CombinedChlorine(value: Double) extends Entity
 
 final case class TotalChlorine(value: Double) extends Entity
+
+final case class pH(value: Double) extends Entity
