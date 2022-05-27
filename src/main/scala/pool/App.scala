@@ -11,10 +11,9 @@ import scalafx.scene.layout.VBox
 
 object App extends JFXApp3 with LazyLogging:
   override def start(): Unit =
+    val context = Context( ConfigFactory.load("app.conf") )
+    val view = View(context)
     stage = new JFXApp3.PrimaryStage {
-      val context = Context( ConfigFactory.load("app.conf") )
-      val view = View(context)
-
       scene = view.scene
       title = context.windowTitle
       minWidth = context.windowWidth
