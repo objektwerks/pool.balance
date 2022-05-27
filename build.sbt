@@ -4,7 +4,6 @@ version := "0.1-SNAPSHOT"
 scalaVersion := "3.1.2"
 mainClass := Some("pool.App")
 assemblyJarName := "pool-balance-0.1.jar"
-assemblyOutputPath := file("target")
 libraryDependencies ++= {
   Seq(
     "org.scalafx" %% "scalafx" % "18.0.1-R27",
