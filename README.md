@@ -17,13 +17,15 @@ Run
 Features
 --------
 1. dashboard
-2. tests
-3. charts
-4. database
+2. measurements
+3. balances
+4. charts
+5. database
 
 Use Cases
 ---------
-1. test water for chemical content
+1. measure pool water chemical content
+2. balance pool water chemical content
 
 Tests
 -----
