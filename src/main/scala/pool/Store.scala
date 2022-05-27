@@ -2,7 +2,5 @@ package pool
 
 import scalikejdbc.*
 
-import Conf.*
-
-class Store:
-  ConnectionPool.singleton(url, user, password)
+final class Store(conf: Conf):
+  ConnectionPool.singleton(conf.url, conf.user, conf.password)

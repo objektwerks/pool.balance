@@ -1,21 +1,20 @@
 package pool
 
-import com.typesafe.config.ConfigFactory
+import com.typesafe.config.{Config, ConfigFactory}
 import scalafx.scene.image.{Image, ImageView}
 
-object Conf:
-  private val conf = ConfigFactory.load("app.conf")
+final class Conf(config: Config):
+  val windowTitle = config.getString("window.title")
+  val windowWidth = config.getDouble("window.width")
+  val windowHeight = config.getDouble("window.height")
 
-  val windowTitle = conf.getString("window.title")
-  val windowWidth = conf.getDouble("window.width")
-  val windowHeight = conf.getDouble("window.height")
-
-  val url = conf.getString("db.url")
-  val user = conf.getString("db.user")
-  val password = conf.getString("db.password")
+  val url = config.getString("db.url")
+  val user = config.getString("db.user")
+  val password = config.getString("db.password")
 
   val logo = new Image(Image.getClass.getResourceAsStream("/logo.white.png"))
 
+object Conf:
   def loadImageView(path: String): ImageView = new ImageView {
     image = new Image(Image.getClass.getResourceAsStream(path))
     fitHeight = 25
