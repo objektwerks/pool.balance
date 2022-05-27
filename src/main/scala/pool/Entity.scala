@@ -12,4 +12,6 @@ sealed trait Entity:
 
   def newTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm")
 
-final case class Pool(volume: Int = 0) extends Entity
+final case class Pool(volume: Int = 10000) extends Entity
+
+final case class FreeChlorine(value: Double)
