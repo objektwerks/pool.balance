@@ -17,13 +17,16 @@ Run
 Features
 --------
 1. dashboard
-2. measurements
-3. actions
-4. charts
-5. database
+2. tests
+3. charts
+4. database
 
-Measurements
-------------
+Use Cases
+---------
+1. test water for chemical content
+
+Tests
+-----
 >Measured in ppm ( parts per million ).
 1. free chlorine (fc): 0 - 10, ok = 1 - 5, ideal = 3
 2. combined chlorine (cc = tc - fc): 0 - 0.5, ok = 0.2, ideal = 0
