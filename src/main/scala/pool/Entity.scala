@@ -16,7 +16,7 @@ sealed trait Measurement extends Entity:
   def newDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
   def newTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm")
 
-  implicit val measurementOrdering: Ordering[Measurement] = Ordering.by(m => (m.dateMeasured.toEpochDay, m.timeMeasured.toSecondOfDay))
+  given measurementOrdering: Ordering[Measurement] = Ordering.by(m => (m.dateMeasured.toEpochDay, m.timeMeasured.toSecondOfDay))
 
 final case class FreeChlorine(value: Double) extends Measurement
 
