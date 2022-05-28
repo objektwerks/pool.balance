@@ -10,8 +10,8 @@ final case class Pool(built: LocalDate, volume: Int = 10000) extends Entity
 
 sealed trait Measurement extends Entity:
   val value: Double
-  val dateCreated: LocalDate = LocalDate.now
-  val timeCreated: LocalTime = LocalTime.now
+  val dateMeasured: LocalDate = LocalDate.now
+  val timeMeasured: LocalTime = LocalTime.now
 
   def newDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
   def newTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm")
