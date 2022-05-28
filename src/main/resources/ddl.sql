@@ -1,56 +1,56 @@
-create table pool (
+create table if not exists pool (
   id int primary key auto_increment not null,
   volume double not null
 );
-create table free_chlorine (
+create table if not exists free_chlorine (
   id int primary key auto_increment not null,
   date_created date not null,
   time_created time not null,
   value double not null
 );
-create table combined_chlorine (
+create table if not exists combined_chlorine (
   id int primary key auto_increment not null,
   date_created date not null,
   time_created time not null,
   value double not null
 );
-create table total_chlorine (
+create table if not exists total_chlorine (
   id int primary key auto_increment not null,
   date_created date not null,
   time_created time not null,
   value double not null
 );
-create table ph (
+create table if not exists ph (
   id int primary key auto_increment not null,
   date_created date not null,
   time_created time not null,
   value double not null
 );
-create table calcium_hardness (
+create table if not exists calcium_hardness (
   id int primary key auto_increment not null,
   date_created date not null,
   time_created time not null,
   value double not null
 );
-create table total_alkalinity (
+create table if not exists total_alkalinity (
   id int primary key auto_increment not null,
   date_created date not null,
   time_created time not null,
   value double not null
 );
-create table cyanuric_acid (
+create table if not exists cyanuric_acid (
   id int primary key auto_increment not null,
   date_created date not null,
   time_created time not null,
   value double not null
 );
-create table total_bromine (
+create table if not exists total_bromine (
   id int primary key auto_increment not null,
   date_created date not null,
   time_created time not null,
   value double not null
 );
-create table temperature (
+create table if not exists temperature (
   id int primary key auto_increment not null,
   date_created date not null,
   time_created time not null,
