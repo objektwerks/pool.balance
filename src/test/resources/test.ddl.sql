@@ -1,6 +1,5 @@
-drop all objects;
 create table pool (
-  id int primary key auto_increment,
+  id int primary key auto_increment not null,
   volume double not null
 );
 create table free_chlorine (
