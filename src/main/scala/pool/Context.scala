@@ -17,7 +17,7 @@ final class Context(config: Config):
   val store = Store(this)
   val model = Model(this)
 
-object Conf:
+object Context:
   def loadImageView(path: String): ImageView = new ImageView {
     image = new Image(Image.getClass.getResourceAsStream(path))
     fitHeight = 25
