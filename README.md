@@ -60,10 +60,10 @@ Entities
 
 UI
 --
-* App 1 --> 1 Conf | Store | Model | View
-* Store 1 --> 1 Conf
-* Model 1 --> 1 Conf | Store
-* View 1 --> 1 Conf | Model
+* App 1 --> 1 Context | Store | Model | View
+* Store 1 --> 1 Context
+* Model 1 --> 1 Context | Store
+* View 1 --> 1 Context | Model
 
 Resources
 ---------
