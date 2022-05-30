@@ -34,5 +34,7 @@ final class Model(context: Context):
   def update(cyanuricAcid: CyanuricAcid): Unit = ()
 
   def totalBromines(): List[TotalBromine] = List[TotalBromine]()
+  def add(totalBromine: TotalBromine): Int = 0
+  def update(totalBromine: TotalBromine): Unit = ()
 
   def temperatures(): List[Temperature] = List[Temperature]()
