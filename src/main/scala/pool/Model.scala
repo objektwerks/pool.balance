@@ -23,9 +23,9 @@ final class Model(context: Context):
   def add(pH: pH): Int = store.add(pH)
   def update(pH: pH): Unit = store.update(pH)
 
-  def calciumHardnesses(): List[CalciumHardness] = List[CalciumHardness]()
-  def add(calciumHardness: CalciumHardness): Int = 0
-  def update(calciumHardness: CalciumHardness): Unit = ()
+  def calciumHardnesses(): List[CalciumHardness] = store.calciumHardnesses()
+  def add(calciumHardness: CalciumHardness): Int = store.add(calciumHardness)
+  def update(calciumHardness: CalciumHardness): Unit = store.update(calciumHardness)
 
   def totalAlkalinities(): List[TotalAlkalinity] = List[TotalAlkalinity]()
   def add(totalAlkalinity: TotalAlkalinity): Int = 0
