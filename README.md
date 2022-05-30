@@ -47,9 +47,9 @@ Measurements
 
 Model
 -----
-1. Pool 1 --> Measurement <-- FreeChlorine, CombinedChlorine, TotalChlorine, pH, CalciumHardness,
+1. Pool 1 --> * Measurement <-- FreeChlorine, CombinedChlorine, TotalChlorine, pH, CalciumHardness,
 TotalAlkalinity, CyanuricAcid, TotalBromine, Temperature
-2. Pool 1 --> Chemical <-- LiquidChlorine, Trichlor, Dichlor, CalciumHypochlorite, Stabilizer
+2. Pool 1 --> * Chemical <-- LiquidChlorine, Trichlor, Dichlor, CalciumHypochlorite, Stabilizer
 
 UI
 --
