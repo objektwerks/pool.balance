@@ -26,6 +26,8 @@ final class Model(context: Context):
   def update(calciumHardness: CalciumHardness): Unit = ()
 
   def totalAlkalinities(): List[TotalAlkalinity] = List[TotalAlkalinity]()
+  def add(totalAlkalinity: TotalAlkalinity): Int = 0
+  def update(totalAlkalinity: TotalAlkalinity): Unit = ()
 
   def cyanuricAcids(): List[CyanuricAcid] = List[CyanuricAcid]()
 
