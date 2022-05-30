@@ -14,9 +14,9 @@ final case class Pool(id: Long = 0, name: String, built: LocalDate, volume: Int)
 sealed trait Measurement extends Entity:
   val id: Long = 0
   val poolId: Long
-  val measurement: Double
   val dateMeasured: LocalDate = LocalDate.now
   val timeMeasured: LocalTime = LocalTime.now
+  val measurement: Double
 
   given measurementOrdering: Ordering[Measurement] = Ordering.by(m => (m.dateMeasured.toEpochDay, m.timeMeasured.toSecondOfDay))
 
@@ -38,11 +38,14 @@ final case class TotalBromine(poolId: Long, measurement: Double) extends Measure
 
 final case class Temperature(poolId: Long, measurement: Double) extends Measurement
 
-final case class Chemical(id: Long = 0,
-                          poolId: Long,
-                          dateAdded: LocalDate = LocalDate.now,
-                          timeAdded: LocalTime = LocalTime.now,
-                          chemical: String = "chlorine",
-                          amount: Double = 1.0,
-                          unit: String = "gallon") extends Entity:
-  given measurementOrdering: Ordering[Measurement] = Ordering.by(m => (m.dateMeasured.toEpochDay, m.timeMeasured.toSecondOfDay))
+sealed trait Chemical extends Entity:
+  val id: Long = 0
+  val poolId: Long
+  val dateAdded: LocalDate = LocalDate.now
+  val timeAdded: LocalTime = LocalTime.now
+  val amount: Double
+  val unit: String
+
+  given chemicalOrdering: Ordering[Chemical] = Ordering.by(c => (c.dateAdded.toEpochDay, c.timeAdded.toSecondOfDay))
+
+final case class LiquidChlorine(poolId: Long, amount: Double, unit: String) extends Chemical
