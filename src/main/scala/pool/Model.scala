@@ -12,14 +12,18 @@ package pool
 10. Temperature
 */
 final class Model(context: Context):
-  def listPools(): List[Pool] = List[Pool]()
+  def pools(): List[Pool] = List[Pool]()
 
-  def listFreeChlorines(): List[FreeChlorine] = List[FreeChlorine]()
+  def freeChlorines(): List[FreeChlorine] = List[FreeChlorine]()
 
-  def listCombinedChlorines(): List[CombinedChlorine] = List[CombinedChlorine]()
+  def combinedChlorines(): List[CombinedChlorine] = List[CombinedChlorine]()
 
-  def listTotalChlorines(): List[TotalChlorine] = List[TotalChlorine]()
+  def totalChlorines(): List[TotalChlorine] = List[TotalChlorine]()
 
-  def listPhs(): List[pH] = List[pH]()
+  def pHs(): List[pH] = List[pH]()
+
+  def calciumHardnesses(): List[CalciumHardness] = List[CalciumHardness]()
+
+  def TotalAlkalinities(): List[TotalAlkalinity] = List[TotalAlkalinity]()
 
   
