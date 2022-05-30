@@ -60,4 +60,8 @@ final class Store(context: Context):
 
   def temperatures(): List[Temperature] = List[Temperature]()
   def add(temperature: Temperature): Int = 0
-  def update(temperature: Temperature): Unit = ()  
+  def update(temperature: Temperature): Unit = ()
+
+  def liquidChlorines(): List[LiquidChlorine] = List[LiquidChlorine]()
+  def add(liquidChlorine: LiquidChlorine): Int = 0
+  def update(liquidChlorine: LiquidChlorine): Unit = ()
