@@ -18,6 +18,8 @@ final class Model(context: Context):
   def update(totalChlorine: TotalChlorine): Unit = ()
 
   def pHs(): List[pH] = List[pH]()
+  def add(pH: pH): Int = 0
+  def update(pH: pH): Unit = ()
 
   def calciumHardnesses(): List[CalciumHardness] = List[CalciumHardness]()
 
