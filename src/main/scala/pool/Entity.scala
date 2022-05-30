@@ -38,6 +38,13 @@ final case class TotalBromine(poolId: Long, measurement: Double) extends Measure
 
 final case class Temperature(poolId: Long, measurement: Double) extends Measurement
 
+/*
+1. Liquid Chlorine
+2. Trichlor
+3. Dichlor
+4. Calcium Hypochlorite
+5. Cyanuric Acid
+*/
 sealed trait Chemical extends Entity:
   val id: Long = 0
   val poolId: Long
@@ -49,3 +56,5 @@ sealed trait Chemical extends Entity:
   given chemicalOrdering: Ordering[Chemical] = Ordering.by(c => (c.dateAdded.toEpochDay, c.timeAdded.toSecondOfDay))
 
 final case class LiquidChlorine(poolId: Long, amount: Double, unit: String) extends Chemical
+
+final case class Trichlor(poolId: Long, amount: Double, unit: String) extends Chemical
