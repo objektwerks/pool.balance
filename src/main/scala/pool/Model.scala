@@ -38,3 +38,5 @@ final class Model(context: Context):
   def update(totalBromine: TotalBromine): Unit = ()
 
   def temperatures(): List[Temperature] = List[Temperature]()
+  def add(temperature: Temperature): Int = 0
+  def update(temperature: Temperature): Unit = ()
