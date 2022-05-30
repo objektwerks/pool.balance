@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter
 sealed trait Entity:
   val id: Long
 
-final case class Pool(id: Long = 0, name: String, built: LocalDate, volume: Int = 10000) extends Entity
+final case class Pool(id: Long = 0, name: String, built: LocalDate, volume: Int) extends Entity
 
 sealed trait Measurement extends Entity:
   val id: Long = 0

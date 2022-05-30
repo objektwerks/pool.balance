@@ -1,11 +1,13 @@
 package pool
 
+import scala.util.Try
+
 final class Model(context: Context):
   val store = context.store
 
-  def pools(): List[Pool] = store.pools()
-  def add(pool: Pool): Pool = store.add(pool)
-  def update(pool: Pool): Unit = store.update(pool)
+  def pools(): Either[Throwable, List[Pool]] = Try( store.pools() ).toEither
+  def add(pool: Pool): Either[Throwable, Pool] = Try( store.add(pool) ).toEither
+  def update(pool: Pool):Either[Throwable, Unit] = Try( store.update(pool) ).toEither
 
   def freeChlorines(): List[FreeChlorine] = store.freeChlorines()
   def add(freeChlorine: FreeChlorine): Int = store.add(freeChlorine)

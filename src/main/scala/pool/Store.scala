@@ -14,7 +14,7 @@ final class Store(context: Context):
 
   def add(pool: Pool): Pool =
     val id = DB localTx { implicit session =>
-      sql"insert into pool(id, name, built, volume) values(${pool.id}, ${pool.name}, ${pool.built}, ${pool.volume})"
+      sql"insert into pool(name, built, volume) values(${pool.name}, ${pool.built}, ${pool.volume})"
       .updateAndReturnGeneratedKey()
     }
     pool.copy(id = id)
