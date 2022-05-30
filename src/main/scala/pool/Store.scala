@@ -8,7 +8,7 @@ final class Store(context: Context):
   def pools(): List[Pool] =
     DB readOnly { implicit session =>
       sql"select * from pool order by built desc"
-        .map(rs => Pool(rs.int("id"), rs.string("name"), rs.localDate("built"), rs.int("volume")))
+        .map(rs => Pool(rs.long("id"), rs.string("name"), rs.localDate("built"), rs.int("volume")))
         .list()
     }
 
