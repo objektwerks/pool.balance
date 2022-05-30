@@ -14,10 +14,12 @@ package pool
 final class Model(context: Context):
   def listPools(): List[Pool] = List[Pool]()
 
-  def listFreeChlorine(): List[FreeChlorine] = List[FreeChlorine]()
+  def listFreeChlorines(): List[FreeChlorine] = List[FreeChlorine]()
 
-  def listCombinedChlorine(): List[CombinedChlorine] = List[CombinedChlorine]()
+  def listCombinedChlorines(): List[CombinedChlorine] = List[CombinedChlorine]()
 
-  def listTotalChlorine(): List[TotalChlorine] = List[TotalChlorine]()
+  def listTotalChlorines(): List[TotalChlorine] = List[TotalChlorine]()
+
+  def listPhs(): List[pH] = List[pH]()
 
   
