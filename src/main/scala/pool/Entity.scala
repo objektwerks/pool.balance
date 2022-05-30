@@ -6,6 +6,9 @@ import java.time.format.DateTimeFormatter
 sealed trait Entity:
   val id: Long
 
+  def newDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+  def newTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+
 final case class Pool(id: Long = 0, name: String, built: LocalDate, volume: Int) extends Entity
 
 sealed trait Measurement extends Entity:
@@ -14,9 +17,6 @@ sealed trait Measurement extends Entity:
   val measurement: Double
   val dateMeasured: LocalDate = LocalDate.now
   val timeMeasured: LocalTime = LocalTime.now
-
-  def newDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
-  def newTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm")
 
   given measurementOrdering: Ordering[Measurement] = Ordering.by(m => (m.dateMeasured.toEpochDay, m.timeMeasured.toSecondOfDay))
 
