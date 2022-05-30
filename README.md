@@ -23,7 +23,7 @@ Features
 --------
 1. dashboard
 2. measurements
-3. balances
+3. chemicals
 4. charts
 5. database
 
@@ -44,6 +44,24 @@ Tests
 7. cyanuric acid (cya): 0 - 300, ok = 30 - 100, ideal = 50
 8. total bromine (tb): 0 - 20, ok = 2 - 10, ideal = 5
 9. temperature: 0 - 100
+
+Chemicals
+---------
+1. Chlorine
+2. Stabilizer
+3. Tablets
+4. Shock
+
+Solutions
+---------
+1. high ph - Sodium Bisulfate
+2. low ph - Sodium Carbonate, Soda Ash
+3. high alkalinity - Muriatic Acid, Sodium Bisulfate
+4. low alkalinity - Sodium Bicarbonate, Baking Soda
+5. calcium hardness - Calcium Chloride
+6. low chlorine - Chlorine Tablets, Granules, Liquid
+7. algae - Algaecide, Shock
+8. stains - Stain Identification Kit, Stain Remover
 
 Entities
 --------
