@@ -75,3 +75,19 @@ create table liquid_chlorine (
   amount double not null,
   unit varchar not null
 );
+create table trichlor (
+  id long primary key auto_increment,
+  pool_id long references pool(id),
+  date_added date not null,
+  time_added time not null,
+  amount double not null,
+  unit varchar not null
+);
+create table dichlor (
+  id long primary key auto_increment,
+  pool_id long references pool(id),
+  date_added date not null,
+  time_added time not null,
+  amount double not null,
+  unit varchar not null
+);
