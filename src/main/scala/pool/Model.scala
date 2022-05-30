@@ -11,9 +11,9 @@ final class Model(context: Context):
   def add(freeChlorine: FreeChlorine): Int = store.add(freeChlorine)
   def update(freeChlorine: FreeChlorine): Unit = store.update(freeChlorine)
 
-  def combinedChlorines(): List[CombinedChlorine] = List[CombinedChlorine]()
-  def add(combinedChlorine: CombinedChlorine): Int = 0
-  def update(combinedChlorine: CombinedChlorine): Unit = ()
+  def combinedChlorines(): List[CombinedChlorine] = store.combinedChlorines()
+  def add(combinedChlorine: CombinedChlorine): Int = store.add(combinedChlorine)
+  def update(combinedChlorine: CombinedChlorine): Unit = store.update(combinedChlorine)
 
   def totalChlorines(): List[TotalChlorine] = List[TotalChlorine]()
   def add(totalChlorine: TotalChlorine): Int = 0
