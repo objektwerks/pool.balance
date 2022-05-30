@@ -44,3 +44,23 @@ final class Model(context: Context):
   def temperatures(): List[Temperature] = store.temperatures()
   def add(temperature: Temperature): Int = store.add(temperature)
   def update(temperature: Temperature): Unit = store.update(temperature)
+
+  def liquidChlorines(): List[LiquidChlorine] = store.liquidChlorines()
+  def add(liquidChlorine: LiquidChlorine): Int = store.add(liquidChlorine)
+  def update(liquidChlorine: LiquidChlorine): Unit = store.update(liquidChlorine)
+
+  def trichlors(): List[Trichlor] = List[Trichlor]()
+  def add(trichlor: Trichlor): Int = 0
+  def update(trichlor: Trichlor): Unit = ()
+
+  def dichlors(): List[Dichlor] = List[Dichlor]()
+  def add(dichlor: Dichlor): Int = 0
+  def update(dichlor: Dichlor): Unit = ()
+
+  def calciumHypochlorites(): List[CalciumHypochlorite] = List[CalciumHypochlorite]()
+  def add(calciumHypochlorite: CalciumHypochlorite): Int = 0
+  def update(calciumHypochlorite: CalciumHypochlorite): Unit = ()
+
+  def stabilizers(): List[Stabilizer] = List[Stabilizer]()
+  def add(stabilizer: Stabilizer): Int = 0
+  def update(stabilizer: Stabilizer): Unit = ()
