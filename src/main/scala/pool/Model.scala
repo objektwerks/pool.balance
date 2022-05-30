@@ -53,9 +53,9 @@ final class Model(context: Context):
   def add(trichlor: Trichlor): Int = store.add(trichlor)
   def update(trichlor: Trichlor): Unit = store.update(trichlor)
 
-  def dichlors(): List[Dichlor] = List[Dichlor]()
-  def add(dichlor: Dichlor): Int = 0
-  def update(dichlor: Dichlor): Unit = ()
+  def dichlors(): List[Dichlor] = store.dichlors()
+  def add(dichlor: Dichlor): Int = store.add(dichlor)
+  def update(dichlor: Dichlor): Unit = store.update(dichlor)
 
   def calciumHypochlorites(): List[CalciumHypochlorite] = List[CalciumHypochlorite]()
   def add(calciumHypochlorite: CalciumHypochlorite): Int = 0
