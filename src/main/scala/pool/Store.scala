@@ -69,3 +69,7 @@ final class Store(context: Context):
   def trichlors(): List[Trichlor] = List[Trichlor]()
   def add(trichlor: Trichlor): Int = 0
   def update(trichlor: Trichlor): Unit = ()
+
+  def dichlors(): List[Dichlor] = List[Dichlor]()
+  def add(dichlor: Dichlor): Int = 0
+  def update(dichlor: Dichlor): Unit = ()
