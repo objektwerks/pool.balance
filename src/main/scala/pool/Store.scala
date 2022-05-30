@@ -5,8 +5,6 @@ import scalikejdbc.*
 final class Store(context: Context):
   ConnectionPool.singleton(context.url, context.user, context.password)
 
-  def ping: Boolean = true
-
   def pools(): List[Pool] = List[Pool]()
   def add(pool: Pool): Int = 0
   def update(pool: Pool): Unit = ()

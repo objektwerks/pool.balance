@@ -9,5 +9,5 @@ final class StoreTest extends AnyFunSuite with Matchers:
   val store = Context( ConfigFactory.load("test.conf") ).store
 
   test("store") {
-    store.ping shouldBe true
+    store.pools().isEmpty shouldBe true
   }
