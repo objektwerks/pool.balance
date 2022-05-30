@@ -24,6 +24,8 @@ final class Model(context: Context):
 
   def calciumHardnesses(): List[CalciumHardness] = List[CalciumHardness]()
 
-  def TotalAlkalinities(): List[TotalAlkalinity] = List[TotalAlkalinity]()
+  def totalAlkalinities(): List[TotalAlkalinity] = List[TotalAlkalinity]()
+
+  def cyanuricAcids(): List[CyanuricAcid] = List[CyanuricAcid]()
 
   
