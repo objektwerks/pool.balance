@@ -49,9 +49,9 @@ final class Model(context: Context):
   def add(liquidChlorine: LiquidChlorine): Int = store.add(liquidChlorine)
   def update(liquidChlorine: LiquidChlorine): Unit = store.update(liquidChlorine)
 
-  def trichlors(): List[Trichlor] = List[Trichlor]()
-  def add(trichlor: Trichlor): Int = 0
-  def update(trichlor: Trichlor): Unit = ()
+  def trichlors(): List[Trichlor] = store.trichlors()
+  def add(trichlor: Trichlor): Int = store.add(trichlor)
+  def update(trichlor: Trichlor): Unit = store.update(trichlor)
 
   def dichlors(): List[Dichlor] = List[Dichlor]()
   def add(dichlor: Dichlor): Int = 0
