@@ -91,3 +91,19 @@ create table dichlor (
   amount double not null,
   unit varchar not null
 );
+create table calcium_hypochlorite (
+  id long primary key auto_increment,
+  pool_id long references pool(id),
+  date_added date not null,
+  time_added time not null,
+  amount double not null,
+  unit varchar not null
+);
+create table stabilizer (
+  id long primary key auto_increment,
+  pool_id long references pool(id),
+  date_added date not null,
+  time_added time not null,
+  amount double not null,
+  unit varchar not null
+);
