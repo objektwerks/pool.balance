@@ -67,12 +67,11 @@ create table temperature (
   time_measured time not null,
   measurement double not null
 );
-create table chemical (
+create table liquid_chlorine (
   id long primary key auto_increment,
   pool_id long references pool(id),
   date_added date not null,
   time_added time not null,
-  chemical varchar not null,
   amount double not null,
   unit varchar not null
 );
