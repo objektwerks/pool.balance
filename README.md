@@ -47,10 +47,12 @@ Tests
 
 Chemicals
 ---------
-1. Chlorine
-2. Stabilizer
-3. Tablets
-4. Shock
+1. Liquid Chlorine
+2. Trichlor Chlorine
+3. Calcium Hypochlorite Chlorine
+4. Dichlor Chlorine
+5. Lithium Hypochlorite Chlorine
+6. Cyanuric Acid Stabilizer
 
 Solutions
 ---------
