@@ -35,9 +35,9 @@ final class Model(context: Context):
   def add(cyanuricAcid: CyanuricAcid): Int = store.add(cyanuricAcid)
   def update(cyanuricAcid: CyanuricAcid): Unit = store.update(cyanuricAcid)
 
-  def totalBromines(): List[TotalBromine] = List[TotalBromine]()
-  def add(totalBromine: TotalBromine): Int = 0
-  def update(totalBromine: TotalBromine): Unit = ()
+  def totalBromines(): List[TotalBromine] = store.totalBromines()
+  def add(totalBromine: TotalBromine): Int = store.add(totalBromine)
+  def update(totalBromine: TotalBromine): Unit = store.update(totalBromine)
 
   def temperatures(): List[Temperature] = List[Temperature]()
   def add(temperature: Temperature): Int = 0
