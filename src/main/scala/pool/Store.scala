@@ -73,3 +73,7 @@ final class Store(context: Context):
   def dichlors(): List[Dichlor] = List[Dichlor]()
   def add(dichlor: Dichlor): Int = 0
   def update(dichlor: Dichlor): Unit = ()
+
+  def calciumHypochlorites(): List[CalciumHypochlorite] = List[CalciumHypochlorite]()
+  def add(calciumHypochlorite: CalciumHypochlorite): Int = 0
+  def update(calciumHypochlorite: CalciumHypochlorite): Unit = ()
