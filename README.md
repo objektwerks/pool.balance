@@ -32,8 +32,8 @@ Use Cases
 1. measure pool water chemical content
 2. balance pool water chemical content
 
-Tests
------
+Measurements
+------------
 >Measured in ppm ( parts per million ).
 1. free chlorine (fc): 0 - 10, ok = 1 - 5, ideal = 3
 2. combined chlorine (cc = tc - fc): 0 - 0.5, ok = 0.2, ideal = 0
@@ -45,26 +45,11 @@ Tests
 8. total bromine (tb): 0 - 20, ok = 2 - 10, ideal = 5
 9. temperature: 0 - 100
 
-Chemicals
----------
-1. Liquid Chlorine
-2. Trichlor
-3. Dichlor
-4. Calcium Hypochlorite
-5. Stabilizer
-
-Entities
---------
-1. Pool
-2. FreeChlorine
-3. CombinedChlorine
-4. TotalChlorine
-5. pH
-6. CalciumHardness
-7. TotalAlkalinity
-8. CyanuricAcid
-9. TotalBromine
-10. Temperature
+Model
+-----
+1. Pool 1 --> Measurement <-- FreeChlorine, CombinedChlorine, TotalChlorine, pH, CalciumHardness,
+TotalAlkalinity, CyanuricAcid, TotalBromine, Temperature
+2. Pool 1 --> Chemical <-- LiquidChlorine, Trichlor, Dichlor, CalciumHypochlorite, Stabilizer
 
 UI
 --
