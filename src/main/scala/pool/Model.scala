@@ -7,9 +7,9 @@ final class Model(context: Context):
   def add(pool: Pool): Int = store.add(pool)
   def update(pool: Pool): Unit = store.update(pool)
 
-  def freeChlorines(): List[FreeChlorine] = List[FreeChlorine]()
-  def add(freeChlorine: FreeChlorine): Int = 0
-  def update(freeChlorine: FreeChlorine): Unit = ()
+  def freeChlorines(): List[FreeChlorine] = store.freeChlorines()
+  def add(freeChlorine: FreeChlorine): Int = store.add(freeChlorine)
+  def update(freeChlorine: FreeChlorine): Unit = store.update(freeChlorine)
 
   def combinedChlorines(): List[CombinedChlorine] = List[CombinedChlorine]()
   def add(combinedChlorine: CombinedChlorine): Int = 0
