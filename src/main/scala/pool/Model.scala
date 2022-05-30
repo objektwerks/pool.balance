@@ -18,4 +18,6 @@ final class Model(context: Context):
 
   def listCombinedChlorine(): List[CombinedChlorine] = List[CombinedChlorine]()
 
+  def listTotalChlorine(): List[TotalChlorine] = List[TotalChlorine]()
+
   
