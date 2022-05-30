@@ -10,7 +10,7 @@ final case class Pool(id: Int = 0, name: String, built: LocalDate, volume: Int =
 
 sealed trait Measurement extends Entity:
   val id: Int = 0
-  val value: Double
+  val measurement: Double
   val dateMeasured: LocalDate = LocalDate.now
   val timeMeasured: LocalTime = LocalTime.now
 
@@ -19,20 +19,20 @@ sealed trait Measurement extends Entity:
 
   given measurementOrdering: Ordering[Measurement] = Ordering.by(m => (m.dateMeasured.toEpochDay, m.timeMeasured.toSecondOfDay))
 
-final case class FreeChlorine(value: Double) extends Measurement
+final case class FreeChlorine(measurement: Double) extends Measurement
 
-final case class CombinedChlorine(value: Double) extends Measurement
+final case class CombinedChlorine(measurement: Double) extends Measurement
 
-final case class TotalChlorine(value: Double) extends Measurement
+final case class TotalChlorine(measurement: Double) extends Measurement
 
-final case class pH(value: Double) extends Measurement
+final case class pH(measurement: Double) extends Measurement
 
-final case class CalciumHardness(value: Double) extends Measurement
+final case class CalciumHardness(measurement: Double) extends Measurement
 
-final case class TotalAlkalinity(value: Double) extends Measurement
+final case class TotalAlkalinity(measurement: Double) extends Measurement
 
-final case class CyanuricAcid(value: Double) extends Measurement
+final case class CyanuricAcid(measurement: Double) extends Measurement
 
-final case class TotalBromine(value: Double) extends Measurement
+final case class TotalBromine(measurement: Double) extends Measurement
 
-final case class Temperature(value: Double) extends Measurement
+final case class Temperature(measurement: Double) extends Measurement
