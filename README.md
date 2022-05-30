@@ -51,7 +51,7 @@ Chemicals
 2. Trichlor
 3. Dichlor
 4. Calcium Hypochlorite
-5. Cyanuric Acid
+5. Stabilizer
 
 Entities
 --------
