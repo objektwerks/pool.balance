@@ -5,26 +5,22 @@ import scalikejdbc.*
 final class Store(context: Context):
   ConnectionPool.singleton(context.url, context.user, context.password)
 
-  def pools(): List[Pool] =
-    DB readOnly { implicit session =>
-      sql"select * from pool order by built desc"
-        .map(rs => Pool(rs.long("id"), rs.string("name"), rs.localDate("built"), rs.int("volume")))
-        .list()
-    }
+  def pools(): List[Pool] = DB readOnly { implicit session =>
+    sql"select * from pool order by built desc"
+      .map(rs => Pool(rs.long("id"), rs.string("name"), rs.localDate("built"), rs.int("volume")))
+      .list()
+  }
 
-  def add(pool: Pool): Pool =
-    val id = DB localTx { implicit session =>
-      sql"insert into pool(name, built, volume) values(${pool.name}, ${pool.built}, ${pool.volume})"
-      .updateAndReturnGeneratedKey()
-    }
+  def add(pool: Pool): Pool = DB localTx { implicit session =>
+    val id = sql"insert into pool(name, built, volume) values(${pool.name}, ${pool.built}, ${pool.volume})"
+    .updateAndReturnGeneratedKey()
     pool.copy(id = id)
+  }
 
-  def update(pool: Pool): Unit =
-    DB localTx { implicit session =>
-      sql"update pool set name = ${pool.name}, built = ${pool.built}, volume = ${pool.volume} where id = ${pool.id}"
-      .update()
-    }
-    ()
+  def update(pool: Pool): Unit = DB localTx { implicit session =>
+    sql"update pool set name = ${pool.name}, built = ${pool.built}, volume = ${pool.volume} where id = ${pool.id}"
+    .update()
+  }
 
   def freeChlorines(): List[FreeChlorine] = List[FreeChlorine]()
   def add(freeChlorine: FreeChlorine): Int = 0
