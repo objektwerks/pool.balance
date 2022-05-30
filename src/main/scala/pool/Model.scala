@@ -4,7 +4,7 @@ final class Model(context: Context):
   val store = context.store
 
   def pools(): List[Pool] = store.pools()
-  def add(pool: Pool): Int = store.add(pool)
+  def add(pool: Pool): Pool = store.add(pool)
   def update(pool: Pool): Unit = store.update(pool)
 
   def freeChlorines(): List[FreeChlorine] = store.freeChlorines()

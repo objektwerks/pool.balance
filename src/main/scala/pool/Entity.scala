@@ -4,12 +4,12 @@ import java.time.{LocalDate, LocalTime}
 import java.time.format.DateTimeFormatter
 
 sealed trait Entity:
-  val id: Int
+  val id: Long
 
-final case class Pool(id: Int = 0, name: String, built: LocalDate, volume: Int = 10000) extends Entity
+final case class Pool(id: Long = 0, name: String, built: LocalDate, volume: Int = 10000) extends Entity
 
 sealed trait Measurement extends Entity:
-  val id: Int = 0
+  val id: Long = 0
   val measurement: Double
   val dateMeasured: LocalDate = LocalDate.now
   val timeMeasured: LocalTime = LocalTime.now
