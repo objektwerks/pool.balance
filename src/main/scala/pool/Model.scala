@@ -19,9 +19,9 @@ final class Model(context: Context):
   def add(totalChlorine: TotalChlorine): Int = store.add(totalChlorine)
   def update(totalChlorine: TotalChlorine): Unit = store.update(totalChlorine)
 
-  def pHs(): List[pH] = List[pH]()
-  def add(pH: pH): Int = 0
-  def update(pH: pH): Unit = ()
+  def pHs(): List[pH] = store.pHs()
+  def add(pH: pH): Int = store.add(pH)
+  def update(pH: pH): Unit = store.update(pH)
 
   def calciumHardnesses(): List[CalciumHardness] = List[CalciumHardness]()
   def add(calciumHardness: CalciumHardness): Int = 0
