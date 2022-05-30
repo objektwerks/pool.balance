@@ -77,3 +77,7 @@ final class Store(context: Context):
   def calciumHypochlorites(): List[CalciumHypochlorite] = List[CalciumHypochlorite]()
   def add(calciumHypochlorite: CalciumHypochlorite): Int = 0
   def update(calciumHypochlorite: CalciumHypochlorite): Unit = ()
+
+  def stabilizers(): List[Stabilizer] = List[Stabilizer]()
+  def add(stabilizer: Stabilizer): Int = 0
+  def update(stabilizer: Stabilizer): Unit = ()
