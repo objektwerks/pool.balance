@@ -30,6 +30,8 @@ final class Model(context: Context):
   def update(totalAlkalinity: TotalAlkalinity): Unit = ()
 
   def cyanuricAcids(): List[CyanuricAcid] = List[CyanuricAcid]()
+  def add(cyanuricAcid: CyanuricAcid): Int = 0
+  def update(cyanuricAcid: CyanuricAcid): Unit = ()
 
   def totalBromines(): List[TotalBromine] = List[TotalBromine]()
 
