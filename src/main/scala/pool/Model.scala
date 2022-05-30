@@ -31,9 +31,9 @@ final class Model(context: Context):
   def add(totalAlkalinity: TotalAlkalinity): Int = store.add(totalAlkalinity)
   def update(totalAlkalinity: TotalAlkalinity): Unit = store.update(totalAlkalinity)
 
-  def cyanuricAcids(): List[CyanuricAcid] = List[CyanuricAcid]()
-  def add(cyanuricAcid: CyanuricAcid): Int = 0
-  def update(cyanuricAcid: CyanuricAcid): Unit = ()
+  def cyanuricAcids(): List[CyanuricAcid] = store.cyanuricAcids()
+  def add(cyanuricAcid: CyanuricAcid): Int = store.add(cyanuricAcid)
+  def update(cyanuricAcid: CyanuricAcid): Unit = store.update(cyanuricAcid)
 
   def totalBromines(): List[TotalBromine] = List[TotalBromine]()
   def add(totalBromine: TotalBromine): Int = 0
