@@ -13,13 +13,13 @@ final class Store(context: Context):
 
   def add(pool: Pool): Pool = DB localTx { implicit session =>
     val id = sql"insert into pool(name, built, volume) values(${pool.name}, ${pool.built}, ${pool.volume})"
-    .updateAndReturnGeneratedKey()
+      .updateAndReturnGeneratedKey()
     pool.copy(id = id)
   }
 
   def update(pool: Pool): Unit = DB localTx { implicit session =>
     sql"update pool set name = ${pool.name}, built = ${pool.built}, volume = ${pool.volume} where id = ${pool.id}"
-    .update()
+      .update()
   }
 
   def freeChlorines(): List[FreeChlorine] = List[FreeChlorine]()
