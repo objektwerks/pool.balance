@@ -58,3 +58,5 @@ sealed trait Chemical extends Entity:
 final case class LiquidChlorine(poolId: Long, amount: Double, unit: String) extends Chemical
 
 final case class Trichlor(poolId: Long, amount: Double, unit: String) extends Chemical
+
+final case class Dichlor(poolId: Long, amount: Double, unit: String) extends Chemical
