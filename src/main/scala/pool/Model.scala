@@ -22,6 +22,8 @@ final class Model(context: Context):
   def update(pH: pH): Unit = ()
 
   def calciumHardnesses(): List[CalciumHardness] = List[CalciumHardness]()
+  def add(calciumHardness: CalciumHardness): Int = 0
+  def update(calciumHardness: CalciumHardness): Unit = ()
 
   def totalAlkalinities(): List[TotalAlkalinity] = List[TotalAlkalinity]()
 
