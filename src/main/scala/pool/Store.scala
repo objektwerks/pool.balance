@@ -19,7 +19,12 @@ final class Store(context: Context):
     }
     pool.copy(id = id)
 
-  def update(pool: Pool): Unit = ()
+  def update(pool: Pool): Unit =
+    DB localTx { implicit session =>
+      sql"update pool set name = ${pool.name}, built = ${pool.built}, volume = ${pool.volume} where id = ${pool.id}"
+      .update()
+    }
+    ()
 
   def freeChlorines(): List[FreeChlorine] = List[FreeChlorine]()
   def add(freeChlorine: FreeChlorine): Int = 0
