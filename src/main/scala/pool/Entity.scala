@@ -39,9 +39,10 @@ final case class TotalBromine(poolId: Long, measurement: Double) extends Measure
 final case class Temperature(poolId: Long, measurement: Double) extends Measurement
 
 final case class Chemical(id: Long = 0,
-                          poolId: Long = 0,
+                          poolId: Long,
                           dateAdded: LocalDate = LocalDate.now,
                           timeAdded: LocalTime = LocalTime.now,
                           chemical: String = "chlorine",
                           amount: Double = 1.0,
-                          unit: String = "gallon") extends Entity
+                          unit: String = "gallon") extends Entity:
+  given measurementOrdering: Ordering[Measurement] = Ordering.by(m => (m.dateMeasured.toEpochDay, m.timeMeasured.toSecondOfDay))
