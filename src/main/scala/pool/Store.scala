@@ -5,7 +5,13 @@ import scalikejdbc.*
 final class Store(context: Context):
   ConnectionPool.singleton(context.url, context.user, context.password)
 
-  def pools(): List[Pool] = List[Pool]()
+  def pools(): List[Pool] =
+    DB readOnly { implicit session =>
+      sql"select * from pool order by built desc"
+        .map(rs => Pool(rs.int("id"), rs.string("name"), rs.localDate("built"), rs.int("volume")))
+        .list()
+    }
+
   def add(pool: Pool): Int = 0
   def update(pool: Pool): Unit = ()
 
