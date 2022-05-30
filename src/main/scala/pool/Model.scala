@@ -1,9 +1,11 @@
 package pool
 
 final class Model(context: Context):
-  def pools(): List[Pool] = List[Pool]()
-  def add(pool: Pool): Int = 0
-  def update(pool: Pool): Unit = ()
+  val store = context.store
+
+  def pools(): List[Pool] = store.pools()
+  def add(pool: Pool): Int = store.add(pool)
+  def update(pool: Pool): Unit = store.update(pool)
 
   def freeChlorines(): List[FreeChlorine] = List[FreeChlorine]()
   def add(freeChlorine: FreeChlorine): Int = 0
