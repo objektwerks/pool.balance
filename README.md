@@ -48,22 +48,10 @@ Tests
 Chemicals
 ---------
 1. Liquid Chlorine
-2. Trichlor Chlorine
-3. Calcium Hypochlorite Chlorine
-4. Dichlor Chlorine
-5. Lithium Hypochlorite Chlorine
-6. Cyanuric Acid Stabilizer
-
-Solutions
----------
-1. high ph - Sodium Bisulfate
-2. low ph - Sodium Carbonate, Soda Ash
-3. high alkalinity - Muriatic Acid, Sodium Bisulfate
-4. low alkalinity - Sodium Bicarbonate, Baking Soda
-5. calcium hardness - Calcium Chloride
-6. low chlorine - Chlorine Tablets, Granules, Liquid
-7. algae - Algaecide, Shock
-8. stains - Stain Identification Kit, Stain Remover
+2. Trichlor
+3. Dichlor
+4. Calcium Hypochlorite
+5. Cyanuric Acid
 
 Entities
 --------
