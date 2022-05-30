@@ -84,3 +84,35 @@ create table if not exists liquid_chlorine (
   amount double not null,
   unit varchar not null
 );
+create table if not exists trichlor (
+  id long primary key auto_increment,
+  pool_id long references pool(id),
+  date_added date not null,
+  time_added time not null,
+  amount double not null,
+  unit varchar not null
+);
+create table if not exists dichlor (
+  id long primary key auto_increment,
+  pool_id long references pool(id),
+  date_added date not null,
+  time_added time not null,
+  amount double not null,
+  unit varchar not null
+);
+create table if not exists calcium_hypochlorite (
+  id long primary key auto_increment,
+  pool_id long references pool(id),
+  date_added date not null,
+  time_added time not null,
+  amount double not null,
+  unit varchar not null
+);
+create table if not exists stabilizer (
+  id long primary key auto_increment,
+  pool_id long references pool(id),
+  date_added date not null,
+  time_added time not null,
+  amount double not null,
+  unit varchar not null
+);
