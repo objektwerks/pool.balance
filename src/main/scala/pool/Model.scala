@@ -39,6 +39,6 @@ final class Model(context: Context):
   def add(totalBromine: TotalBromine): Int = store.add(totalBromine)
   def update(totalBromine: TotalBromine): Unit = store.update(totalBromine)
 
-  def temperatures(): List[Temperature] = List[Temperature]()
-  def add(temperature: Temperature): Int = 0
-  def update(temperature: Temperature): Unit = ()
+  def temperatures(): List[Temperature] = store.temperatures()
+  def add(temperature: Temperature): Int = store.add(temperature)
+  def update(temperature: Temperature): Unit = store.update(temperature)
