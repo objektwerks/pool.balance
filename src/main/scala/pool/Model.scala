@@ -1,16 +1,5 @@
 package pool
 
-/*
-2. FreeChlorine
-3. CombinedChlorine
-4. TotalChlorine
-5. pH
-6. CalciumHardness
-7. TotalAlkalinity
-8. CyanuricAcid
-9. TotalBromine
-10. Temperature
-*/
 final class Model(context: Context):
   def pools(): List[Pool] = List[Pool]()
   def add(pool: Pool): Int = 0
@@ -25,6 +14,8 @@ final class Model(context: Context):
   def update(combinedChlorine: CombinedChlorine): Unit = ()
 
   def totalChlorines(): List[TotalChlorine] = List[TotalChlorine]()
+  def add(totalChlorine: TotalChlorine): Int = 0
+  def update(totalChlorine: TotalChlorine): Unit = ()
 
   def pHs(): List[pH] = List[pH]()
 
