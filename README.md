@@ -62,6 +62,7 @@ Resources
 ---------
 1. [JavaFX](https://openjfx.io/index.html)
 2. [ScalaFX](http://www.scalafx.org/)
+3. [ScalikeJdbc](http://scalikejdbc.org/)
 
 License
 -------
