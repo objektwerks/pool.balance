@@ -14,6 +14,10 @@ package pool
 final class Model(context: Context):
   def pools(): List[Pool] = List[Pool]()
 
+  def add(pool: Pool): Int = 0
+
+  def update(pool: Pool): Unit = ()
+
   def freeChlorines(): List[FreeChlorine] = List[FreeChlorine]()
 
   def combinedChlorines(): List[CombinedChlorine] = List[CombinedChlorine]()
@@ -30,4 +34,4 @@ final class Model(context: Context):
 
   def totalBromines(): List[TotalBromine] = List[TotalBromine]()
 
-  
+  def temperatures(): List[Temperature] = List[Temperature]()
