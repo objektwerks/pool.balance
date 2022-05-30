@@ -28,4 +28,6 @@ final class Model(context: Context):
 
   def cyanuricAcids(): List[CyanuricAcid] = List[CyanuricAcid]()
 
+  def totalBromines(): List[TotalBromine] = List[TotalBromine]()
+
   
