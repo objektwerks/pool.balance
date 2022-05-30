@@ -20,6 +20,10 @@ final class Model(context: Context):
 
   def freeChlorines(): List[FreeChlorine] = List[FreeChlorine]()
 
+  def add(freeChlorine: FreeChlorine): Int = 0
+
+  def update(freeChlorine: FreeChlorine): Unit = ()
+
   def combinedChlorines(): List[CombinedChlorine] = List[CombinedChlorine]()
 
   def totalChlorines(): List[TotalChlorine] = List[TotalChlorine]()
