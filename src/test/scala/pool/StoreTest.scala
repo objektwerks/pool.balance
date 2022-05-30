@@ -20,6 +20,5 @@ final class StoreTest extends AnyFunSuite with Matchers:
 
     val list = store.pools()
     list.length shouldBe 1
-    val head = list.head
-    head shouldBe updated
+    list.head shouldBe updated
   }
