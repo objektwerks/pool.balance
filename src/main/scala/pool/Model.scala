@@ -61,6 +61,6 @@ final class Model(context: Context):
   def add(calciumHypochlorite: CalciumHypochlorite): Int = store.add(calciumHypochlorite)
   def update(calciumHypochlorite: CalciumHypochlorite): Unit = store.update(calciumHypochlorite)
 
-  def stabilizers(): List[Stabilizer] = List[Stabilizer]()
-  def add(stabilizer: Stabilizer): Int = 0
-  def update(stabilizer: Stabilizer): Unit = ()
+  def stabilizers(): List[Stabilizer] = store.stabilizers()
+  def add(stabilizer: Stabilizer): Int = store.add(stabilizer)
+  def update(stabilizer: Stabilizer): Unit = store.update(stabilizer)
