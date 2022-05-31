@@ -17,7 +17,7 @@ Run
 Assembly
 --------
 1. sbt assembly
->See: target/scala-3.1.3-RC3/pool-balance-0.1.jar
+2. java -jar target/scala-3.1.3-RC4/pool-balance-0.1.jar
 
 Features
 --------
