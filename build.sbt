@@ -16,3 +16,13 @@ libraryDependencies ++= {
     "org.scalatest" %% "scalatest" % "3.2.12" % Test
   )
 }
+lazy val os = System.getProperty("os.name") match {
+  case n if n.startsWith("Linux")   => "linux"
+  case n if n.startsWith("Mac")     => "mac"
+  case n if n.startsWith("Windows") => "win"
+  case _ => throw new Exception("Unknown platform!")
+}
+lazy val javafxModules = Seq("base", "controls", "web")
+libraryDependencies ++= javafxModules.map( module =>
+  "org.openjfx" % s"javafx-$module" % "18" classifier os
+)
