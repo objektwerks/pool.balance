@@ -13,6 +13,7 @@ final class Store(context: Context):
     ds.addDataSourceProperty("url", context.url)
     ds.addDataSourceProperty("user", context.user)
     ds.addDataSourceProperty("password", context.password)
+    ds.setMaximumPoolSize(4)
     ds
   }
   ConnectionPool.singleton(DataSourceConnectionPool(dataSource))
