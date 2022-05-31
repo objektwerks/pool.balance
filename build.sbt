@@ -7,6 +7,7 @@ assemblyJarName := "pool-balance-0.1.jar"
 libraryDependencies ++= {
   Seq(
     "org.scalafx" %% "scalafx" % "18.0.1-R27",
+    "org.jfxtras" % "jfxtras-controls" % "17-r1",
     "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
     "com.zaxxer" % "HikariCP" % "5.0.1" exclude("org.slf4j", "slf4j-api"),
     "com.h2database" % "h2" % "2.1.212",
