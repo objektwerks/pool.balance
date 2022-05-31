@@ -1,6 +1,10 @@
 package pool
 
 import com.typesafe.config.{Config, ConfigFactory}
+import com.zaxxer.hikari.HikariDataSource
+
+import javax.sql.DataSource
+
 import scalafx.scene.image.{Image, ImageView}
 
 final class Context(config: Config):
@@ -13,6 +17,16 @@ final class Context(config: Config):
   val password = config.getString("db.password")
   val dataSourceClassName = config.getString("db.dataSourceClassName")
   val maximumPoolSize = config.getInt("db.maximumPoolSize")
+
+  val dataSource: DataSource = {
+    val ds = new HikariDataSource()
+    ds.setDataSourceClassName(dataSourceClassName)
+    ds.addDataSourceProperty("url", url)
+    ds.addDataSourceProperty("user", user)
+    ds.addDataSourceProperty("password", password)
+    ds.setMaximumPoolSize(maximumPoolSize)
+    ds
+  }
 
   val logo = new Image(Image.getClass.getResourceAsStream("/logo.white.png"))
 
