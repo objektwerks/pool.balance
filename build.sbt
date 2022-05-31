@@ -26,3 +26,7 @@ lazy val javafxModules = Seq("base", "controls", "web")
 libraryDependencies ++= javafxModules.map( module =>
   "org.openjfx" % s"javafx-$module" % "18.0.1" classifier os
 )
+assembly / assemblyMergeStrategy := {
+  case PathList("module-info.class")                                 => MergeStrategy.discard
+  case PathList("META-INF", "versions", xs @ _, "module-info.class") => MergeStrategy.discard
+}
