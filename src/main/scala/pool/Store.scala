@@ -1,9 +1,21 @@
 package pool
 
+import com.zaxxer.hikari.HikariDataSource
+
+import javax.sql.DataSource
+
 import scalikejdbc.*
 
 final class Store(context: Context):
-  ConnectionPool.singleton(context.url, context.user, context.password)
+  private val dataSource: DataSource = {
+    val ds = new HikariDataSource()
+    ds.setDataSourceClassName("org.h2.jdbcx.JdbcDataSource")
+    ds.addDataSourceProperty("url", context.url)
+    ds.addDataSourceProperty("user", context.user)
+    ds.addDataSourceProperty("password", context.password)
+    ds
+  }
+  ConnectionPool.singleton(DataSourceConnectionPool(dataSource))
 
   def pools(): List[Pool] = DB readOnly { implicit session =>
     sql"select * from pool order by built desc"
