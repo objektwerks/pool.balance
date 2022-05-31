@@ -12,6 +12,7 @@ final class Context(config: Config):
   val user = config.getString("db.user")
   val password = config.getString("db.password")
   val dataSourceClassName = config.getString("db.dataSourceClassName")
+  val maximumPoolSize = config.getInt("db.maximumPoolSize")
 
   val logo = new Image(Image.getClass.getResourceAsStream("/logo.white.png"))
 
