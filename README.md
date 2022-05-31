@@ -64,6 +64,7 @@ Resources
 2. [ScalaFX](http://www.scalafx.org/)
 3. [ScalikeJdbc](http://scalikejdbc.org/)
 4. [jDeploy](https://www.jdeploy.com/)
+5. [JavaFX Tutorial](https://jenkov.com/tutorials/javafx/index.html)
 
 License
 -------
