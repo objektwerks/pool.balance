@@ -11,6 +11,7 @@ final class Context(config: Config):
   val url = config.getString("db.url")
   val user = config.getString("db.user")
   val password = config.getString("db.password")
+  val dataSourceClassName = config.getString("db.dataSourceClassName")
 
   val logo = new Image(Image.getClass.getResourceAsStream("/logo.white.png"))
 
