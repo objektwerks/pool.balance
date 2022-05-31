@@ -9,7 +9,7 @@ import scalikejdbc.*
 final class Store(context: Context):
   private val dataSource: DataSource = {
     val ds = new HikariDataSource()
-    ds.setDataSourceClassName("org.h2.jdbcx.JdbcDataSource")
+    ds.setDataSourceClassName(context.dataSourceClassName)
     ds.addDataSourceProperty("url", context.url)
     ds.addDataSourceProperty("user", context.user)
     ds.addDataSourceProperty("password", context.password)
