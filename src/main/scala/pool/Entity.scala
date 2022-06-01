@@ -80,7 +80,7 @@ final case class Temperature(id: Long = 0,
                              measurement: Double) extends Measurement
 
 sealed trait Chemical extends Entity:
-  val id: Long = 0
+  val id: Long
   val poolId: Long
   val dateAdded: LocalDate = LocalDate.now
   val timeAdded: LocalTime = LocalTime.now
@@ -89,14 +89,44 @@ sealed trait Chemical extends Entity:
 
   given chemicalOrdering: Ordering[Chemical] = Ordering.by(c => (c.dateAdded.toEpochDay, c.timeAdded.toSecondOfDay))
 
-final case class LiquidChlorine(poolId: Long, amount: Double, unit: uom) extends Chemical
+final case class LiquidChlorine(id: Long = 0,
+                                poolId: Long,
+                                dateMeasured: LocalDate,
+                                timeMeasured: LocalTime,
+                                amount: Double, 
+                                unit: uom) extends Chemical
 
-final case class Trichlor(poolId: Long, amount: Double, unit: uom) extends Chemical
+final case class Trichlor(id: Long = 0,
+                          poolId: Long,
+                          dateMeasured: LocalDate,
+                          timeMeasured: LocalTime,
+                          amount: Double, 
+                          unit: uom) extends Chemical
 
-final case class Dichlor(poolId: Long, amount: Double, unit: uom) extends Chemical
+final case class Dichlor(id: Long = 0,
+                         poolId: Long,
+                         dateMeasured: LocalDate,
+                         timeMeasured: LocalTime,
+                         amount: Double, 
+                         unit: uom) extends Chemical
 
-final case class CalciumHypochlorite(poolId: Long, amount: Double, unit: uom) extends Chemical
+final case class CalciumHypochlorite(id: Long = 0,
+                                     poolId: Long,
+                                     dateMeasured: LocalDate,
+                                     timeMeasured: LocalTime,
+                                     amount: Double, 
+                                     unit: uom) extends Chemical
 
-final case class Stabilizer(poolId: Long, amount: Double, unit: uom) extends Chemical
+final case class Stabilizer(id: Long = 0,
+                            poolId: Long,
+                            dateMeasured: LocalDate,
+                            timeMeasured: LocalTime,
+                            amount: Double, 
+                            unit: uom) extends Chemical
 
-final case class Algaecide(poolId: Long, amount: Double, unit: uom) extends Chemical
+final case class Algaecide(id: Long = 0,
+                           poolId: Long,
+                           dateMeasured: LocalDate,
+                           timeMeasured: LocalTime,
+                           amount: Double, 
+                           unit: uom) extends Chemical
