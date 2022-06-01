@@ -77,3 +77,7 @@ final class Store(context: Context):
   def stabilizers(): List[Stabilizer] = List[Stabilizer]()
   def add(stabilizer: Stabilizer): Int = 0
   def update(stabilizer: Stabilizer): Unit = ()
+
+  def algaecides(): List[Algaecide] = List[Algaecide]()
+  def add(algaecide: Algaecide): Int = 0
+  def update(algaecide: Algaecide): Unit = ()
