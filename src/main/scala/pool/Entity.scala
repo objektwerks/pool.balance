@@ -3,6 +3,15 @@ package pool
 import java.time.{LocalDate, LocalTime}
 import java.time.format.DateTimeFormatter
 
+enum Unit:
+  case gallons
+  case grams
+  case kilos
+  case liters
+  case lbs
+  case ml
+  case oz
+
 sealed trait Entity:
   val id: Long
 
