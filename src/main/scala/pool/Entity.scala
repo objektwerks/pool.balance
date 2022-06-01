@@ -3,14 +3,8 @@ package pool
 import java.time.{LocalDate, LocalTime}
 import java.time.format.DateTimeFormatter
 
-enum MeasurementUnit:
-  case gallons
-  case grams
-  case kilos
-  case liters
-  case lbs
-  case ml
-  case oz
+enum UM:
+  case gallons, grams, kilos, liters, lbs, ml, oz
 
 sealed trait Entity:
   val id: Long
