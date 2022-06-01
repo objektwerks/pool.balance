@@ -24,11 +24,12 @@ libraryDependencies ++= {
 */
 lazy val os = System.getProperty("target") match {
   case name if name.startsWith("mac") => "mac"
-  case name if name.startsWith("m1") => "mac-aarch64"
+  case name if name.startsWith("m1")  => "mac-aarch64"
   case name if name.startsWith("win") => "win"
-  case _ => throw new Exception("Only Apple M1 and Windows supported for this build.")
+  case _ => throw new Exception("Only Mac, M1 and Windows supported for this build.")
 }
-if (os == "mac-aarch64") assemblyJarName := "pool-balance-m1-0.1.jar"
+if (os == "mac") assemblyJarName := "pool-balance-mac-0.1.jar"
+else if (os == "mac-aarch64") assemblyJarName := "pool-balance-m1-0.1.jar"
 else assemblyJarName := "pool-balance-win-0.1.jar"
 
 lazy val javafxModules = Seq("base", "controls", "web")
@@ -42,9 +43,7 @@ assembly / assemblyMergeStrategy := {
 }
 
 /*
-I need to run my sbt clean test assembly builds for a target os. 
-I work on an Apple M1, but I need to also target Windows as well. 
-To date, I've come up with solution: ```https://github.com/objektwerks/pool.balance/blob/main/build.sbt```, which works.
-Unpacking both the m1 and win jars that I create, I only noticed 1 difference: ```jfxwebkit```, which is found in the win jar.
-I thought that was interesting.
+I need to target os builds for mac, m1 and win. 
+So I've come up with this solution: ```https://github.com/objektwerks/pool.balance/blob/main/build.sbt```, which works.
+Unpacking build jars, I only noticed 1 difference: ```jfxwebkit.dll```, found in the win jar. Interesting.
 */
