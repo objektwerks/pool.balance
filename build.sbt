@@ -16,11 +16,12 @@ libraryDependencies ++= {
     "org.scalatest" %% "scalatest" % "3.2.12" % Test
   )
 }
+
 // sbt -Dtarget="mac" clean test assembly | sbt -Dtarget="win" clean test assembly 
 lazy val os = System.getProperty("target") match {
   case name if name.startsWith("mac") => "mac-aarch64"
   case name if name.startsWith("win") => "win"
-  case _                              => throw new Exception("Only Apple M1 and Windows supported.")
+  case _ => throw new Exception("Only Apple M1 and Windows supported for this build.")
 }
 if (os == "mac-aarch64") assemblyJarName := "pool-balance-m1-0.1.jar"
 else assemblyJarName := "pool-balance-win-0.1.jar"
@@ -29,6 +30,7 @@ lazy val javafxModules = Seq("base", "controls", "web")
 libraryDependencies ++= javafxModules.map( module =>
   "org.openjfx" % s"javafx-$module" % "18.0.1" classifier os
 )
+
 assembly / assemblyMergeStrategy := {
   case PathList("META-INF", xs @ _*) => MergeStrategy.discard
   case x => MergeStrategy.first
