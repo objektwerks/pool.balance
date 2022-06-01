@@ -27,7 +27,7 @@ final class Store(context: Context):
       .map(rs => Measurement(
         rs.long("id"),
         rs.long("pool_id"),
-        typeofMeasurement.valueOf( rs.string("typeof") ),
+        typeOfMeasurement.valueOf( rs.string("typeof") ),
         rs.localDate("date_measured"),
         rs.localTime("time_measured"), 
         rs.double("measurement"))
@@ -58,7 +58,7 @@ final class Store(context: Context):
       .map(rs => Chemical(
         rs.long("id"),
         rs.long("pool_id"),
-        typeofChemical.valueOf( rs.string("typeof") ),
+        typeOfChemical.valueOf( rs.string("typeof") ),
         rs.localDate("date_added"),
         rs.localTime("time_added"), 
         rs.double("amount"),
