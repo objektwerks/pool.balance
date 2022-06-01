@@ -22,4 +22,9 @@ final class StoreTest extends AnyFunSuite with Matchers:
     val list = store.pools()
     list.length shouldBe 1
     list.head shouldBe updated
+
+    testMeasurements(list.head.id)
   }
+
+  def testMeasurements(poolId: Long): Unit =
+    ()
