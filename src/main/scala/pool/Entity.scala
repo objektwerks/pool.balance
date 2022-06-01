@@ -57,3 +57,5 @@ final case class Dichlor(poolId: Long, amount: Double, unit: String) extends Che
 final case class CalciumHypochlorite(poolId: Long, amount: Double, unit: String) extends Chemical
 
 final case class Stabilizer(poolId: Long, amount: Double, unit: String) extends Chemical
+
+final case class Algaecide(poolId: Long, amount: Double, unit: String) extends Chemical
