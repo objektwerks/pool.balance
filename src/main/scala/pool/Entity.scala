@@ -47,18 +47,18 @@ sealed trait Chemical extends Entity:
   val dateAdded: LocalDate = LocalDate.now
   val timeAdded: LocalTime = LocalTime.now
   val amount: Double
-  val unit: String
+  val unit: uom
 
   given chemicalOrdering: Ordering[Chemical] = Ordering.by(c => (c.dateAdded.toEpochDay, c.timeAdded.toSecondOfDay))
 
-final case class LiquidChlorine(poolId: Long, amount: Double, unit: String) extends Chemical
+final case class LiquidChlorine(poolId: Long, amount: Double, unit: uom) extends Chemical
 
-final case class Trichlor(poolId: Long, amount: Double, unit: String) extends Chemical
+final case class Trichlor(poolId: Long, amount: Double, unit: uom) extends Chemical
 
-final case class Dichlor(poolId: Long, amount: Double, unit: String) extends Chemical
+final case class Dichlor(poolId: Long, amount: Double, unit: uom) extends Chemical
 
-final case class CalciumHypochlorite(poolId: Long, amount: Double, unit: String) extends Chemical
+final case class CalciumHypochlorite(poolId: Long, amount: Double, unit: uom) extends Chemical
 
-final case class Stabilizer(poolId: Long, amount: Double, unit: String) extends Chemical
+final case class Stabilizer(poolId: Long, amount: Double, unit: uom) extends Chemical
 
-final case class Algaecide(poolId: Long, amount: Double, unit: String) extends Chemical
+final case class Algaecide(poolId: Long, amount: Double, unit: uom) extends Chemical
