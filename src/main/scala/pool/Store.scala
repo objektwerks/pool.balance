@@ -25,10 +25,8 @@ final class Store(context: Context):
   def freeChlorines(): List[FreeChlorine] = DB readOnly { implicit session =>
     sql"select * from free_chlorine order by date_measured, time_measured"
       .map(rs => FreeChlorine(
-        rs.long("id"),
-        rs.long("pool_id"), 
-        rs.localDate("date_measured"), 
-        rs.localTime("time_measured"), 
+        rs.long("id"), rs.long("pool_id"), 
+        rs.localDate("date_measured"), rs.localTime("time_measured"), 
         rs.double("measurement")))
       .list()
   }
