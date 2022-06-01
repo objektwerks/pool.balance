@@ -6,6 +6,9 @@ import java.time.format.DateTimeFormatter
 enum uom:
   case gl, kg, g, l, ml, lbs, oz
 
+object uom:
+  def list: Array[String] = uom.values.map(u => u.toString)
+
 sealed trait Entity:
   val id: Long
 

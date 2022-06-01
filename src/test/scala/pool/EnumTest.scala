@@ -12,4 +12,5 @@ class EnumTest extends AnyFunSuite with Matchers:
     uom.valueOf(uom.ml.toString) shouldBe uom.ml
     uom.valueOf(uom.lbs.toString) shouldBe uom.lbs
     uom.valueOf(uom.oz.toString) shouldBe uom.oz
+    uom.list shouldBe Array("gl", "kg", "g", "l", "ml", "lbs", "oz")
  }
