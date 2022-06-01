@@ -17,9 +17,14 @@ libraryDependencies ++= {
   )
 }
 
-// sbt -Dtarget="mac" clean test assembly | sbt -Dtarget="win" clean test assembly 
+/*
+1. sbt -Dtarget="mac" clean test assembly
+2. sbt -Dtarget="m1" clean test assembly
+3. sbt -Dtarget="win" clean test assembly
+*/
 lazy val os = System.getProperty("target") match {
-  case name if name.startsWith("mac") => "mac-aarch64"
+  case name if name.startsWith("mac") => "mac"
+  case name if name.startsWith("m1") => "mac-aarch64"
   case name if name.startsWith("win") => "win"
   case _ => throw new Exception("Only Apple M1 and Windows supported for this build.")
 }
@@ -35,3 +40,11 @@ assembly / assemblyMergeStrategy := {
   case PathList("META-INF", xs @ _*) => MergeStrategy.discard
   case x => MergeStrategy.first
 }
+
+/*
+I need to run my sbt clean test assembly builds for a target os. 
+I work on an Apple M1, but I need to also target Windows as well. 
+To date, I've come up with solution: ```https://github.com/objektwerks/pool.balance/blob/main/build.sbt```, which works.
+Unpacking both the m1 and win jars that I create, I only noticed 1 difference: ```jfxwebkit```, which is found in the win jar.
+I thought that was interesting.
+*/
