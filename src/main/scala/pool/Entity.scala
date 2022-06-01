@@ -3,11 +3,11 @@ package pool
 import java.time.{LocalDate, LocalTime}
 import java.time.format.DateTimeFormatter
 
-enum uom:
+enum unitOfMeasure:
   case gl, kg, g, l, ml, lbs, oz
 
-object uom:
-  def list: Array[String] = uom.values.map(u => u.toString)
+object unitOfMeasure:
+  def list: Array[String] = unitOfMeasure.values.map(u => u.toString)
 
 sealed trait Entity:
   val id: Long
@@ -38,5 +38,5 @@ final case class Chemical(id: Long = 0,
                                 dateAdded: LocalDate = LocalDate.now,
                                 timeAdded: LocalTime = LocalTime.now,
                                 amount: Double, 
-                                unit: uom) extends Entity:
+                                unit: unitOfMeasure) extends Entity:
   given chemicalOrdering: Ordering[Chemical] = Ordering.by(c => (c.dateAdded.toEpochDay, c.timeAdded.toSecondOfDay))

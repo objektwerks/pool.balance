@@ -62,7 +62,7 @@ final class Store(context: Context):
         rs.localDate("date_added"),
         rs.localTime("time_added"), 
         rs.double("amount"),
-        uom.valueOf( rs.string("unit") ))
+        unitOfMeasure.valueOf( rs.string("unit") ))
       )
       .list()
   }
