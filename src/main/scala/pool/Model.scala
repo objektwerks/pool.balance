@@ -64,3 +64,7 @@ final class Model(context: Context):
   def stabilizers(): List[Stabilizer] = store.stabilizers()
   def add(stabilizer: Stabilizer): Int = store.add(stabilizer)
   def update(stabilizer: Stabilizer): Unit = store.update(stabilizer)
+
+  def algaecides(): List[Algaecide] = store.algaecides()
+  def add(algaecide: Algaecide): Int = store.add(algaecide)
+  def update(algaecide: Algaecide): Unit = store.update(algaecide)
