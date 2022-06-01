@@ -21,4 +21,6 @@ final class StoreTest extends AnyFunSuite with Matchers:
     val list = store.pools()
     list.length shouldBe 1
     list.head shouldBe updated
+
+    println( s"gallons to string: ${UM.gallons.toString}" )
   }
