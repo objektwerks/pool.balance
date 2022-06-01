@@ -4,7 +4,7 @@ import java.time.{LocalDate, LocalTime}
 import java.time.format.DateTimeFormatter
 
 enum uom extends Enum[uom]:
-  case gl, grams, kilos, liters, lbs, ml, oz
+  case gl, kg, g, l, ml, lbs, oz
 
 sealed trait Entity:
   val id: Long

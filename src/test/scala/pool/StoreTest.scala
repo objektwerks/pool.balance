@@ -9,6 +9,16 @@ import java.time.LocalDate
 final class StoreTest extends AnyFunSuite with Matchers:
   val store = Context( ConfigFactory.load("test.conf") ).store
 
+  test("uom") {
+    uom.gl.toString shouldBe "gl"
+    uom.kg.toString shouldBe "kg"
+    uom.g.toString shouldBe "g"
+    uom.l.toString shouldBe "l"
+    uom.ml.toString shouldBe "ml"
+    uom.lbs.toString shouldBe "lbs"
+    uom.oz.toString shouldBe "oz"
+  }
+
   test("pool") {
     val pool = Pool(name = "pool-a", built = LocalDate.now(), volume = 10000)
 
@@ -21,6 +31,4 @@ final class StoreTest extends AnyFunSuite with Matchers:
     val list = store.pools()
     list.length shouldBe 1
     list.head shouldBe updated
-
-    println( s"gallons to string: ${UM.gallons.toString}" )
   }
