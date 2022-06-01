@@ -27,6 +27,6 @@ libraryDependencies ++= javafxModules.map( module =>
   "org.openjfx" % s"javafx-$module" % "18.0.1" classifier os
 )
 assembly / assemblyMergeStrategy := {
- case PathList("META-INF", xs @ _*) => MergeStrategy.discard
- case x => MergeStrategy.first
+  case PathList("META-INF", xs @ _*) => MergeStrategy.discard
+  case x => MergeStrategy.first
 }
