@@ -35,7 +35,7 @@ if (os == "mac") assemblyJarName := "pool-balance-mac-0.1.jar"
 else if (os == "mac-aarch64") assemblyJarName := "pool-balance-m1-0.1.jar"
 else if (os == "win") assemblyJarName := "pool-balance-win-0.1.jar"
 else if (os == "linux") assemblyJarName := "pool-balance-linux-0.1.jar"
-else  assemblyJarName := "pool-balance-no-target-0.1.jar"
+else assemblyJarName := "pool-balance-no-target-specified-0.1.jar"
 
 lazy val javafxModules = Seq("base", "controls", "web")
 libraryDependencies ++= javafxModules.map( module =>
