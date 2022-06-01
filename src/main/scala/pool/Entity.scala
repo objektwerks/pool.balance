@@ -17,24 +17,24 @@ sealed trait Entity:
 
 final case class Pool(id: Long = 0, name: String, built: LocalDate, volume: Int) extends Entity
 
-enum MeasurementType:
+enum typeofMeasurement:
   case freeChlorine, combinedChlorine, totalChlorine, pH, calciumHardness, totalAlkalinity, cyanuricAcid, totalBromine, temperature
 
 final case class Measurement(id: Long = 0,
                              poolId: Long,
-                             typeof: MeasurementType,
+                             typeof: typeofMeasurement,
                              dateMeasured: LocalDate = LocalDate.now,
                              timeMeasured: LocalTime = LocalTime.now,
                              measurement: Double ) extends Entity:
   given measurementOrdering: Ordering[Measurement] = Ordering.by(m => (m.dateMeasured.toEpochDay, m.timeMeasured.toSecondOfDay))
 
 
-enum ChemicalType:
+enum typeofChemical:
   case liquidChlorine, trichlor, dichlor, calciumHypochlorite, stabilizer, algaecide
 
 final case class Chemical(id: Long = 0,
                                 poolId: Long,
-                                typeof: ChemicalType,
+                                typeof: typeofChemical,
                                 dateAdded: LocalDate = LocalDate.now,
                                 timeAdded: LocalTime = LocalTime.now,
                                 amount: Double, 
