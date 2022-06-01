@@ -11,7 +11,7 @@ final class Model(context: Context):
 
   def freeChlorines(): Either[Throwable, List[FreeChlorine]] = Try( store.freeChlorines() ).toEither
   def add(freeChlorine: FreeChlorine): Either[Throwable, FreeChlorine] = Try( store.add(freeChlorine) ).toEither
-  def update(freeChlorine: FreeChlorine): Unit = store.update(freeChlorine)
+  def update(freeChlorine: FreeChlorine): Either[Throwable, Unit] = Try( store.update(freeChlorine) ).toEither
 
   def combinedChlorines(): List[CombinedChlorine] = store.combinedChlorines()
   def add(combinedChlorine: CombinedChlorine): Int = store.add(combinedChlorine)

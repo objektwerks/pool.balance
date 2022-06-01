@@ -34,13 +34,21 @@ final class Store(context: Context):
   }
 
   def add(freeChlorine: FreeChlorine): FreeChlorine = DB localTx { implicit session =>
-    val id = sql"""insert into free_chlorine(pool_id, date_measured, time_measured, measurement)" +
-      values(${freeChlorine.poolId}, ${freeChlorine.dateMeasured}, ${freeChlorine.timeMeasured}, ${freeChlorine.measurement})"""
+    val id = sql"""
+      insert into free_chlorine(pool_id, date_measured, time_measured, measurement)" +
+      values(${freeChlorine.poolId}, ${freeChlorine.dateMeasured}, ${freeChlorine.timeMeasured}, ${freeChlorine.measurement})
+      """
       .updateAndReturnGeneratedKey()
     freeChlorine.copy(id = id)
   }
 
-  def update(freeChlorine: FreeChlorine): Unit = ()
+  def update(freeChlorine: FreeChlorine): Unit = DB localTx { implicit session =>
+    sql"""
+      update free_chlorine set date_measured = ${freeChlorine.dateMeasured}, time_measured = ${freeChlorine.timeMeasured},
+      measurement = ${freeChlorine.measurement} where id = ${freeChlorine.id}
+      """
+      .update()
+  }
 
   def combinedChlorines(): List[CombinedChlorine] = List[CombinedChlorine]()
   def add(combinedChlorine: CombinedChlorine): Int = 0
