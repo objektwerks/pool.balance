@@ -18,17 +18,22 @@ sealed trait Entity:
 final case class Pool(id: Long = 0, name: String, built: LocalDate, volume: Int) extends Entity
 
 sealed trait Measurement extends Entity:
-  val id: Long = 0
+  val id: Long
   val poolId: Long
-  val dateMeasured: LocalDate = LocalDate.now
-  val timeMeasured: LocalTime = LocalTime.now
+  val dateMeasured: LocalDate
+  val timeMeasured: LocalTime
   val measurement: Double
 
   given measurementOrdering: Ordering[Measurement] = Ordering.by(m => (m.dateMeasured.toEpochDay, m.timeMeasured.toSecondOfDay))
 
-final case class FreeChlorine(poolId: Long, measurement: Double) extends Measurement
+final case class FreeChlorine(id: Long = 0,
+                              poolId: Long,
+                              dateMeasured: LocalDate,
+                              timeMeasured: LocalTime,
+                              measurement: Double) extends Measurement
 
-final case class CombinedChlorine(poolId: Long, measurement: Double) extends Measurement
+final case class CombinedChlorine(poolId: Long,
+                                  measurement: Double) extends Measurement
 
 final case class TotalChlorine(poolId: Long, measurement: Double) extends Measurement
 

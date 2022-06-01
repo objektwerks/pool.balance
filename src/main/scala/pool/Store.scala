@@ -22,7 +22,17 @@ final class Store(context: Context):
       .update()
   }
 
-  def freeChlorines(): List[FreeChlorine] = List[FreeChlorine]()
+  def freeChlorines(): List[FreeChlorine] = DB readOnly { implicit session =>
+    sql"select * from free_chlorine order by date_measured, time_measured"
+      .map(rs => FreeChlorine(
+        rs.long("id"),
+        rs.long("pool_id"), 
+        rs.localDate("date_measured"), 
+        rs.localTime("time_measured"), 
+        rs.double("measurement")))
+      .list()
+  }
+
   def add(freeChlorine: FreeChlorine): Int = 0
   def update(freeChlorine: FreeChlorine): Unit = ()
 
