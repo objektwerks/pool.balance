@@ -21,16 +21,19 @@ libraryDependencies ++= {
 1. sbt -Dtarget="mac" clean test assembly
 2. sbt -Dtarget="m1" clean test assembly
 3. sbt -Dtarget="win" clean test assembly
+4. sbt -Dtarget="linux" clean test assembly
 */
 lazy val os = System.getProperty("target") match {
-  case name if name.startsWith("mac") => "mac"
-  case name if name.startsWith("m1")  => "mac-aarch64"
-  case name if name.startsWith("win") => "win"
+  case name if name.startsWith("mac")   => "mac"
+  case name if name.startsWith("m1")    => "mac-aarch64"
+  case name if name.startsWith("win")   => "win"
+  case name if name.startsWith("linux") => "linux"
   case _ => throw new Exception("Only Mac, M1 and Windows supported for this build.")
 }
 if (os == "mac") assemblyJarName := "pool-balance-mac-0.1.jar"
 else if (os == "mac-aarch64") assemblyJarName := "pool-balance-m1-0.1.jar"
-else assemblyJarName := "pool-balance-win-0.1.jar"
+else if (os == "win")  assemblyJarName := "pool-balance-win-0.1.jar"
+else assemblyJarName := "pool-balance-linux-0.1.jar"
 
 lazy val javafxModules = Seq("base", "controls", "web")
 libraryDependencies ++= javafxModules.map( module =>
