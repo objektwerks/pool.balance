@@ -20,6 +20,9 @@ final case class Pool(id: Long = 0, name: String, built: LocalDate, volume: Int)
 enum typeOfMeasurement:
   case freeChlorine, combinedChlorine, totalChlorine, pH, calciumHardness, totalAlkalinity, cyanuricAcid, totalBromine, temperature
 
+object typeOfMeasurement:
+  def list: Array[String] = typeOfMeasurement.values.map(t => t.toString)
+
 final case class Measurement(id: Long = 0,
                              poolId: Long,
                              typeof: typeOfMeasurement,
@@ -31,6 +34,9 @@ final case class Measurement(id: Long = 0,
 
 enum typeOfChemical:
   case liquidChlorine, trichlor, dichlor, calciumHypochlorite, stabilizer, algaecide
+
+object typeOfChemical:
+  def list: Array[String] = typeOfChemical.values.map(t => t.toString)
 
 final case class Chemical(id: Long = 0,
                                 poolId: Long,
