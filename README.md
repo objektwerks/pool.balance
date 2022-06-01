@@ -16,7 +16,7 @@ Run
 
 Assembly
 --------
->To build for a "mac", "m1' or "win" target:
+>To build for a "mac", "m1', "win" or "linux" os target:
 1. sbt -Dtarget="mac" clean test assembly
 2. sbt -Dtarget="m1" clean test assembly
 3. sbt -Dtarget="win" clean test assembly
