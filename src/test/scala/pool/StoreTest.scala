@@ -28,3 +28,6 @@ final class StoreTest extends AnyFunSuite with Matchers:
 
   def testMeasurements(poolId: Long): Unit =
     ()
+
+  def testChemicals(poolId: Long): Unit =
+    ()
