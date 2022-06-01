@@ -3,7 +3,6 @@ organization := "objektwerks"
 version := "0.1-SNAPSHOT"
 scalaVersion := "3.1.3-RC4"
 mainClass := Some("pool.App")
-assemblyJarName := "pool-balance-0.1.jar"
 libraryDependencies ++= {
   Seq(
     "org.scalafx" %% "scalafx" % "18.0.1-R27",
@@ -22,6 +21,9 @@ lazy val os = System.getProperty("os.name").toLowerCase match {
   case name if name.startsWith("win") => "win"
   case _                              => throw new Exception("Only Apple M1 and Windows supported.")
 }
+if (os == "mac-aarch64") assemblyJarName := "pool-balance-m1-0.1.jar"
+else assemblyJarName := "pool-balance-win-0.1.jar"
+
 lazy val javafxModules = Seq("base", "controls", "web")
 libraryDependencies ++= javafxModules.map( module =>
   "org.openjfx" % s"javafx-$module" % "18.0.1" classifier os
