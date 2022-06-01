@@ -17,9 +17,9 @@ libraryDependencies ++= {
     "org.scalatest" %% "scalatest" % "3.2.12" % Test
   )
 }
-lazy val os = System.getProperty("os.name") match {
-  case n if n.startsWith("Mac")     => "mac-aarch64"
-  case n if n.startsWith("Windows") => "win"
+lazy val os = System.getProperty("os.name").toLowerCase match {
+  case n if n.startsWith("mac")     => "mac-aarch64"
+  case n if n.startsWith("win")     => "win"
   case _                            => throw new Exception("Only Apple M1 and Windows supported.")
 }
 lazy val javafxModules = Seq("base", "controls", "web")
