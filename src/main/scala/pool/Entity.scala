@@ -3,7 +3,7 @@ package pool
 import java.time.{LocalDate, LocalTime}
 import java.time.format.DateTimeFormatter
 
-enum UM:
+enum UM extends Enum[UM]:
   case gallons, grams, kilos, liters, lbs, ml, oz
 
 sealed trait Entity:
