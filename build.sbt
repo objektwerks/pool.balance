@@ -16,7 +16,8 @@ libraryDependencies ++= {
     "org.scalatest" %% "scalatest" % "3.2.12" % Test
   )
 }
-lazy val os = System.getProperty("os.name").toLowerCase match {
+// sbt -Dtarget="mac" clean test assembly | sbt -Dtarget="win" clean test assembly 
+lazy val os = System.getProperty("target") match {
   case name if name.startsWith("mac") => "mac-aarch64"
   case name if name.startsWith("win") => "win"
   case _                              => throw new Exception("Only Apple M1 and Windows supported.")
