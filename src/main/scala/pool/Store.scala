@@ -33,7 +33,7 @@ final class Store(context: Context):
 
   def add(freeChlorine: FreeChlorine): FreeChlorine = DB localTx { implicit session =>
     val id = sql"""
-      insert into free_chlorine(pool_id, date_measured, time_measured, measurement)" +
+      insert into free_chlorine(pool_id, date_measured, time_measured, measurement)
       values(${freeChlorine.poolId}, ${freeChlorine.dateMeasured}, ${freeChlorine.timeMeasured}, ${freeChlorine.measurement})
       """
       .updateAndReturnGeneratedKey()
