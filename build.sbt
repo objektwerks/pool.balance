@@ -18,6 +18,7 @@ libraryDependencies ++= {
 }
 
 /*
+See assembly section in readme.
 1. sbt -Dtarget="mac" clean test assembly
 2. sbt -Dtarget="m1" clean test assembly
 3. sbt -Dtarget="win" clean test assembly
@@ -44,9 +45,3 @@ assembly / assemblyMergeStrategy := {
   case PathList("META-INF", xs @ _*) => MergeStrategy.discard
   case x => MergeStrategy.first
 }
-
-/*
-I need to target os builds for mac, m1 and win. 
-So I've come up with this solution: ```https://github.com/objektwerks/pool.balance/blob/main/build.sbt```, which works.
-Unpacking build jars, I only noticed 1 difference: ```jfxwebkit.dll```, found in the win jar. Interesting.
-*/
