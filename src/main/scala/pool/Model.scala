@@ -9,8 +9,8 @@ final class Model(context: Context):
   def add(pool: Pool): Either[Throwable, Pool] = Try( store.add(pool) ).toEither
   def update(pool: Pool):Either[Throwable, Unit] = Try( store.update(pool) ).toEither
 
-  def freeChlorines(): List[FreeChlorine] = store.freeChlorines()
-  def add(freeChlorine: FreeChlorine): Int = store.add(freeChlorine)
+  def freeChlorines(): Either[Throwable, List[FreeChlorine]] = Try( store.freeChlorines() ).toEither
+  def add(freeChlorine: FreeChlorine): Either[Throwable, FreeChlorine] = Try( store.add(freeChlorine) ).toEither
   def update(freeChlorine: FreeChlorine): Unit = store.update(freeChlorine)
 
   def combinedChlorines(): List[CombinedChlorine] = store.combinedChlorines()
