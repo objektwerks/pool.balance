@@ -32,22 +32,52 @@ final case class FreeChlorine(id: Long = 0,
                               timeMeasured: LocalTime,
                               measurement: Double) extends Measurement
 
-final case class CombinedChlorine(poolId: Long,
+final case class CombinedChlorine(id: Long,
+                                  poolId: Long,
+                                  dateMeasured: LocalDate,
+                                  timeMeasured: LocalTime,
                                   measurement: Double) extends Measurement
 
-final case class TotalChlorine(poolId: Long, measurement: Double) extends Measurement
+final case class TotalChlorine(id: Long,
+                               poolId: Long,
+                               dateMeasured: LocalDate,
+                               timeMeasured: LocalTime,
+                               measurement: Double) extends Measurement
+final case class pH(id: Long = 0,
+                    poolId: Long,
+                    dateMeasured: LocalDate,
+                    timeMeasured: LocalTime,
+                    measurement: Double) extends Measurement
 
-final case class pH(poolId: Long, measurement: Double) extends Measurement
+final case class CalciumHardness(id: Long = 0,
+                                 poolId: Long,
+                                 dateMeasured: LocalDate,
+                                 timeMeasured: LocalTime,
+                                 measurement: Double) extends Measurement
 
-final case class CalciumHardness(poolId: Long, measurement: Double) extends Measurement
+final case class TotalAlkalinity(id: Long = 0,
+                                 poolId: Long,
+                                 dateMeasured: LocalDate,
+                                 timeMeasured: LocalTime,
+                                 measurement: Double) extends Measurement
 
-final case class TotalAlkalinity(poolId: Long, measurement: Double) extends Measurement
+final case class CyanuricAcid(id: Long = 0,
+                              poolId: Long,
+                              dateMeasured: LocalDate,
+                              timeMeasured: LocalTime,
+                              measurement: Double) extends Measurement
 
-final case class CyanuricAcid(poolId: Long, measurement: Double) extends Measurement
+final case class TotalBromine(id: Long = 0,
+                              poolId: Long,
+                              dateMeasured: LocalDate,
+                              timeMeasured: LocalTime,
+                              measurement: Double) extends Measurement
 
-final case class TotalBromine(poolId: Long, measurement: Double) extends Measurement
-
-final case class Temperature(poolId: Long, measurement: Double) extends Measurement
+final case class Temperature(id: Long = 0,
+                             poolId: Long,
+                             dateMeasured: LocalDate,
+                             timeMeasured: LocalTime,
+                             measurement: Double) extends Measurement
 
 sealed trait Chemical extends Entity:
   val id: Long = 0
