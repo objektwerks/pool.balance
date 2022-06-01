@@ -16,7 +16,8 @@ Run
 
 Assembly
 --------
-1. sbt assembly
+>To build for a "mac" or "win" target:
+1. sbt -Dtarget="mac" clean test assembly | sbt -Dtarget="win" clean test assembly
 2. java -jar target/scala-3.1.3-RC4/pool-balance-m1-0.1.jar | pool-balance-win-0.1.jar
 
 Features
