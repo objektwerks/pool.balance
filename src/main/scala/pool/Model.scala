@@ -9,6 +9,10 @@ final class Model(context: Context):
   def add(pool: Pool): Either[Throwable, Pool] = Try( store.add(pool) ).toEither
   def update(pool: Pool):Either[Throwable, Unit] = Try( store.update(pool) ).toEither
 
+  def cleanings(): Either[Throwable, List[Cleaning]] = Try( store.cleanings() ).toEither
+  def add(cleaning: Cleaning): Either[Throwable, Cleaning] = Try( store.add(cleaning) ).toEither
+  def update(cleaning: Cleaning): Either[Throwable, Unit] = Try( store.update(cleaning) ).toEither
+
   def measurements(): Either[Throwable, List[Measurement]] = Try( store.measurements() ).toEither
   def add(measurement: Measurement): Either[Throwable, Measurement] = Try( store.add(measurement) ).toEither
   def update(measurement: Measurement): Either[Throwable, Unit] = Try( store.update(measurement) ).toEither
