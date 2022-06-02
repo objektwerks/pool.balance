@@ -4,6 +4,17 @@ create table if not exists pool (
   built date not null,
   volume double not null
 );
+create table if not exists cleaning (
+  id long primary key auto_increment,
+  pool_id long references pool(id),
+  brush bool not null,
+  net bool not null,
+  skimmer_basket bool not null,
+  pump_basket bool not null,
+  pump_filter bool not null,
+  vacuum bool not null,
+  date_cleaned date not null
+);
 create table if not exists measurement (
   id long primary key auto_increment,
   pool_id long references pool(id),
