@@ -44,6 +44,14 @@ final class Store(context: Context):
       .updateAndReturnGeneratedKey()
     cleaning.copy(id = id)
   }
+  def update(cleaning: Cleaning): Unit = DB localTx { implicit session =>
+    sql"""
+      update cleaning set brush = ${cleaning.brush}, net = ${cleaning.net}, skimmer_basket = ${cleaning.skimmerBasket},
+      pump_basket = ${cleaning.pumpBasket}, pump_filter = ${cleaning.pumpFilter}, vacuum = ${cleaning.vacuum},
+      date_cleaned = ${cleaning.dateCleaned} where id = ${cleaning.id}
+      """
+      .update()
+  }
 
   def measurements(): List[Measurement] = DB readOnly { implicit session =>
     sql"select * from measurement order by date_measured, time_measured"
