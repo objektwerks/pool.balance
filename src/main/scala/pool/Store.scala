@@ -111,3 +111,20 @@ final class Store(context: Context):
       """
       .update()
   }
+
+  def freeChlorines(): List[Measurement] = List[Measurement]()
+  def combinedChlorines(): List[Measurement] = List[Measurement]()
+  def totalChlorines(): List[Measurement] = List[Measurement]()
+  def pHs(): List[Measurement] = List[Measurement]()
+  def calciumHardnesses(): List[Measurement] = List[Measurement]()
+  def totalAlkalinities(): List[Measurement] = List[Measurement]()
+  def cyanuricAcids(): List[Measurement] = List[Measurement]()
+  def totalBromines(): List[Measurement] = List[Measurement]()
+  def temperatures(): List[Measurement] = List[Measurement]()
+  
+  def liquidChlorines(): List[Chemical] = List[Chemical]()
+  def trichlors(): List[Chemical] = List[Chemical]()
+  def dichlors(): List[Chemical] = List[Chemical]()
+  def calciumHypochlorites(): List[Chemical] = List[Chemical]()
+  def stabilizers(): List[Chemical] = List[Chemical]()
+  def algaecides(): List[Chemical] = List[Chemical]()
