@@ -53,8 +53,8 @@ final class Store(context: Context):
       .update()
   }
 
-  def measurements(): List[Measurement] = DB readOnly { implicit session =>
-    sql"select * from measurement order by date_measured, time_measured"
+  def measurements(typeof: typeOfMeasurement): List[Measurement] = DB readOnly { implicit session =>
+    sql"select * from measurement where typeof = $typeof order by date_measured, time_measured"
       .map(rs => Measurement(
         rs.long("id"),
         rs.long("pool_id"),
