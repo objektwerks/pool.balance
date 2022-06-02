@@ -53,14 +53,14 @@ Measurements
 8. total bromine (tb): 0 - 20, ok = 2 - 10, ideal = 5
 9. temperature: 0 - 100
 
-Model
------
+Entity
+------
 1. Pool 1 --> * Measurement <-- FreeChlorine, CombinedChlorine, TotalChlorine, pH, CalciumHardness,
 TotalAlkalinity, CyanuricAcid, TotalBromine, Temperature
 2. Pool 1 --> * Chemical <-- LiquidChlorine, Trichlor, Dichlor, CalciumHypochlorite, Stabilizer
 
-UI
---
+Model
+-----
 * App 1 --> 1 Context | Store | Model | View
 * Store 1 --> 1 Context
 * Model 1 --> 1 Context | Store
