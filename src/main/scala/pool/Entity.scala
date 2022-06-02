@@ -21,10 +21,10 @@ final case class Cleaning(id: Long = 0,
                           poolId: Long,
                           brush: Boolean = false,
                           net: Boolean = false,
-                          vacuum: Boolean = false,
                           skimmerBasket: Boolean = false,
                           pumpBasket: Boolean = false,
                           pumpFilter: Boolean = false,
+                          vacuum: Boolean = false,
                           dateCleaned: LocalDate = LocalDate.now) extends Entity
 
 enum typeOfMeasurement:
