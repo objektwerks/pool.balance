@@ -30,15 +30,17 @@ Assembly
 Features
 --------
 1. dashboard
-2. measurements
-3. chemicals
-4. charts
-5. database
+2. cleanings
+3. measurements
+4. chemicals
+5. charts
+6. database
 
 Use Cases
 ---------
-1. measure pool water chemical content
-2. balance pool water chemical content
+1. clean pool and components
+2. measure pool chemical content
+3. add chemicals to pool
 
 Measurements
 ------------
