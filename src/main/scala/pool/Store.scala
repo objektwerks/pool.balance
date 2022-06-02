@@ -20,6 +20,22 @@ final class Store(context: Context):
       .update()
   }
 
+  def cleanings(): List[Cleaning] = DB readOnly { implicit session =>
+    sql"select * from cleaning order by date_created"
+      .map(rs => Cleaning(
+        rs.long("id"),
+        rs.long("pool_id"),
+        rs.boolean("brush"),
+        rs.boolean("net"),
+        rs.boolean("skimmer_basket"),
+        rs.boolean("pump_basket"),
+        rs.boolean("pump_filter"),
+        rs.boolean("vacuum"),
+        rs.localDate("date_cleaned"))
+      )
+      .list()
+  }
+
   def measurements(): List[Measurement] = DB readOnly { implicit session =>
     sql"select * from measurement order by date_measured, time_measured"
       .map(rs => Measurement(
