@@ -17,6 +17,16 @@ sealed trait Entity:
 
 final case class Pool(id: Long = 0, name: String, built: LocalDate, volume: Int) extends Entity
 
+final case class Cleaning(id: Long = 0,
+                          poolId: Long,
+                          brush: Boolean = false,
+                          net: Boolean = false,
+                          vacuum: Boolean = false,
+                          skimmerBasket: Boolean = false,
+                          pumpBasket: Boolean = false,
+                          pumpFilter: Boolean = false,
+                          dateCleaned: LocalDate = LocalDate.now) extends Entity
+
 enum typeOfMeasurement:
   case freeChlorine, combinedChlorine, totalChlorine, pH, calciumHardness, totalAlkalinity, cyanuricAcid, totalBromine, temperature
 
