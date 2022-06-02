@@ -2,7 +2,8 @@ create table if not exists pool (
   id long primary key auto_increment,
   name varchar not null,
   built date not null,
-  volume double not null
+  volume double not null,
+  unit varchar not null
 );
 create table if not exists cleaning (
   id long primary key auto_increment,

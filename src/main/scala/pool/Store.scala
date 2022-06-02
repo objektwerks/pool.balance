@@ -7,16 +7,27 @@ final class Store(context: Context):
 
   def pools(): List[Pool] = DB readOnly { implicit session =>
     sql"select * from pool order by built desc"
-      .map(rs => Pool(rs.long("id"), rs.string("name"), rs.localDate("built"), rs.int("volume")))
+      .map(rs => Pool(
+        rs.long("id"),
+        rs.string("name"), 
+        rs.localDate("built"), 
+        rs.int("volume"), 
+        unitOfMeasure.valueOf( rs.string("unit") ))
+      )
       .list()
   }
   def add(pool: Pool): Pool = DB localTx { implicit session =>
-    val id = sql"insert into pool(name, built, volume) values(${pool.name}, ${pool.built}, ${pool.volume})"
+    val id = sql"""
+      insert into pool(name, built, volume, unit) values(${pool.name}, ${pool.built}, ${pool.volume}, ${pool.unit.toString})
+      """
       .updateAndReturnGeneratedKey()
     pool.copy(id = id)
   }
   def update(pool: Pool): Unit = DB localTx { implicit session =>
-    sql"update pool set name = ${pool.name}, built = ${pool.built}, volume = ${pool.volume} where id = ${pool.id}"
+    sql"""
+      update pool set name = ${pool.name}, built = ${pool.built}, volume = ${pool.volume}, unit = ${pool.unit.toString}
+      where id = ${pool.id}
+      """
       .update()
   }
 

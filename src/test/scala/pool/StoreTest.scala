@@ -11,7 +11,7 @@ final class StoreTest extends AnyFunSuite with Matchers:
   val store = Context( ConfigFactory.load("test.conf") ).store
 
   test("store") {
-    val pool = Pool(name = "pool-a", built = LocalDate.now(), volume = 10000)
+    val pool = Pool(name = "pool-a", built = LocalDate.now(), volume = 10000, unit = unitOfMeasure.gl)
 
     val added = store.add(pool)
     added.id should not be 0

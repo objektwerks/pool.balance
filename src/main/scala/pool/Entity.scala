@@ -15,7 +15,11 @@ sealed trait Entity:
   def newDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
   def newTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
-final case class Pool(id: Long = 0, name: String, built: LocalDate, volume: Int) extends Entity
+final case class Pool(id: Long = 0,
+                      name: String, 
+                      built: LocalDate, 
+                      volume: Int,
+                      unit: unitOfMeasure) extends Entity
 
 final case class Cleaning(id: Long = 0,
                           poolId: Long,
