@@ -35,6 +35,15 @@ final class Store(context: Context):
       )
       .list()
   }
+  def add(cleaning: Cleaning): Cleaning = DB localTx { implicit session =>
+    val id = sql"""
+      insert into cleaning(pool_id, brush, net, skimmer_basket, pump_basket, pump_filter, vacuum, date_cleaned)
+      values(${cleaning.poolId}, ${cleaning.brush}, ${cleaning.net}, ${cleaning.skimmerBasket},
+      ${cleaning.pumpBasket}, ${cleaning.pumpFilter}, ${cleaning.dateCleaned})
+      """
+      .updateAndReturnGeneratedKey()
+    cleaning.copy(id = id)
+  }
 
   def measurements(): List[Measurement] = DB readOnly { implicit session =>
     sql"select * from measurement order by date_measured, time_measured"
