@@ -82,8 +82,8 @@ final class Store(context: Context):
       .update()
   }
 
-  def chemicals(): List[Chemical] = DB readOnly { implicit session =>
-    sql"select * from measurement order by date_added, time_added"
+  def chemicals(typeof: typeOfChemical): List[Chemical] = DB readOnly { implicit session =>
+    sql"select * from measurement where typeof = $typeof order by date_added, time_added"
       .map(rs => Chemical(
         rs.long("id"),
         rs.long("pool_id"),

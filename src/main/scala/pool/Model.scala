@@ -17,6 +17,6 @@ final class Model(context: Context):
   def add(measurement: Measurement): Either[Throwable, Measurement] = Try( store.add(measurement) ).toEither
   def update(measurement: Measurement): Either[Throwable, Unit] = Try( store.update(measurement) ).toEither
 
-  def chemicals(): Either[Throwable, List[Chemical]] = Try( store.chemicals() ).toEither
+  def chemicals(typeof: typeOfChemical): Either[Throwable, List[Chemical]] = Try( store.chemicals(typeof) ).toEither
   def add(chemical: Chemical): Either[Throwable, Chemical] = Try( store.add(chemical) ).toEither
   def update(chemical: Chemical): Either[Throwable, Unit] = Try( store.update(chemical) ).toEither
