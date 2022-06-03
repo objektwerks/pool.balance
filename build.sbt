@@ -22,7 +22,16 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 
-lazy val copyAssemblyJar = taskKey[Unit]("Copy assembly jar to deploy dir.")
+lazy val createBuildDir = taskKey[File]("Creates new build directory.")
+createBuildDir := {
+  val buildDir = baseDirectory.value / "build"
+  //IO.delete(buildDir)
+  IO.createDirectory(buildDir)
+  buildDir
+}
+assembly / assemblyOutputPath := createBuildDir.value
+
+lazy val copyAssemblyJar = taskKey[Unit]("Copy assembly jar to build dir.")
 copyAssemblyJar := {
   val jar = (assembly / assemblyOutputPath).value
   val source: Path = Paths.get(jar.toString())
@@ -30,12 +39,7 @@ copyAssemblyJar := {
 
   val target: Path = Paths.get("./build")
   println(s"target: ${target.toString()}")
-
-  if (!Files.exists(target)) {
-    println(s"Directory does not exist: $target")
-    Files.createDirectories(target)
-    println(s"Created directory: $target")
-  } else println(s"Directory exists: $target")
+  println(s"Does build dir exist: ${Files.exists(target)}")
 
   assert(Files.isDirectory(target), s"$target is not a directory!")
 
