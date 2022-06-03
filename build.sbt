@@ -31,6 +31,7 @@ lazy val os: String = sys.props.getOrElse("target", "") match {
   case name if name.startsWith("linux") => "linux"
   case _ => ""
 }
+
 if (os == "mac") assemblyJarName := "pool-balance-mac-0.1.jar"
 else if (os == "mac-aarch64") assemblyJarName := "pool-balance-m1-0.1.jar"
 else if (os == "win") assemblyJarName := "pool-balance-win-0.1.jar"
