@@ -49,7 +49,5 @@ final class StoreTest extends AnyFunSuite with Matchers:
 
   def listMeasurements(measurement: Measurement): Unit =
     val measurements = store.measurements(measurement.typeof)
-    println(measurement.timeMeasured.toString)
-    println(measurements.head.timeMeasured.toString)
     measurements.length shouldBe 1
     measurements.head shouldBe measurement
