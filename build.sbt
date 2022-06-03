@@ -19,7 +19,7 @@ libraryDependencies ++= {
 
 lazy val createBuildDir = taskKey[File]("Creates new build directory.")
 createBuildDir := {
-  val buildDir = baseDirectory.value / "zzz"
+  val buildDir = baseDirectory.value / "build"
   IO.delete(buildDir)
   IO.createDirectory(buildDir)
   buildDir
