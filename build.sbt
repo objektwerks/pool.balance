@@ -17,14 +17,14 @@ libraryDependencies ++= {
   )
 }
 
-lazy val createBuildDir = taskKey[File]("Creates new build directory.")
-createBuildDir := {
-  val buildDir = baseDirectory.value / "build"
+lazy val copyAssemblyJar = taskKey[Unit]("Copy assembly jar to build dir.")
+copyAssemblyJar := {
+  val buildDir = file("./build")
   IO.delete(buildDir)
   IO.createDirectory(buildDir)
-  buildDir
+  val assemblyJar = assembly.value / assemblyJarName.value
+  IO.copyDirectory(assemblyJar, buildDir)
 }
-assembly / assemblyOutputPath := createBuildDir.value
 
 /*
 See assembly section in readme.
