@@ -15,8 +15,8 @@ sealed trait Entity:
 object Entity:
   def newDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
   def newTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
-  def formatLocalDate(localDate: LocalDate): LocalDate = LocalDate.parse( localDate.format(newDateFormatter) )
-  def formatLocalTime(localTime: LocalTime): LocalTime = LocalTime.parse( localTime.format(newTimeFormatter) )
+  def format(localDate: LocalDate): LocalDate = LocalDate.parse( localDate.format(newDateFormatter) )
+  def format(localTime: LocalTime): LocalTime = LocalTime.parse( localTime.format(newTimeFormatter) )
 
 final case class Pool(id: Long = 0,
                       name: String, 
@@ -32,7 +32,7 @@ final case class Cleaning(id: Long = 0,
                           pumpBasket: Boolean = false,
                           pumpFilter: Boolean = false,
                           vacuum: Boolean = false,
-                          dateCleaned: LocalDate = Entity.formatLocalDate(LocalDate.now)) extends Entity
+                          dateCleaned: LocalDate = Entity.format(LocalDate.now)) extends Entity
 
 enum typeOfMeasurement:
   case freeChlorine, combinedChlorine, totalChlorine, pH, calciumHardness, totalAlkalinity, cyanuricAcid, totalBromine, temperature
@@ -43,8 +43,8 @@ object typeOfMeasurement:
 final case class Measurement(id: Long = 0,
                              poolId: Long,
                              typeof: typeOfMeasurement,
-                             dateMeasured: LocalDate = Entity.formatLocalDate(LocalDate.now),
-                             timeMeasured: LocalTime = Entity.formatLocalTime(LocalTime.now),
+                             dateMeasured: LocalDate = Entity.format(LocalDate.now),
+                             timeMeasured: LocalTime = Entity.format(LocalTime.now),
                              measurement: Double ) extends Entity:
   given measurementOrdering: Ordering[Measurement] = Ordering.by(m => (m.dateMeasured.toEpochDay, m.timeMeasured.toSecondOfDay))
 
@@ -58,8 +58,8 @@ object typeOfChemical:
 final case class Chemical(id: Long = 0,
                           poolId: Long,
                           typeof: typeOfChemical,
-                          dateAdded: LocalDate = Entity.formatLocalDate(LocalDate.now),
-                          timeAdded: LocalTime = Entity.formatLocalTime(LocalTime.now),
+                          dateAdded: LocalDate = Entity.format(LocalDate.now),
+                          timeAdded: LocalTime = Entity.format(LocalTime.now),
                           amount: Double, 
                           unit: unitOfMeasure) extends Entity:
   given chemicalOrdering: Ordering[Chemical] = Ordering.by(c => (c.dateAdded.toEpochDay, c.timeAdded.toSecondOfDay))
