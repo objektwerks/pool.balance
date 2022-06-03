@@ -16,9 +16,17 @@ class EnumTest extends AnyFunSuite with Matchers:
   }
 
   test("type of measurement") {
+// case freeChlorine, combinedChlorine, totalChlorine, pH, calciumHardness, totalAlkalinity, cyanuricAcid, totalBromine, temperature
+
 
   }
 
   test("type of chemical") {
-
+// case liquidChlorine, trichlor, dichlor, calciumHypochlorite, stabilizer, algaecide
+    typeOfChemical.valueOf(typeOfChemical.liquidChlorine.toString) shouldBe typeOfChemical.liquidChlorine
+    typeOfChemical.valueOf(typeOfChemical.trichlor.toString) shouldBe typeOfChemical.trichlor
+    typeOfChemical.valueOf(typeOfChemical.dichlor.toString) shouldBe typeOfChemical.dichlor
+    typeOfChemical.valueOf(typeOfChemical.calciumHypochlorite.toString) shouldBe typeOfChemical.calciumHypochlorite
+    typeOfChemical.valueOf(typeOfChemical.stabilizer.toString) shouldBe typeOfChemical.stabilizer
+    typeOfChemical.valueOf(typeOfChemical.algaecide.toString) shouldBe typeOfChemical.algaecide
   }
