@@ -29,7 +29,7 @@ copyAssemblyJar := {
   println(s"source: ${source.toString()}")
 
   val target: Path = Paths.get("./build")
-  println(s"source: ${target.toString()}")
+  println(s"target: ${target.toString()}")
 
   if (!Files.exists(target)) {
     println(s"Directory does not exist: $target")
