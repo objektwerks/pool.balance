@@ -25,12 +25,13 @@ import java.nio.file.StandardCopyOption
 lazy val createBuildDir = taskKey[File]("Creates new build directory.")
 createBuildDir := {
   val buildDir = baseDirectory.value / "build"
-  //IO.delete(buildDir)
+  println(s"build dir: ${buildDir.toString()}")
   IO.createDirectory(buildDir)
   buildDir
 }
 assembly / assemblyOutputPath := createBuildDir.value
 
+/*
 lazy val copyAssemblyJar = taskKey[Unit]("Copy assembly jar to build dir.")
 copyAssemblyJar := {
   val jar = (assembly / assemblyOutputPath).value
@@ -45,7 +46,7 @@ copyAssemblyJar := {
 
   Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING)
 }
-
+*/
 /*
 See assembly section in readme.
 1. sbt -Dtarget="mac" clean test assembly
