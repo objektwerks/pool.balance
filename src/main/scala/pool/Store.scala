@@ -36,7 +36,7 @@ final class Store(context: Context):
   }
 
   def cleanings(): List[Cleaning] = DB readOnly { implicit session =>
-    sql"select * from cleaning order by date_created"
+    sql"select * from cleaning order by date_cleaned"
       .map(rs => Cleaning(
         rs.long("id"),
         rs.long("pool_id"),
@@ -54,7 +54,7 @@ final class Store(context: Context):
     val id = sql"""
       insert into cleaning(pool_id, brush, net, skimmer_basket, pump_basket, pump_filter, vacuum, date_cleaned)
       values(${cleaning.poolId}, ${cleaning.brush}, ${cleaning.net}, ${cleaning.skimmerBasket},
-      ${cleaning.pumpBasket}, ${cleaning.pumpFilter}, ${cleaning.dateCleaned})
+      ${cleaning.pumpBasket}, ${cleaning.pumpFilter}, ${cleaning.vacuum}, ${cleaning.dateCleaned})
       """
       .updateAndReturnGeneratedKey()
     cleaning.copy(id = id)

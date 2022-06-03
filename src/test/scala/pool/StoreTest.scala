@@ -15,6 +15,10 @@ final class StoreTest extends AnyFunSuite with Matchers:
     pool = updatePool(pool)
     listPools(pool)
 
+    var cleaning = addCleaning(pool)
+    cleaning = updateCleaning(cleaning)
+    listCleanings(cleaning)
+    
     var measurement = addMeasurement(pool)
     measurement = updateMeasurement(measurement)
     listMeasurements(measurement)
@@ -39,6 +43,22 @@ final class StoreTest extends AnyFunSuite with Matchers:
     val pools = store.pools()
     pools.length shouldBe 1
     pools.head shouldBe pool
+
+  def addCleaning(pool: Pool): Cleaning =
+    val cleaning = Cleaning(poolId = pool.id, brush = true)
+    val addedCleaning = store.add(cleaning)
+    addedCleaning.id should not be 0
+    addedCleaning
+
+  def updateCleaning(cleaning: Cleaning): Cleaning =
+    val updatedCleaning = cleaning.copy(net = true)
+    store.update(updatedCleaning)
+    updatedCleaning
+
+  def listCleanings(cleaning: Cleaning): Unit =
+    val cleanings = store.cleanings()
+    cleanings.length shouldBe 1
+    cleanings.head shouldBe cleaning
 
   def addMeasurement(pool: Pool): Measurement =
     val measurement = Measurement(poolId = pool.id, typeof = typeOfMeasurement.pH, measurement = 7.3)
