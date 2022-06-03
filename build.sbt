@@ -17,6 +17,15 @@ libraryDependencies ++= {
   )
 }
 
+lazy val createBuildDir = taskKey[File]("Creates new build directory.")
+createBuildDir := {
+  val buildDir = baseDirectory.value / "zzz"
+  IO.delete(buildDir)
+  IO.createDirectory(buildDir)
+  buildDir
+}
+assembly / assemblyOutputPath := createBuildDir.value
+
 /*
 See assembly section in readme.
 1. sbt -Dtarget="mac" clean test assembly
