@@ -17,13 +17,17 @@ libraryDependencies ++= {
   )
 }
 
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.StandardCopyOption
+
 lazy val copyAssemblyJar = taskKey[Unit]("Copy assembly jar to build dir.")
 copyAssemblyJar := {
-  val buildDir = file("./build")
-  IO.delete(buildDir)
-  IO.createDirectory(buildDir)
-  val assemblyJar = assembly.value / assemblyJarName.value
-  IO.copyDirectory(assemblyJar, buildDir)
+  val jar: Path = Path.of("target/scala-3.1.3-RC4/pool-balance-m1-0.1.jar")
+  val build: Path = Path.of("./build/")
+  if (!Files.exists(build)) Files.createDirectory(build)
+  assert(Files.isDirectory(build))
+  Files.copy(jar, build, StandardCopyOption.REPLACE_EXISTING)
 }
 
 /*
