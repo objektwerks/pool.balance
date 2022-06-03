@@ -24,10 +24,21 @@ import java.nio.file.StandardCopyOption
 
 lazy val copyAssemblyJar = taskKey[Unit]("Copy assembly jar to deploy dir.")
 copyAssemblyJar := {
-  val source: Path = Paths.get("target/scala-3.1.3-RC4/pool-balance-m1-0.1.jar")
+  val jar = (assembly / assemblyOutputPath).value
+  val source: Path = Paths.get(jar.toString())
+  println(s"source: ${source.toString()}")
+
   val target: Path = Paths.get("./build")
-  Files.createDirectories(target)
-  assert(Files.isDirectory(target))
+  println(s"source: ${target.toString()}")
+
+  if (!Files.exists(target)) {
+    println(s"Directory does not exist: $target")
+    Files.createDirectories(target)
+    println(s"Created directory: $target")
+  } else println(s"Directory exists: $target")
+
+  assert(Files.isDirectory(target), s"$target is not a directory!")
+
   Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING)
 }
 
