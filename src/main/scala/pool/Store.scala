@@ -4,8 +4,6 @@ import java.time.LocalTime
 
 import scalikejdbc.*
 
-import Entity.*
-
 final class Store(context: Context):
   ConnectionPool.singleton(DataSourceConnectionPool(context.dataSource))
 
