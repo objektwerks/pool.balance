@@ -17,11 +17,6 @@ libraryDependencies ++= {
   )
 }
 
-import java.nio.file.Files
-import java.nio.file.Path
-import java.nio.file.Paths
-import java.nio.file.StandardCopyOption
-
 lazy val createBuildDir = taskKey[File]("Create build dir.")
 createBuildDir := {
   val buildDir = baseDirectory.value / "build"
@@ -32,6 +27,11 @@ createBuildDir := {
 assembly / assemblyOutputPath := createBuildDir.value
 
 /*
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+import java.nio.file.StandardCopyOption
+
 lazy val copyAssemblyJar = taskKey[Unit]("Copy assembly jar to build dir.")
 copyAssemblyJar := {
   val jar = (assembly / assemblyOutputPath).value
