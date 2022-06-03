@@ -56,10 +56,10 @@ object typeOfChemical:
   def list: Array[String] = typeOfChemical.values.map(t => t.toString)
 
 final case class Chemical(id: Long = 0,
-                                poolId: Long,
-                                typeof: typeOfChemical,
-                                dateAdded: LocalDate = Entity.formatLocalDate(LocalDate.now),
-                                timeAdded: LocalTime = Entity.formatLocalTime(LocalTime.now),
-                                amount: Double, 
-                                unit: unitOfMeasure) extends Entity:
+                          poolId: Long,
+                          typeof: typeOfChemical,
+                          dateAdded: LocalDate = Entity.formatLocalDate(LocalDate.now),
+                          timeAdded: LocalTime = Entity.formatLocalTime(LocalTime.now),
+                          amount: Double, 
+                          unit: unitOfMeasure) extends Entity:
   given chemicalOrdering: Ordering[Chemical] = Ordering.by(c => (c.dateAdded.toEpochDay, c.timeAdded.toSecondOfDay))
