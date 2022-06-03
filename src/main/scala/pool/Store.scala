@@ -99,7 +99,7 @@ final class Store(context: Context):
   }
 
   def chemicals(typeof: typeOfChemical): List[Chemical] = DB readOnly { implicit session =>
-    sql"select * from measurement where typeof = ${typeof.toString} order by date_added, time_added"
+    sql"select * from chemical where typeof = ${typeof.toString} order by date_added, time_added"
       .map(rs => Chemical(
         rs.long("id"),
         rs.long("pool_id"),
@@ -113,7 +113,7 @@ final class Store(context: Context):
   }
   def add(chemical: Chemical): Chemical = DB localTx { implicit session =>
     val id = sql"""
-      insert into chemical(pool_id, typeof, date_added, time_added, amouont, unit)
+      insert into chemical(pool_id, typeof, date_added, time_added, amount, unit)
       values(${chemical.poolId}, ${chemical.typeof.toString}, ${chemical.dateAdded},
       ${formatLocalTime(chemical.timeAdded)}, ${chemical.amount}, ${chemical.unit.toString})
       """

@@ -18,6 +18,10 @@ final class StoreTest extends AnyFunSuite with Matchers:
     var measurement = addMeasurement(pool)
     measurement = updateMeasurement(measurement)
     listMeasurements(measurement)
+
+    var chemical = addChemical(pool)
+    chemical = updateChemical(chemical)
+    listChemicals(chemical)
   }
 
   def addPool(): Pool =
@@ -51,3 +55,19 @@ final class StoreTest extends AnyFunSuite with Matchers:
     val measurements = store.measurements(measurement.typeof)
     measurements.length shouldBe 1
     measurements.head shouldBe measurement
+
+  def addChemical(pool: Pool): Chemical =
+    val chemical = Chemical(poolId = pool.id, typeof = typeOfChemical.trichlor, amount = 1.0, unit = unitOfMeasure.gl)
+    val addedChemcial = store.add(chemical)
+    addedChemcial.id should not be 0
+    addedChemcial
+
+  def updateChemical(chemical: Chemical): Chemical =
+    val updatedChemical = chemical.copy(amount = 2.5)
+    store.update(updatedChemical)
+    updatedChemical
+
+  def listChemicals(chemical: Chemical): Unit =
+    val chemicals = store.chemicals(chemical.typeof)
+    chemicals.length shouldBe 1
+    chemicals.head shouldBe chemical
