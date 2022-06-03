@@ -17,29 +17,30 @@ libraryDependencies ++= {
   )
 }
 
+/*
 lazy val createBuildDir = taskKey[File]("Create build dir.")
 createBuildDir := {
   val buildDir = baseDirectory.value / "build"
-  println(s"build dir: ${buildDir.toString()}")
+  println(s"build dir: ${buildDir}")
   IO.createDirectory(buildDir)
   buildDir
 }
-assembly / assemblyOutputPath := createBuildDir.value
-
-/*
-import java.nio.file.Files
-import java.nio.file.Path
-import java.nio.file.Paths
-import java.nio.file.StandardCopyOption
+// assembly / assemblyOutputPath := createBuildDir.value
 
 lazy val copyAssemblyJar = taskKey[Unit]("Copy assembly jar to build dir.")
 copyAssemblyJar := {
-  val jar = (assembly / assemblyOutputPath).value
-  val source: Path = Paths.get(jar.toString())
-  println(s"source: ${source.toString()}")
+  import java.nio.file.Files
+  import java.nio.file.Path
+  import java.nio.file.Paths
+  import java.nio.file.StandardCopyOption
 
-  val target: Path = Paths.get("./build")
-  println(s"target: ${target.toString()}")
+  val jar = (assembly / assemblyOutputPath).value
+  val source: Path = Paths.get(jar.toString)
+  println(s"source: ${source.toString}")
+
+  val buildDir = baseDirectory.value / "build"
+  val target: Path = (buildDir.toPath
+  println(s"target: ${target.toString}")
   println(s"Does build dir exist: ${Files.exists(target)}")
 
   assert(Files.isDirectory(target), s"$target is not a directory!")
