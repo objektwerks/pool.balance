@@ -47,6 +47,7 @@ copyAssemblyJar := {
   Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING)
 }
 */
+
 /*
 See assembly section in readme.
 1. sbt -Dtarget="mac" clean test assembly
