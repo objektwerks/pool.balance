@@ -12,8 +12,10 @@ object unitOfMeasure:
 sealed trait Entity:
   val id: Long
 
+object Entity:
   def newDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
   def newTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+  def formatLocalTime(localTime: LocalTime): LocalTime = LocalTime.parse( localTime.format(newTimeFormatter) )
 
 final case class Pool(id: Long = 0,
                       name: String, 
@@ -41,7 +43,7 @@ final case class Measurement(id: Long = 0,
                              poolId: Long,
                              typeof: typeOfMeasurement,
                              dateMeasured: LocalDate = LocalDate.now,
-                             timeMeasured: LocalTime = LocalTime.now,
+                             timeMeasured: LocalTime = Entity.formatLocalTime(LocalTime.now),
                              measurement: Double ) extends Entity:
   given measurementOrdering: Ordering[Measurement] = Ordering.by(m => (m.dateMeasured.toEpochDay, m.timeMeasured.toSecondOfDay))
 
@@ -56,7 +58,7 @@ final case class Chemical(id: Long = 0,
                                 poolId: Long,
                                 typeof: typeOfChemical,
                                 dateAdded: LocalDate = LocalDate.now,
-                                timeAdded: LocalTime = LocalTime.now,
+                                timeAdded: LocalTime = Entity.formatLocalTime(LocalTime.now),
                                 amount: Double, 
                                 unit: unitOfMeasure) extends Entity:
   given chemicalOrdering: Ordering[Chemical] = Ordering.by(c => (c.dateAdded.toEpochDay, c.timeAdded.toSecondOfDay))
