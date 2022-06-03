@@ -1,7 +1,5 @@
 package pool
 
-import java.time.LocalTime
-
 import scalikejdbc.*
 
 final class Store(context: Context):
