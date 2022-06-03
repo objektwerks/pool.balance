@@ -22,7 +22,7 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 
-lazy val createBuildDir = taskKey[File]("Creates new build directory.")
+lazy val createBuildDir = taskKey[File]("Create build dir.")
 createBuildDir := {
   val buildDir = baseDirectory.value / "build"
   println(s"build dir: ${buildDir.toString()}")
