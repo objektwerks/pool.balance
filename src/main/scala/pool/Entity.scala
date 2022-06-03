@@ -15,6 +15,7 @@ sealed trait Entity:
 object Entity:
   def newDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
   def newTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+  def formatLocalDate(localDate: LocalDate): LocalDate = LocalDate.parse( localDate.format(newDateFormatter) )
   def formatLocalTime(localTime: LocalTime): LocalTime = LocalTime.parse( localTime.format(newTimeFormatter) )
 
 final case class Pool(id: Long = 0,
