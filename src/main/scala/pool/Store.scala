@@ -75,7 +75,7 @@ final class Store(context: Context):
         rs.long("pool_id"),
         typeOfMeasurement.valueOf( rs.string("typeof") ),
         rs.localDate("date_measured"),
-        formatLocalTime( rs.localTime("time_measured") ),
+        rs.localTime("time_measured"),
         rs.double("measurement"))
       )
       .list()
@@ -105,7 +105,7 @@ final class Store(context: Context):
         rs.long("pool_id"),
         typeOfChemical.valueOf( rs.string("typeof") ),
         rs.localDate("date_added"),
-        formatLocalTime( rs.localTime("time_added") ),
+        rs.localTime("time_added"),
         rs.double("amount"),
         unitOfMeasure.valueOf( rs.string("unit") ))
       )
