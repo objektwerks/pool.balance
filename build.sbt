@@ -22,7 +22,7 @@ libraryDependencies ++= {
 lazy val createBuildDir = taskKey[File]("Create build dir.")
 createBuildDir := {
   val buildDir = baseDirectory.value / "build"
-  println(s"build dir: ${buildDir}")
+  println(s"assembly jar build dir: ${buildDir}")
   IO.createDirectory(buildDir)
   buildDir
 }
