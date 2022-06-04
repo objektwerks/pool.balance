@@ -23,7 +23,7 @@ createAssemblyDir := {
 
   val assemblyDir: File = baseDirectory.value / "assembly"
   val assemblyPath: Path = assemblyDir.toPath()
-  println(s"build dir: ${assemblyPath}")
+  println(s"assembly dir: ${assemblyPath}")
 
   if (!Files.exists(assemblyPath)) Files.createDirectory(assemblyPath)
   println(s"Does $assemblyPath exist: ${Files.exists(assemblyPath)}")
@@ -36,8 +36,11 @@ lazy val copyAssemblyJar = taskKey[Unit]("Copy assembly jar to assembly dir.")
 copyAssemblyJar := {
   import java.nio.file._
 
+  val assemblyDir: File = createAssemblyDir.value
+  val assemblyPath: String = s"${assemblyDir.toString}/${assemblyJarName.value}"
+
   val source: Path = (assembly / assemblyOutputPath).value.toPath
-  val target: Path = createAssemblyDir.value.toPath
+  val target: Path = Paths.get(assemblyPath)
 
   println(s"source: ${source.toString}")
   println(s"target: ${target.toString}")
