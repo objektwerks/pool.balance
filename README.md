@@ -22,10 +22,10 @@ Assembly
 3. sbt -Dtarget="win" clean test assembly copyAssemblyJar
 4. sbt -Dtarget="linux" clean test assembly copyAssemblyJar
 >To run locally:
-1. java -jar target/scala-3.1.3-RC4/pool-balance-mac-0.1.jar
-2. java -jar target/scala-3.1.3-RC4/pool-balance-m1-0.1.jar
-3. java -jar target/scala-3.1.3-RC4/pool-balance-win-0.1.jar
-4. java -jar target/scala-3.1.3-RC4/pool-balance-linux-0.1.jar
+1. java -jar assembly/pool-balance-mac-0.1.jar
+2. java -jar assembly/pool-balance-m1-0.1.jar
+3. java -jar assembly/pool-balance-win-0.1.jar
+4. java -jar assembly/pool-balance-linux-0.1.jar
 
 Features
 --------
