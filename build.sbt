@@ -21,15 +21,15 @@ lazy val createAssemblyDir = taskKey[File]("Create build dir.")
 createAssemblyDir := {
   import java.nio.file._
 
-  val buildDir: File = baseDirectory.value / "assembly"
-  val buildPath: Path = buildDir.toPath()
-  println(s"build dir: ${buildPath}")
+  val assemblyDir: File = baseDirectory.value / "assembly"
+  val assemblyPath: Path = assemblyDir.toPath()
+  println(s"build dir: ${assemblyPath}")
 
-  if (!Files.exists(buildPath)) Files.createDirectory(buildPath)
-  println(s"Does $buildPath exist: ${Files.exists(buildPath)}")
-  println(s"Is $buildPath a directory: ${Files.isDirectory(buildPath)}")
+  if (!Files.exists(assemblyPath)) Files.createDirectory(assemblyPath)
+  println(s"Does $assemblyPath exist: ${Files.exists(assemblyPath)}")
+  println(s"Is $assemblyPath a directory: ${Files.isDirectory(assemblyPath)}")
 
-  buildDir
+  assemblyDir
 }
 
 lazy val copyAssemblyJar = taskKey[Unit]("Copy assembly jar to assembly dir.")
