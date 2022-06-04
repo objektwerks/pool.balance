@@ -1,5 +1,3 @@
-import java.nio.file._
-
 name := "pool.balance"
 organization := "objektwerks"
 version := "0.1-SNAPSHOT"
@@ -30,6 +28,8 @@ assembly / assemblyOutputPath := createBuildDir.value
 
 lazy val copyAssemblyJar = taskKey[Unit]("Copy assembly jar to build dir.")
 copyAssemblyJar := {
+  import java.nio.file._
+
   val jar = (assembly / assemblyOutputPath).value
   val source: Path = Paths.get(jar.toString)
   println(s"source: ${source.toString}")
