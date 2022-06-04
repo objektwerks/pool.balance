@@ -23,7 +23,7 @@ createAssemblyDir := {
 
   val assemblyDir: File = baseDirectory.value / "assembly"
   val assemblyPath: Path = assemblyDir.toPath()
-  println(s"assembly dir: ${assemblyPath}")
+  println(s"[createAssemblyDir] assembly dir: ${assemblyPath}")
 
   if (!Files.exists(assemblyPath)) Files.createDirectory(assemblyPath)
   println(s"[createAssemblyDir] Does $assemblyPath exist: ${Files.exists(assemblyPath)}")
