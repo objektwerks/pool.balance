@@ -17,7 +17,7 @@ libraryDependencies ++= {
   )
 }
 
-lazy val createAssemblyDir = taskKey[File]("Create build dir.")
+lazy val createAssemblyDir = taskKey[File]("Create assembly dir.")
 createAssemblyDir := {
   import java.nio.file._
 
