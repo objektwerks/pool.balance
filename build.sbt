@@ -21,7 +21,7 @@ lazy val createBuildDir = taskKey[File]("Create build dir.")
 createBuildDir := {
   import java.nio.file._
 
-  val buildDir: File = baseDirectory.value / "build"
+  val buildDir: File = baseDirectory.value / "assembly"
   val buildPath: Path = buildDir.toPath()
   println(s"build dir: ${buildPath}")
 
