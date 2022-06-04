@@ -17,10 +17,10 @@ Run
 Assembly
 --------
 >To build for a "mac", "m1', "win" or "linux" os target:
-1. sbt -Dtarget="mac" clean test assembly
-2. sbt -Dtarget="m1" clean test assembly
-3. sbt -Dtarget="win" clean test assembly
-4. sbt -Dtarget="linux" clean test assembly
+1. sbt -Dtarget="mac" clean test assembly copyAssemblyJar
+2. sbt -Dtarget="m1" clean test assembly copyAssemblyJar
+3. sbt -Dtarget="win" clean test assembly copyAssemblyJar
+4. sbt -Dtarget="linux" clean test assembly copyAssemblyJar
 >To run locally:
 1. java -jar target/scala-3.1.3-RC4/pool-balance-mac-0.1.jar
 2. java -jar target/scala-3.1.3-RC4/pool-balance-m1-0.1.jar
