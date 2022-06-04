@@ -37,8 +37,8 @@ copyAssemblyJar := {
   val buildDir = baseDirectory.value / "build"
   val target: Path = buildDir.toPath
   println(s"target: ${target.toString}")
-  println(s"Does build dir exist: ${Files.exists(target)}")
-  println(s"$target is a directory: ${Files.isDirectory(target)}")
+  println(s"Does $target exist: ${Files.exists(target)}")
+  println(s"Is $target a directory: ${Files.isDirectory(target)}")
 
   Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING)
 }
