@@ -21,7 +21,7 @@ lazy val createAssemblyDir = taskKey[File]("Create assembly dir.")
 createAssemblyDir := {
   import java.nio.file._
 
-  val assemblyDir: File = baseDirectory.value / "assembly"
+  val assemblyDir: File = baseDirectory.value / ".assembly"
   val assemblyPath: Path = assemblyDir.toPath()
   println(s"[createAssemblyDir] assembly dir: ${assemblyPath}")
 
