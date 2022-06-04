@@ -4,4 +4,3 @@ project/metals.sbt
 project/project/
 project/target/
 target/
-assembly
