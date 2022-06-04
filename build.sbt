@@ -1,3 +1,5 @@
+import java.nio.file._
+
 name := "pool.balance"
 organization := "objektwerks"
 version := "0.1-SNAPSHOT"
@@ -17,7 +19,6 @@ libraryDependencies ++= {
   )
 }
 
-/*
 lazy val createBuildDir = taskKey[File]("Create build dir.")
 createBuildDir := {
   val buildDir = baseDirectory.value / "build"
@@ -29,25 +30,18 @@ assembly / assemblyOutputPath := createBuildDir.value
 
 lazy val copyAssemblyJar = taskKey[Unit]("Copy assembly jar to build dir.")
 copyAssemblyJar := {
-  import java.nio.file.Files
-  import java.nio.file.Path
-  import java.nio.file.Paths
-  import java.nio.file.StandardCopyOption
-
   val jar = (assembly / assemblyOutputPath).value
   val source: Path = Paths.get(jar.toString)
   println(s"source: ${source.toString}")
 
   val buildDir = baseDirectory.value / "build"
-  val target: Path = (buildDir.toPath
+  val target: Path = buildDir.toPath
   println(s"target: ${target.toString}")
   println(s"Does build dir exist: ${Files.exists(target)}")
-
-  assert(Files.isDirectory(target), s"$target is not a directory!")
+  println(s"$target is a directory: ${Files.isDirectory(target)}")
 
   Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING)
 }
-*/
 
 /*
 See assembly section in readme.
