@@ -17,8 +17,8 @@ libraryDependencies ++= {
   )
 }
 
-lazy val createBuildDir = taskKey[File]("Create build dir.")
-createBuildDir := {
+lazy val createAssemblyDir = taskKey[File]("Create build dir.")
+createAssemblyDir := {
   import java.nio.file._
 
   val buildDir: File = baseDirectory.value / "assembly"
@@ -32,12 +32,12 @@ createBuildDir := {
   buildDir
 }
 
-lazy val copyAssemblyJar = taskKey[Unit]("Copy assembly jar to build dir.")
+lazy val copyAssemblyJar = taskKey[Unit]("Copy assembly jar to assembly dir.")
 copyAssemblyJar := {
   import java.nio.file._
 
   val source: Path = (assembly / assemblyOutputPath).value.toPath
-  val target: Path = createBuildDir.value.toPath
+  val target: Path = createAssemblyDir.value.toPath
 
   println(s"source: ${source.toString}")
   println(s"target: ${target.toString}")
