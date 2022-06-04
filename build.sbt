@@ -25,7 +25,7 @@ createBuildDir := {
   IO.createDirectory(buildDir)
   buildDir
 }
-// assembly / assemblyOutputPath := createBuildDir.value
+assembly / assemblyOutputPath := createBuildDir.value
 
 lazy val copyAssemblyJar = taskKey[Unit]("Copy assembly jar to build dir.")
 copyAssemblyJar := {
