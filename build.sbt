@@ -50,10 +50,10 @@ copyAssemblyJar := {
 
 /*
 See assembly section in readme.
-1. sbt -Dtarget="mac" clean test assembly
-2. sbt -Dtarget="m1" clean test assembly
-3. sbt -Dtarget="win" clean test assembly
-4. sbt -Dtarget="linux" clean test assembly
+1. sbt -Dtarget="mac" clean test assembly copyAssemblyJar
+2. sbt -Dtarget="m1" clean test assembly copyAssemblyJar
+3. sbt -Dtarget="win" clean test assembly copyAssemblyJar
+4. sbt -Dtarget="linux" clean test assembly copyAssemblyJar
 */
 lazy val os: String = sys.props.getOrElse("target", "") match {
   case name if name.startsWith("mac")   => "mac"
