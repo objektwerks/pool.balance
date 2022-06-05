@@ -7,12 +7,13 @@ final class Model(context: Context):
   private val store = context.store
 
   private val observablePools = ObservableBuffer[Pool]()
+  private val observableCleanings = ObservableBuffer[Cleaning]()
 
   def pools(): Either[Throwable, ObservableBuffer[Pool]] = Try( observablePools ++= store.pools() ).toEither
   def add(pool: Pool): Either[Throwable, Pool] = Try( store.add(pool) ).toEither
   def update(pool: Pool):Either[Throwable, Unit] = Try( store.update(pool) ).toEither
 
-  def cleanings(): Either[Throwable, List[Cleaning]] = Try( store.cleanings() ).toEither
+  def cleanings(): Either[Throwable, ObservableBuffer[Cleaning]] = Try( observableCleanings ++= store.cleanings() ).toEither
   def add(cleaning: Cleaning): Either[Throwable, Cleaning] = Try( store.add(cleaning) ).toEither
   def update(cleaning: Cleaning): Either[Throwable, Unit] = Try( store.update(cleaning) ).toEither
 
