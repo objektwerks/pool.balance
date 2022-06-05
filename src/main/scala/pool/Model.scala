@@ -12,18 +12,19 @@ final class Model(context: Context):
   private val observableMeasurements = ObservableBuffer[Measurement]()
   private val observableChemicals = ObservableBuffer[Chemical]()
 
-  val selectedPoolId = LongProperty(0)
-
   def pools(): Either[Throwable, ObservableBuffer[Pool]] =
     Try {
       observablePools.clear()
+      observableCleanings.clear()
+      observableMeasurements.clear()
+      observableChemicals.clear()
       observablePools ++= store.pools()
     }.toEither
-  def add(pool: Pool): Either[Throwable, Unit] =
+  def add(pool: Pool): Either[Throwable, Pool] =
     Try {
       val newPool = store.add(pool)
       observablePools += newPool
-      selectedPoolId.value = newPool.id
+      newPool
     }.toEither
   def update(selectedIndex: Int, pool: Pool):Either[Throwable, Unit] =
     Try {
