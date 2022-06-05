@@ -31,7 +31,7 @@ final class Model(context: Context):
       newPool
     }.toEither
 
-  def update(selectedIndex: Int, pool: Pool):Either[Throwable, Unit] =
+  def update(selectedIndex: Int, pool: Pool): Either[Throwable, Unit] =
     Try {
       store.update(pool)
       observablePools.update(selectedIndex, pool)
