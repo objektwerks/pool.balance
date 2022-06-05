@@ -106,7 +106,10 @@ final class Model(context: Context):
       newChemical
     }.toEither
 
-  def update(chemical: Chemical): Either[Throwable, Unit] =
+  def update(selectedIndex: Int, chemical: Chemical): Either[Throwable, Unit] =
     Try {
-      store.update(chemical) 
+      store.update(chemical)
+      observableChemicals.update(selectedIndex, chemical)
+      observableChemicals.sort()
+      selectedChemicalId.value = chemical.id
     }.toEither
