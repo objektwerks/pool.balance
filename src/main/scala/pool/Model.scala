@@ -12,6 +12,8 @@ final class Model(context: Context):
   private val observableMeasurements = ObservableBuffer[Measurement]()
   private val observableChemicals = ObservableBuffer[Chemical]()
 
+  val selectedPoolId = LongProperty(0)
+
   def pools(): Either[Throwable, ObservableBuffer[Pool]] =
     Try {
       observablePools.clear()
@@ -20,12 +22,15 @@ final class Model(context: Context):
       observableChemicals.clear()
       observablePools ++= store.pools()
     }.toEither
+
   def add(pool: Pool): Either[Throwable, Pool] =
     Try {
       val newPool = store.add(pool)
       observablePools += newPool
+      selectedPoolId.value = newPool.id
       newPool
     }.toEither
+
   def update(selectedIndex: Int, pool: Pool):Either[Throwable, Unit] =
     Try {
       store.update(pool)
@@ -37,7 +42,9 @@ final class Model(context: Context):
       observableCleanings.clear()
       observableCleanings ++= store.cleanings(poolId)
     }.toEither
+
   def add(cleaning: Cleaning): Either[Throwable, Cleaning] = Try( store.add(cleaning) ).toEither
+
   def update(cleaning: Cleaning): Either[Throwable, Unit] = Try( store.update(cleaning) ).toEither
 
   def measurements(poolId: Long, typeof: typeOfMeasurement): Either[Throwable, ObservableBuffer[Measurement]] =
@@ -45,7 +52,9 @@ final class Model(context: Context):
       observableMeasurements.clear()
       observableMeasurements ++= store.measurements(poolId, typeof) 
     }.toEither
+  
   def add(measurement: Measurement): Either[Throwable, Measurement] = Try( store.add(measurement) ).toEither
+
   def update(measurement: Measurement): Either[Throwable, Unit] = Try( store.update(measurement) ).toEither
 
   def chemicals(poolId: Long, typeof: typeOfChemical): Either[Throwable, ObservableBuffer[Chemical]] =
@@ -53,5 +62,7 @@ final class Model(context: Context):
       observableChemicals.clear()
       observableChemicals ++= store.chemicals(poolId, typeof) 
     }.toEither
+  
   def add(chemical: Chemical): Either[Throwable, Chemical] = Try( store.add(chemical) ).toEither
+
   def update(chemical: Chemical): Either[Throwable, Unit] = Try( store.update(chemical) ).toEither
