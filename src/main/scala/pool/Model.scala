@@ -60,7 +60,13 @@ final class Model(context: Context):
       newCleaning
     }.toEither
 
-  def update(cleaning: Cleaning): Either[Throwable, Unit] = Try( store.update(cleaning) ).toEither
+  def update(selectedIndex: Int, cleaning: Cleaning): Either[Throwable, Unit] =
+    Try {
+      store.update(cleaning)
+      observableCleanings.update(selectedIndex, cleaning)
+      observableCleanings.sort()
+      selectedCleaningId.value = cleaning.id
+    }.toEither
 
   def measurements(poolId: Long, typeof: typeOfMeasurement): Either[Throwable, ObservableBuffer[Measurement]] =
     Try {
