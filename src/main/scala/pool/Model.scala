@@ -25,7 +25,11 @@ final class Model(context: Context):
       observablePools += newPool
       selectedPoolId.value = newPool.id
     }.toEither
-  def update(pool: Pool):Either[Throwable, Unit] = Try( store.update(pool) ).toEither
+  def update(selectedIndex: Int, pool: Pool):Either[Throwable, Unit] =
+    Try {
+      store.update(pool)
+      observablePools.update(selectedIndex, pool)
+    }.toEither
 
   def cleanings(): Either[Throwable, ObservableBuffer[Cleaning]] =
     Try {
