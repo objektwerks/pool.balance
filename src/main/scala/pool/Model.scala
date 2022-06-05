@@ -35,6 +35,7 @@ final class Model(context: Context):
     Try {
       store.update(pool)
       observablePools.update(selectedIndex, pool)
+      selectedPoolId.value = pool.id
     }.toEither
 
   def cleanings(poolId: Long): Either[Throwable, ObservableBuffer[Cleaning]] =
