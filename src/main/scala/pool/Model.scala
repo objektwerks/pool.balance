@@ -1,11 +1,14 @@
 package pool
 
 import scala.util.Try
+import scalafx.collections.ObservableBuffer
 
 final class Model(context: Context):
-  val store = context.store
+  private val store = context.store
 
-  def pools(): Either[Throwable, List[Pool]] = Try( store.pools() ).toEither
+  private val observablePools = ObservableBuffer[Pool]()
+
+  def pools(): Either[Throwable, ObservableBuffer[Pool]] = Try( observablePools ++= store.pools() ).toEither
   def add(pool: Pool): Either[Throwable, Pool] = Try( store.add(pool) ).toEither
   def update(pool: Pool):Either[Throwable, Unit] = Try( store.update(pool) ).toEither
 
