@@ -51,7 +51,7 @@ final class Model(context: Context):
   def chemicals(poolId: Long, typeof: typeOfChemical): Either[Throwable, ObservableBuffer[Chemical]] =
     Try {
       observableChemicals.clear()
-      observableChemicals ++= store.chemicals(typeof) 
+      observableChemicals ++= store.chemicals(poolId, typeof) 
     }.toEither
   def add(chemical: Chemical): Either[Throwable, Chemical] = Try( store.add(chemical) ).toEither
   def update(chemical: Chemical): Either[Throwable, Unit] = Try( store.update(chemical) ).toEither

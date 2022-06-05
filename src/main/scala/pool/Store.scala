@@ -94,8 +94,8 @@ final class Store(context: Context):
       .update()
   }
 
-  def chemicals(typeof: typeOfChemical): List[Chemical] = DB readOnly { implicit session =>
-    sql"select * from chemical where typeof = ${typeof.toString} order by date_added, time_added"
+  def chemicals(poolId: Long, typeof: typeOfChemical): List[Chemical] = DB readOnly { implicit session =>
+    sql"select * from chemical where pool_id = ${poolId} and typeof = ${typeof.toString} order by date_added, time_added"
       .map(rs => Chemical(
         rs.long("id"),
         rs.long("pool_id"),
