@@ -51,7 +51,14 @@ final class Model(context: Context):
       observableCleanings ++= store.cleanings(poolId)
     }.toEither
 
-  def add(cleaning: Cleaning): Either[Throwable, Cleaning] = Try( store.add(cleaning) ).toEither
+  def add(cleaning: Cleaning): Either[Throwable, Cleaning] =
+    Try {
+      val newCleaning = store.add(cleaning)
+      observableCleanings += newCleaning
+      observableCleanings.sort()
+      selectedCleaningId.value = newCleaning.id
+      newCleaning
+    }.toEither
 
   def update(cleaning: Cleaning): Either[Throwable, Unit] = Try( store.update(cleaning) ).toEither
 
