@@ -17,15 +17,15 @@ final class StoreTest extends AnyFunSuite with Matchers:
 
     var cleaning = addCleaning(pool)
     cleaning = updateCleaning(cleaning)
-    listCleanings(cleaning)
+    listCleanings(pool, cleaning)
     
     var measurement = addMeasurement(pool)
     measurement = updateMeasurement(measurement)
-    listMeasurements(measurement)
+    listMeasurements(pool, measurement)
 
     var chemical = addChemical(pool)
     chemical = updateChemical(chemical)
-    listChemicals(chemical)
+    listChemicals(pool, chemical)
   }
 
   def addPool(): Pool =
@@ -55,8 +55,8 @@ final class StoreTest extends AnyFunSuite with Matchers:
     store.update(updatedCleaning)
     updatedCleaning
 
-  def listCleanings(cleaning: Cleaning): Unit =
-    val cleanings = store.cleanings()
+  def listCleanings(pool: Pool, cleaning: Cleaning): Unit =
+    val cleanings = store.cleanings(pool.id)
     cleanings.length shouldBe 1
     cleanings.head shouldBe cleaning
 
@@ -71,8 +71,8 @@ final class StoreTest extends AnyFunSuite with Matchers:
     store.update(updatedMeasurement)
     updatedMeasurement
 
-  def listMeasurements(measurement: Measurement): Unit =
-    val measurements = store.measurements(measurement.typeof)
+  def listMeasurements(pool: Pool, measurement: Measurement): Unit =
+    val measurements = store.measurements(pool.id, measurement.typeof)
     measurements.length shouldBe 1
     measurements.head shouldBe measurement
 
@@ -87,7 +87,7 @@ final class StoreTest extends AnyFunSuite with Matchers:
     store.update(updatedChemical)
     updatedChemical
 
-  def listChemicals(chemical: Chemical): Unit =
-    val chemicals = store.chemicals(chemical.typeof)
+  def listChemicals(pool: Pool, chemical: Chemical): Unit =
+    val chemicals = store.chemicals(pool.id, chemical.typeof)
     chemicals.length shouldBe 1
     chemicals.head shouldBe chemical
