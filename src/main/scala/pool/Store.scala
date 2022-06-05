@@ -74,18 +74,18 @@ final class Store(context: Context):
         rs.long("id"),
         rs.long("pool_id"),
         typeOfMeasurement.valueOf( rs.string("typeof") ),
+        rs.double("measurement"),
         rs.localDate("date_measured"),
-        rs.localTime("time_measured"),
-        rs.double("measurement"))
+        rs.localTime("time_measured"))
       )
       .list()
   }
 
   def add(measurement: Measurement): Measurement = DB localTx { implicit session =>
     val id = sql"""
-      insert into measurement(pool_id, typeof, date_measured, time_measured, measurement)
-      values(${measurement.poolId}, ${measurement.typeof.toString}, ${measurement.dateMeasured},
-      ${measurement.timeMeasured}, ${measurement.measurement})
+      insert into measurement(pool_id, typeof, measurement, date_measured, time_measured)
+      values(${measurement.poolId}, ${measurement.typeof.toString}, ${measurement.measurement},
+      ${measurement.dateMeasured}, ${measurement.timeMeasured})
       """
       .updateAndReturnGeneratedKey()
     measurement.copy(id = id)
@@ -93,9 +93,9 @@ final class Store(context: Context):
 
   def update(measurement: Measurement): Unit = DB localTx { implicit session =>
     sql"""
-      update measurement set date_measured = ${measurement.dateMeasured},
-      time_measured = ${measurement.timeMeasured},
-      measurement = ${measurement.measurement} where id = ${measurement.id}
+      update measurement set typeof = ${measurement.typeof.toString}, measurement = ${measurement.measurement},
+      date_measured = ${measurement.dateMeasured}, time_measured = ${measurement.timeMeasured}
+       where id = ${measurement.id}
       """
       .update()
   }
@@ -106,19 +106,19 @@ final class Store(context: Context):
         rs.long("id"),
         rs.long("pool_id"),
         typeOfChemical.valueOf( rs.string("typeof") ),
-        rs.localDate("date_added"),
-        rs.localTime("time_added"),
         rs.double("amount"),
-        unitOfMeasure.valueOf( rs.string("unit") ))
+        unitOfMeasure.valueOf( rs.string("unit") ),
+        rs.localDate("date_added"),
+        rs.localTime("time_added"))
       )
       .list()
   }
 
   def add(chemical: Chemical): Chemical = DB localTx { implicit session =>
     val id = sql"""
-      insert into chemical(pool_id, typeof, date_added, time_added, amount, unit)
-      values(${chemical.poolId}, ${chemical.typeof.toString}, ${chemical.dateAdded},
-      ${chemical.timeAdded}, ${chemical.amount}, ${chemical.unit.toString})
+      insert into chemical(pool_id, typeof, amount, unit, date_added, time_added)
+      values(${chemical.poolId}, ${chemical.typeof.toString}, ${chemical.amount}, ${chemical.unit.toString},
+      ${chemical.dateAdded}, ${chemical.timeAdded})
       """
       .updateAndReturnGeneratedKey()
     chemical.copy(id = id)
@@ -126,8 +126,9 @@ final class Store(context: Context):
 
   def update(chemical: Chemical): Unit = DB localTx { implicit session =>
     sql"""
-      update chemical set date_added = ${chemical.dateAdded}, time_added = ${chemical.timeAdded},
-      amount = ${chemical.amount}, unit = ${chemical.unit.toString} where id = ${chemical.id}
+      update chemical set typeof = ${chemical.typeof.toString}, amount = ${chemical.amount},
+      unit = ${chemical.unit.toString}, date_added = ${chemical.dateAdded}, time_added = ${chemical.timeAdded}
+      where id = ${chemical.id}
       """
       .update()
   }

@@ -48,9 +48,9 @@ object typeOfMeasurement:
 final case class Measurement(id: Long = 0,
                              poolId: Long,
                              typeof: typeOfMeasurement,
+                             measurement: Double,
                              dateMeasured: LocalDate = Entity.format(LocalDate.now),
-                             timeMeasured: LocalTime = Entity.format(LocalTime.now),
-                             measurement: Double ) extends Entity
+                             timeMeasured: LocalTime = Entity.format(LocalTime.now)) extends Entity
 
 enum typeOfChemical:
   case liquidChlorine, trichlor, dichlor, calciumHypochlorite, stabilizer, algaecide
@@ -61,7 +61,7 @@ object typeOfChemical:
 final case class Chemical(id: Long = 0,
                           poolId: Long,
                           typeof: typeOfChemical,
-                          dateAdded: LocalDate = Entity.format(LocalDate.now),
-                          timeAdded: LocalTime = Entity.format(LocalTime.now),
                           amount: Double, 
-                          unit: unitOfMeasure) extends Entity
+                          unit: unitOfMeasure,
+                          dateAdded: LocalDate = Entity.format(LocalDate.now),
+                          timeAdded: LocalTime = Entity.format(LocalTime.now)) extends Entity
