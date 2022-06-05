@@ -31,8 +31,8 @@ final class Store(context: Context):
       .update()
   }
 
-  def cleanings(): List[Cleaning] = DB readOnly { implicit session =>
-    sql"select * from cleaning order by date_cleaned"
+  def cleanings(poolId: Long): List[Cleaning] = DB readOnly { implicit session =>
+    sql"select * from cleaning where pool_id = ${poolId} order by date_cleaned"
       .map(rs => Cleaning(
         rs.long("id"),
         rs.long("pool_id"),

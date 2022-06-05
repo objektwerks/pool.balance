@@ -35,7 +35,7 @@ final class Model(context: Context):
   def cleanings(poolId: Long): Either[Throwable, ObservableBuffer[Cleaning]] =
     Try {
       observableCleanings.clear()
-      observableCleanings ++= store.cleanings()
+      observableCleanings ++= store.cleanings(poolId)
     }.toEither
   def add(cleaning: Cleaning): Either[Throwable, Cleaning] = Try( store.add(cleaning) ).toEither
   def update(cleaning: Cleaning): Either[Throwable, Unit] = Try( store.update(cleaning) ).toEither
