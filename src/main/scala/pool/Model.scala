@@ -83,7 +83,13 @@ final class Model(context: Context):
       newMeasurement
     }.toEither
 
-  def update(measurement: Measurement): Either[Throwable, Unit] = Try( store.update(measurement) ).toEither
+  def update(selectedIndex: Int, measurement: Measurement): Either[Throwable, Unit] =
+    Try {
+      store.update(measurement)
+      observableMeasurements.update(selectedIndex, measurement)
+      observableMeasurements.sort()
+      selectedMeasurementId.value = measurement.id
+    }.toEither
 
   def chemicals(poolId: Long, typeof: typeOfChemical): Either[Throwable, ObservableBuffer[Chemical]] =
     Try {
