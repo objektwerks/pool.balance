@@ -32,7 +32,7 @@ final class Model(context: Context):
       observablePools.update(selectedIndex, pool)
     }.toEither
 
-  def cleanings(): Either[Throwable, ObservableBuffer[Cleaning]] =
+  def cleanings(poolId: Long): Either[Throwable, ObservableBuffer[Cleaning]] =
     Try {
       observableCleanings.clear()
       observableCleanings ++= store.cleanings()
@@ -40,7 +40,7 @@ final class Model(context: Context):
   def add(cleaning: Cleaning): Either[Throwable, Cleaning] = Try( store.add(cleaning) ).toEither
   def update(cleaning: Cleaning): Either[Throwable, Unit] = Try( store.update(cleaning) ).toEither
 
-  def measurements(typeof: typeOfMeasurement): Either[Throwable, ObservableBuffer[Measurement]] =
+  def measurements(poolId: Long, typeof: typeOfMeasurement): Either[Throwable, ObservableBuffer[Measurement]] =
     Try {
       observableMeasurements.clear()
       observableMeasurements ++= store.measurements(typeof) 
@@ -48,7 +48,7 @@ final class Model(context: Context):
   def add(measurement: Measurement): Either[Throwable, Measurement] = Try( store.add(measurement) ).toEither
   def update(measurement: Measurement): Either[Throwable, Unit] = Try( store.update(measurement) ).toEither
 
-  def chemicals(typeof: typeOfChemical): Either[Throwable, ObservableBuffer[Chemical]] =
+  def chemicals(poolId: Long, typeof: typeOfChemical): Either[Throwable, ObservableBuffer[Chemical]] =
     Try {
       observableChemicals.clear()
       observableChemicals ++= store.chemicals(typeof) 
