@@ -30,6 +30,7 @@ final class Model(context: Context):
     Try {
       val newPool = store.add(pool)
       observablePools += newPool
+      observablePools.sorted()
       selectedPoolId.value = newPool.id
       newPool
     }.toEither
@@ -38,6 +39,7 @@ final class Model(context: Context):
     Try {
       store.update(pool)
       observablePools.update(selectedIndex, pool)
+      observablePools.sorted()
       selectedPoolId.value = pool.id
     }.toEither
 
