@@ -8,7 +8,8 @@ final class Model(context: Context):
 
   private val observablePools = ObservableBuffer[Pool]()
   private val observableCleanings = ObservableBuffer[Cleaning]()
-
+  private val observableMeasurements = ObservableBuffer[Measurement]()
+  
   def pools(): Either[Throwable, ObservableBuffer[Pool]] = Try( observablePools ++= store.pools() ).toEither
   def add(pool: Pool): Either[Throwable, Pool] = Try( store.add(pool) ).toEither
   def update(pool: Pool):Either[Throwable, Unit] = Try( store.update(pool) ).toEither
@@ -17,7 +18,7 @@ final class Model(context: Context):
   def add(cleaning: Cleaning): Either[Throwable, Cleaning] = Try( store.add(cleaning) ).toEither
   def update(cleaning: Cleaning): Either[Throwable, Unit] = Try( store.update(cleaning) ).toEither
 
-  def measurements(typeof: typeOfMeasurement): Either[Throwable, List[Measurement]] = Try( store.measurements(typeof) ).toEither
+  def measurements(typeof: typeOfMeasurement): Either[Throwable, ObservableBuffer[Measurement]] = Try( observableMeasurements ++= store.measurements(typeof) ).toEither
   def add(measurement: Measurement): Either[Throwable, Measurement] = Try( store.add(measurement) ).toEither
   def update(measurement: Measurement): Either[Throwable, Unit] = Try( store.update(measurement) ).toEither
 
