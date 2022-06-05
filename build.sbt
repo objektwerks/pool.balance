@@ -23,11 +23,10 @@ createAssemblyDir := {
 
   val assemblyDir: File = baseDirectory.value / ".assembly"
   val assemblyPath: Path = assemblyDir.toPath()
-  println(s"[createAssemblyDir] assembly dir: ${assemblyPath}")
 
   if (!Files.exists(assemblyPath)) Files.createDirectory(assemblyPath)
-  println(s"[createAssemblyDir] Does $assemblyPath exist: ${Files.exists(assemblyPath)}")
-  println(s"[createAssemblyDir] Is $assemblyPath a directory: ${Files.isDirectory(assemblyPath)}")
+
+  println(s"[createAssemblyDir] assembly dir: ${assemblyPath} is valid: ${Files.isDirectory(assemblyPath)}")
 
   assemblyDir
 }
@@ -42,8 +41,8 @@ copyAssemblyJar := {
   val source: Path = (assembly / assemblyOutputPath).value.toPath
   val target: Path = Paths.get(assemblyPath)
 
-  println(s"[copyAssemblyJar] source: ${source.toString}")
-  println(s"[copyAssemblyJar] target: ${target.toString}")
+  println(s"[copyAssemblyJar] source: ${source}")
+  println(s"[copyAssemblyJar] target: ${target}")
 
   Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING)
 }
