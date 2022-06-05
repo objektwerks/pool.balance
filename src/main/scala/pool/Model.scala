@@ -74,7 +74,14 @@ final class Model(context: Context):
       observableMeasurements ++= store.measurements(poolId, typeof) 
     }.toEither
   
-  def add(measurement: Measurement): Either[Throwable, Measurement] = Try( store.add(measurement) ).toEither
+  def add(measurement: Measurement): Either[Throwable, Measurement] =
+    Try {
+      val newMeasurement = store.add(measurement)
+      observableMeasurements += newMeasurement
+      observableMeasurements.sort()
+      selectedMeasurementId.value = newMeasurement.id
+      newMeasurement
+    }.toEither
 
   def update(measurement: Measurement): Either[Throwable, Unit] = Try( store.update(measurement) ).toEither
 
