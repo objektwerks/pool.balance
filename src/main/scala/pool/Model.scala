@@ -97,6 +97,16 @@ final class Model(context: Context):
       observableChemicals ++= store.chemicals(poolId, typeof) 
     }.toEither
   
-  def add(chemical: Chemical): Either[Throwable, Chemical] = Try( store.add(chemical) ).toEither
+  def add(chemical: Chemical): Either[Throwable, Chemical] =
+    Try {
+      val newChemical = store.add(chemical)
+      observableChemicals += newChemical
+      observableChemicals.sort()
+      selectedChemicalId.value = newChemical.id      
+      newChemical
+    }.toEither
 
-  def update(chemical: Chemical): Either[Throwable, Unit] = Try( store.update(chemical) ).toEither
+  def update(chemical: Chemical): Either[Throwable, Unit] =
+    Try {
+      store.update(chemical) 
+    }.toEither
