@@ -43,7 +43,7 @@ final class Model(context: Context):
   def measurements(poolId: Long, typeof: typeOfMeasurement): Either[Throwable, ObservableBuffer[Measurement]] =
     Try {
       observableMeasurements.clear()
-      observableMeasurements ++= store.measurements(typeof) 
+      observableMeasurements ++= store.measurements(poolId, typeof) 
     }.toEither
   def add(measurement: Measurement): Either[Throwable, Measurement] = Try( store.add(measurement) ).toEither
   def update(measurement: Measurement): Either[Throwable, Unit] = Try( store.update(measurement) ).toEither
