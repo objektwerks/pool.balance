@@ -32,7 +32,9 @@ final case class Cleaning(id: Long = 0,
                           pumpBasket: Boolean = false,
                           pumpFilter: Boolean = false,
                           vacuum: Boolean = false,
-                          dateCleaned: LocalDate = Entity.format(LocalDate.now)) extends Entity
+                          dateCleaned: LocalDate = Entity.format(LocalDate.now)) extends Entity:
+  given cleaningOrdering: Ordering[Cleaning] = Ordering.by(c => (c.dateCleaned.toEpochDay))
+
 
 enum typeOfMeasurement:
   case freeChlorine, combinedChlorine, totalChlorine, pH, calciumHardness, totalAlkalinity, cyanuricAcid, totalBromine, temperature
