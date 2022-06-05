@@ -18,8 +18,8 @@ object Entity:
   def format(localDate: LocalDate): LocalDate = LocalDate.parse( localDate.format(newDateFormatter) )
   def format(localTime: LocalTime): LocalTime = LocalTime.parse( localTime.format(newTimeFormatter) )
 
-  given poolOrdering: Ordering[Pool] = Ordering.by(p => (p.name))
-  given cleaningOrdering: Ordering[Cleaning] = Ordering.by(c => (c.dateCleaned.toEpochDay))
+  given poolOrdering: Ordering[Pool] = Ordering.by(p => p.built)
+  given cleaningOrdering: Ordering[Cleaning] = Ordering.by(c => c.dateCleaned.toEpochDay)
   given measurementOrdering: Ordering[Measurement] = Ordering.by(m => (m.dateMeasured.toEpochDay, m.timeMeasured.toSecondOfDay))
   given chemicalOrdering: Ordering[Chemical] = Ordering.by(c => (c.dateAdded.toEpochDay, c.timeAdded.toSecondOfDay))
 
