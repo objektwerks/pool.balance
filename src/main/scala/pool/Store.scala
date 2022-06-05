@@ -32,7 +32,7 @@ final class Store(context: Context):
   }
 
   def cleanings(poolId: Long): List[Cleaning] = DB readOnly { implicit session =>
-    sql"select * from cleaning where pool_id = ${poolId} order by date_cleaned"
+    sql"select * from cleaning where pool_id = ${poolId} order by date_cleaned desc"
       .map(rs => Cleaning(
         rs.long("id"),
         rs.long("pool_id"),
@@ -65,7 +65,7 @@ final class Store(context: Context):
   }
 
   def measurements(poolId: Long, typeof: typeOfMeasurement): List[Measurement] = DB readOnly { implicit session =>
-    sql"select * from measurement where pool_id = ${poolId} and typeof = ${typeof.toString} order by date_measured, time_measured"
+    sql"select * from measurement where pool_id = ${poolId} and typeof = ${typeof.toString} order by date_measured, time_measured desc"
       .map(rs => Measurement(
         rs.long("id"),
         rs.long("pool_id"),
@@ -95,7 +95,7 @@ final class Store(context: Context):
   }
 
   def chemicals(poolId: Long, typeof: typeOfChemical): List[Chemical] = DB readOnly { implicit session =>
-    sql"select * from chemical where pool_id = ${poolId} and typeof = ${typeof.toString} order by date_added, time_added"
+    sql"select * from chemical where pool_id = ${poolId} and typeof = ${typeof.toString} order by date_added, time_added desc"
       .map(rs => Chemical(
         rs.long("id"),
         rs.long("pool_id"),
