@@ -13,6 +13,9 @@ final class Model(context: Context):
   private val observableChemicals = ObservableBuffer[Chemical]()
 
   val selectedPoolId = LongProperty(0)
+  val selectedCleaningId = LongProperty(0)
+  val selectedMeasurementId = LongProperty(0)
+  val selectedChemicalId = LongProperty(0)
 
   def pools(): Either[Throwable, ObservableBuffer[Pool]] =
     Try {
