@@ -27,7 +27,11 @@ final class Model(context: Context):
   def add(cleaning: Cleaning): Either[Throwable, Cleaning] = Try( store.add(cleaning) ).toEither
   def update(cleaning: Cleaning): Either[Throwable, Unit] = Try( store.update(cleaning) ).toEither
 
-  def measurements(typeof: typeOfMeasurement): Either[Throwable, ObservableBuffer[Measurement]] = Try( observableMeasurements ++= store.measurements(typeof) ).toEither
+  def measurements(typeof: typeOfMeasurement): Either[Throwable, ObservableBuffer[Measurement]] =
+    Try {
+      observableMeasurements.clear()
+      observableMeasurements ++= store.measurements(typeof) 
+    }.toEither
   def add(measurement: Measurement): Either[Throwable, Measurement] = Try( store.add(measurement) ).toEither
   def update(measurement: Measurement): Either[Throwable, Unit] = Try( store.update(measurement) ).toEither
 
