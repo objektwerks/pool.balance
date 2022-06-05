@@ -2,6 +2,7 @@ package pool
 
 import scala.util.Try
 import scalafx.collections.ObservableBuffer
+import scalafx.beans.property.LongProperty
 
 final class Model(context: Context):
   private val store = context.store
@@ -11,12 +12,19 @@ final class Model(context: Context):
   private val observableMeasurements = ObservableBuffer[Measurement]()
   private val observableChemicals = ObservableBuffer[Chemical]()
 
+  val selectedPoolId = LongProperty(0)
+
   def pools(): Either[Throwable, ObservableBuffer[Pool]] =
     Try {
       observablePools.clear()
       observablePools ++= store.pools()
     }.toEither
-  def add(pool: Pool): Either[Throwable, Pool] = Try( store.add(pool) ).toEither
+  def add(pool: Pool): Either[Throwable, Unit] =
+    Try {
+      val newPool = store.add(pool)
+      observablePools += newPool
+      selectedPoolId.value = newPool.id
+    }.toEither
   def update(pool: Pool):Either[Throwable, Unit] = Try( store.update(pool) ).toEither
 
   def cleanings(): Either[Throwable, ObservableBuffer[Cleaning]] =
