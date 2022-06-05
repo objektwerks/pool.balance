@@ -16,6 +16,7 @@ final class Store(context: Context):
       )
       .list()
   }
+
   def add(pool: Pool): Pool = DB localTx { implicit session =>
     val id = sql"""
       insert into pool(name, built, volume, unit) values(${pool.name}, ${pool.built}, ${pool.volume}, ${pool.unit.toString})
@@ -23,6 +24,7 @@ final class Store(context: Context):
       .updateAndReturnGeneratedKey()
     pool.copy(id = id)
   }
+
   def update(pool: Pool): Unit = DB localTx { implicit session =>
     sql"""
       update pool set name = ${pool.name}, built = ${pool.built}, volume = ${pool.volume}, unit = ${pool.unit.toString}
@@ -46,6 +48,7 @@ final class Store(context: Context):
       )
       .list()
   }
+
   def add(cleaning: Cleaning): Cleaning = DB localTx { implicit session =>
     val id = sql"""
       insert into cleaning(pool_id, brush, net, skimmer_basket, pump_basket, pump_filter, vacuum, date_cleaned)
@@ -55,6 +58,7 @@ final class Store(context: Context):
       .updateAndReturnGeneratedKey()
     cleaning.copy(id = id)
   }
+
   def update(cleaning: Cleaning): Unit = DB localTx { implicit session =>
     sql"""
       update cleaning set brush = ${cleaning.brush}, net = ${cleaning.net}, skimmer_basket = ${cleaning.skimmerBasket},
@@ -76,6 +80,7 @@ final class Store(context: Context):
       )
       .list()
   }
+
   def add(measurement: Measurement): Measurement = DB localTx { implicit session =>
     val id = sql"""
       insert into measurement(pool_id, typeof, date_measured, time_measured, measurement)
@@ -85,6 +90,7 @@ final class Store(context: Context):
       .updateAndReturnGeneratedKey()
     measurement.copy(id = id)
   }
+
   def update(measurement: Measurement): Unit = DB localTx { implicit session =>
     sql"""
       update measurement set date_measured = ${measurement.dateMeasured},
@@ -107,6 +113,7 @@ final class Store(context: Context):
       )
       .list()
   }
+
   def add(chemical: Chemical): Chemical = DB localTx { implicit session =>
     val id = sql"""
       insert into chemical(pool_id, typeof, date_added, time_added, amount, unit)
@@ -116,6 +123,7 @@ final class Store(context: Context):
       .updateAndReturnGeneratedKey()
     chemical.copy(id = id)
   }
+
   def update(chemical: Chemical): Unit = DB localTx { implicit session =>
     sql"""
       update chemical set date_added = ${chemical.dateAdded}, time_added = ${chemical.timeAdded},
