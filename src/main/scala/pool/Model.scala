@@ -11,7 +11,11 @@ final class Model(context: Context):
   private val observableMeasurements = ObservableBuffer[Measurement]()
   private val observableChemicals = ObservableBuffer[Chemical]()
 
-  def pools(): Either[Throwable, ObservableBuffer[Pool]] = Try( observablePools ++= store.pools() ).toEither
+  def pools(): Either[Throwable, ObservableBuffer[Pool]] =
+    Try {
+      observablePools.clear()
+      observablePools ++= store.pools()
+    }.toEither
   def add(pool: Pool): Either[Throwable, Pool] = Try( store.add(pool) ).toEither
   def update(pool: Pool):Either[Throwable, Unit] = Try( store.update(pool) ).toEither
 
