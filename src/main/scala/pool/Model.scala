@@ -4,6 +4,8 @@ import scala.util.Try
 import scalafx.collections.ObservableBuffer
 import scalafx.beans.property.LongProperty
 
+import Entity.given
+
 final class Model(context: Context):
   private val store = context.store
 
@@ -30,7 +32,7 @@ final class Model(context: Context):
     Try {
       val newPool = store.add(pool)
       observablePools += newPool
-      observablePools.sorted()
+      observablePools.sort()
       selectedPoolId.value = newPool.id
       newPool
     }.toEither
@@ -39,7 +41,7 @@ final class Model(context: Context):
     Try {
       store.update(pool)
       observablePools.update(selectedIndex, pool)
-      observablePools.sorted()
+      observablePools.sort()
       selectedPoolId.value = pool.id
     }.toEither
 

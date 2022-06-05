@@ -18,12 +18,16 @@ object Entity:
   def format(localDate: LocalDate): LocalDate = LocalDate.parse( localDate.format(newDateFormatter) )
   def format(localTime: LocalTime): LocalTime = LocalTime.parse( localTime.format(newTimeFormatter) )
 
+  given poolOrdering: Ordering[Pool] = Ordering.by(p => (p.name))
+  given cleaningOrdering: Ordering[Cleaning] = Ordering.by(c => (c.dateCleaned.toEpochDay))
+  given measurementOrdering: Ordering[Measurement] = Ordering.by(m => (m.dateMeasured.toEpochDay, m.timeMeasured.toSecondOfDay))
+  given chemicalOrdering: Ordering[Chemical] = Ordering.by(c => (c.dateAdded.toEpochDay, c.timeAdded.toSecondOfDay))
+
 final case class Pool(id: Long = 0,
                       name: String, 
                       built: LocalDate, 
                       volume: Int,
-                      unit: unitOfMeasure) extends Entity:
-  given poolOrdering: Ordering[Pool] = Ordering.by(p => (p.name))
+                      unit: unitOfMeasure) extends Entity
 
 final case class Cleaning(id: Long = 0,
                           poolId: Long,
@@ -33,9 +37,7 @@ final case class Cleaning(id: Long = 0,
                           pumpBasket: Boolean = false,
                           pumpFilter: Boolean = false,
                           vacuum: Boolean = false,
-                          dateCleaned: LocalDate = Entity.format(LocalDate.now)) extends Entity:
-  given cleaningOrdering: Ordering[Cleaning] = Ordering.by(c => (c.dateCleaned.toEpochDay))
-
+                          dateCleaned: LocalDate = Entity.format(LocalDate.now)) extends Entity
 
 enum typeOfMeasurement:
   case freeChlorine, combinedChlorine, totalChlorine, pH, calciumHardness, totalAlkalinity, cyanuricAcid, totalBromine, temperature
@@ -48,9 +50,7 @@ final case class Measurement(id: Long = 0,
                              typeof: typeOfMeasurement,
                              dateMeasured: LocalDate = Entity.format(LocalDate.now),
                              timeMeasured: LocalTime = Entity.format(LocalTime.now),
-                             measurement: Double ) extends Entity:
-  given measurementOrdering: Ordering[Measurement] = Ordering.by(m => (m.dateMeasured.toEpochDay, m.timeMeasured.toSecondOfDay))
-
+                             measurement: Double ) extends Entity
 
 enum typeOfChemical:
   case liquidChlorine, trichlor, dichlor, calciumHypochlorite, stabilizer, algaecide
@@ -64,5 +64,4 @@ final case class Chemical(id: Long = 0,
                           dateAdded: LocalDate = Entity.format(LocalDate.now),
                           timeAdded: LocalTime = Entity.format(LocalTime.now),
                           amount: Double, 
-                          unit: unitOfMeasure) extends Entity:
-  given chemicalOrdering: Ordering[Chemical] = Ordering.by(c => (c.dateAdded.toEpochDay, c.timeAdded.toSecondOfDay))
+                          unit: unitOfMeasure) extends Entity
