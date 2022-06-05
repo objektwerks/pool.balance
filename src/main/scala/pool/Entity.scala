@@ -22,7 +22,8 @@ final case class Pool(id: Long = 0,
                       name: String, 
                       built: LocalDate, 
                       volume: Int,
-                      unit: unitOfMeasure) extends Entity
+                      unit: unitOfMeasure) extends Entity:
+  given poolOrdering: Ordering[Pool] = Ordering.by(p => (p.name))
 
 final case class Cleaning(id: Long = 0,
                           poolId: Long,
