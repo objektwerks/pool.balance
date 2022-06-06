@@ -68,13 +68,20 @@ final class Store(context: Context):
       .update()
   }
 
-  def measurements(poolId: Long, typeof: typeOfMeasurement): List[Measurement] = DB readOnly { implicit session =>
-    sql"select * from measurement where pool_id = ${poolId} and typeof = ${typeof.toString} order by date_measured, time_measured desc"
+  def measurements(poolId: Long): List[Measurement] = DB readOnly { implicit session =>
+    sql"select * from measurement where pool_id = ${poolId} order by date_measured, time_measured desc"
       .map(rs => Measurement(
         rs.long("id"),
         rs.long("pool_id"),
-        typeOfMeasurement.valueOf( rs.string("typeof") ),
-        rs.double("measurement"),
+        rs.int("free_chlorine"),
+        rs.double("combined_chlorine"),
+        rs.int("total_chlorine"),
+        rs.double("ph"),
+        rs.int("calcium_hardness"),
+        rs.int("total_alkalinity"),
+        rs.int("cyanuric_acid"),
+        rs.int("total_bromine"),
+        rs.int("temperature"),
         rs.localDate("date_measured"),
         rs.localTime("time_measured"))
       )
@@ -84,8 +91,9 @@ final class Store(context: Context):
   def add(measurement: Measurement): Measurement = DB localTx { implicit session =>
     val id = sql"""
       insert into measurement(pool_id, typeof, measurement, date_measured, time_measured)
-      values(${measurement.poolId}, ${measurement.typeof.toString}, ${measurement.measurement},
-      ${measurement.dateMeasured}, ${measurement.timeMeasured})
+      values(${measurement.poolId}, ${measurement.freeChlorine}, ${measurement.combinedChlorine}, ${measurement.totalChlorine},
+      ${measurement.ph}, ${measurement.calciumHardness}, ${measurement.totalAlkalinity}, ${measurement.cyanuricAcid},
+      ${measurement.totalBromine}, ${measurement.temperature}, ${measurement.dateMeasured}, ${measurement.timeMeasured})
       """
       .updateAndReturnGeneratedKey()
     measurement.copy(id = id)
@@ -93,7 +101,10 @@ final class Store(context: Context):
 
   def update(measurement: Measurement): Unit = DB localTx { implicit session =>
     sql"""
-      update measurement set typeof = ${measurement.typeof.toString}, measurement = ${measurement.measurement},
+      update measurement set free_chlorine = ${measurement.freeChlorine}, combined_chlorine = ${measurement.combinedChlorine},
+      total_chlorine = ${measurement.totalChlorine}, ph = ${measurement.ph}, calcium_hardness = ${measurement.calciumHardness},
+      total_alkalinity = ${measurement.totalAlkalinity}, cyanuric_acid = ${measurement.cyanuricAcid},
+      total_bromine = ${measurement.totalBromine}, temperature = ${measurement.temperature},
       date_measured = ${measurement.dateMeasured}, time_measured = ${measurement.timeMeasured}
        where id = ${measurement.id}
       """
