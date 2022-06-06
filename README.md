@@ -69,8 +69,8 @@ Model
 * Model 1 --> 1 Context | Store
 * View 1 --> 1 Context | Model
  
-UI 
---
+UI Grid
+-------
 Pools         | Free Chlorine       | pH      | Total Alkalnity     | Calcium Hardness
 ------------- | ------------------- | ------- | ------------------- | ----------------
 Cleanings     |
