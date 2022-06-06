@@ -53,7 +53,7 @@ final case class Measurement(id: Long = 0,
                              timeMeasured: LocalTime = Entity.format(LocalTime.now)) extends Entity
 
 enum typeOfChemical:
-  case liquidChlorine, trichlor, dichlor, calciumHypochlorite, stabilizer, algaecide
+  case liquidChlorine, trichlor, dichlor, calciumHypochlorite, stabilizer, algaecide, muriaticAcid
 
 object typeOfChemical:
   def list: Array[String] = typeOfChemical.values.map(t => t.toString)
