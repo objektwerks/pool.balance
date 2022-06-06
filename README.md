@@ -68,10 +68,10 @@ Model
 * Store 1 --> 1 Context
 * Model 1 --> 1 Context | Store
 * View 1 --> 1 Context | Model
-
-UI
+ 
+UI 
 --
-* Pools         Free Chlorine       pH      Total Alkalnity     Calcium Hardness
+| Pools         | Free Chlorine       | pH      | Total Alkalnity     | Calcium Hardness
 
 * Cleanings
 
