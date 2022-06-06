@@ -39,16 +39,17 @@ final case class Cleaning(id: Long = 0,
                           vacuum: Boolean = false,
                           dateCleaned: LocalDate = Entity.format(LocalDate.now)) extends Entity
 
-enum typeOfMeasurement:
-  case freeChlorine, combinedChlorine, totalChlorine, pH, calciumHardness, totalAlkalinity, cyanuricAcid, totalBromine, temperature
-
-object typeOfMeasurement:
-  def list: Array[String] = typeOfMeasurement.values.map(t => t.toString)
-
 final case class Measurement(id: Long = 0,
                              poolId: Long,
-                             typeof: typeOfMeasurement,
-                             measurement: Double,
+                             freeChlorine: Int = 3,
+                             combinedChlorine: Double = 0.0,
+                             totalChlorine: Int = 3,
+                             ph: Double = 7.4,
+                             calciumHardness: Int = 375,
+                             totalAlkalinity: Int = 100,
+                             cyanuricAcid: Int = 50,
+                             totalBromine: Int = 5,
+                             temperature: Int = 85,
                              dateMeasured: LocalDate = Entity.format(LocalDate.now),
                              timeMeasured: LocalTime = Entity.format(LocalTime.now)) extends Entity
 
