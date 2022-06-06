@@ -61,18 +61,18 @@ final class StoreTest extends AnyFunSuite with Matchers:
     cleanings.head shouldBe cleaning
 
   def addMeasurement(pool: Pool): Measurement =
-    val measurement = Measurement(poolId = pool.id, typeof = typeOfMeasurement.pH, measurement = 7.3)
+    val measurement = Measurement(poolId = pool.id)
     val addedMeasurement = store.add(measurement)
     addedMeasurement.id should not be 0
     addedMeasurement
 
   def updateMeasurement(measurement: Measurement): Measurement =
-    val updatedMeasurement = measurement.copy(measurement = 7.3)
+    val updatedMeasurement = measurement.copy(ph = 7.3)
     store.update(updatedMeasurement)
     updatedMeasurement
 
   def listMeasurements(pool: Pool, measurement: Measurement): Unit =
-    val measurements = store.measurements(pool.id, measurement.typeof)
+    val measurements = store.measurements(pool.id)
     measurements.length shouldBe 1
     measurements.head shouldBe measurement
 

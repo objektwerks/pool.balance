@@ -15,18 +15,6 @@ class EnumTest extends AnyFunSuite with Matchers:
     unitOfMeasure.list shouldBe Array("gl", "kg", "g", "l", "ml", "lbs", "oz")
   }
 
-  test("type of measurement") {
-    typeOfMeasurement.valueOf(typeOfMeasurement.freeChlorine.toString) shouldBe typeOfMeasurement.freeChlorine
-    typeOfMeasurement.valueOf(typeOfMeasurement.combinedChlorine.toString) shouldBe typeOfMeasurement.combinedChlorine
-    typeOfMeasurement.valueOf(typeOfMeasurement.totalChlorine.toString) shouldBe typeOfMeasurement.totalChlorine
-    typeOfMeasurement.valueOf(typeOfMeasurement.pH.toString) shouldBe typeOfMeasurement.pH
-    typeOfMeasurement.valueOf(typeOfMeasurement.calciumHardness.toString) shouldBe typeOfMeasurement.calciumHardness
-    typeOfMeasurement.valueOf(typeOfMeasurement.totalAlkalinity.toString) shouldBe typeOfMeasurement.totalAlkalinity
-    typeOfMeasurement.valueOf(typeOfMeasurement.cyanuricAcid.toString) shouldBe typeOfMeasurement.cyanuricAcid
-    typeOfMeasurement.valueOf(typeOfMeasurement.totalBromine.toString) shouldBe typeOfMeasurement.totalBromine
-    typeOfMeasurement.valueOf(typeOfMeasurement.temperature.toString) shouldBe typeOfMeasurement.temperature
-  }
-
   test("type of chemical") {
     typeOfChemical.valueOf(typeOfChemical.liquidChlorine.toString) shouldBe typeOfChemical.liquidChlorine
     typeOfChemical.valueOf(typeOfChemical.trichlor.toString) shouldBe typeOfChemical.trichlor
