@@ -73,11 +73,12 @@ UI
 --
 Pools         | Free Chlorine       | pH      | Total Alkalnity     | Calcium Hardness
 ------------- | ------------------- | ------- | ------------------- | ----------------
-* Cleanings
-
-* Measurements
-
-* Chemicals
+Cleanings     |
+------------- |
+Measurements  |
+------------- |
+Chemicals     |
+------------- |
 
 Resources
 ---------
