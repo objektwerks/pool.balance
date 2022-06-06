@@ -79,7 +79,7 @@ Chemicals     |
 
 UI Layout
 ---------
-* VBox 1 --> 1 TilePane | GridPane 1 --> * Pane
+* VBox 1 --> 1 TilePane | TabPane
 
 Resources
 ---------
