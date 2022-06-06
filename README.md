@@ -77,6 +77,10 @@ Cleanings     |
 Measurements  |
 Chemicals     |
 
+UI Layout
+---------
+VBox 1 --> 1 SplitPane 1 --> 1 GridPane | StackPane
+
 Resources
 ---------
 1. [JavaFX](https://openjfx.io/index.html)
