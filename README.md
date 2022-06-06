@@ -69,6 +69,16 @@ Model
 * Model 1 --> 1 Context | Store
 * View 1 --> 1 Context | Model
 
+UI
+--
+* Pools         Free Chlorine       pH      Total Alkalnity     Calcium Hardness
+
+* Cleanings
+
+* Measurements
+
+* Chemicals
+
 Resources
 ---------
 1. [JavaFX](https://openjfx.io/index.html)
