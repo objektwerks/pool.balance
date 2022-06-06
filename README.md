@@ -71,6 +71,7 @@ Model
  
 UI 
 --
+>Grid layout:
 Pools         | Free Chlorine       | pH      | Total Alkalnity     | Calcium Hardness
 ------------- | ------------------- | ------- | ------------------- | ----------------
 Cleanings     |
