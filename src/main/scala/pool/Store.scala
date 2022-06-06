@@ -90,7 +90,8 @@ final class Store(context: Context):
 
   def add(measurement: Measurement): Measurement = DB localTx { implicit session =>
     val id = sql"""
-      insert into measurement(pool_id, typeof, measurement, date_measured, time_measured)
+      insert into measurement(pool_id, free_chlorine, combined_chlorine, total_chlorine, ph, calcium_hardness,
+      total_alkalinity, cyanuric_acid, total_bromine, temperature, date_measured, time_measured)
       values(${measurement.poolId}, ${measurement.freeChlorine}, ${measurement.combinedChlorine}, ${measurement.totalChlorine},
       ${measurement.ph}, ${measurement.calciumHardness}, ${measurement.totalAlkalinity}, ${measurement.cyanuricAcid},
       ${measurement.totalBromine}, ${measurement.temperature}, ${measurement.dateMeasured}, ${measurement.timeMeasured})
