@@ -71,8 +71,8 @@ Model
  
 UI 
 --
-| Pools         | Free Chlorine       | pH      | Total Alkalnity     | Calcium Hardness
-
+Pools         | Free Chlorine       | pH      | Total Alkalnity     | Calcium Hardness
+------------- | ------------------- | ------- | ------------------- | ----------------
 * Cleanings
 
 * Measurements
