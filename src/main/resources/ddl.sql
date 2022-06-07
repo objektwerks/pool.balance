@@ -14,7 +14,7 @@ create table if not exists cleaning (
   pump_basket bool not null,
   pump_filter bool not null,
   vacuum bool not null,
-  date_cleaned date not null
+  cleaned date not null
 );
 create table if not exists measurement (
   id long primary key auto_increment,
@@ -28,8 +28,7 @@ create table if not exists measurement (
   cyanuric_acid int not null,
   total_bromine int not null,
   temperature int not null,
-  date_measured date not null,
-  time_measured time not null
+  measured date not null
 );
 create table if not exists chemical (
   id long primary key auto_increment,
@@ -37,6 +36,5 @@ create table if not exists chemical (
   typeof varchar not null,
   amount double not null,
   unit varchar not null,
-  date_added date not null,
-  time_added time not null
+  added date not null
 );

@@ -53,7 +53,7 @@ final class Store(context: Context):
     val id = sql"""
       insert into cleaning(pool_id, brush, net, skimmer_basket, pump_basket, pump_filter, vacuum, date_cleaned)
       values(${cleaning.poolId}, ${cleaning.brush}, ${cleaning.net}, ${cleaning.skimmerBasket},
-      ${cleaning.pumpBasket}, ${cleaning.pumpFilter}, ${cleaning.vacuum}, ${cleaning.dateCleaned})
+      ${cleaning.pumpBasket}, ${cleaning.pumpFilter}, ${cleaning.vacuum}, ${cleaning.cleaned})
       """
       .updateAndReturnGeneratedKey()
     cleaning.copy(id = id)
@@ -63,7 +63,7 @@ final class Store(context: Context):
     sql"""
       update cleaning set brush = ${cleaning.brush}, net = ${cleaning.net}, skimmer_basket = ${cleaning.skimmerBasket},
       pump_basket = ${cleaning.pumpBasket}, pump_filter = ${cleaning.pumpFilter}, vacuum = ${cleaning.vacuum},
-      date_cleaned = ${cleaning.dateCleaned} where id = ${cleaning.id}
+      date_cleaned = ${cleaning.cleaned} where id = ${cleaning.id}
       """
       .update()
   }
