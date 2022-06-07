@@ -3,7 +3,7 @@ package pool
 import java.time.{LocalDate, LocalTime, LocalDateTime}
 import java.time.format.DateTimeFormatter
 
-import scalafx.beans.property.{IntegerProperty, StringProperty}
+import scalafx.beans.property.{BooleanProperty, IntegerProperty, StringProperty}
 
 enum unitOfMeasure:
   case gl, kg, g, l, ml, lbs, oz
@@ -15,8 +15,10 @@ sealed trait Entity:
   val id: Long
 
 object Entity:
+  def newDateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm")
   def newDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
   def newTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+  def format(localDateTime: LocalDateTime): LocalDateTime = LocalDateTime.parse( localDateTime.format(newDateTimeFormatter) )
   def format(localDate: LocalDate): LocalDate = LocalDate.parse( localDate.format(newDateFormatter) )
   def format(localTime: LocalTime): LocalTime = LocalTime.parse( localTime.format(newTimeFormatter) )
 
@@ -44,7 +46,15 @@ final case class Cleaning(id: Long = 0,
                           pumpBasket: Boolean = false,
                           pumpFilter: Boolean = false,
                           vacuum: Boolean = false,
-                          cleaned: LocalDateTime = LocalDateTime.now) extends Entity
+                          cleaned: LocalDateTime = LocalDateTime.now) extends Entity:
+  val brushProperty = new BooleanProperty(this, "brush", brush)
+  val netProperty = new BooleanProperty(this, "net", net)
+  val skimmerBasketProperty = new BooleanProperty(this, "skimmerBasket", skimmerBasket)
+  val pumpBasketProperty = new BooleanProperty(this, "pumpBasket", pumpBasket)
+  val pumpFilterProperty = new BooleanProperty(this, "pumpFilter", pumpFilter)
+  val vacuumProperty = new BooleanProperty(this, "vacuum", vacuum)
+  val cleanedProperty = new StringProperty(this, "cleaned", Entity.format(cleaned).toString)
+  val cleaning = this
 
 final case class Measurement(id: Long = 0,
                              poolId: Long,
