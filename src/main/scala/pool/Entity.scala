@@ -34,6 +34,7 @@ final case class Pool(id: Long = 0,
   val builtProperty = new IntegerProperty(this, "built", built)
   val volumeProperty = new IntegerProperty(this, "volume", volume)
   val unitProperty = new StringProperty(this, "unit", unit.toString)
+  val pool = this
 
 final case class Cleaning(id: Long = 0,
                           poolId: Long,
