@@ -93,7 +93,7 @@ final case class Chemical(id: Long = 0,
                           unit: unitOfMeasure,
                           added: LocalDateTime = LocalDateTime.now) extends Entity:
   val typeofProperty = new StringProperty(this, "typeof", typeof.toString)
-  val amountProperty = new DoubleProperty(this, "amount", amount)
+  val amountProperty = new StringProperty(this, "amount", amount.toString)
   val unitProperty = new StringProperty(this, "unit", unit.toString)
   val measuredProperty = new StringProperty(this, "measured", Entity.format(added).toString)
   val chemical = this
