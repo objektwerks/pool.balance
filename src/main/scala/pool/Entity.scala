@@ -3,6 +3,8 @@ package pool
 import java.time.{LocalDate, LocalTime, LocalDateTime}
 import java.time.format.DateTimeFormatter
 
+import scalafx.beans.property.{IntegerProperty, StringProperty}
+
 enum unitOfMeasure:
   case gl, kg, g, l, ml, lbs, oz
 
@@ -27,7 +29,11 @@ final case class Pool(id: Long = 0,
                       name: String, 
                       built: Int, 
                       volume: Int,
-                      unit: unitOfMeasure) extends Entity
+                      unit: unitOfMeasure) extends Entity:
+  val nameProperty = new StringProperty(this, "name", name)
+  val builtProperty = new IntegerProperty(this, "built", built)
+  val volumeProperty = new IntegerProperty(this, "volume", volume)
+  val unitProperty = new StringProperty(this, "unit", unit.toString)
 
 final case class Cleaning(id: Long = 0,
                           poolId: Long,
