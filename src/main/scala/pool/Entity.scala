@@ -1,7 +1,6 @@
 package pool
 
-import java.time.{LocalDate, LocalTime}
-import java.time.format.DateTimeFormatter
+import java.time.LocalDateTime
 
 enum unitOfMeasure:
   case gl, kg, g, l, ml, lbs, oz
@@ -13,17 +12,14 @@ sealed trait Entity:
   val id: Long
 
 object Entity:
-  def newDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-  def format(localDate: LocalDate): LocalDate = LocalDate.parse( localDate.format(newDateFormatter) )
-
-  given poolOrdering: Ordering[Pool] = Ordering.by[Pool, Long](p => p.built.toEpochDay).reverse
-  given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => c.cleaned.toEpochDay).reverse
-  given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => m.measured.toEpochDay).reverse
-  given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => c.added.toEpochDay).reverse
+  given poolOrdering: Ordering[Pool] = Ordering.by[Pool, Long](p => p.built).reverse
+  given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => c.cleaned.toLocalDate.toEpochDay).reverse
+  given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => m.measured.toLocalDate.toEpochDay).reverse
+  given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => c.added.toLocalDate.toEpochDay).reverse
 
 final case class Pool(id: Long = 0,
                       name: String, 
-                      built: LocalDate, 
+                      built: Int, 
                       volume: Int,
                       unit: unitOfMeasure) extends Entity
 
@@ -35,7 +31,7 @@ final case class Cleaning(id: Long = 0,
                           pumpBasket: Boolean = false,
                           pumpFilter: Boolean = false,
                           vacuum: Boolean = false,
-                          cleaned: LocalDate = Entity.format(LocalDate.now)) extends Entity
+                          cleaned: LocalDateTime = LocalDateTime.now) extends Entity
 
 final case class Measurement(id: Long = 0,
                              poolId: Long,
@@ -48,7 +44,7 @@ final case class Measurement(id: Long = 0,
                              cyanuricAcid: Int = 50,
                              totalBromine: Int = 5,
                              temperature: Int = 85,
-                             measured: LocalDate = Entity.format(LocalDate.now)) extends Entity
+                             measured: LocalDateTime = LocalDateTime.now) extends Entity
 
 enum typeOfChemical:
   case liquidChlorine, trichlor, dichlor, calciumHypochlorite, stabilizer, algaecide, muriaticAcid
@@ -61,4 +57,4 @@ final case class Chemical(id: Long = 0,
                           typeof: typeOfChemical,
                           amount: Double, 
                           unit: unitOfMeasure,
-                          added: LocalDate = Entity.format(LocalDate.now)) extends Entity
+                          added: LocalDateTime = LocalDateTime.now) extends Entity

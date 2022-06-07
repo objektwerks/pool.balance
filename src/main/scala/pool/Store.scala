@@ -10,7 +10,7 @@ final class Store(context: Context):
       .map(rs => Pool(
         rs.long("id"),
         rs.string("name"), 
-        rs.localDate("built"), 
+        rs.int("built"), 
         rs.int("volume"), 
         unitOfMeasure.valueOf( rs.string("unit") ))
       )
@@ -44,7 +44,7 @@ final class Store(context: Context):
         rs.boolean("pump_basket"),
         rs.boolean("pump_filter"),
         rs.boolean("vacuum"),
-        rs.localDate("cleaned"))
+        rs.localDateTime("cleaned"))
       )
       .list()
   }
@@ -82,7 +82,7 @@ final class Store(context: Context):
         rs.int("cyanuric_acid"),
         rs.int("total_bromine"),
         rs.int("temperature"),
-        rs.localDate("measured"))
+        rs.localDateTime("measured"))
       )
       .list()
   }
@@ -118,7 +118,7 @@ final class Store(context: Context):
         typeOfChemical.valueOf( rs.string("typeof") ),
         rs.double("amount"),
         unitOfMeasure.valueOf( rs.string("unit") ),
-        rs.localDate("added"))
+        rs.localDateTime("added"))
       )
       .list()
   }
