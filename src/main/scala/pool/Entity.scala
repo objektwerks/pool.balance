@@ -1,6 +1,7 @@
 package pool
 
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 enum unitOfMeasure:
   case gl, kg, g, l, ml, lbs, oz
@@ -12,6 +13,9 @@ sealed trait Entity:
   val id: Long
 
 object Entity:
+  def newDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+  def newTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+
   given poolOrdering: Ordering[Pool] = Ordering.by[Pool, Long](p => p.built).reverse
   given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => c.cleaned.toLocalDate.toEpochDay).reverse
   given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => m.measured.toLocalDate.toEpochDay).reverse
