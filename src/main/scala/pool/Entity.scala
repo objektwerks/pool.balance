@@ -20,8 +20,8 @@ object Entity:
 
   given poolOrdering: Ordering[Pool] = Ordering.by[Pool, Long](p => p.built.toEpochDay).reverse
   given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => c.cleaned.toEpochDay).reverse
-  given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, (Long, Int)](m => (m.dateMeasured.toEpochDay, m.timeMeasured.toSecondOfDay)).reverse
-  given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, (Long, Int)](c => (c.dateAdded.toEpochDay, c.timeAdded.toSecondOfDay)).reverse
+  given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => m.measured.toEpochDay).reverse
+  given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => c.added.toEpochDay).reverse
 
 final case class Pool(id: Long = 0,
                       name: String, 
@@ -50,8 +50,7 @@ final case class Measurement(id: Long = 0,
                              cyanuricAcid: Int = 50,
                              totalBromine: Int = 5,
                              temperature: Int = 85,
-                             dateMeasured: LocalDate = Entity.format(LocalDate.now),
-                             timeMeasured: LocalTime = Entity.format(LocalTime.now)) extends Entity
+                             measured: LocalDate = Entity.format(LocalDate.now)) extends Entity
 
 enum typeOfChemical:
   case liquidChlorine, trichlor, dichlor, calciumHypochlorite, stabilizer, algaecide, muriaticAcid
@@ -64,5 +63,4 @@ final case class Chemical(id: Long = 0,
                           typeof: typeOfChemical,
                           amount: Double, 
                           unit: unitOfMeasure,
-                          dateAdded: LocalDate = Entity.format(LocalDate.now),
-                          timeAdded: LocalTime = Entity.format(LocalTime.now)) extends Entity
+                          added: LocalDate = Entity.format(LocalDate.now)) extends Entity
