@@ -3,7 +3,7 @@ package pool
 import java.time.{LocalDate, LocalTime, LocalDateTime}
 import java.time.format.DateTimeFormatter
 
-import scalafx.beans.property.{BooleanProperty, IntegerProperty, StringProperty}
+import scalafx.beans.property.{BooleanProperty, DoubleProperty, IntegerProperty, StringProperty}
 
 enum unitOfMeasure:
   case gl, kg, g, l, ml, lbs, oz
@@ -67,7 +67,17 @@ final case class Measurement(id: Long = 0,
                              cyanuricAcid: Int = 50,
                              totalBromine: Int = 5,
                              temperature: Int = 85,
-                             measured: LocalDateTime = LocalDateTime.now) extends Entity
+                             measured: LocalDateTime = LocalDateTime.now) extends Entity:
+  val freeChlorineProperty = new IntegerProperty(this, "freeChlorine", freeChlorine)
+  val combinedChlorineProperty = new DoubleProperty(this, "combinedChlorine", ph)
+  val totalChlorineProperty = new IntegerProperty(this, "totalChlorine", totalChlorine)
+  val pHProperty = new DoubleProperty(this, "ph", ph)
+  val calciumHardnessProperty = new IntegerProperty(this, "calciumHardness", calciumHardness)
+  val totalAlkalinityProperty = new IntegerProperty(this, "totalAlkalinity", totalAlkalinity)
+  val cyanuricAcidProperty = new IntegerProperty(this, "cyanuricAcid", cyanuricAcid)
+  val totalBromineProperty = new IntegerProperty(this, "totalBromine", totalBromine)
+  val temperatureProperty = new IntegerProperty(this, "temperature", temperature)
+  val measurement = this
 
 enum typeOfChemical:
   case liquidChlorine, trichlor, dichlor, calciumHypochlorite, stabilizer, algaecide, muriaticAcid
