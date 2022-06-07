@@ -69,17 +69,10 @@ Model
 * Model 1 --> 1 Context | Store
 * View 1 --> 1 Context | Model
  
-UI Grid
--------
-Pools         | Free Chlorine       | pH      | Total Alkalnity     | Calcium Hardness
-------------- | ------------------- | ------- | ------------------- | ----------------
-Cleanings     |
-Measurements  |
-Chemicals     |
-
 UI Layout
 ---------
-* VBox 1 --> 1 TilePane | TabPane
+1. North: pools, with dashboard for free chlorine, ph, total alkalinity and calcium hardness
+2. South: navigation for cleanings, measurements and chemicals, each with lists, actions and charts
 
 Resources
 ---------
