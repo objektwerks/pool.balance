@@ -71,8 +71,8 @@ Model
  
 UI Layout
 ---------
-1. North: pools, with dashboard for free chlorine, ph, total alkalinity and calcium hardness
-2. South: navigation for cleanings, measurements and chemicals, each with lists, actions and charts
+1. West: pane(pools), navigation(cleanings, measurements, chemicals)
+2. East: dashboard(free chlorine, ph, total alkalinity, calcium hardness), pane(cleanings, measurements, chemicals)
 
 Resources
 ---------
