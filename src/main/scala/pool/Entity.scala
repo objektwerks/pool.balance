@@ -77,6 +77,7 @@ final case class Measurement(id: Long = 0,
   val cyanuricAcidProperty = new IntegerProperty(this, "cyanuricAcid", cyanuricAcid)
   val totalBromineProperty = new IntegerProperty(this, "totalBromine", totalBromine)
   val temperatureProperty = new IntegerProperty(this, "temperature", temperature)
+  val measuredProperty = new StringProperty(this, "measured", Entity.format(measured).toString)
   val measurement = this
 
 enum typeOfChemical:
@@ -90,4 +91,9 @@ final case class Chemical(id: Long = 0,
                           typeof: typeOfChemical,
                           amount: Double, 
                           unit: unitOfMeasure,
-                          added: LocalDateTime = LocalDateTime.now) extends Entity
+                          added: LocalDateTime = LocalDateTime.now) extends Entity:
+  val typeofProperty = new StringProperty(this, "typeof", typeof.toString)
+  val amountProperty = new DoubleProperty(this, "amount", amount)
+  val unitProperty = new StringProperty(this, "unit", unit.toString)
+  val measuredProperty = new StringProperty(this, "measured", Entity.format(added).toString)
+  val chemical = this
