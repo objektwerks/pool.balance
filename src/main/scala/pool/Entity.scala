@@ -33,8 +33,8 @@ final case class Pool(id: Long = 0,
                       volume: Int,
                       unit: unitOfMeasure) extends Entity:
   val nameProperty = new StringProperty(this, "name", name)
-  val builtProperty = new IntegerProperty(this, "built", built)
-  val volumeProperty = new IntegerProperty(this, "volume", volume)
+  val builtProperty = new StringProperty(this, "built", built.toString)
+  val volumeProperty = new StringProperty(this, "volume", volume.toString)
   val unitProperty = new StringProperty(this, "unit", unit.toString)
   val pool = this
 
