@@ -55,12 +55,13 @@ Measurements
 8. total bromine (tb): 0 - 20, ok = 2 - 10, ideal = 5
 9. temperature: 0 - 100
 
+Chemicals
+---------
+* LiquidChlorine, Trichlor, Dichlor, CalciumHypochlorite, Stabilizer, Algaecide
+
 Entity
 ------
-1. Pool 1 --> * Cleaning
-2. Pool 1 --> * Measurement <-- FreeChlorine, CombinedChlorine, TotalChlorine, pH, CalciumHardness, TotalAlkalinity,
-CyanuricAcid, TotalBromine, Temperature
-3. Pool 1 --> * Chemical <-- LiquidChlorine, Trichlor, Dichlor, CalciumHypochlorite, Stabilizer, Algaecide
+* Pool 1 --> * Cleaning | Measurement | Chemical
 
 Model
 -----
@@ -69,8 +70,8 @@ Model
 * Model 1 --> 1 Context | Store
 * View 1 --> 1 Context | Model
  
-UI Layout
----------
+UI
+--
 1. West: pane(pools), navigation(cleanings, measurements, chemicals)
 2. East: dashboard(free chlorine, ph, total alkalinity, calcium hardness), pane(cleanings, measurements, chemicals)
 
