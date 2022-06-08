@@ -61,6 +61,9 @@ final class Context(config: Config):
   val dialogHeaderMeasurement = config.getString("dialog.header.measurement")
   val dialogHeaderChemical = config.getString("dialog.header.chemical")
 
+  val listUnits = config.getStringList("list.units")
+  val listChemicals = config.getStringList("list.chemicals")
+
   val logo = new Image(Image.getClass.getResourceAsStream("/logo.white.png"))
   val addImage = loadImageView("/add.png")
   val editImage = loadImageView("/edit.png")
