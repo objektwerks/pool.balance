@@ -5,6 +5,7 @@ import com.zaxxer.hikari.HikariDataSource
 
 import javax.sql.DataSource
 
+import scala.jdk.CollectionConverters.*
 import scalafx.scene.image.{Image, ImageView}
 
 final class Context(config: Config):
@@ -61,8 +62,8 @@ final class Context(config: Config):
   val dialogHeaderMeasurement = config.getString("dialog.header.measurement")
   val dialogHeaderChemical = config.getString("dialog.header.chemical")
 
-  val listUnits = config.getStringList("list.units")
-  val listChemicals = config.getStringList("list.chemicals")
+  val listUnits = config.getStringList("list.units").asScala
+  val listChemicals = config.getStringList("list.chemicals").asScala
 
   val logo = new Image(Image.getClass.getResourceAsStream("/logo.white.png"))
   val addImage = loadImageView("/add.png")
