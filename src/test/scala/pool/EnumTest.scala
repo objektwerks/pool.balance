@@ -12,7 +12,6 @@ class EnumTest extends AnyFunSuite with Matchers:
     unitOfMeasure.valueOf(unitOfMeasure.ml.toString) shouldBe unitOfMeasure.ml
     unitOfMeasure.valueOf(unitOfMeasure.lbs.toString) shouldBe unitOfMeasure.lbs
     unitOfMeasure.valueOf(unitOfMeasure.oz.toString) shouldBe unitOfMeasure.oz
-    unitOfMeasure.list shouldBe Array("gl", "kg", "g", "l", "ml", "lbs", "oz")
   }
 
   test("type of chemical") {
