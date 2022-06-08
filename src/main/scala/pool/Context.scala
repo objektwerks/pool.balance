@@ -28,14 +28,6 @@ final class Context(config: Config):
   val windowWidth = config.getDouble("window.width")
   val windowHeight = config.getDouble("window.height")
 /*
-  brush = "Brush:"
-  net = "Net:"
-  skimmerBasket = "Skimmer Basket:"
-  pumpBasket = "Pump Basket:"
-  pumpFilter = "Pump Filter:"
-  vacuum = "Vacuum:"
-  cleaned = "Cleaned:"
-
   freeChlorine = "Free Chlorine:"
   combinedChlorine = "Combined Chlorine:"
   totalChlorine = "Total Chlorine:"
@@ -46,10 +38,6 @@ final class Context(config: Config):
   totalBromine = "Total Bromine:"
   temperature = "Temperature:"
   measured = "Measured:"
-
-  typeof = "Type Of:",
-  amount = "Amount:"
-  added = "Added:"
 */
   val labelPools = config.getString("label.pools")
   val labelCleanings = config.getString("label.cleanings")
@@ -67,6 +55,9 @@ final class Context(config: Config):
   val labelVacuum = config.getString("label.vacuum")
   val labelCleaned = config.getString("label.cleaned")
 
+  val labelTypeof = config.getString("label.typeof")
+  val labelAmount = config.getString("label.amount")
+  val labelAdded = config.getString("label.added")
 
   val logo = new Image(Image.getClass.getResourceAsStream("/logo.white.png"))
   val addImage = loadImageView("/add.png")
