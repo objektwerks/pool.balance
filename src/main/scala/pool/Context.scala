@@ -35,6 +35,7 @@ final class Context(config: Config):
   pumpFilter = "Pump Filter:"
   vacuum = "Vacuum:"
   cleaned = "Cleaned:"
+
   freeChlorine = "Free Chlorine:"
   combinedChlorine = "Combined Chlorine:"
   totalChlorine = "Total Chlorine:"
@@ -45,6 +46,7 @@ final class Context(config: Config):
   totalBromine = "Total Bromine:"
   temperature = "Temperature:"
   measured = "Measured:"
+
   typeof = "Type Of:",
   amount = "Amount:"
   added = "Added:"
@@ -57,6 +59,14 @@ final class Context(config: Config):
   val labelBuilt = config.getString("label.built")
   val labelVolume = config.getString("label.volume")
   val labelUnit = config.getString("label.unit")
+  val labelBrush = config.getString("label.brush")
+  val labelNet = config.getString("label.net")
+  val labelSkimmerBasket = config.getString("label.skimmerBasket")
+  val labelPumpBasket = config.getString("label.pumpBasket")
+  val labelPumpFilter = config.getString("label.pumpFilter")
+  val labelVacuum = config.getString("label.vacuum")
+  val labelCleaned = config.getString("label.cleaned")
+
 
   val logo = new Image(Image.getClass.getResourceAsStream("/logo.white.png"))
   val addImage = loadImageView("/add.png")
