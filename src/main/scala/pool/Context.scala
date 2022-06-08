@@ -29,6 +29,8 @@ final class Context(config: Config):
   }
 
   val logo = new Image(Image.getClass.getResourceAsStream("/logo.white.png"))
+  val addImage = loadImageView("/add.png")
+  val editImage = loadImageView("/edit.png")
 
   val store = Store(this)
   val model = Model(this)
