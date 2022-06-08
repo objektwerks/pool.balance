@@ -56,6 +56,10 @@ final class Context(config: Config):
 
   val buttonSave = config.getString("button.save")
 
+  val dialogHeaderPool = config.getString("dialog.header.pool")
+  val dialogHeaderCleaning = config.getString("dialog.header.cleaning")
+  val dialogHeaderMeasurement = config.getString("dialog.header.measurement")
+  val dialogHeaderChemical = config.getString("dialog.header.chemical")
 
   val logo = new Image(Image.getClass.getResourceAsStream("/logo.white.png"))
   val addImage = loadImageView("/add.png")
