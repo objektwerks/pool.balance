@@ -8,10 +8,6 @@ import javax.sql.DataSource
 import scalafx.scene.image.{Image, ImageView}
 
 final class Context(config: Config):
-  val windowTitle = config.getString("window.title")
-  val windowWidth = config.getDouble("window.width")
-  val windowHeight = config.getDouble("window.height")
-
   val url = config.getString("db.url")
   val user = config.getString("db.user")
   val password = config.getString("db.password")
@@ -27,6 +23,40 @@ final class Context(config: Config):
     ds.setMaximumPoolSize(maximumPoolSize)
     ds
   }
+
+  val windowTitle = config.getString("window.title")
+  val windowWidth = config.getDouble("window.width")
+  val windowHeight = config.getDouble("window.height")
+/*
+  name = "Name:"
+  built = "Built:"
+  volume = "Volume:"
+  unit = "Unit:"
+  brush = "Brush:"
+  net = "Net:"
+  skimmerBasket = "Skimmer Basket:"
+  pumpBasket = "Pump Basket:"
+  pumpFilter = "Pump Filter:"
+  vacuum = "Vacuum:"
+  cleaned = "Cleaned:"
+  freeChlorine = "Free Chlorine:"
+  combinedChlorine = "Combined Chlorine:"
+  totalChlorine = "Total Chlorine:"
+  ph = "ph:"
+  calciumHardness = "Calcium Hardness:"
+  totalAlkalinity = "Total Alkalinity:"
+  cyanuricAcid = "Cyanuric Acid:"
+  totalBromine = "Total Bromine:"
+  temperature = "Temperature:"
+  measured = "Measured:"
+  typeof = "Type Of:",
+  amount = "Amount:"
+  added = "Added:"
+*/
+  val labelPools = config.getString("label.pools")
+  val labelCleanings = config.getString("label.cleanings")
+  val labelMeasurements = config.getString("label.measurements")
+  val labelChemicals = config.getString("label.chemicals")
 
   val logo = new Image(Image.getClass.getResourceAsStream("/logo.white.png"))
   val addImage = loadImageView("/add.png")
