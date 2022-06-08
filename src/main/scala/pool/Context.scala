@@ -54,6 +54,9 @@ final class Context(config: Config):
   val labelAmount = config.getString("label.amount")
   val labelAdded = config.getString("label.added")
 
+  val buttonSave = config.getString("button.save")
+
+
   val logo = new Image(Image.getClass.getResourceAsStream("/logo.white.png"))
   val addImage = loadImageView("/add.png")
   val editImage = loadImageView("/edit.png")
