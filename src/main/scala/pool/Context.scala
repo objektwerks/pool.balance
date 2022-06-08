@@ -27,18 +27,7 @@ final class Context(config: Config):
   val windowTitle = config.getString("window.title")
   val windowWidth = config.getDouble("window.width")
   val windowHeight = config.getDouble("window.height")
-/*
-  freeChlorine = "Free Chlorine:"
-  combinedChlorine = "Combined Chlorine:"
-  totalChlorine = "Total Chlorine:"
-  ph = "ph:"
-  calciumHardness = "Calcium Hardness:"
-  totalAlkalinity = "Total Alkalinity:"
-  cyanuricAcid = "Cyanuric Acid:"
-  totalBromine = "Total Bromine:"
-  temperature = "Temperature:"
-  measured = "Measured:"
-*/
+
   val labelPools = config.getString("label.pools")
   val labelCleanings = config.getString("label.cleanings")
   val labelMeasurements = config.getString("label.measurements")
@@ -54,7 +43,13 @@ final class Context(config: Config):
   val labelPumpFilter = config.getString("label.pumpFilter")
   val labelVacuum = config.getString("label.vacuum")
   val labelCleaned = config.getString("label.cleaned")
-
+  val labelFreeChlorine = config.getString("label.freeChlorine")
+  val labelCalciumHardness = config.getString("label.calciumHardness")
+  val labelTotalAlkalinity = config.getString("label.totalAlkalinity")
+  val labelCyanuricAcid = config.getString("label.cyanuricAcid")
+  val labelTotalBromine = config.getString("label.totalBromine")
+  val labelTemperature = config.getString("label.temperature")
+  val labelMeasure = config.getString("label.measured")
   val labelTypeof = config.getString("label.typeof")
   val labelAmount = config.getString("label.amount")
   val labelAdded = config.getString("label.added")
