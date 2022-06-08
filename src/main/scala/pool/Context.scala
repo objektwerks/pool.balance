@@ -14,7 +14,6 @@ final class Context(config: Config):
   val password = config.getString("db.password")
   val dataSourceClassName = config.getString("db.dataSourceClassName")
   val maximumPoolSize = config.getInt("db.maximumPoolSize")
-
   val dataSource: DataSource = {
     val ds = new HikariDataSource()
     ds.setDataSourceClassName(dataSourceClassName)
