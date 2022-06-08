@@ -8,9 +8,6 @@ import scalafx.beans.property.{BooleanProperty, DoubleProperty, IntegerProperty,
 enum unitOfMeasure:
   case gl, kg, g, l, ml, lbs, oz
 
-object unitOfMeasure:
-  def list: Array[String] = unitOfMeasure.values.map(u => u.toString)
-
 sealed trait Entity:
   val id: Long
 
@@ -82,9 +79,6 @@ final case class Measurement(id: Long = 0,
 
 enum typeOfChemical:
   case liquidChlorine, trichlor, dichlor, calciumHypochlorite, stabilizer, algaecide, muriaticAcid
-
-object typeOfChemical:
-  def list: Array[String] = typeOfChemical.values.map(t => t.toString)
 
 final case class Chemical(id: Long = 0,
                           poolId: Long,
