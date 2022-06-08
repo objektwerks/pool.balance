@@ -28,10 +28,6 @@ final class Context(config: Config):
   val windowWidth = config.getDouble("window.width")
   val windowHeight = config.getDouble("window.height")
 /*
-  name = "Name:"
-  built = "Built:"
-  volume = "Volume:"
-  unit = "Unit:"
   brush = "Brush:"
   net = "Net:"
   skimmerBasket = "Skimmer Basket:"
@@ -57,6 +53,10 @@ final class Context(config: Config):
   val labelCleanings = config.getString("label.cleanings")
   val labelMeasurements = config.getString("label.measurements")
   val labelChemicals = config.getString("label.chemicals")
+  val labelName = config.getString("label.name")
+  val labelBuilt = config.getString("label.built")
+  val labelVolume = config.getString("label.volume")
+  val labelUnit = config.getString("label.unit")
 
   val logo = new Image(Image.getClass.getResourceAsStream("/logo.white.png"))
   val addImage = loadImageView("/add.png")
