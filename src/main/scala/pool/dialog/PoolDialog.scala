@@ -1,6 +1,7 @@
 package pool.dialog
 
 import scalafx.collections.ObservableBuffer
+import scalafx.scene.layout.Region
 import scalafx.scene.control.{ComboBox, Dialog, TextField}
 
 import pool.{Context, Pool}
@@ -22,3 +23,11 @@ class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
   	items = ObservableBuffer.from(context.listUnits)
   	value = pool.unit.toString
   }
+
+  val controls = List[(String, Region)](
+    context.labelName -> nameTextField,
+    context.labelBuilt -> builtTextField,
+    context.labelVolume -> volumeTextField,
+    context.labelUnit -> unitComboBox
+  )
+  val controlGridPane = new ControlGridPane(controls)
