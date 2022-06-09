@@ -60,7 +60,7 @@ class PoolPane(context: Context) extends VBox:
   poolTableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
   poolTableView.selectionModel().selectedItemProperty().addListener { (_, _, selectedPool) =>
     // model.update executes a remove and add on items. the remove passes a null selectedPool!
-    if (selectedPool != null) then
+    if selectedPool != null then
       model.selectedPoolId.value = selectedPool.id
       poolEditButton.disable = false
   }
@@ -71,8 +71,7 @@ class PoolPane(context: Context) extends VBox:
 
   def add(): Unit =
     PoolDialog(context, Pool()).showAndWait() match
-      case Some(pool: Pool) =>
-        model.add(pool).fold(_ => (), pool => poolTableView.selectionModel().select(pool))    
+      case Some(pool: Pool) => model.add(pool).fold(_ => (), pool => poolTableView.selectionModel().select(pool))    
       case _ =>
 
   def update(): Unit =
