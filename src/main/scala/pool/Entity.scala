@@ -28,10 +28,10 @@ object Entity:
   def isNotDouble(text: String): Boolean = !text.matches("\\d{0,7}([\\.]\\d{0,4})?")
 
 final case class Pool(id: Long = 0,
-                      name: String, 
-                      built: Int, 
-                      volume: Int,
-                      unit: unitOfMeasure) extends Entity:
+                      name: String = "", 
+                      built: Int = 0, 
+                      volume: Int = 0,
+                      unit: unitOfMeasure = unitOfMeasure.gl) extends Entity:
   val nameProperty = new StringProperty(this, "name", name)
   val builtProperty = new StringProperty(this, "built", built.toString)
   val volumeProperty = new StringProperty(this, "volume", volume.toString)
@@ -85,9 +85,9 @@ enum typeOfChemical:
 
 final case class Chemical(id: Long = 0,
                           poolId: Long,
-                          typeof: typeOfChemical,
-                          amount: Double, 
-                          unit: unitOfMeasure,
+                          typeof: typeOfChemical = typeOfChemical.liquidChlorine,
+                          amount: Double = 1.0, 
+                          unit: unitOfMeasure = unitOfMeasure.gl,
                           added: LocalDateTime = LocalDateTime.now) extends Entity:
   val typeofProperty = new StringProperty(this, "typeof", typeof.toString)
   val amountProperty = new StringProperty(this, "amount", amount.toString)

@@ -51,7 +51,8 @@ class PoolPane(context: Context) extends VBox:
   }
 
   val poolToolBar = new HBox {
-    spacing = 6; children = List(poolAddButton, poolEditButton)
+    spacing = 6
+    children = List(poolAddButton, poolEditButton)
   }
 
   children = List(poolLabel, poolTableView, poolToolBar)
