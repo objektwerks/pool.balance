@@ -5,6 +5,7 @@ import scalafx.scene.Scene
 import scalafx.scene.layout.{HBox, VBox}
 
 import pool.pane.{DashboardPane, MenuPane, PoolPane}
+import pool.pane.ContentPane
 
 final class View(context: Context):
   val poolPane = PoolPane(context)
@@ -15,12 +16,13 @@ final class View(context: Context):
   }
 
   val dashboardPane = DashboardPane(context)
+  val contentPane = ContentPane(context)
 
   val eastPane = new VBox {
-    children = List(dashboardPane)
+    children = List(dashboardPane, contentPane)
   }
 
-  val contentPane = new HBox {
+  val rootPane = new HBox {
     prefWidth = context.windowWidth
     prefHeight = context.windowHeight
     spacing = 6
@@ -29,5 +31,5 @@ final class View(context: Context):
   }
 
   val scene = new Scene {
-    root = contentPane
+    root = rootPane
   }
