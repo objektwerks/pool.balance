@@ -71,7 +71,7 @@ class PoolPane(context: Context) extends VBox:
   poolEditButton.onAction = { _ => update() }
 
   def add(): Unit =
-    PoolDialog(context, Pool(name = "", built = 0, volume = 0, unit = unitOfMeasure.gl)).showAndWait() match
+    PoolDialog(context, Pool()).showAndWait() match
       case Some(pool: Pool) =>
         model.add(pool).fold(_ => (), pool => poolTableView.selectionModel().select(pool))    
       case _ =>
