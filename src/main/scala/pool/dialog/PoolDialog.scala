@@ -46,8 +46,8 @@ class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
   dialog.content = ControlGridPane(controls)
   
   nameTextField.text.onChange { (_, _, newValue) => saveButton.disable = newValue.trim.isEmpty }
-  builtTextField.text.onChange { (_, oldValue, newValue) => if (isNotInt(newValue)) builtTextField.text.value = oldValue }
-  volumeTextField.text.onChange { (_, oldValue, newValue) => if (isNotInt(newValue)) volumeTextField.text.value = oldValue }
+  builtTextField.text.onChange { (_, oldValue, newValue) => if isNotInt(newValue) then builtTextField.text.value = oldValue }
+  volumeTextField.text.onChange { (_, oldValue, newValue) => if isNotInt(newValue) then volumeTextField.text.value = oldValue }
   unitComboBox.value.onChange { (_, _, newValue) => saveButton.disable = newValue.trim.isEmpty }
 
   resultConverter = dialogButton => {
