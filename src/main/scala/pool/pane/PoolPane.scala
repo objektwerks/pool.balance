@@ -10,10 +10,10 @@ import pool.{Context, Pool, unitOfMeasure}
 import pool.dialog.PoolDialog
 
 class PoolPane(context: Context) extends VBox:
-  val model = context.model
-
   spacing = 6
   padding = Insets(6)
+
+  val model = context.model
 
   val poolLabel = new Label {
     text = context.labelPools
