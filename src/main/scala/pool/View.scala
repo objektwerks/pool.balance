@@ -9,13 +9,15 @@ import pool.pane.ContentPane
 
 final class View(context: Context):
   val poolPane = PoolPane(context)
+
   val menuPane = MenuPane(context)
 
   val westPane = new VBox {
-    children = List(poolPane)
+    children = List(poolPane, menuPane)
   }
 
   val dashboardPane = DashboardPane(context)
+  
   val contentPane = ContentPane(context)
 
   val eastPane = new VBox {

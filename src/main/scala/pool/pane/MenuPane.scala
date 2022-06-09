@@ -1,7 +1,9 @@
 package pool.pane
 
-import scalafx.scene.layout.VBox
+import scalafx.geometry.Orientation
+import scalafx.scene.layout.TilePane
 
 import pool.Context
 
-class MenuPane(context: Context) extends VBox
+class MenuPane(context: Context) extends TilePane:
+  orientation = Orientation.Vertical
