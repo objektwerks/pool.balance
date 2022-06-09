@@ -6,9 +6,14 @@ import scalafx.scene.layout.Region
 import scalafx.scene.control.{ButtonType, ComboBox, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 
-import pool.{Context, Pool}
+import pool.{App, Context, Pool}
+import pool.unitOfMeasure
 
 class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
+  initOwner(App.stage)
+  title = context.windowTitle
+  headerText = context.dialogHeaderPool
+
   val nameTextField = new TextField {
     text = pool.name
   }
@@ -37,3 +42,12 @@ class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
   val saveButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
   dialog.content = ControlGridPane(controls)
+
+  resultConverter = dialogButton => {
+    if (dialogButton == saveButtonType)
+      pool.copy(name = nameTextField.text.value,
+      	built = Integer.parseInt(builtTextField.text.value),
+        volume = Integer.parseInt(volumeTextField.text.value),
+        unit = unitOfMeasure.valueOf(unitComboBox.value.value))
+    else null
+  }
