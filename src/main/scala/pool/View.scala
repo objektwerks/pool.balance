@@ -4,7 +4,7 @@ import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.layout.{HBox, VBox}
 
-import pool.pane.{ContentPane, DashboardPane, TabbedPane, PoolPane}
+import pool.pane.{DashboardPane, PoolPane, TabbedPane}
 
 final class View(context: Context):
   val poolPane = PoolPane(context)
