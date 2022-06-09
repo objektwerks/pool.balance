@@ -1,8 +1,10 @@
 package pool.dialog
 
+import scalafx.Includes._
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.Region
-import scalafx.scene.control.{ComboBox, Dialog, TextField}
+import scalafx.scene.control.{ButtonType, ComboBox, Dialog, TextField}
+import scalafx.scene.control.ButtonBar.ButtonData
 
 import pool.{Context, Pool}
 
@@ -30,4 +32,8 @@ class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
     context.labelVolume -> volumeTextField,
     context.labelUnit -> unitComboBox
   )
-  val controlGridPane = new ControlGridPane(controls)
+
+  val dialog = dialogPane()
+  val saveButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
+  dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
+  dialog.content = ControlGridPane(controls)
