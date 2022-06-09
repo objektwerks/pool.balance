@@ -18,7 +18,7 @@ final class View(context: Context):
     children = List(tabbedPane)
   }
 
-  val rootPane = new HBox {
+  val rootPane = new VBox {
     prefWidth = context.windowWidth
     prefHeight = context.windowHeight
     spacing = 6
