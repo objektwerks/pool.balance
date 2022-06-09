@@ -8,6 +8,8 @@ import javax.sql.DataSource
 import scala.jdk.CollectionConverters.*
 import scalafx.scene.image.{Image, ImageView}
 
+import pool.pane.{ContentPane, DashboardPane, MenuPane, PoolPane}
+
 final class Context(config: Config):
   val url = config.getString("db.url")
   val user = config.getString("db.user")
@@ -93,6 +95,11 @@ final class Context(config: Config):
 
   val store = Store(this)
   val model = Model(this)
+
+  val dashboardPane = DashboardPane(this)
+  val contentPane = ContentPane(this)
+  val poolPane = PoolPane(this)
+  val menuPane = MenuPane(this)
 
   private def loadImageView(path: String): ImageView = new ImageView {
     image = new Image(Image.getClass.getResourceAsStream(path))
