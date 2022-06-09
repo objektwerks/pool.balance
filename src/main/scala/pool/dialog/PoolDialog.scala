@@ -15,6 +15,8 @@ class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
   title = context.windowTitle
   headerText = context.dialogHeaderPool
 
+  val dialog = dialogPane()
+
   val nameTextField = new TextField {
     text = pool.name
   }
@@ -38,12 +40,11 @@ class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
     context.labelVolume -> volumeTextField,
     context.labelUnit -> unitComboBox
   )
+  dialog.content = ControlGridPane(controls)
 
-  val dialog = dialogPane()
   val saveButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
   val saveButton = dialog.lookupButton(saveButtonType)
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
-  dialog.content = ControlGridPane(controls)
   
   nameTextField.text.onChange { (_, _, newValue) => saveButton.disable = newValue.trim.isEmpty }
   builtTextField.text.onChange { (_, oldValue, newValue) => if isNotInt(newValue) then builtTextField.text.value = oldValue }
