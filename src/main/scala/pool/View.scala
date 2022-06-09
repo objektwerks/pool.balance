@@ -4,17 +4,20 @@ import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.layout.{HBox, VBox}
 
-import pool.pane.PoolPane
+import pool.pane.{DashboardPane, MenuPane, PoolPane}
 
 final class View(context: Context):
   val poolPane = PoolPane(context)
+  val menuPane = MenuPane(context)
 
   val westPane = new VBox {
     children = List(poolPane)
   }
 
+  val dashboardPane = DashboardPane(context)
+
   val eastPane = new VBox {
-    children = List()
+    children = List(dashboardPane)
   }
 
   val contentPane = new HBox {
