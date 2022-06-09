@@ -24,8 +24,8 @@ object Entity:
   given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => m.measured.toLocalDate.toEpochDay).reverse
   given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => c.added.toLocalDate.toEpochDay).reverse
 
-  def isNotNumeric(text: String): Boolean = !text.matches("\\d{0,7}([\\.]\\d{0,4})?")
-
+  def isNotInt(text: String): Boolean = !text.matches("\\d+")
+  def isNotDouble(text: String): Boolean = !text.matches("\\d{0,7}([\\.]\\d{0,4})?")
 
 final case class Pool(id: Long = 0,
                       name: String, 

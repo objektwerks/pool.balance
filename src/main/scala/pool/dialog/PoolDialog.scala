@@ -38,22 +38,22 @@ class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
     context.labelUnit -> unitComboBox
   )
 
-  nameTextField.text.onChange { (_, _, newValue) => saveButton.disable = newValue.trim.isEmpty }
-  builtTextField.text.onChange { (_, oldValue, newValue) => if (Entity.isNotNumeric(newValue)) builtTextField.text.value = oldValue }
-  volumeTextField.text.onChange { (_, oldValue, newValue) => if (Entity.isNotNumeric(newValue)) volumeTextField.text.value = oldValue }
-  unitComboBox.value.onChange { (_, _, newValue) => saveButton.disable = newValue.trim.isEmpty }
-
   val dialog = dialogPane()
   val saveButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
   val saveButton = dialog.lookupButton(saveButtonType)
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
   dialog.content = ControlGridPane(controls)
+  
+  nameTextField.text.onChange { (_, _, newValue) => saveButton.disable = newValue.trim.isEmpty }
+  builtTextField.text.onChange { (_, oldValue, newValue) => if (Entity.isNotInt(newValue)) builtTextField.text.value = oldValue }
+  volumeTextField.text.onChange { (_, oldValue, newValue) => if (Entity.isNotInt(newValue)) volumeTextField.text.value = oldValue }
+  unitComboBox.value.onChange { (_, _, newValue) => saveButton.disable = newValue.trim.isEmpty }
 
   resultConverter = dialogButton => {
     if (dialogButton == saveButtonType)
       pool.copy(name = nameTextField.text.value,
-      	built = Integer.parseInt(builtTextField.text.value),
-        volume = Integer.parseInt(volumeTextField.text.value),
-        unit = unitOfMeasure.valueOf(unitComboBox.value.value))
+      	        built = Integer.parseInt(builtTextField.text.value),
+                volume = Integer.parseInt(volumeTextField.text.value),
+                unit = unitOfMeasure.valueOf(unitComboBox.value.value))
     else null
   }
