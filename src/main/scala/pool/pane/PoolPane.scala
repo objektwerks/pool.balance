@@ -38,9 +38,7 @@ class PoolPane(context: Context) extends VBox:
         cellValueFactory = _.value.unitProperty
       }
     )
-    model.pools() match
-      case Right(pools) => items = pools
-      case Left(_) => items = ObservableBuffer[Pool]()
+    items = model.pools().fold( _ => ObservableBuffer[Pool](), pools => pools)
   }
 
   val poolAddButton = new Button {
@@ -61,7 +59,7 @@ class PoolPane(context: Context) extends VBox:
   poolTableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
   poolTableView.selectionModel().selectedItemProperty().addListener { (_, _, selectedPool) =>
     // model.update executes a remove and add on items. the remove passes a null selectedPool!
-    if (selectedPool != null) {
+    if (selectedPool != null) { // Verify this old behavior!
       model.selectedPoolId.value = selectedPool.id
       poolEditButton.disable = false
     }
@@ -73,17 +71,15 @@ class PoolPane(context: Context) extends VBox:
 
   def add(): Unit =
     PoolDialog(context, Pool(name = "", built = 0, volume = 0, unit = unitOfMeasure.gl)).showAndWait() match
-      case Some(Pool(id, name, built, volume, unit)) =>
-        model.add(Pool(id, name, built, volume, unit)) match
-          case Right(pool) => poolTableView.selectionModel().select(pool)
-          case Left(_) =>        
+      case Some(pool: Pool) =>
+        model.add(pool).fold(_ => (), pool => poolTableView.selectionModel().select(pool))    
       case _ =>
 
   def update(): Unit =
     val selectedIndex = poolTableView.selectionModel().getSelectedIndex
     val pool = poolTableView.selectionModel().getSelectedItem.pool
     PoolDialog(context, pool).showAndWait() match
-      case Some(Pool(id, name, built, volume, unit)) =>
-        model.update(selectedIndex, Pool(id, name, built, volume, unit))
+      case Some(pool: Pool) =>
+        model.update(selectedIndex, pool)
         poolTableView.selectionModel().select(selectedIndex)
       case _ =>
