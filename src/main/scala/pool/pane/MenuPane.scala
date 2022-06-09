@@ -1,7 +1,7 @@
 package pool.pane
 
-import scalafx.scene.layout.TilePane
+import scalafx.scene.layout.VBox
 
 import pool.Context
 
-class MenuPane(context: Context) extends TilePane
+class MenuPane(context: Context) extends VBox
