@@ -83,6 +83,10 @@ final class Context(config: Config):
   val dialogHeaderMeasurement = config.getString("dialog.header.measurement")
   val dialogHeaderChemical = config.getString("dialog.header.chemical")
 
+  val tabCleanings = config.getString("tab.cleanings")
+  val tabMeasurements = config.getString("tab.measurements")
+  val tabChemicals = config.getString("tab.chemicals")
+
   val listUnits = config.getStringList("list.units").asScala.toList
   val listChemicals = config.getStringList("list.chemicals").asScala.toList
 
