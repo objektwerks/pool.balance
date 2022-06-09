@@ -52,7 +52,7 @@ class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
   unitComboBox.value.onChange { (_, _, newValue) => saveButton.disable = newValue.trim.isEmpty }
 
   resultConverter = dialogButton => {
-    if (dialogButton == saveButtonType)
+    if dialogButton == saveButtonType then
       pool.copy(name = nameTextField.text.value,
       	        built = builtTextField.text.value.toIntOption.getOrElse(-1),
                 volume = volumeTextField.text.value.toIntOption.getOrElse(-1),
