@@ -7,16 +7,15 @@ import scalafx.scene.layout.{HBox, VBox}
 import pool.pane.{ContentPane, DashboardPane, TabbedPane, PoolPane}
 
 final class View(context: Context):
+  val poolPane = PoolPane(context)
   val dashboardPane = DashboardPane(context)
-  val contentPane = ContentPane(context)
-  val eastPane = new VBox {
-    children = List(dashboardPane, contentPane)
+  val northPane = new HBox {
+    children = List(poolPane, dashboardPane)
   }
 
-  val poolPane = PoolPane(context)
   val tabbedPane = TabbedPane(context)
-  val westPane = new VBox {
-    children = List(poolPane, tabbedPane)
+  val southPane = new VBox {
+    children = List(tabbedPane)
   }
 
   val rootPane = new HBox {
@@ -24,7 +23,7 @@ final class View(context: Context):
     prefHeight = context.windowHeight
     spacing = 6
     padding = Insets(6)
-    children = List(westPane, eastPane)
+    children = List(northPane, southPane)
   }
 
   val scene = new Scene {
