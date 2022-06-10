@@ -15,11 +15,11 @@ class PoolPane(context: Context) extends VBox:
 
   val model = context.model
 
-  val poolLabel = new Label {
+  val label = new Label {
     text = context.labelPools
   }
 
-  val poolTableView = new TableView[Pool]() {
+  val tableView = new TableView[Pool]() {
     columns ++= List(
       new TableColumn[Pool, String] {
         text = context.tableHeaderName
@@ -41,45 +41,45 @@ class PoolPane(context: Context) extends VBox:
     items = model.pools().fold( _ => ObservableBuffer[Pool](), pools => pools)
   }
 
-  val poolAddButton = new Button {
+  val addButton = new Button {
     graphic = context.addImage
   }
 
-  val poolEditButton = new Button {
+  val editButton = new Button {
     graphic = context.editImage
     disable = true
   }
 
-  val poolToolBar = new HBox {
+  val toolBar = new HBox {
     spacing = 6
-    children = List(poolAddButton, poolEditButton)
+    children = List(addButton, editButton)
   }
 
-  children = List(poolLabel, poolTableView, poolToolBar)
+  children = List(label, tableView, toolBar)
 
-  poolTableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
+  tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
   
-  poolTableView.selectionModel().selectedItemProperty().addListener { (_, _, selectedPool) =>
+  tableView.selectionModel().selectedItemProperty().addListener { (_, _, selectedPool) =>
     // model.update executes a remove and add on items. the remove passes a null selectedPool!
     if selectedPool != null then
       model.selectedPoolId.value = selectedPool.id
-      poolEditButton.disable = false
+      editButton.disable = false
   }
 
-  poolAddButton.onAction = { _ => add() }
+  addButton.onAction = { _ => add() }
 
-  poolEditButton.onAction = { _ => update() }
+  editButton.onAction = { _ => update() }
 
   def add(): Unit =
     PoolDialog(context, Pool()).showAndWait() match
-      case Some(pool: Pool) => model.add(pool).fold(_ => (), pool => poolTableView.selectionModel().select(pool))
+      case Some(pool: Pool) => model.add(pool).fold(_ => (), pool => tableView.selectionModel().select(pool))
       case _ =>
 
   def update(): Unit =
-    val selectedIndex = poolTableView.selectionModel().getSelectedIndex
-    val pool = poolTableView.selectionModel().getSelectedItem.pool
+    val selectedIndex = tableView.selectionModel().getSelectedIndex
+    val pool = tableView.selectionModel().getSelectedItem.pool
     PoolDialog(context, pool).showAndWait() match
       case Some(pool: Pool) =>
         model.update(selectedIndex, pool)
-        poolTableView.selectionModel().select(selectedIndex)
+        tableView.selectionModel().select(selectedIndex)
       case _ =>
