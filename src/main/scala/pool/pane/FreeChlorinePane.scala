@@ -2,4 +2,7 @@ package pool.pane
 
 import scalafx.scene.control.TitledPane
 
-class FreeChlorinePane extends TitledPane
+import pool.Context
+
+class FreeChlorinePane(context: Context) extends TitledPane:
+  text = context.tableHeaderFreeChlorine
