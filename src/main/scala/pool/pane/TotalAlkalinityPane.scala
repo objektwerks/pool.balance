@@ -1,17 +1,11 @@
 package pool.pane
 
 import scalafx.geometry.Insets
-import scalafx.scene.control.Label
-import scalafx.scene.layout.VBox
+import scalafx.scene.control.TitledPane
 
 import pool.Context
 
-class TotalAlkalinityPane(context: Context) extends VBox:
-  spacing = 6
+class TotalAlkalinityPane(context: Context) extends TitledPane:
+  collapsible = false
   padding = Insets(6)
-
-  val title = new Label {
-    text = context.tableHeaderTotalAlkalinity
-  }
-
-  children = List(title)
+  text = context.tableHeaderTotalAlkalinity

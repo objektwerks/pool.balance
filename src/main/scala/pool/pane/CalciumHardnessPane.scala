@@ -1,17 +1,11 @@
 package pool.pane
 
 import scalafx.geometry.Insets
-import scalafx.scene.control.Label
-import scalafx.scene.layout.VBox
+import scalafx.scene.control.TitledPane
 
 import pool.Context
 
-class CalciumHardnessPane(context: Context) extends VBox:
-  spacing = 6
+class CalciumHardnessPane(context: Context) extends TitledPane:
+  collapsible = false
   padding = Insets(6)
-
-  val title = new Label {
-    text = context.tableHeaderCalciumHardness
-  }
-
-  children = List(title)
+  text = context.tableHeaderCalciumHardness
