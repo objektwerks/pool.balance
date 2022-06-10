@@ -14,6 +14,7 @@ abstract class DashboardTilePane(context: Context) extends TitledPane:
     editable = false
     text = "0"
   }
+  
   val currentAverage = new TextField {
     editable = false
     text = "0"
