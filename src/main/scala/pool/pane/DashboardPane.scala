@@ -9,6 +9,7 @@ class DashboardPane(context: Context) extends TilePane:
   orientation = Orientation.Vertical
   alignment = Pos.TopLeft
   padding = Insets(6)
+  prefRows = 4
 
   children = List(FreeChlorinePane(context),
                   PhPane(context),
