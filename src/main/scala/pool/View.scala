@@ -1,5 +1,6 @@
 package pool
 
+import scalafx.Includes._
 import scalafx.scene.control.SplitPane
 import scalafx.geometry.{Insets, Orientation}
 import scalafx.scene.Scene
@@ -24,7 +25,7 @@ final class View(context: Context):
     padding = Insets(6)
     items.addAll(northPane, southPane)
   }
-  southPane.prefHeightProperty().bind(splitPane.heightProperty())
+  southPane.prefHeightProperty() <== splitPane.heightProperty()
   splitPane.setDividerPositions(0.3, 0.7)
 
   val rootPane = new VBox {
