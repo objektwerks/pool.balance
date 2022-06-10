@@ -6,7 +6,7 @@ import scalafx.scene.control.{TextField, TitledPane}
 import pool.Context
 import pool.dialog.ControlGridPane
 
-abstract class DashboardTilePane(context: Context) extends TitledPane:
+abstract class DashboardTitledPane(context: Context) extends TitledPane:
   collapsible = false
   padding = Insets(6)
 
