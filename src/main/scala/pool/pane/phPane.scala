@@ -1,8 +1,17 @@
 package pool.pane
 
-import scalafx.scene.control.TitledPane
+import scalafx.geometry.Insets
+import scalafx.scene.control.Label
+import scalafx.scene.layout.VBox
 
 import pool.Context
 
-class phPane(context: Context) extends TitledPane:
-  text = context.tableHeaderPh
+class phPane(context: Context) extends VBox:
+  spacing = 6
+  padding = Insets(6)
+
+  val title = new Label {
+    text = context.tableHeaderPh
+  }
+
+  children = List(title)
