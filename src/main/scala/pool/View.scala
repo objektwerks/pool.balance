@@ -1,9 +1,9 @@
 package pool
 
 import scalafx.Includes._
-import scalafx.scene.control.SplitPane
 import scalafx.geometry.{Insets, Orientation}
 import scalafx.scene.Scene
+import scalafx.scene.control.SplitPane
 import scalafx.scene.layout.{HBox, VBox}
 
 import pool.pane.{DashboardPane, PoolPane, TabbedPane}
