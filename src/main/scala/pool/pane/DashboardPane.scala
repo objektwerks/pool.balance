@@ -11,6 +11,6 @@ class DashboardPane(context: Context) extends TilePane:
   padding = Insets(6)
 
   children = List(FreeChlorinePane(context),
-                  phPane(context),
+                  PhPane(context),
                   TotalAlkalinityPane(context),
                   CalciumHardnessPane(context))
