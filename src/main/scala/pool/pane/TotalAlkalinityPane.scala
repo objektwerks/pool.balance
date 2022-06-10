@@ -2,4 +2,7 @@ package pool.pane
 
 import scalafx.scene.control.TitledPane
 
-class TotalAlkalinityPane extends TitledPane
+import pool.Context
+
+class TotalAlkalinityPane(context: Context) extends TitledPane:
+  text = context.tableHeaderTotalAlkalinity
