@@ -6,8 +6,8 @@ import scalafx.scene.layout.TilePane
 import pool.Context
 
 class DashboardPane(context: Context) extends TilePane:
-  orientation = Orientation.Horizontal
-  alignment = Pos.Center
+  orientation = Orientation.Vertical
+  alignment = Pos.TopLeft
   padding = Insets(6)
 
   children = List(FreeChlorinePane(context),

@@ -11,21 +11,20 @@ import pool.pane.{DashboardPane, PoolPane, TabbedPane}
 final class View(context: Context):
   val poolPane = PoolPane(context)
   val dashboardPane = DashboardPane(context)
-  val northPane = new HBox {
+  val westPane = new VBox {
     children = List(poolPane, dashboardPane)
   }
 
   val tabbedPane = TabbedPane(context)
-  val southPane = new VBox {
+  val eastPane = new VBox {
     children = List(tabbedPane)
   }
 
   val splitPane = new SplitPane {
-    orientation = Orientation.Vertical
+    orientation = Orientation.Horizontal
     padding = Insets(6)
-    items.addAll(northPane, southPane)
+    items.addAll(westPane, eastPane)
   }
-  southPane.prefHeightProperty() <== splitPane.heightProperty()
   splitPane.setDividerPositions(0.3, 0.7)
 
   val rootPane = new VBox {
