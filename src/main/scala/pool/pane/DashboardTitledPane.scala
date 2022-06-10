@@ -1,7 +1,7 @@
 package pool.pane
 
-import scalafx.geometry.Insets
-import scalafx.scene.control.{TextField, TitledPane}
+import scalafx.geometry.{Insets, Pos}
+import scalafx.scene.control.{Label, TitledPane}
 
 import pool.Context
 import pool.dialog.ControlGridPane
@@ -9,17 +9,17 @@ import pool.dialog.ControlGridPane
 abstract class DashboardTitledPane(context: Context) extends TitledPane:
   collapsible = false
 
-  val currentValue = new TextField {
-    editable = false
+  val currentValue = new Label {
+    alignment = Pos.Center
     text = "0"
   }
   
-  val currentAverage = new TextField {
-    editable = false
+  val currentAverage = new Label {
+    alignment = Pos.Center
     text = "0"
   }
 
-  val controls = List[(String, TextField)](
+  val controls = List[(String, Label)](
     context.labelCurrent -> currentValue,
     context.labelAverage -> currentAverage
   )
