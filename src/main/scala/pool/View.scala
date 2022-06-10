@@ -28,7 +28,7 @@ final class View(context: Context):
     prefHeight = context.windowHeight
     items.addAll(westPane, eastPane)
   }
-  splitPane.setDividerPositions(0.3, 0.7)
+  splitPane.setDividerPositions(0.35, 0.65)
 
   val rootPane = new VBox {
     spacing = 6
