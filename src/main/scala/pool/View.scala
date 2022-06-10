@@ -3,30 +3,29 @@ package pool
 import scalafx.Includes._
 import scalafx.geometry.{Insets, Orientation}
 import scalafx.scene.Scene
-import scalafx.scene.control.{Separator, SplitPane}
+import scalafx.scene.control.SplitPane
 import scalafx.scene.layout.{HBox, VBox}
 
 import pool.pane.{DashboardPane, PoolPane, TabbedPane}
 
 final class View(context: Context):
   val poolPane = PoolPane(context)
-  poolPane.prefHeight = context.windowHeight * 0.4
   val dashboardPane = DashboardPane(context)
-  val westPane = new VBox {
-    children = List(poolPane, Separator(Orientation.Horizontal), dashboardPane)
+  val northPane = new HBox {
+    children = List(poolPane, dashboardPane)
   }
 
   val tabbedPane = TabbedPane(context)
-  val eastPane = new VBox {
+  val southPane = new VBox {
     children = List(tabbedPane)
   }
 
   val splitPane = new SplitPane {
-    orientation = Orientation.Horizontal
+    orientation = Orientation.Vertical
     padding = Insets(6)
     prefWidth = context.windowWidth
     prefHeight = context.windowHeight
-    items.addAll(westPane, eastPane)
+    items.addAll(northPane, southPane)
   }
   splitPane.setDividerPositions(0.35, 0.65)
 

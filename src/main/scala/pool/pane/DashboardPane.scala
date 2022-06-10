@@ -1,11 +1,11 @@
 package pool.pane
 
 import scalafx.geometry.Insets
-import scalafx.scene.layout.VBox
+import scalafx.scene.layout.HBox
 
 import pool.Context
 
-class DashboardPane(context: Context) extends VBox:
+class DashboardPane(context: Context) extends HBox:
   spacing = 6
   padding = Insets(6)
 
