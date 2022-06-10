@@ -5,7 +5,7 @@ import scalafx.scene.layout.VBox
 
 import pool.Context
 
-class ChemicalPane(context: Context) extends VBox:
+class ChemicalsPane(context: Context) extends VBox:
   spacing = 6
   padding = Insets(6)
 

@@ -5,7 +5,7 @@ import scalafx.scene.layout.VBox
 
 import pool.Context
 
-class CleaningPane(context: Context) extends VBox:
+class MeasurementsPane(context: Context) extends VBox:
   spacing = 6
   padding = Insets(6)
 

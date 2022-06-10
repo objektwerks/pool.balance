@@ -9,19 +9,19 @@ class TabbedPane(context: Context) extends TabPane:
   val cleaningsTab = new Tab {
     text = context.tabCleanings
     closable = false
-    content = CleaningPane(context)
+    content = CleaningsPane(context)
   }
 
   val measurementsTab = new Tab {
   	text = context.tabMeasurements
   	closable = false
-  	content = MeasurementPane(context)
+  	content = MeasurementsPane(context)
   }
 
   val chemicalsTab = new Tab {
   	text = context.tabChemicals
   	closable = false
-  	content = ChemicalPane(context)
+  	content = ChemicalsPane(context)
   }
 
   padding = Insets(6)
