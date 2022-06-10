@@ -12,4 +12,5 @@ class DashboardPane(context: Context) extends HBox:
   children = List(FreeChlorinePane(context),
                   PhPane(context),
                   TotalAlkalinityPane(context),
-                  CalciumHardnessPane(context))
+                  CalciumHardnessPane(context),
+                  CyanuricAcidPane(context))
