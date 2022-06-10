@@ -28,6 +28,9 @@ final class Context(config: Config):
   val windowWidth = config.getDouble("window.width")
   val windowHeight = config.getDouble("window.height")
 
+  val paneAdd = config.getString("pane.add")
+  val paneEdit = config.getString("pane.edit")
+
   val labelPools = config.getString("label.pools")
   val labelCleanings = config.getString("label.cleanings")
   val labelMeasurements = config.getString("label.measurements")
@@ -97,9 +100,6 @@ final class Context(config: Config):
 
   val listUnits = config.getStringList("list.units").asScala.toList
   val listChemicals = config.getStringList("list.chemicals").asScala.toList
-
-  val addImage = loadImageView("/add.png")
-  val editImage = loadImageView("/edit.png")
 
   val logo = new Image(Image.getClass.getResourceAsStream("/logo.white.png"))
 

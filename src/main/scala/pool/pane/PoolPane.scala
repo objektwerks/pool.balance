@@ -42,11 +42,11 @@ class PoolPane(context: Context) extends VBox:
   }
 
   val addButton = new Button {
-    graphic = context.addImage
+    text = context.paneAdd
   }
 
   val editButton = new Button {
-    graphic = context.editImage
+    text = context.paneEdit
     disable = true
   }
 
