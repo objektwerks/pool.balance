@@ -9,7 +9,7 @@ import scalafx.scene.layout.{HBox, VBox}
 import pool.{Context, Pool, unitOfMeasure}
 import pool.dialog.PoolDialog
 
-class PoolPane(context: Context) extends VBox:
+class PoolsPane(context: Context) extends VBox:
   spacing = 6
   padding = Insets(6)
 

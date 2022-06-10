@@ -6,12 +6,12 @@ import scalafx.scene.Scene
 import scalafx.scene.control.{Separator, SplitPane}
 import scalafx.scene.layout.{HBox, VBox}
 
-import pool.pane.PoolPane
+import pool.pane.PoolsPane
 import pool.pane.dashboard.DashboardPane
 import pool.pane.tabbed.TabbedPane
 
 final class View(context: Context):
-  val poolPane = PoolPane(context)
+  val poolPane = PoolsPane(context)
   poolPane.prefWidth = context.windowWidth * 0.425
   val dashboardPane = DashboardPane(context)
   val northPane = new HBox {
