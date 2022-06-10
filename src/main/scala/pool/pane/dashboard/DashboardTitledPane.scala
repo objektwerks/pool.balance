@@ -11,8 +11,6 @@ import pool.dialog.ControlGridPane
 abstract class DashboardTitledPane(context: Context) extends VBox:
   spacing = 6
   padding = Insets(6)
-  hgrow = Priority.Always
-  vgrow = Priority.Always
   border = Border.stroke(Paint.valueOf("lightgray"))
 
   val title = new Label {
