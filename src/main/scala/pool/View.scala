@@ -23,7 +23,6 @@ final class View(context: Context):
 
   val splitPane = new SplitPane {
     orientation = Orientation.Vertical
-    padding = Insets(6)
     prefWidth = context.windowWidth
     prefHeight = context.windowHeight
     items.addAll(northPane, southPane)
