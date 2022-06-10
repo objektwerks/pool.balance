@@ -1,9 +1,8 @@
 package pool.dialog
 
-import scalafx.geometry.Insets
+import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.control.Label
 import scalafx.scene.layout.{GridPane, Region}
-import scalafx.scene.text.TextAlignment;
 
 class ControlGridPane(controls: List[(String, Region)]) extends GridPane:
   hgap = 6
@@ -12,7 +11,7 @@ class ControlGridPane(controls: List[(String, Region)]) extends GridPane:
   var row = 0
   for ((label, control) <- controls)
     val columnLabel = new Label {
-      textAlignment = TextAlignment.Left
+      alignment = Pos.CenterLeft
       text = label 
     }
     add(columnLabel, columnIndex = 0, rowIndex = row)

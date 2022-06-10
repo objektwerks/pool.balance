@@ -1,10 +1,9 @@
 package pool.pane.dashboard
 
-import scalafx.geometry.Insets
+import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.control.Label
 import scalafx.scene.layout.{Border, Priority, VBox}
 import scalafx.scene.paint.Paint
-import scalafx.scene.text.TextAlignment;
 
 import pool.Context
 import pool.dialog.ControlGridPane
@@ -17,16 +16,16 @@ abstract class DashboardTitledPane(context: Context) extends VBox:
   border = Border.stroke(Paint.valueOf("lightgray"))
 
   val title = new Label {
-    textAlignment = TextAlignment.Center
+    alignment = Pos.Center
   }
 
   val currentValue = new Label {
-    textAlignment = TextAlignment.Center
+    alignment = Pos.Center
     text = "0"
   }
   
   val currentAverage = new Label {
-    textAlignment = TextAlignment.Center
+    alignment = Pos.Center
     text = "0"
   }
 
