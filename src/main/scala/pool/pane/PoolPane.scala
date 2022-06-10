@@ -22,19 +22,19 @@ class PoolPane(context: Context) extends VBox:
   val tableView = new TableView[Pool]() {
     columns ++= List(
       new TableColumn[Pool, String] {
-        text = context.tableHeaderName
+        text = context.tableName
         cellValueFactory = _.value.nameProperty
       },
       new TableColumn[Pool, String] {
-        text = context.tableHeaderBuilt
+        text = context.tableBuilt
         cellValueFactory = _.value.builtProperty
       },
       new TableColumn[Pool, String] {
-        text = context.tableHeaderVolume
+        text = context.tableVolume
         cellValueFactory = _.value.volumeProperty
       },
       new TableColumn[Pool, String] {
-        text = context.tableHeaderUnit
+        text = context.tableUnit
         cellValueFactory = _.value.unitProperty
       }
     )

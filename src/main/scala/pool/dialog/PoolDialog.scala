@@ -13,7 +13,7 @@ import pool.Entity.*
 class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
   initOwner(App.stage)
   title = context.windowTitle
-  headerText = context.dialogHeaderPool
+  headerText = context.dialogPool
 
   val nameTextField = new TextField {
     text = pool.name

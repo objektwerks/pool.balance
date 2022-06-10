@@ -8,4 +8,4 @@ import pool.Context
 class PhPane(context: Context) extends TitledPane:
   collapsible = false
   padding = Insets(6)
-  text = context.tableHeaderPh
+  text = context.tablePh

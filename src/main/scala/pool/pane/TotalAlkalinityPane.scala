@@ -8,4 +8,4 @@ import pool.Context
 class TotalAlkalinityPane(context: Context) extends TitledPane:
   collapsible = false
   padding = Insets(6)
-  text = context.tableHeaderTotalAlkalinity
+  text = context.tableTotalAlkalinity

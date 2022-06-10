@@ -8,4 +8,4 @@ import pool.Context
 class CalciumHardnessPane(context: Context) extends TitledPane:
   collapsible = false
   padding = Insets(6)
-  text = context.tableHeaderCalciumHardness
+  text = context.tableCalciumHardness
