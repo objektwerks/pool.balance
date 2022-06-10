@@ -8,7 +8,6 @@ import pool.dialog.ControlGridPane
 
 abstract class DashboardTitledPane(context: Context) extends TitledPane:
   collapsible = false
-  padding = Insets(6)
 
   val currentValue = new TextField {
     editable = false

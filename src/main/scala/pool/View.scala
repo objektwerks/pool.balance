@@ -10,6 +10,7 @@ import pool.pane.{DashboardPane, PoolPane, TabbedPane}
 
 final class View(context: Context):
   val poolPane = PoolPane(context)
+  poolPane.prefHeight = 300
   val dashboardPane = DashboardPane(context)
   val westPane = new VBox {
     children = List(poolPane, Separator(Orientation.Horizontal), dashboardPane)

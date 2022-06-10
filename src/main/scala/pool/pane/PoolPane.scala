@@ -12,7 +12,6 @@ import pool.dialog.PoolDialog
 class PoolPane(context: Context) extends VBox:
   spacing = 6
   padding = Insets(6)
-  prefHeight = 300
 
   val model = context.model
 
