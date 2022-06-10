@@ -56,6 +56,8 @@ final class Context(config: Config):
   val labelTypeof = config.getString("label.typeof")
   val labelAmount = config.getString("label.amount")
   val labelAdded = config.getString("label.added")
+  val labelCurrent = config.getString("label.current")
+  val labelAverage = config.getString("label.average")
 
   val tableName = config.getString("table.name")
   val tableBuilt = config.getString("table.built")
