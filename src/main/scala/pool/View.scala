@@ -23,13 +23,13 @@ final class View(context: Context):
   val splitPane = new SplitPane {
     orientation = Orientation.Horizontal
     padding = Insets(6)
+    prefWidth = context.windowWidth
+    prefHeight = context.windowHeight
     items.addAll(westPane, eastPane)
   }
   splitPane.setDividerPositions(0.3, 0.7)
 
   val rootPane = new VBox {
-    prefWidth = context.windowWidth
-    prefHeight = context.windowHeight
     spacing = 6
     padding = Insets(6)
     children = List(splitPane)
