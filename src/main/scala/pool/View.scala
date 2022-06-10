@@ -1,6 +1,7 @@
 package pool
 
-import scalafx.geometry.Insets
+import scalafx.scene.control.SplitPane
+import scalafx.geometry.{Insets, Orientation}
 import scalafx.scene.Scene
 import scalafx.scene.layout.{HBox, VBox}
 
@@ -18,12 +19,20 @@ final class View(context: Context):
     children = List(tabbedPane)
   }
 
+  val splitPane = new SplitPane {
+    orientation = Orientation.Vertical
+    padding = Insets(6)
+    items.addAll(northPane, southPane)
+  }
+  southPane.prefHeightProperty().bind(splitPane.heightProperty())
+  splitPane.setDividerPositions(0.3, 0.7)
+
   val rootPane = new VBox {
     prefWidth = context.windowWidth
     prefHeight = context.windowHeight
     spacing = 6
     padding = Insets(6)
-    children = List(northPane, southPane)
+    children = List(splitPane)
   }
 
   val scene = new Scene {
