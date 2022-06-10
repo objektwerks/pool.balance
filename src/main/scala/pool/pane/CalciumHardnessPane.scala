@@ -3,4 +3,4 @@ package pool.pane
 import pool.Context
 
 class CalciumHardnessPane(context: Context) extends DashboardTitledPane(context):
-  text = context.tableCalciumHardness
+  title.text = context.tableCalciumHardness
