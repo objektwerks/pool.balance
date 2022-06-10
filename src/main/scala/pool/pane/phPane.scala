@@ -2,4 +2,7 @@ package pool.pane
 
 import scalafx.scene.control.TitledPane
 
-class phPane extends TitledPane
+import pool.Context
+
+class phPane(context: Context) extends TitledPane:
+  text = context.tableHeaderPh
