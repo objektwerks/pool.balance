@@ -1,4 +1,4 @@
-package pool.pane
+package pool.pane.tabbed
 
 import scalafx.geometry.Insets
 import scalafx.scene.layout.VBox

@@ -1,4 +1,4 @@
-package pool.pane
+package pool.pane.dashboard
 
 import scalafx.geometry.Insets
 import scalafx.scene.layout.HBox

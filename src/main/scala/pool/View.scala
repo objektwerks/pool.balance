@@ -6,7 +6,9 @@ import scalafx.scene.Scene
 import scalafx.scene.control.{Separator, SplitPane}
 import scalafx.scene.layout.{HBox, VBox}
 
-import pool.pane.{DashboardPane, PoolPane, TabbedPane}
+import pool.pane.PoolPane
+import pool.pane.dashboard.DashboardPane
+import pool.pane.tabbed.TabbedPane
 
 final class View(context: Context):
   val poolPane = PoolPane(context)
