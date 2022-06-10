@@ -7,7 +7,7 @@ import pool.Context
 
 class DashboardPane(context: Context) extends TilePane:
   orientation = Orientation.Vertical
-  alignment = Pos.TopLeft
+  alignment = Pos.Center
   padding = Insets(6)
   prefRows = 4
 

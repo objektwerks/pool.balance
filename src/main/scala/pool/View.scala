@@ -3,7 +3,7 @@ package pool
 import scalafx.Includes._
 import scalafx.geometry.{Insets, Orientation}
 import scalafx.scene.Scene
-import scalafx.scene.control.SplitPane
+import scalafx.scene.control.{Separator, SplitPane}
 import scalafx.scene.layout.{HBox, VBox}
 
 import pool.pane.{DashboardPane, PoolPane, TabbedPane}
@@ -12,7 +12,7 @@ final class View(context: Context):
   val poolPane = PoolPane(context)
   val dashboardPane = DashboardPane(context)
   val westPane = new VBox {
-    children = List(poolPane, dashboardPane)
+    children = List(poolPane, Separator(Orientation.Horizontal), dashboardPane)
   }
 
   val tabbedPane = TabbedPane(context)
