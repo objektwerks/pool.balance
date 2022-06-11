@@ -5,8 +5,9 @@ import scalafx.scene.control.{Button, Label}
 import scalafx.scene.layout.{HBox, VBox}
 
 import pool.Context
+import pool.pane.AddEditToolbar
 
-class CleaningsPane(context: Context) extends VBox:
+class CleaningsPane(context: Context) extends VBox with AddEditToolbar(context):
   spacing = 6
   padding = Insets(6)
 
@@ -16,18 +17,4 @@ class CleaningsPane(context: Context) extends VBox:
     text = context.labelCleanings
   }
 
-  val addButton = new Button {
-    text = context.paneAdd
-  }
-
-  val editButton = new Button {
-    text = context.paneEdit
-    disable = true
-  }
-
-  val toolBar = new HBox {
-    spacing = 6
-    children = List(addButton, editButton)
-  }
-
-  children = List(label, toolBar)
+  children = List(label, toolbar)
