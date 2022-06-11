@@ -1,14 +1,13 @@
 package pool
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.geometry.{Insets, Orientation}
 import scalafx.scene.Scene
 import scalafx.scene.control.{Separator, SplitPane}
 import scalafx.scene.layout.{HBox, VBox}
 
-import pool.pane.PoolsPane
+import pool.pane.{PoolsPane, TabbedPane}
 import pool.pane.dashboard.DashboardPane
-import pool.pane.TabbedPane
 
 final class View(context: Context):
   val poolPane = PoolsPane(context)
