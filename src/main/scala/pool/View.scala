@@ -8,7 +8,7 @@ import scalafx.scene.layout.{HBox, VBox}
 
 import pool.pane.PoolsPane
 import pool.pane.dashboard.DashboardPane
-import pool.pane.tabbed.TabbedPane
+import pool.pane.TabbedPane
 
 final class View(context: Context):
   val poolPane = PoolsPane(context)
