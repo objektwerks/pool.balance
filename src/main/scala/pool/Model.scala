@@ -91,10 +91,10 @@ final class Model(context: Context):
       selectedMeasurementId.value = measurement.id
     }.toEither
 
-  def chemicals(poolId: Long, typeof: typeOfChemical): Either[Throwable, ObservableBuffer[Chemical]] =
+  def chemicals(poolId: Long): Either[Throwable, ObservableBuffer[Chemical]] =
     Try {
       observableChemicals.clear()
-      observableChemicals ++= store.chemicals(poolId, typeof) 
+      observableChemicals ++= store.chemicals(poolId) 
     }.toEither
   
   def add(chemical: Chemical): Either[Throwable, Chemical] =

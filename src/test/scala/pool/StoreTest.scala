@@ -88,6 +88,6 @@ final class StoreTest extends AnyFunSuite with Matchers:
     updatedChemical
 
   def listChemicals(pool: Pool, chemical: Chemical): Unit =
-    val chemicals = store.chemicals(pool.id, chemical.typeof)
+    val chemicals = store.chemicals(pool.id)
     chemicals.length shouldBe 1
     chemicals.head shouldBe chemical
