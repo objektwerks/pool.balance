@@ -5,7 +5,7 @@ import scalafx.scene.layout.{HBox, VBox}
 
 import pool.Context
 
-trait AddEditToolbar(context: Context):
+trait AddEditToolbar(val context: Context):
   val addButton = new Button {
     text = context.paneAdd
   }
