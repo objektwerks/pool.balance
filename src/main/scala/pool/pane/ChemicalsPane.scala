@@ -7,6 +7,7 @@ import scalafx.scene.control.{Button, Label, SelectionMode, TableColumn, TableVi
 import scalafx.scene.layout.{HBox, VBox}
 
 import pool.{Chemical, Context, Pool}
+import pool.dialog.ChemicalDialog
 
 class ChemicalsPane(context: Context) extends VBox with AddEditToolbar(context):
   spacing = 6
@@ -43,3 +44,28 @@ class ChemicalsPane(context: Context) extends VBox with AddEditToolbar(context):
   children = List(label, tableView, toolbar)
 
   tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
+
+  tableView.selectionModel().selectedItemProperty().addListener { (_, _, selectedChemical) =>
+    // model.update executes a remove and add on items. the remove passes a null selectedPool!
+    if selectedChemical != null then
+      model.selectedChemicalId.value = selectedChemical.id
+      editButton.disable = false
+  }
+
+  addButton.onAction = { _ => add() }
+
+  editButton.onAction = { _ => update() }
+
+  def add(): Unit =
+    ChemicalDialog(context, Chemical(poolId = model.selectedPoolId.value)).showAndWait() match
+      case Some(chemical: Chemical) => model.add(chemical).fold(_ => (), chemical => tableView.selectionModel().select(chemical))
+      case _ =>
+
+  def update(): Unit =
+    val selectedIndex = tableView.selectionModel().getSelectedIndex
+    val chemical = tableView.selectionModel().getSelectedItem.chemical
+    ChemicalDialog(context, chemical).showAndWait() match
+      case Some(chemical: Chemical) =>
+        model.update(selectedIndex, chemical)
+        tableView.selectionModel().select(selectedIndex)
+      case _ =>
