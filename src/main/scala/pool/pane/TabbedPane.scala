@@ -1,4 +1,4 @@
-package pool.pane.tabbed
+package pool.pane
 
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Tab, TabPane}
