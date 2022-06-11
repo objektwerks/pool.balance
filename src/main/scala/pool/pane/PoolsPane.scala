@@ -1,6 +1,6 @@
 package pool.pane
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, Label, SelectionMode, TableColumn, TableView}
