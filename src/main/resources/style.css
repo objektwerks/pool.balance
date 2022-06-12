@@ -1,8 +1,11 @@
-.text-input {
-    --fx-text-inner-color: navy
+.button {
+    -fx-text-fill: navy
 }
 .label {
     -fx-text-fill: navy
+}
+.text-input {
+    --fx-text-inner-color: navy
 }
 .titled-pane {
     -fx-text-fill: navy
