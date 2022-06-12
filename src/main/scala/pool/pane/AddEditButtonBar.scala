@@ -5,7 +5,7 @@ import scalafx.scene.layout.{HBox, VBox}
 
 import pool.Context
 
-trait AddEditToolbar(val context: Context):
+trait AddEditButtonBar(val context: Context):
   val addButton = new Button {
     graphic = context.addImage
     text = context.paneAdd
@@ -17,7 +17,7 @@ trait AddEditToolbar(val context: Context):
     disable = true
   }
 
-  val toolbar = new HBox {
+  val addEditButtonBar = new HBox {
     spacing = 6
     children = List(addButton, editButton)
   }

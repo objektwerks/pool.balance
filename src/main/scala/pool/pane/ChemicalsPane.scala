@@ -9,7 +9,7 @@ import scalafx.scene.layout.{HBox, VBox}
 import pool.{Chemical, Context, Pool}
 import pool.dialog.ChemicalDialog
 
-class ChemicalsPane(context: Context) extends VBox with AddEditToolbar(context):
+class ChemicalsPane(context: Context) extends VBox with AddEditButtonBar(context):
   spacing = 6
   padding = Insets(6)
 
@@ -41,7 +41,7 @@ class ChemicalsPane(context: Context) extends VBox with AddEditToolbar(context):
     items = model.chemicals(model.selectedPoolId.value).fold( _ => ObservableBuffer[Chemical](), chemicals => chemicals)
   }
 
-  children = List(label, tableView, toolbar)
+  children = List(label, tableView, addEditButtonBar)
 
   tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
 

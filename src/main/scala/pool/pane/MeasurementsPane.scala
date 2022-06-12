@@ -9,7 +9,7 @@ import scalafx.scene.layout.{HBox, VBox}
 import pool.{Measurement, Context}
 import pool.dialog.MeasurementDialog
 
-class MeasurementsPane(context: Context) extends VBox with AddEditToolbar(context):
+class MeasurementsPane(context: Context) extends VBox with AddEditButtonBar(context):
   spacing = 6
   padding = Insets(6)
 
@@ -65,7 +65,7 @@ class MeasurementsPane(context: Context) extends VBox with AddEditToolbar(contex
     items = model.measurements(model.selectedPoolId.value).fold( _ => ObservableBuffer[Measurement](), measurements => measurements)
   }
 
-  children = List(label, tableView, toolbar)
+  children = List(label, tableView, addEditButtonBar)
 
   tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
 

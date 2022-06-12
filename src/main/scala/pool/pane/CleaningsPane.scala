@@ -9,7 +9,7 @@ import scalafx.scene.layout.{HBox, VBox}
 import pool.{Cleaning, Context}
 import pool.dialog.CleaningDialog
 
-class CleaningsPane(context: Context) extends VBox with AddEditToolbar(context):
+class CleaningsPane(context: Context) extends VBox with AddEditButtonBar(context):
   spacing = 6
   padding = Insets(6)
 
@@ -53,7 +53,7 @@ class CleaningsPane(context: Context) extends VBox with AddEditToolbar(context):
     items = model.cleanings(model.selectedPoolId.value).fold( _ => ObservableBuffer[Cleaning](), cleanings => cleanings)
   }
 
-  children = List(label, tableView, toolbar)
+  children = List(label, tableView, addEditButtonBar)
 
   tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
 
