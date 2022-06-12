@@ -53,3 +53,6 @@ class CleaningsPane(context: Context) extends VBox with AddEditToolbar(context):
   }
 
   children = List(label, tableView, toolbar)
+
+  tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
+
