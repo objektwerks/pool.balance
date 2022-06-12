@@ -4,6 +4,9 @@
 .label {
     -fx-text-fill: navy
 }
+.tab-label {
+    -fx-text-fill: navy
+}
 .text-input {
     --fx-text-inner-color: navy
 }
