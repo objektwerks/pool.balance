@@ -7,6 +7,7 @@ import scalafx.scene.control.{Button, Label, SelectionMode, TableColumn, TableVi
 import scalafx.scene.layout.{HBox, VBox}
 
 import pool.{Cleaning, Context}
+import pool.dialog.CleaningDialog
 
 class CleaningsPane(context: Context) extends VBox with AddEditToolbar(context):
   spacing = 6
@@ -59,7 +60,24 @@ class CleaningsPane(context: Context) extends VBox with AddEditToolbar(context):
   tableView.selectionModel().selectedItemProperty().addListener { (_, _, selectedItem) =>
     // model.update executes a remove and add on items. the remove passes a null selectedItem!
     if selectedItem != null then
-      model.selectedChemicalId.value = selectedItem.id
+      model.selectedCleaningId.value = selectedItem.id
       editButton.disable = false
   }
 
+  addButton.onAction = { _ => add() }
+
+  editButton.onAction = { _ => update() }
+
+  def add(): Unit =
+    CleaningDialog(context, Cleaning(poolId = model.selectedPoolId.value)).showAndWait() match
+      case Some(cleaning: Cleaning) => model.add(cleaning).fold(_ => (), cleaning => tableView.selectionModel().select(cleaning))
+      case _ =>
+
+  def update(): Unit =
+    val selectedIndex = tableView.selectionModel().getSelectedIndex
+    val cleaning = tableView.selectionModel().getSelectedItem.cleaning
+    CleaningDialog(context, cleaning).showAndWait() match
+      case Some(cleaning: Cleaning) =>
+        model.update(selectedIndex, cleaning)
+        tableView.selectionModel().select(selectedIndex)
+      case _ =>
