@@ -67,3 +67,12 @@ class MeasurementsPane(context: Context) extends VBox with AddEditToolbar(contex
 
   children = List(label, tableView, toolbar)
 
+  tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
+
+  tableView.selectionModel().selectedItemProperty().addListener { (_, _, selectedItem) =>
+    // model.update executes a remove and add on items. the remove passes a null selectedItem!
+    if selectedItem != null then
+      model.selectedMeasurementId.value = selectedItem.id
+      editButton.disable = false
+  }
+
