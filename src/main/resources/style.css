@@ -1,3 +1,6 @@
 .text-input {
+    --fx-text-inner-color: navy
+}
+.label {
     -fx-text-fill: navy
 }
