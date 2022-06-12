@@ -7,13 +7,13 @@ import pool.Context
 
 trait AddEditToolbar(val context: Context):
   val addButton = new Button {
-    text = context.paneAdd
     graphic = context.addImage
+    text = context.paneAdd
   }
 
   val editButton = new Button {
-    text = context.paneEdit
     graphic = context.editImage
+    text = context.paneEdit
     disable = true
   }
 
