@@ -101,6 +101,9 @@ final class Context(config: Config):
   val listUnits = config.getStringList("list.units").asScala.toList
   val listChemicals = config.getStringList("list.chemicals").asScala.toList
 
+  val addImage = loadImageView("/add.png")
+  val editImage = loadImageView("/edit.png")
+
   val logo = new Image(Image.getClass.getResourceAsStream("/logo.white.png"))
 
   val store = Store(this)
