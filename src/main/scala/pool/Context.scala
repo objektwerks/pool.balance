@@ -82,7 +82,7 @@ final class Context(config: Config):
   val tableCyanuricAcid = config.getString("table.cyanuricAcid")
   val tableTotalBromine = config.getString("table.totalBromine")
   val tableTemperature = config.getString("table.temperature")
-  val tableMeasure = config.getString("table.measured")
+  val tableMeasured = config.getString("table.measured")
   val tableTypeof = config.getString("table.typeof")
   val tableAmount = config.getString("table.amount")
   val tableAdded = config.getString("table.added")
