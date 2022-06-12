@@ -45,10 +45,10 @@ class PoolsPane(context: Context) extends VBox with AddEditToolbar(context):
 
   tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
   
-  tableView.selectionModel().selectedItemProperty().addListener { (_, _, selectedPool) =>
-    // model.update executes a remove and add on items. the remove passes a null selectedPool!
-    if selectedPool != null then
-      model.selectedPoolId.value = selectedPool.id
+  tableView.selectionModel().selectedItemProperty().addListener { (_, _, selectedItem) =>
+    // model.update executes a remove and add on items. the remove passes a null selectedItem!
+    if selectedItem != null then
+      model.selectedPoolId.value = selectedItem.id
       editButton.disable = false
   }
 

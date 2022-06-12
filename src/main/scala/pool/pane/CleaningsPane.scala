@@ -56,3 +56,10 @@ class CleaningsPane(context: Context) extends VBox with AddEditToolbar(context):
 
   tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
 
+  tableView.selectionModel().selectedItemProperty().addListener { (_, _, selectedItem) =>
+    // model.update executes a remove and add on items. the remove passes a null selectedItem!
+    if selectedItem != null then
+      model.selectedChemicalId.value = selectedItem.id
+      editButton.disable = false
+  }
+
