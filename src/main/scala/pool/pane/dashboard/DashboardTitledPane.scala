@@ -1,21 +1,13 @@
 package pool.pane.dashboard
 
-import scalafx.geometry.{Insets, Pos}
-import scalafx.scene.control.Label
-import scalafx.scene.layout.{Border, Priority, VBox}
-import scalafx.scene.paint.Paint
+import scalafx.geometry.Pos
+import scalafx.scene.control.{Label, TitledPane}
 
 import pool.Context
 import pool.dialog.ControlGridPane
 
-abstract class DashboardTitledPane(context: Context) extends VBox:
-  spacing = 6
-  padding = Insets(6)
-  border = Border.stroke(Paint.valueOf("lightgray"))
-
-  val title = new Label {
-    alignment = Pos.Center
-  }
+abstract class DashboardTitledPane(context: Context) extends TitledPane:
+  collapsible = false
 
   val currentValue = new Label {
     alignment = Pos.Center
@@ -32,4 +24,4 @@ abstract class DashboardTitledPane(context: Context) extends VBox:
     context.labelAverage -> currentAverage
   )
   
-  children = List(title, ControlGridPane(controls))
+  content = ControlGridPane(controls)
