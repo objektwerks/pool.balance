@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter
 
 import scalafx.beans.property.{BooleanProperty, DoubleProperty, IntegerProperty, StringProperty}
 
-enum unitOfMeasure:
+enum UnitOfMeasure:
   case gl, kg, g, l, ml, lbs, oz
 
 sealed trait Entity:
@@ -31,7 +31,7 @@ final case class Pool(id: Long = 0,
                       name: String = "", 
                       built: Int = 0, 
                       volume: Int = 0,
-                      unit: unitOfMeasure = unitOfMeasure.gl) extends Entity:
+                      unit: UnitOfMeasure = UnitOfMeasure.gl) extends Entity:
   val nameProperty = new StringProperty(this, "name", name)
   val builtProperty = new StringProperty(this, "built", built.toString)
   val volumeProperty = new StringProperty(this, "volume", volume.toString)
@@ -87,7 +87,7 @@ final case class Chemical(id: Long = 0,
                           poolId: Long,
                           typeof: typeOfChemical = typeOfChemical.liquidChlorine,
                           amount: Double = 1.0, 
-                          unit: unitOfMeasure = unitOfMeasure.gl,
+                          unit: UnitOfMeasure = UnitOfMeasure.gl,
                           added: LocalDateTime = LocalDateTime.now) extends Entity:
   val typeofProperty = new StringProperty(this, "typeof", typeof.toString)
   val amountProperty = new StringProperty(this, "amount", amount.toString)

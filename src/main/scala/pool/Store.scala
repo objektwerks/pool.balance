@@ -12,7 +12,7 @@ final class Store(context: Context):
         rs.string("name"), 
         rs.int("built"), 
         rs.int("volume"), 
-        unitOfMeasure.valueOf( rs.string("unit") ))
+        UnitOfMeasure.valueOf( rs.string("unit") ))
       )
       .list()
   }
@@ -117,7 +117,7 @@ final class Store(context: Context):
         rs.long("pool_id"),
         typeOfChemical.valueOf( rs.string("typeof") ),
         rs.double("amount"),
-        unitOfMeasure.valueOf( rs.string("unit") ),
+        UnitOfMeasure.valueOf( rs.string("unit") ),
         rs.localDateTime("added"))
       )
       .list()

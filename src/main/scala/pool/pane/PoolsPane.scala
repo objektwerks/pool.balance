@@ -6,7 +6,7 @@ import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, Label, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, VBox}
 
-import pool.{Context, Pool, unitOfMeasure}
+import pool.{Context, Pool, UnitOfMeasure}
 import pool.dialog.PoolDialog
 
 class PoolsPane(context: Context) extends VBox with AddEditButtonBar(context):

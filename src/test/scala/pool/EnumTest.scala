@@ -5,13 +5,13 @@ import org.scalatest.matchers.should.Matchers
 
 class EnumTest extends AnyFunSuite with Matchers:
   test("unit of measure") {
-    unitOfMeasure.valueOf(unitOfMeasure.gl.toString) shouldBe unitOfMeasure.gl
-    unitOfMeasure.valueOf(unitOfMeasure.kg.toString) shouldBe unitOfMeasure.kg
-    unitOfMeasure.valueOf(unitOfMeasure.g.toString) shouldBe unitOfMeasure.g
-    unitOfMeasure.valueOf(unitOfMeasure.l.toString) shouldBe unitOfMeasure.l
-    unitOfMeasure.valueOf(unitOfMeasure.ml.toString) shouldBe unitOfMeasure.ml
-    unitOfMeasure.valueOf(unitOfMeasure.lbs.toString) shouldBe unitOfMeasure.lbs
-    unitOfMeasure.valueOf(unitOfMeasure.oz.toString) shouldBe unitOfMeasure.oz
+    UnitOfMeasure.valueOf(UnitOfMeasure.gl.toString) shouldBe UnitOfMeasure.gl
+    UnitOfMeasure.valueOf(UnitOfMeasure.kg.toString) shouldBe UnitOfMeasure.kg
+    UnitOfMeasure.valueOf(UnitOfMeasure.g.toString) shouldBe UnitOfMeasure.g
+    UnitOfMeasure.valueOf(UnitOfMeasure.l.toString) shouldBe UnitOfMeasure.l
+    UnitOfMeasure.valueOf(UnitOfMeasure.ml.toString) shouldBe UnitOfMeasure.ml
+    UnitOfMeasure.valueOf(UnitOfMeasure.lbs.toString) shouldBe UnitOfMeasure.lbs
+    UnitOfMeasure.valueOf(UnitOfMeasure.oz.toString) shouldBe UnitOfMeasure.oz
   }
 
   test("type of chemical") {

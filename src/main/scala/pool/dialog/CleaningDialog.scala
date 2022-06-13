@@ -7,7 +7,7 @@ import scalafx.scene.control.{ButtonType, ComboBox, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import pool.{App, Context, Entity, Cleaning}
-import pool.unitOfMeasure
+import pool.UnitOfMeasure
 import pool.Entity.*
 
 class CleaningDialog(context: Context, cleaning: Cleaning) extends Dialog[Cleaning]:

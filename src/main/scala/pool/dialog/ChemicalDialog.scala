@@ -7,7 +7,7 @@ import scalafx.scene.control.{ButtonType, ComboBox, DatePicker, Dialog, TextFiel
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import pool.{App, Context, Entity, Chemical}
-import pool.unitOfMeasure
+import pool.UnitOfMeasure
 import pool.Entity.*
 import pool.typeOfChemical
 
@@ -56,7 +56,7 @@ class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemic
     if dialogButton == saveButtonType then
       chemical.copy(typeof = typeOfChemical.valueOf(typeofComboBox.value.value),
       	            amount = amountTextField.text.value.toDoubleOption.getOrElse(-1.0),
-                    unit = unitOfMeasure.valueOf(unitComboBox.value.value),
+                    unit = UnitOfMeasure.valueOf(unitComboBox.value.value),
                     added = chemical.applyLocalDate(addedDatePicker.value.value)
                    )
     else null

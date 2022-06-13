@@ -7,7 +7,7 @@ import scalafx.scene.control.{ButtonType, ComboBox, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import pool.{App, Context, Entity, Pool}
-import pool.unitOfMeasure
+import pool.UnitOfMeasure
 import pool.Entity.*
 
 class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
@@ -55,6 +55,6 @@ class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
       pool.copy(name = nameTextField.text.value,
       	        built = builtTextField.text.value.toIntOption.getOrElse(-1),
                 volume = volumeTextField.text.value.toIntOption.getOrElse(-1),
-                unit = unitOfMeasure.valueOf(unitComboBox.value.value))
+                unit = UnitOfMeasure.valueOf(unitComboBox.value.value))
     else null
   }
