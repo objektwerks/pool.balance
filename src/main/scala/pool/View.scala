@@ -11,7 +11,6 @@ import pool.pane.dashboard.DashboardPane
 
 final class View(context: Context):
   val poolPane = PoolsPane(context)
-  poolPane.prefWidth = context.windowWidth * 0.425
   val dashboardPane = DashboardPane(context)
   val northPane = new HBox {
     children = List(poolPane, Separator(Orientation.Vertical), dashboardPane)
