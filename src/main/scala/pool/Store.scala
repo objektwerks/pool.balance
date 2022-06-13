@@ -115,7 +115,7 @@ final class Store(context: Context):
       .map(rs => Chemical(
         rs.long("id"),
         rs.long("pool_id"),
-        typeOfChemical.valueOf( rs.string("typeof") ),
+        TypeOfChemical.valueOf( rs.string("typeof") ),
         rs.double("amount"),
         UnitOfMeasure.valueOf( rs.string("unit") ),
         rs.localDateTime("added"))

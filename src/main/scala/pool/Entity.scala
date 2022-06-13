@@ -80,12 +80,12 @@ final case class Measurement(id: Long = 0,
   val measuredProperty = new StringProperty(this, "measured", Entity.format(measured).toString)
   val measurement = this
 
-enum typeOfChemical:
+enum TypeOfChemical:
   case liquidChlorine, trichlor, dichlor, calciumHypochlorite, stabilizer, algaecide, muriaticAcid
 
 final case class Chemical(id: Long = 0,
                           poolId: Long,
-                          typeof: typeOfChemical = typeOfChemical.liquidChlorine,
+                          typeof: TypeOfChemical = TypeOfChemical.liquidChlorine,
                           amount: Double = 1.0, 
                           unit: UnitOfMeasure = UnitOfMeasure.gl,
                           added: LocalDateTime = LocalDateTime.now) extends Entity:
