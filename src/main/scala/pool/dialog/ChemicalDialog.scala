@@ -3,7 +3,7 @@ package pool.dialog
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.Region
-import scalafx.scene.control.{ButtonType, ComboBox, Dialog, TextField}
+import scalafx.scene.control.{ButtonType, ComboBox, DatePicker, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import pool.{App, Context, Entity, Chemical}
@@ -14,3 +14,21 @@ class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemic
   initOwner(App.stage)
   title = context.windowTitle
   headerText = context.dialogChemical
+
+  val typeofComboBox = new ComboBox[String] {
+  	items = ObservableBuffer.from(context.listChemicals)
+  	value = chemical.typeof.toString
+  }
+
+  val amountTextField = new TextField {
+    text = chemical.amount.toString
+  }
+
+  val unitComboBox = new ComboBox[String] {
+  	items = ObservableBuffer.from(context.listUnits)
+  	value = chemical.unit.toString
+  }
+
+  val addedDatePicker = new DatePicker {
+    value = chemical.added.toLocalDate
+  }
