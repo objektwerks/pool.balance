@@ -13,4 +13,5 @@ class DashboardPane(context: Context) extends HBox:
                   PhPane(context),
                   TotalAlkalinityPane(context),
                   CalciumHardnessPane(context),
-                  CyanuricAcidPane(context))
+                  CyanuricAcidPane(context),
+                  TotalBrominePane(context))
