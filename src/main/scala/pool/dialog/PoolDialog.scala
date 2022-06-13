@@ -38,11 +38,13 @@ class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
     context.labelVolume -> volumeTextField,
     context.labelUnit -> unitComboBox
   )
-  dialogPane().content = ControlGridPane(controls)
+  val pane = dialogPane()
+  pane.content = ControlGridPane(controls)
 
   val saveButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
-  val saveButton = dialogPane().lookupButton(saveButtonType)
-  dialogPane().buttonTypes = List(saveButtonType, ButtonType.Cancel)
+  pane.buttonTypes = List(saveButtonType, ButtonType.Cancel)
+  val saveButton = pane.lookupButton(saveButtonType)
+  println(s"save button: $saveButton")
   
   nameTextField.text.onChange { (_, _, newValue) => saveButton.disable = newValue.trim.isEmpty }
   builtTextField.text.onChange { (_, oldValue, newValue) => if isNotInt(newValue) then builtTextField.text.value = oldValue }
