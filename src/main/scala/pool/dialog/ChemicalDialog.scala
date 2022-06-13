@@ -4,6 +4,7 @@ import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.Region
 import scalafx.scene.control.{ButtonType, ComboBox, DatePicker, Dialog, TextField}
+import scalafx.scene.control.ButtonBar.ButtonData
 
 import pool.{App, Context, Entity, Chemical}
 import pool.unitOfMeasure
@@ -40,4 +41,8 @@ class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemic
   )
   val pane = dialogPane()
   pane.content = ControlGridPane(controls)
+
+  val saveButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
+  pane.buttonTypes = List(saveButtonType, ButtonType.Cancel)
+  val saveButton = pane.lookupButton(saveButtonType)
 
