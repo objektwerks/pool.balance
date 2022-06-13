@@ -2,6 +2,13 @@ Pool Balance
 ------------
 >Pool cleaning, measurement and balancing app using ScalaFX and Scala 3.
 
+Todo
+----
+1. Validators
+2. Validating Fields with Errors
+3. Validating Dialogs with Errors
+4. Dashboard Current and Average Values
+
 Build
 -----
 1. sbt clean compile
