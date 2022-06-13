@@ -8,6 +8,7 @@ Todo
 2. Validating Fields with Errors
 3. Validating Dialogs with Errors
 4. Dashboard Current and Average Values
+5. Dashboard Pass and Fail Badges
 
 Build
 -----
