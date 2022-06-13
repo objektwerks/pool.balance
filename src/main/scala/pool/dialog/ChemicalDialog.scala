@@ -4,7 +4,6 @@ import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.Region
 import scalafx.scene.control.{ButtonType, ComboBox, DatePicker, Dialog, TextField}
-import scalafx.scene.control.ButtonBar.ButtonData
 
 import pool.{App, Context, Entity, Chemical}
 import pool.unitOfMeasure
@@ -32,3 +31,13 @@ class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemic
   val addedDatePicker = new DatePicker {
     value = chemical.added.toLocalDate
   }
+
+  val controls = List[(String, Region)](
+    context.labelTypeof -> typeofComboBox,
+    context.labelAmount -> amountTextField,
+    context.labelUnit -> unitComboBox,
+    context.labelAdded -> addedDatePicker
+  )
+  val pane = dialogPane()
+  pane.content = ControlGridPane(controls)
+
