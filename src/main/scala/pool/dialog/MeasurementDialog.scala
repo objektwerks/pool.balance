@@ -69,3 +69,9 @@ class MeasurementDialog(context: Context, measurement: Measurement) extends Dial
   )
   val pane = dialogPane()
   pane.content = ControlGridPane(controls)
+
+  val saveButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
+  pane.buttonTypes = List(saveButtonType, ButtonType.Cancel)
+  val saveButton = pane.lookupButton(saveButtonType)
+
+  
