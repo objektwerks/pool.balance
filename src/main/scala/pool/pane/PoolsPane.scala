@@ -52,10 +52,6 @@ class PoolsPane(context: Context) extends VBox with AddEditButtonBar(context):
       editButton.disable = false
   }
 
-  addButton.onAction = { _ => add() }
-
-  editButton.onAction = { _ => update() }
-
   def add(): Unit =
     PoolDialog(context, Pool()).showAndWait() match
       case Some(pool: Pool) => model.add(pool).fold(_ => (), pool => tableView.selectionModel().select(pool))
