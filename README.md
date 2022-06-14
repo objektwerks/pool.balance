@@ -4,12 +4,11 @@ Pool Balance
 
 Todo
 ----
-1. Dialogs
-2. Validators
-3. Validating Fields with Errors
-4. Validating Dialogs with Errors
-5. Dashboard Current and Average Values
-6. Dashboard Pass and Fail Badges
+1. Validators
+2. Validating Fields with Errors
+3. Validating Dialogs with Errors
+4. Dashboard Current and Average Values
+5. Dashboard Pass and Fail Badges
 
 Build
 -----
