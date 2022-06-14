@@ -74,4 +74,14 @@ class MeasurementDialog(context: Context, measurement: Measurement) extends Dial
   pane.buttonTypes = List(saveButtonType, ButtonType.Cancel)
   val saveButton = pane.lookupButton(saveButtonType)
 
-  
+  freeChlorineTextField.text.onChange { (_, oldValue, newValue) => if isNotInt(newValue) then freeChlorineTextField.text.value = oldValue }
+  combinedChlorineTextField.text.onChange { (_, oldValue, newValue) => if isNotInt(newValue) then combinedChlorineTextField.text.value = oldValue }
+  totalChlorineTextField.text.onChange { (_, oldValue, newValue) => if isNotInt(newValue) then totalChlorineTextField.text.value = oldValue }
+  phTextField.text.onChange { (_, oldValue, newValue) => if isNotInt(newValue) then phTextField.text.value = oldValue }
+  calciumHardnessTextField.text.onChange { (_, oldValue, newValue) => if isNotInt(newValue) then calciumHardnessTextField.text.value = oldValue }
+  totalAlkalinityTextField.text.onChange { (_, oldValue, newValue) => if isNotInt(newValue) then totalAlkalinityTextField.text.value = oldValue }
+  cyanuricAcidTextField.text.onChange { (_, oldValue, newValue) => if isNotInt(newValue) then cyanuricAcidTextField.text.value = oldValue }
+  totalBromineTextField.text.onChange { (_, oldValue, newValue) => if isNotInt(newValue) then totalBromineTextField.text.value = oldValue }
+  temperatureTextField.text.onChange { (_, oldValue, newValue) => if isNotInt(newValue) then temperatureTextField.text.value = oldValue }
+  measuredDatePicker.value.onChange { (_, _, newValue) => saveButton.disable = false }
+
