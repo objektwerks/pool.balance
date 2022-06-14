@@ -54,3 +54,18 @@ class MeasurementDialog(context: Context, measurement: Measurement) extends Dial
   val measuredDatePicker = new DatePicker {
     value = measurement.measured.toLocalDate
   }
+
+  val controls = List[(String, Region)](
+    context.labelFreeChlorine -> freeChlorineTextField,
+    context.labelCombinedChlorine -> combinedChlorineTextField,
+    context.labelTotalChlorine -> totalChlorineTextField,
+    context.labelPh -> phTextField,
+    context.labelCalciumHardness -> calciumHardnessTextField,
+    context.labelTotalAlkalinity -> totalAlkalinityTextField,
+    context.labelCyanuricAcid -> cyanuricAcidTextField,
+    context.labelTotalBromine -> totalBromineTextField,
+    context.labelTemperature -> temperatureTextField,
+    context.labelMeasure -> measuredDatePicker
+  )
+  val pane = dialogPane()
+  pane.content = ControlGridPane(controls)
