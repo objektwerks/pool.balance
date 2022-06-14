@@ -15,6 +15,42 @@ class MeasurementDialog(context: Context, measurement: Measurement) extends Dial
   title = context.windowTitle
   headerText = context.dialogMeasurement
 
+  val freeChlorineTextField = new TextField {
+    text = measurement.freeChlorine.toString
+  }
+
+  val combinedChlorineTextField = new TextField {
+    text = measurement.combinedChlorine.toString
+  }
+
+  val totalChlorineTextField = new TextField {
+    text = measurement.totalChlorine.toString
+  }
+
+  val phTextField = new TextField {
+    text = measurement.ph.toString
+  }
+
+  val calciumHardnessTextField = new TextField {
+    text = measurement.calciumHardness.toString
+  }
+
+  val totalAlkalinityTextField = new TextField {
+    text = measurement.totalAlkalinity.toString
+  }
+
+  val cyanuricAcidTextField = new TextField {
+    text = measurement.cyanuricAcid.toString
+  }
+
+  val totalBromineTextField = new TextField {
+    text = measurement.totalBromine.toString
+  }
+
+  val temperatureTextField = new TextField {
+    text = measurement.temperature.toString
+  }
+
   val measuredDatePicker = new DatePicker {
     value = measurement.measured.toLocalDate
   }
