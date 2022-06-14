@@ -85,3 +85,10 @@ class MeasurementDialog(context: Context, measurement: Measurement) extends Dial
   temperatureTextField.text.onChange { (_, oldValue, newValue) => if isNotInt(newValue) then temperatureTextField.text.value = oldValue }
   measuredDatePicker.value.onChange { (_, _, newValue) => saveButton.disable = false }
 
+  resultConverter = dialogButton => {
+    if dialogButton == saveButtonType then
+      measurement.copy(
+        measured = applyLocalDate(measuredDatePicker.value.value, measurement.measured)
+      )
+    else null
+  }
