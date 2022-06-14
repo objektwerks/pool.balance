@@ -54,3 +54,8 @@ class CleaningDialog(context: Context, cleaning: Cleaning) extends Dialog[Cleani
   )
   val pane = dialogPane()
   pane.content = ControlGridPane(controls)
+
+  val saveButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
+  pane.buttonTypes = List(saveButtonType, ButtonType.Cancel)
+  val saveButton = pane.lookupButton(saveButtonType)
+
