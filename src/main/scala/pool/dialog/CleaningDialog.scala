@@ -69,7 +69,12 @@ class CleaningDialog(context: Context, cleaning: Cleaning) extends Dialog[Cleani
 
   resultConverter = dialogButton => {
     if dialogButton == saveButtonType then
-      cleaning.copy(
+      cleaning.copy(brush = brushCheckBox.selected.value,
+                    net = netCheckBox.selected.value,
+                    skimmerBasket = skimmerBasketCheckBox.selected.value,
+                    pumpBasket = pumpBasketCheckBox.selected.value,
+                    pumpFilter = pumpFilterCheckBox.selected.value,
+                    vacuum = vacuumCheckBox.selected.value,
                     cleaned = applyLocalDate(cleanedDatePicker.value.value, cleaning.cleaned)
                    )
     else null
