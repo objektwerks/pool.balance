@@ -42,3 +42,15 @@ class CleaningDialog(context: Context, cleaning: Cleaning) extends Dialog[Cleani
   val cleanedDatePicker = new DatePicker {
     value = cleaning.cleaned.toLocalDate
   }
+
+  val controls = List[(String, Region)](
+    context.labelBrush -> brushCheckBox,
+    context.labelNet -> netCheckBox,
+    context.labelSkimmerBasket -> skimmerBasketCheckBox,
+    context.labelPumpBasket -> pumpBasketCheckBox,
+    context.labelPumpFilter -> pumpFilterCheckBox,
+    context.labelVacuum -> vacuumCheckBox,
+    context.labelCleaned -> cleanedDatePicker
+  )
+  val pane = dialogPane()
+  pane.content = ControlGridPane(controls)
