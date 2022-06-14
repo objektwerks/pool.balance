@@ -64,10 +64,6 @@ class CleaningsPane(context: Context) extends VBox with AddEditButtonBar(context
       editButton.disable = false
   }
 
-  addButton.onAction = { _ => add() }
-
-  editButton.onAction = { _ => update() }
-
   def add(): Unit =
     CleaningDialog(context, Cleaning(poolId = model.selectedPoolId.value)).showAndWait() match
       case Some(cleaning: Cleaning) => model.add(cleaning).fold(_ => (), cleaning => tableView.selectionModel().select(cleaning))
