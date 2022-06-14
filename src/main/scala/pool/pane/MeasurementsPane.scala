@@ -76,10 +76,6 @@ class MeasurementsPane(context: Context) extends VBox with AddEditButtonBar(cont
       editButton.disable = false
   }
 
-  addButton.onAction = { _ => add() }
-
-  editButton.onAction = { _ => update() }
-
   def add(): Unit =
     MeasurementDialog(context, Measurement(poolId = model.selectedPoolId.value)).showAndWait() match
       case Some(measurement: Measurement) => model.add(measurement).fold(_ => (), measurement => tableView.selectionModel().select(measurement))
