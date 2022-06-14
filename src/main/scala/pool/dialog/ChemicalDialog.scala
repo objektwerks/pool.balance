@@ -57,7 +57,7 @@ class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemic
       chemical.copy(typeof = TypeOfChemical.valueOf(typeofComboBox.value.value),
       	            amount = amountTextField.text.value.toDoubleOption.getOrElse(-1.0),
                     unit = UnitOfMeasure.valueOf(unitComboBox.value.value),
-                    added = chemical.applyLocalDate(addedDatePicker.value.value)
+                    added = applyLocalDate(addedDatePicker.value.value, chemical.added)
                    )
     else null
   }

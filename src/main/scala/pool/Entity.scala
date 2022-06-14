@@ -19,6 +19,12 @@ object Entity:
   def format(localDate: LocalDate): LocalDate = LocalDate.parse( localDate.format(newDateFormatter) )
   def format(localTime: LocalTime): LocalTime = LocalTime.parse( localTime.format(newTimeFormatter) )
 
+  def applyLocalDate(localDate: LocalDate, localDateTime: LocalDateTime): LocalDateTime =
+    localDateTime
+      .withYear(localDate.getYear)
+      .withMonth(localDate.getMonthValue)
+      .withDayOfMonth(localDate.getDayOfMonth)
+
   given poolOrdering: Ordering[Pool] = Ordering.by[Pool, Long](p => p.built).reverse
   given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => c.cleaned.toLocalDate.toEpochDay).reverse
   given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => m.measured.toLocalDate.toEpochDay).reverse
@@ -94,9 +100,3 @@ final case class Chemical(id: Long = 0,
   val unitProperty = new StringProperty(this, "unit", unit.toString)
   val addedProperty = new StringProperty(this, "added", Entity.format(added).toString)
   val chemical = this
-
-  def applyLocalDate(localDate: LocalDate): LocalDateTime =
-    added
-      .withYear(localDate.getYear)
-      .withMonth(localDate.getMonthValue)
-      .withDayOfMonth(localDate.getDayOfMonth)

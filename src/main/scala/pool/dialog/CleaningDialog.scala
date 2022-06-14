@@ -67,3 +67,10 @@ class CleaningDialog(context: Context, cleaning: Cleaning) extends Dialog[Cleani
   vacuumCheckBox.selected.onChange  { (_, _, newValue) => saveButton.disable = false }
   cleanedDatePicker.value.onChange { (_, _, newValue) => saveButton.disable = false }
 
+  resultConverter = dialogButton => {
+    if dialogButton == saveButtonType then
+      cleaning.copy(
+                    cleaned = applyLocalDate(cleanedDatePicker.value.value, cleaning.cleaned)
+                   )
+    else null
+  }
