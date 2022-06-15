@@ -34,17 +34,6 @@ class MeasurementSlider(labelText: String,
     children = List(label, textField, slider)
   }
 
-/**
-  * free chlorine (fc): 0 - 10, ok = 1 - 5, ideal = 3
-  * combined chlorine (cc = tc - fc): 0.0 - 0.5, ok = 0.2, ideal = 0.0
-  * total chlorine (tc = fc + cc): 0 - 10, ok = 1 - 5, ideal = 3
-  * ph: 6.2 - 8.4, ok = 7.2 - 7.6, ideal = 7.4
-  * calcium hardness (ch): 0 - 1000, ok = 250 - 500, ideal = 375
-  * total alkalinity (ta): 0 - 240, ok = 80 - 120, ideal = 100
-  * cyanuric acid (cya): 0 - 300, ok = 30 - 100, ideal = 50
-  * total bromine (tb): 0 - 20, ok = 2 - 10, ideal = 5
-  * temperature: 50 - 110
- */
 object MeasurementSlider:
   def decimalFormat: DecimalFormat = DecimalFormat("####.#")
   def integerFormat: NumberFormat = NumberFormat.getIntegerInstance
@@ -136,6 +125,17 @@ object MeasurementSlider:
                           formatConverter = formatConverter(integerFormat)) {
                             slider.min = 0
                             slider.max = 20
+                            slider.majorTickUnit = 1
+                            slider.value = measurement.totalBromine
+                          }
+
+  def temperatureSlider(context: Context,
+                        measurement: Measurement): HBox =
+    new MeasurementSlider(labelText = context.labelTemperature,
+                          textFieldText = measurement.temperature.toString,
+                          formatConverter = formatConverter(integerFormat)) {
+                            slider.min = 50
+                            slider.max = 100
                             slider.majorTickUnit = 1
                             slider.value = measurement.totalBromine
                           }
