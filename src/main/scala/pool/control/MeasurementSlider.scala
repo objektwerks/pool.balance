@@ -36,7 +36,7 @@ class MeasurementSlider(labelText: String,
 
 /**
   * free chlorine (fc): 0 - 10, ok = 1 - 5, ideal = 3
-  * combined chlorine (cc = tc - fc): 0 - 0.5, ok = 0.2, ideal = 0
+  * combined chlorine (cc = tc - fc): 0.0 - 0.5, ok = 0.2, ideal = 0.0
   * total chlorine (tc = fc + cc): 0 - 10, ok = 1 - 5, ideal = 3
   * ph: 6.2 - 8.4, ok = 7.2 - 7.6, ideal = 7.4
   * calcium hardness (ch): 0 - 1000, ok = 250 - 500, ideal = 375
@@ -61,4 +61,15 @@ object MeasurementSlider:
                             slider.max = 10
                             slider.majorTickUnit = 1
                             slider.value = measurement.freeChlorine
+                          }
+
+  def combinedChlorineSlider(context: Context,
+                             measurement: Measurement): HBox =
+    new MeasurementSlider(labelText = context.labelCombinedChlorine,
+                          textFieldText = measurement.combinedChlorine.toString,
+                          formatConverter = formatConverter(decimalFormat)) {
+                            slider.min = 0.0
+                            slider.max = 0.5
+                            slider.majorTickUnit = 0.1
+                            slider.value = measurement.combinedChlorine
                           }
