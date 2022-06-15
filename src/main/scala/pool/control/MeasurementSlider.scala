@@ -73,3 +73,14 @@ object MeasurementSlider:
                             slider.majorTickUnit = 0.1
                             slider.value = measurement.combinedChlorine
                           }
+
+  def totalChlorineSlider(context: Context,
+                          measurement: Measurement): HBox =
+    new MeasurementSlider(labelText = context.labelTotalChlorine,
+                          textFieldText = measurement.totalChlorine.toString,
+                          formatConverter = formatConverter(integerFormat)) {
+                            slider.min = 0
+                            slider.max = 10
+                            slider.majorTickUnit = 1
+                            slider.value = measurement.totalChlorine
+                          }
