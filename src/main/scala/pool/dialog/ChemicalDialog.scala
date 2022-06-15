@@ -47,11 +47,6 @@ class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemic
   pane.buttonTypes = List(saveButtonType, ButtonType.Cancel)
   val saveButton = pane.lookupButton(saveButtonType)
 
-  typeofComboBox.value.onChange { (_, _, newValue) => saveButton.disable = newValue.trim.isEmpty }
-  amountTextField.text.onChange { (_, _, newValue) => saveButton.disable = newValue.trim.isEmpty }
-  unitComboBox.value.onChange { (_, _, newValue) => saveButton.disable = newValue.trim.isEmpty }
-  addedDatePicker.value.onChange { (_, _, newValue) => saveButton.disable = false }
-
   resultConverter = dialogButton => {
     if dialogButton == saveButtonType then
       chemical.copy(
