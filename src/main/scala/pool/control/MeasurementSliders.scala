@@ -10,7 +10,9 @@ import scalafx.util.converter.FormatStringConverter
 
 import pool.{Context, Measurement}
 
-class MeasurementSlider(labelText: String, textFieldText: String) extends HBox:
+class MeasurementSlider(labelText: String, 
+                        textFieldText: String,
+                        formatConverter: FormatStringConverter[Number]) extends HBox:
   import MeasurementSliders.*
 
   val label = new Label {
@@ -23,7 +25,7 @@ class MeasurementSlider(labelText: String, textFieldText: String) extends HBox:
   }
   val textField = new TextField {
     text = textFieldText
-    textFormatter = new TextFormatter[Number]( converter(integerFormat) ) {
+    textFormatter = new TextFormatter[Number](formatConverter) {
       value <==> slider.value
     }
   }
@@ -47,13 +49,14 @@ object MeasurementSliders:
   def decimalFormat: DecimalFormat = DecimalFormat("####.#")
   def integerFormat: NumberFormat = NumberFormat.getIntegerInstance
 
-  def converter(format: DecimalFormat): FormatStringConverter[Number] = new FormatStringConverter[Number](format)
-  def converter(format: NumberFormat): FormatStringConverter[Number] = new FormatStringConverter[Number](format)
+  def formatConverter(format: DecimalFormat): FormatStringConverter[Number] = new FormatStringConverter[Number](format)
+  def formatConverter(format: NumberFormat): FormatStringConverter[Number] = new FormatStringConverter[Number](format)
 
   def freeChlorineSlider(context: Context,
                          measurement: Measurement): HBox =
     new MeasurementSlider(labelText = context.labelFreeChlorine,
-                          textFieldText = measurement.freeChlorine.toString) {
+                          textFieldText = measurement.freeChlorine.toString,
+                          formatConverter = formatConverter(integerFormat)) {
                             slider.min = 0
                             slider.max = 10
                             slider.majorTickUnit = 1
