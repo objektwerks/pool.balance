@@ -81,7 +81,7 @@ class MeasurementsPane(context: Context) extends VBox with AddEditButtonBar(cont
       case Some(measurement: Measurement) => model.add(measurement).fold(_ => (), measurement => tableView.selectionModel().select(measurement))
       case _ =>
 
-  def edit(): Unit =
+  def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
     val measurement = tableView.selectionModel().getSelectedItem.measurement
     MeasurementDialog(context, measurement).showAndWait() match

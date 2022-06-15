@@ -16,7 +16,7 @@ trait AddEditButtonBar(val context: Context):
     graphic = context.editImage
     text = context.paneEdit
     disable = true
-    onAction = { _ => edit() }
+    onAction = { _ => update() }
   }
 
   val addEditButtonBar = new HBox {
@@ -26,4 +26,4 @@ trait AddEditButtonBar(val context: Context):
 
   def add(): Unit
 
-  def edit(): Unit
+  def update(): Unit

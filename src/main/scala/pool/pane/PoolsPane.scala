@@ -57,7 +57,7 @@ class PoolsPane(context: Context) extends VBox with AddEditButtonBar(context):
       case Some(pool: Pool) => model.add(pool).fold(_ => (), pool => tableView.selectionModel().select(pool))
       case _ =>
 
-  def edit(): Unit =
+  def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
     val pool = tableView.selectionModel().getSelectedItem.pool
     PoolDialog(context, pool).showAndWait() match

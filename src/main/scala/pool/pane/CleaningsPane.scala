@@ -69,7 +69,7 @@ class CleaningsPane(context: Context) extends VBox with AddEditButtonBar(context
       case Some(cleaning: Cleaning) => model.add(cleaning).fold(_ => (), cleaning => tableView.selectionModel().select(cleaning))
       case _ =>
 
-  def edit(): Unit =
+  def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
     val cleaning = tableView.selectionModel().getSelectedItem.cleaning
     CleaningDialog(context, cleaning).showAndWait() match
