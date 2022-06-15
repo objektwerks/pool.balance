@@ -57,7 +57,7 @@ class ChemicalsPane(context: Context) extends VBox with AddEditButtonBar(context
       case Some(chemical: Chemical) => model.add(chemical).fold(_ => (), chemical => tableView.selectionModel().select(chemical))
       case _ =>
 
-  def update(): Unit =
+  def edit(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
     val chemical = tableView.selectionModel().getSelectedItem.chemical
     ChemicalDialog(context, chemical).showAndWait() match
