@@ -21,39 +21,39 @@ class MeasurementsPane(context: Context) extends VBox with AddEditButtonBar(cont
 
   val tableView = new TableView[Measurement]() {
     columns ++= List(
-      new TableColumn[Measurement, String] {
+      new TableColumn[Measurement, Int] {
         text = context.tableFreeChlorine
         cellValueFactory = _.value.freeChlorineProperty
       },
-      new TableColumn[Measurement, String] {
+      new TableColumn[Measurement, Double] {
         text = context.tableCombinedChlorine
         cellValueFactory = _.value.combinedChlorineProperty
       },
-      new TableColumn[Measurement, String] {
+      new TableColumn[Measurement, Int] {
         text = context.tableTotalChlorine
         cellValueFactory = _.value.totalChlorineProperty
       },
-      new TableColumn[Measurement, String] {
+      new TableColumn[Measurement, Double] {
         text = context.tablePh
         cellValueFactory = _.value.phProperty
       },
-      new TableColumn[Measurement, String] {
+      new TableColumn[Measurement, Int] {
         text = context.tableCalciumHardness
         cellValueFactory = _.value.calciumHardnessProperty
       },
-      new TableColumn[Measurement, String] {
+      new TableColumn[Measurement, Int] {
         text = context.tableTotalAlkalinity
         cellValueFactory = _.value.totalAlkalinityProperty
       },
-      new TableColumn[Measurement, String] {
+      new TableColumn[Measurement, Int] {
         text = context.tableCyanuricAcid
         cellValueFactory = _.value.cyanuricAcidProperty
       },
-      new TableColumn[Measurement, String] {
+      new TableColumn[Measurement, Int] {
         text = context.tableTotalBromine
         cellValueFactory = _.value.totalBromineProperty
       },
-      new TableColumn[Measurement, String] {
+      new TableColumn[Measurement, Int] {
         text = context.tableTemperature
         cellValueFactory = _.value.temperatureProperty
       },
