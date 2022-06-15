@@ -21,27 +21,27 @@ class CleaningsPane(context: Context) extends VBox with AddEditButtonBar(context
 
   val tableView = new TableView[Cleaning]() {
     columns ++= List(
-      new TableColumn[Cleaning, String] {
+      new TableColumn[Cleaning, Boolean] {
         text = context.tableBrush
         cellValueFactory = _.value.brushProperty
       },
-      new TableColumn[Cleaning, String] {
+      new TableColumn[Cleaning, Boolean] {
         text = context.tableNet
         cellValueFactory = _.value.netProperty
       },
-      new TableColumn[Cleaning, String] {
+      new TableColumn[Cleaning, Boolean] {
         text = context.tableSkimmerBasket
         cellValueFactory = _.value.skimmerBasketProperty
       },
-      new TableColumn[Cleaning, String] {
+      new TableColumn[Cleaning, Boolean] {
         text = context.tablePumpBasket
         cellValueFactory = _.value.pumpBasketProperty
       },
-      new TableColumn[Cleaning, String] {
+      new TableColumn[Cleaning, Boolean] {
         text = context.tablePumpFilter
         cellValueFactory = _.value.pumpFilterProperty
       },
-      new TableColumn[Cleaning, String] {
+      new TableColumn[Cleaning, Boolean] {
         text = context.tableVacuum
         cellValueFactory = _.value.vacuumProperty
       },
