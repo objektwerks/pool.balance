@@ -62,7 +62,7 @@ Measurements
 6. total alkalinity (ta): 0 - 240, ok = 80 - 120, ideal = 100
 7. cyanuric acid (cya): 0 - 300, ok = 30 - 100, ideal = 50
 8. total bromine (tb): 0 - 20, ok = 2 - 10, ideal = 5
-9. temperature: 0 - 100
+9. temperature: 50 - 110
 
 Chemicals
 ---------
