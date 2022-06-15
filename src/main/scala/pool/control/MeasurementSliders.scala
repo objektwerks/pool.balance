@@ -53,4 +53,9 @@ object MeasurementSliders:
   def freeChlorineSlider(context: Context,
                          measurement: Measurement): HBox =
     new MeasurementSlider(labelText = context.labelFreeChlorine,
-                          textFieldText = measurement.freeChlorine.toString)
+                          textFieldText = measurement.freeChlorine.toString) {
+                            slider.min = 0
+                            slider.max = 10
+                            slider.majorTickUnit = 1
+                            slider.value = measurement.freeChlorine
+                          }
