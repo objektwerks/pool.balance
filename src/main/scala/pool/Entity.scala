@@ -88,16 +88,6 @@ final case class Measurement(id: Long = 0,
   val measuredProperty = ObjectProperty[String](this, "measured", Entity.format(measured).toString)
   val measurement = this
 
-  val freeChlorineRange = 0 to 10
-  val combinedChlorineRange = 0.0 to 0.5
-  val totalChlorineRange = 0 to 10
-  val phRange = 6.2 to 8.4
-  val calciumHardnessRange = 1 to 1000
-  val totalAlkalinityRange = 0 to 240
-  val cyanuricAcidRange = 0 to 300
-  val totalBromineRange = 0 to 20
-  val temperatureRange = 50 to 110
-
 enum TypeOfChemical:
   case liquidChlorine, trichlor, dichlor, calciumHypochlorite, stabilizer, algaecide, muriaticAcid
 
