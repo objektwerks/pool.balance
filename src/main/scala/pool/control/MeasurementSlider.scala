@@ -117,3 +117,14 @@ object MeasurementSlider:
                             slider.majorTickUnit = 20
                             slider.value = measurement.totalAlkalinity
                           }
+
+  def cyanuricAcidSlider(context: Context,
+                         measurement: Measurement): HBox =
+    new MeasurementSlider(labelText = context.labelCyanuricAcid,
+                          textFieldText = measurement.cyanuricAcid.toString,
+                          formatConverter = formatConverter(integerFormat)) {
+                            slider.min = 0
+                            slider.max = 300
+                            slider.majorTickUnit = 30
+                            slider.value = measurement.totalAlkalinity
+                          }
