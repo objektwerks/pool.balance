@@ -49,8 +49,8 @@ class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
     if dialogButton == saveButtonType then
       pool.copy(
         name = nameTextField.text.value,
-        built = builtTextField.text.value.toIntOption.getOrElse(0),
-        volume = volumeTextField.text.value.toIntOption.getOrElse(0),
+        built = builtTextField.text.value.toIntOption.getOrElse(pool.built),
+        volume = volumeTextField.text.value.toIntOption.getOrElse(pool.volume),
         unit = UnitOfMeasure.valueOf(unitComboBox.value.value)
       )
     else null

@@ -51,7 +51,7 @@ class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemic
     if dialogButton == saveButtonType then
       chemical.copy(
         typeof = TypeOfChemical.valueOf(typeofComboBox.value.value),
-        amount = amountTextField.text.value.toDoubleOption.getOrElse(-1.0),
+        amount = amountTextField.text.value.toDoubleOption.getOrElse(chemical.amount),
         unit = UnitOfMeasure.valueOf(unitComboBox.value.value),
         added = applyLocalDate(addedDatePicker.value.value, chemical.added)
       )
