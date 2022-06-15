@@ -13,7 +13,7 @@ import pool.{Context, Measurement}
 class MeasurementSlider(labelText: String, 
                         textFieldText: String,
                         formatConverter: FormatStringConverter[Number]) extends HBox:
-  import MeasurementSliders.*
+  import MeasurementSlider.*
 
   val label = new Label {
     text = labelText
@@ -45,7 +45,7 @@ class MeasurementSlider(labelText: String,
   * total bromine (tb): 0 - 20, ok = 2 - 10, ideal = 5
   * temperature: 50 - 110
  */
-object MeasurementSliders:
+object MeasurementSlider:
   def decimalFormat: DecimalFormat = DecimalFormat("####.#")
   def integerFormat: NumberFormat = NumberFormat.getIntegerInstance
 
