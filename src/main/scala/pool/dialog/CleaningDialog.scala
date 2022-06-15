@@ -59,14 +59,6 @@ class CleaningDialog(context: Context, cleaning: Cleaning) extends Dialog[Cleani
   pane.buttonTypes = List(saveButtonType, ButtonType.Cancel)
   val saveButton = pane.lookupButton(saveButtonType)
 
-  brushCheckBox.selected.onChange  { (_, _, newValue) => saveButton.disable = false }
-  netCheckBox.selected.onChange  { (_, _, newValue) => saveButton.disable = false }
-  skimmerBasketCheckBox.selected.onChange  { (_, _, newValue) => saveButton.disable = false }
-  pumpBasketCheckBox.selected.onChange  { (_, _, newValue) => saveButton.disable = false }
-  pumpFilterCheckBox.selected.onChange  { (_, _, newValue) => saveButton.disable = false }
-  vacuumCheckBox.selected.onChange  { (_, _, newValue) => saveButton.disable = false }
-  cleanedDatePicker.value.onChange { (_, _, newValue) => saveButton.disable = false }
-
   resultConverter = dialogButton => {
     if dialogButton == saveButtonType then
       cleaning.copy(
