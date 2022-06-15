@@ -6,8 +6,10 @@ Todo
 ----
 1. IntegerTextField
 2. DoubleTextField
-3. Dashboard Current and Average Values
-4. Dashboard Pass and Fail Badges
+3. YearTextField
+4. Measurement Sliders
+5. Dashboard Current and Average Values
+6. Dashboard Pass and Fail Badges
 
 Build
 -----
