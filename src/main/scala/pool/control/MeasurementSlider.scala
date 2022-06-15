@@ -106,3 +106,14 @@ object MeasurementSlider:
                             slider.majorTickUnit = 100
                             slider.value = measurement.calciumHardness
                           }
+
+  def totalAlkalinitySlider(context: Context,
+                            measurement: Measurement): HBox =
+    new MeasurementSlider(labelText = context.labelTotalAlkalinity,
+                          textFieldText = measurement.totalAlkalinity.toString,
+                          formatConverter = formatConverter(integerFormat)) {
+                            slider.min = 0
+                            slider.max = 240
+                            slider.majorTickUnit = 20
+                            slider.value = measurement.totalAlkalinity
+                          }
