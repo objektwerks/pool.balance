@@ -1,14 +1,14 @@
 package pool.control
 
-import java.text.NumberFormat
+import java.text.{DecimalFormat, NumberFormat}
 
 import math.BigDecimal.double2bigDecimal
 
-import scalafx.scene.control.{Label, Slider}
+import scalafx.scene.control.{Label, Slider, TextField, TextFormatter}
 import scalafx.scene.layout.HBox
 import scalafx.util.converter.FormatStringConverter
 
-import pool.Measurement
+import pool.{Context, Measurement}
 
 /**
   * free chlorine (fc): 0 - 10, ok = 1 - 5, ideal = 3
@@ -22,10 +22,16 @@ import pool.Measurement
   * temperature: 50 - 110
  */
 object MeasurementSliders:
-  def integerInstance = NumberFormat.getIntegerInstance
-  def formatConverter(format: NumberFormat) = new FormatStringConverter[Number](format)
+  def decimalFormat: DecimalFormat = DecimalFormat("####.#")
+  def integerFormat: NumberFormat = NumberFormat.getIntegerInstance
 
-  def freeChlorineSlider(measurement: Measurement): HBox =
+  def converter(format: DecimalFormat): FormatStringConverter[Number] = new FormatStringConverter[Number](format)
+  def converter(format: NumberFormat): FormatStringConverter[Number] = new FormatStringConverter[Number](format)
+
+  def freeChlorineSlider(context: Context, measurement: Measurement): HBox =
+    val label = new Label {
+      text =context.labelFreeChlorine
+    }
     val slider = new Slider {
       prefWidth = 600
       min = 0
@@ -35,9 +41,13 @@ object MeasurementSliders:
       showTickMarks = true
       value = measurement.freeChlorine
     }
-    val label = new Label {
+    val textField = new TextField {
       text = measurement.freeChlorine.toString
+      textFormatter = new TextFormatter[Number]( converter(integerFormat) ) {
+        value <==> slider.value
+      }
     }
     new HBox {
-      spacing = 3; children = List(slider, label)
+      spacing = 3
+      children = List(label, textField, slider)
     }
