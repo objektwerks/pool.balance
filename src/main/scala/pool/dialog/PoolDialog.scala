@@ -44,11 +44,6 @@ class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
   val saveButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
   pane.buttonTypes = List(saveButtonType, ButtonType.Cancel)
   val saveButton = pane.lookupButton(saveButtonType)
-  
-  nameTextField.text.onChange { (_, _, newValue) => saveButton.disable = newValue.trim.isEmpty }
-  builtTextField.text.onChange { (_, oldValue, newValue) => if isNotInt(newValue) then builtTextField.text.value = oldValue }
-  volumeTextField.text.onChange { (_, oldValue, newValue) => if isNotInt(newValue) then volumeTextField.text.value = oldValue }
-  unitComboBox.value.onChange { (_, _, newValue) => saveButton.disable = newValue.trim.isEmpty }
 
   resultConverter = dialogButton => {
     if dialogButton == saveButtonType then
