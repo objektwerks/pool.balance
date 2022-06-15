@@ -10,6 +10,11 @@ import scalafx.util.converter.FormatStringConverter
 
 import pool.{Context, Measurement}
 
+class MeasurementSlider extends Slider:
+  prefWidth = 600
+  showTickLabels = true
+  showTickMarks = true
+
 /**
   * free chlorine (fc): 0 - 10, ok = 1 - 5, ideal = 3
   * combined chlorine (cc = tc - fc): 0 - 0.5, ok = 0.2, ideal = 0
@@ -32,13 +37,10 @@ object MeasurementSliders:
     val label = new Label {
       text =context.labelFreeChlorine
     }
-    val slider = new Slider {
-      prefWidth = 600
+    val slider = new MeasurementSlider {
       min = 0
       max = 10
       majorTickUnit = 1
-      showTickLabels = true
-      showTickMarks = true
       value = measurement.freeChlorine
     }
     val textField = new TextField {
