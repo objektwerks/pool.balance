@@ -38,10 +38,10 @@ final case class Pool(id: Long = 0,
                       built: Int = 0, 
                       volume: Int = 0,
                       unit: UnitOfMeasure = UnitOfMeasure.gl) extends Entity:
-  val nameProperty = new StringProperty(this, "name", name)
+  val nameProperty = ObjectProperty[String](this, "name", name)
   val builtProperty = ObjectProperty[Int](this, "built", built)
   val volumeProperty = ObjectProperty[Int](this, "volume", volume)
-  val unitProperty = new StringProperty(this, "unit", unit.toString)
+  val unitProperty = ObjectProperty[String](this, "unit", unit.toString)
   val pool = this
 
 final case class Cleaning(id: Long = 0,
@@ -59,7 +59,7 @@ final case class Cleaning(id: Long = 0,
   val pumpBasketProperty = ObjectProperty[Boolean](this, "pumpBasket", pumpBasket)
   val pumpFilterProperty = ObjectProperty[Boolean](this, "pumpFilter", pumpFilter)
   val vacuumProperty = ObjectProperty[Boolean](this, "vacuum", vacuum)
-  val cleanedProperty = new StringProperty(this, "cleaned", Entity.format(cleaned).toString)
+  val cleanedProperty = ObjectProperty[String](this, "cleaned", Entity.format(cleaned).toString)
   val cleaning = this
 
 final case class Measurement(id: Long = 0,
@@ -83,7 +83,7 @@ final case class Measurement(id: Long = 0,
   val cyanuricAcidProperty = ObjectProperty[Int](this, "cyanuricAcid", cyanuricAcid)
   val totalBromineProperty = ObjectProperty[Int](this, "totalBromine", totalBromine)
   val temperatureProperty = ObjectProperty[Int](this, "temperature", temperature)
-  val measuredProperty = new StringProperty(this, "measured", Entity.format(measured).toString)
+  val measuredProperty = ObjectProperty[String](this, "measured", Entity.format(measured).toString)
   val measurement = this
 
 enum TypeOfChemical:
@@ -95,8 +95,8 @@ final case class Chemical(id: Long = 0,
                           amount: Double = 1.0, 
                           unit: UnitOfMeasure = UnitOfMeasure.gl,
                           added: LocalDateTime = LocalDateTime.now) extends Entity:
-  val typeofProperty = new StringProperty(this, "typeof", typeof.toString)
+  val typeofProperty = ObjectProperty[String](this, "typeof", typeof.toString)
   val amountProperty = ObjectProperty[Double](this, "amount", amount)
-  val unitProperty = new StringProperty(this, "unit", unit.toString)
-  val addedProperty = new StringProperty(this, "added", Entity.format(added).toString)
+  val unitProperty = ObjectProperty[String](this, "unit", unit.toString)
+  val addedProperty = ObjectProperty[String](this, "added", Entity.format(added).toString)
   val chemical = this
