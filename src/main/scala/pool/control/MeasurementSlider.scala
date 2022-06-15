@@ -128,3 +128,14 @@ object MeasurementSlider:
                             slider.majorTickUnit = 30
                             slider.value = measurement.totalAlkalinity
                           }
+
+  def totalBromineSlider(context: Context,
+                         measurement: Measurement): HBox =
+    new MeasurementSlider(labelText = context.labelTotalBromine,
+                          textFieldText = measurement.totalBromine.toString,
+                          formatConverter = formatConverter(integerFormat)) {
+                            slider.min = 0
+                            slider.max = 20
+                            slider.majorTickUnit = 1
+                            slider.value = measurement.totalBromine
+                          }
