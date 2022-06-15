@@ -3,7 +3,7 @@ package pool
 import java.time.{LocalDate, LocalTime, LocalDateTime}
 import java.time.format.DateTimeFormatter
 
-import scalafx.beans.property.{BooleanProperty, DoubleProperty, IntegerProperty, StringProperty}
+import scalafx.beans.property.{BooleanProperty, DoubleProperty, ObjectProperty, StringProperty}
 
 enum UnitOfMeasure:
   case gl, kg, g, l, ml, lbs, oz
@@ -39,8 +39,8 @@ final case class Pool(id: Long = 0,
                       volume: Int = 0,
                       unit: UnitOfMeasure = UnitOfMeasure.gl) extends Entity:
   val nameProperty = new StringProperty(this, "name", name)
-  val builtProperty = new StringProperty(this, "built", built.toString)
-  val volumeProperty = new StringProperty(this, "volume", volume.toString)
+  val builtProperty = new ObjectProperty[Int](this, "built", built)
+  val volumeProperty = new ObjectProperty[Int](this, "volume", volume)
   val unitProperty = new StringProperty(this, "unit", unit.toString)
   val pool = this
 
@@ -53,12 +53,12 @@ final case class Cleaning(id: Long = 0,
                           pumpFilter: Boolean = false,
                           vacuum: Boolean = false,
                           cleaned: LocalDateTime = LocalDateTime.now) extends Entity:
-  val brushProperty = new StringProperty(this, "brush", brush.toString)
-  val netProperty = new StringProperty(this, "net", net.toString)
-  val skimmerBasketProperty = new StringProperty(this, "skimmerBasket", skimmerBasket.toString)
-  val pumpBasketProperty = new StringProperty(this, "pumpBasket", pumpBasket.toString)
-  val pumpFilterProperty = new StringProperty(this, "pumpFilter", pumpFilter.toString)
-  val vacuumProperty = new StringProperty(this, "vacuum", vacuum.toString)
+  val brushProperty = new BooleanProperty(this, "brush", brush)
+  val netProperty = new BooleanProperty(this, "net", net)
+  val skimmerBasketProperty = new BooleanProperty(this, "skimmerBasket", skimmerBasket)
+  val pumpBasketProperty = new BooleanProperty(this, "pumpBasket", pumpBasket)
+  val pumpFilterProperty = new BooleanProperty(this, "pumpFilter", pumpFilter)
+  val vacuumProperty = new BooleanProperty(this, "vacuum", vacuum)
   val cleanedProperty = new StringProperty(this, "cleaned", Entity.format(cleaned).toString)
   val cleaning = this
 

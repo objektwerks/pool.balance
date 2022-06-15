@@ -16,20 +16,20 @@ class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
   headerText = context.dialogPool
 
   val nameTextField = new TextField {
-    text <==> pool.nameProperty
+    text = pool.name
   }
 
   val builtTextField = new TextField {
-    text <==> pool.builtProperty
+    text = pool.built.toString
   }
 
   val volumeTextField = new TextField {
-    text <==> pool.volumeProperty
+    text = pool.volume.toString
   }
   
   val unitComboBox = new ComboBox[String] {
   	items = ObservableBuffer.from(context.listUnits)
-  	value <==> pool.unitProperty
+  	value = pool.unit.toString
   }
 
   val controls = List[(String, Region)](
@@ -46,6 +46,12 @@ class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
   val saveButton = pane.lookupButton(saveButtonType)
 
   resultConverter = dialogButton => {
-    if dialogButton == saveButtonType then pool
+    if dialogButton == saveButtonType then
+      pool.copy(
+        name = nameTextField.text.value,
+        built = builtTextField.text.value.toIntOption.getOrElse(pool.built),
+        volume = volumeTextField.text.value.toIntOption.getOrElse(pool.volume),
+        unit = UnitOfMeasure.valueOf(unitComboBox.value.value)
+      )
     else null
   }
