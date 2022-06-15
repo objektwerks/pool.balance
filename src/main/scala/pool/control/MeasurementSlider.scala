@@ -95,3 +95,14 @@ object MeasurementSlider:
                             slider.majorTickUnit = 0.1
                             slider.value = measurement.ph
                           }
+
+  def calciumHardnessSlider(context: Context,
+                            measurement: Measurement): HBox =
+    new MeasurementSlider(labelText = context.labelCalciumHardness,
+                          textFieldText = measurement.calciumHardness.toString,
+                          formatConverter = formatConverter(integerFormat)) {
+                            slider.min = 0
+                            slider.max = 1000
+                            slider.majorTickUnit = 100
+                            slider.value = measurement.calciumHardness
+                          }
