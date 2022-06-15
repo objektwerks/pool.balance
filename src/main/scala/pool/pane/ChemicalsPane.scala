@@ -25,7 +25,7 @@ class ChemicalsPane(context: Context) extends VBox with AddEditButtonBar(context
         text = context.tableTypeof
         cellValueFactory = _.value.typeofProperty
       },
-      new TableColumn[Chemical, String] {
+      new TableColumn[Chemical, Double] {
         text = context.tableAmount
         cellValueFactory = _.value.amountProperty
       },
