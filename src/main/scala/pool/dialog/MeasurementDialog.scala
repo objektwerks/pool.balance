@@ -9,6 +9,7 @@ import scalafx.scene.control.ButtonBar.ButtonData
 import pool.{App, Context, Entity, Measurement}
 import pool.UnitOfMeasure
 import pool.Entity.*
+import pool.control.TextFieldSlider.*
 
 class MeasurementDialog(context: Context, measurement: Measurement) extends Dialog[Measurement]:
   initOwner(App.stage)
