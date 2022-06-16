@@ -1,6 +1,9 @@
 .button {
     -fx-text-fill: navy
 }
+.button-cancel {
+    -fx-text-fill: navy
+}
 .label {
     -fx-text-fill: navy
 }
