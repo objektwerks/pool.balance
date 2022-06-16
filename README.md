@@ -4,9 +4,9 @@ Pool Balance
 
 Todo
 ----
-1. IntegerTextField
-2. DoubleTextField
-3. YearTextField
+1. IntTextField
+2. IntRangeTextField
+3. DoubleTextField
 4. Dashboard Current and Average Values
 5. Dashboard Pass and Fail Badges
 
