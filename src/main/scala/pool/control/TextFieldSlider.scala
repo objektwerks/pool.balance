@@ -37,8 +37,8 @@ object TextFieldSlider:
   def formatConverter(format: DecimalFormat): FormatStringConverter[Number] = new FormatStringConverter[Number](format)
   def formatConverter(format: NumberFormat): FormatStringConverter[Number] = new FormatStringConverter[Number](format)
 
-  def freeChlorineSlider(context: Context,
-                         measurement: Measurement): HBox =
+  def freeChlorineTextFieldSlider(context: Context,
+                                  measurement: Measurement): HBox =
     new TextFieldSlider(textFieldText = measurement.freeChlorine.toString,
                         formatConverter = formatConverter(integerFormat)) {
                           slider.min = 0
@@ -47,8 +47,8 @@ object TextFieldSlider:
                           slider.value = measurement.freeChlorine
                         }
 
-  def combinedChlorineSlider(context: Context,
-                             measurement: Measurement): HBox =
+  def combinedChlorineTextFieldSlider(context: Context,
+                                      measurement: Measurement): HBox =
     new TextFieldSlider(textFieldText = measurement.combinedChlorine.toString,
                         formatConverter = formatConverter(decimalFormat)) {
                           slider.min = 0.0
@@ -57,8 +57,8 @@ object TextFieldSlider:
                           slider.value = measurement.combinedChlorine
                         }
 
-  def totalChlorineSlider(context: Context,
-                          measurement: Measurement): HBox =
+  def totalChlorineTextFieldSlider(context: Context,
+                                   measurement: Measurement): HBox =
     new TextFieldSlider(textFieldText = measurement.totalChlorine.toString,
                         formatConverter = formatConverter(integerFormat)) {
                           slider.min = 0
@@ -67,8 +67,8 @@ object TextFieldSlider:
                           slider.value = measurement.totalChlorine
                         }
 
-  def phSlider(context: Context,
-               measurement: Measurement): HBox =
+  def phTextFieldSlider(context: Context,
+                        measurement: Measurement): HBox =
     new TextFieldSlider(textFieldText = measurement.ph.toString,
                         formatConverter = formatConverter(decimalFormat)) {
                           slider.min = 6.2
@@ -77,8 +77,8 @@ object TextFieldSlider:
                           slider.value = measurement.ph
                         }
 
-  def calciumHardnessSlider(context: Context,
-                            measurement: Measurement): HBox =
+  def calciumHardnessTextFieldSlider(context: Context,
+                                     measurement: Measurement): HBox =
     new TextFieldSlider(textFieldText = measurement.calciumHardness.toString,
                         formatConverter = formatConverter(integerFormat)) {
                           slider.min = 0
@@ -87,8 +87,8 @@ object TextFieldSlider:
                           slider.value = measurement.calciumHardness
                         }
 
-  def totalAlkalinitySlider(context: Context,
-                            measurement: Measurement): HBox =
+  def totalAlkalinityTextFieldSlider(context: Context,
+                                     measurement: Measurement): HBox =
     new TextFieldSlider(textFieldText = measurement.totalAlkalinity.toString,
                         formatConverter = formatConverter(integerFormat)) {
                           slider.min = 0
@@ -97,8 +97,8 @@ object TextFieldSlider:
                           slider.value = measurement.totalAlkalinity
                         }
 
-  def cyanuricAcidSlider(context: Context,
-                         measurement: Measurement): HBox =
+  def cyanuricAcidTextFieldSlider(context: Context,
+                                  measurement: Measurement): HBox =
     new TextFieldSlider(textFieldText = measurement.cyanuricAcid.toString,
                         formatConverter = formatConverter(integerFormat)) {
                           slider.min = 0
@@ -107,8 +107,8 @@ object TextFieldSlider:
                           slider.value = measurement.totalAlkalinity
                         }
 
-  def totalBromineSlider(context: Context,
-                         measurement: Measurement): HBox =
+  def totalBromineTextFieldSlider(context: Context,
+                                  measurement: Measurement): HBox =
     new TextFieldSlider(textFieldText = measurement.totalBromine.toString,
                         formatConverter = formatConverter(integerFormat)) {
                           slider.min = 0
@@ -117,8 +117,8 @@ object TextFieldSlider:
                           slider.value = measurement.totalBromine
                         }
 
-  def temperatureSlider(context: Context,
-                        measurement: Measurement): HBox =
+  def temperatureTextFieldSlider(context: Context,
+                                 measurement: Measurement): HBox =
     new TextFieldSlider(textFieldText = measurement.temperature.toString,
                         formatConverter = formatConverter(integerFormat)) {
                           slider.min = 50
