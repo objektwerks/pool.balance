@@ -24,6 +24,8 @@ class TextFieldSlider(textFieldText: String,
   }
 
   val textField = new TextField {
+    style = "-fx-background-color: #ececec;"
+    editable = false
     prefWidth = 50
     text = textFieldText
     textFormatter = new TextFormatter[Number](formatConverter) {
