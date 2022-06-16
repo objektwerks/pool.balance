@@ -4,11 +4,17 @@
 .label {
     -fx-text-fill: navy
 }
+.slider {
+    -fx-tick-label-fill: navy
+}
 .tab-label {
     -fx-text-fill: navy
 }
+.table-cell {
+    -fx-text-fill: navy
+}
 .text-input {
-    --fx-text-inner-color: navy
+    -fx-text-fill: navy
 }
 .titled-pane {
     -fx-text-fill: navy
