@@ -16,56 +16,29 @@ class MeasurementDialog(context: Context, measurement: Measurement) extends Dial
   title = context.windowTitle
   headerText = context.dialogMeasurement
 
-  val freeChlorineTextField = new TextField {
-    text = measurement.freeChlorine.toString
-  }
-
-  val combinedChlorineTextField = new TextField {
-    text = measurement.combinedChlorine.toString
-  }
-
-  val totalChlorineTextField = new TextField {
-    text = measurement.totalChlorine.toString
-  }
-
-  val phTextField = new TextField {
-    text = measurement.ph.toString
-  }
-
-  val calciumHardnessTextField = new TextField {
-    text = measurement.calciumHardness.toString
-  }
-
-  val totalAlkalinityTextField = new TextField {
-    text = measurement.totalAlkalinity.toString
-  }
-
-  val cyanuricAcidTextField = new TextField {
-    text = measurement.cyanuricAcid.toString
-  }
-
-  val totalBromineTextField = new TextField {
-    text = measurement.totalBromine.toString
-  }
-
-  val temperatureTextField = new TextField {
-    text = measurement.temperature.toString
-  }
-
+  val freeChlorineTextSlider = freeChlorineTextFieldSlider(context, measurement)
+  val combinedChlorineTextSlider = combinedChlorineTextFieldSlider(context, measurement)
+  val totalChlorineTextSlider = totalChlorineTextFieldSlider(context, measurement)
+  val phTextSlider = phTextFieldSlider(context, measurement)
+  val calciumHardnessTextSlider = calciumHardnessTextFieldSlider(context, measurement)
+  val totalAlkalinityTextSlider = totalAlkalinityTextFieldSlider(context, measurement)
+  val cyanuricAcidTextSlider =cyanuricAcidTextFieldSlider(context, measurement)
+  val totalBromineTextSlider = totalBromineTextFieldSlider(context, measurement)
+  val temperatureTextSlider = temperatureTextFieldSlider(context, measurement)
   val measuredDatePicker = new DatePicker {
     value = measurement.measured.toLocalDate
   }
 
   val controls = List[(String, Region)](
-    context.labelFreeChlorine -> freeChlorineTextField,
-    context.labelCombinedChlorine -> combinedChlorineTextField,
-    context.labelTotalChlorine -> totalChlorineTextField,
-    context.labelPh -> phTextField,
-    context.labelCalciumHardness -> calciumHardnessTextField,
-    context.labelTotalAlkalinity -> totalAlkalinityTextField,
-    context.labelCyanuricAcid -> cyanuricAcidTextField,
-    context.labelTotalBromine -> totalBromineTextField,
-    context.labelTemperature -> temperatureTextField,
+    context.labelFreeChlorine -> freeChlorineTextSlider,
+    context.labelCombinedChlorine -> combinedChlorineTextSlider,
+    context.labelTotalChlorine -> totalChlorineTextSlider,
+    context.labelPh -> phTextSlider,
+    context.labelCalciumHardness -> calciumHardnessTextSlider,
+    context.labelTotalAlkalinity -> totalAlkalinityTextSlider,
+    context.labelCyanuricAcid -> cyanuricAcidTextSlider,
+    context.labelTotalBromine -> totalBromineTextSlider,
+    context.labelTemperature -> temperatureTextSlider,
     context.labelMeasure -> measuredDatePicker
   )
   val pane = dialogPane()
@@ -78,15 +51,15 @@ class MeasurementDialog(context: Context, measurement: Measurement) extends Dial
   resultConverter = dialogButton => {
     if dialogButton == saveButtonType then
       measurement.copy(
-        freeChlorine = freeChlorineTextField.text.value.toIntOption.getOrElse(measurement.freeChlorine),
-        combinedChlorine = combinedChlorineTextField.text.value.toDoubleOption.getOrElse(measurement.combinedChlorine),
-        totalChlorine = totalChlorineTextField.text.value.toIntOption.getOrElse(measurement.totalChlorine),
-        ph = phTextField.text.value.toDoubleOption.getOrElse(measurement.ph),
-        calciumHardness = calciumHardnessTextField.text.value.toIntOption.getOrElse(measurement.calciumHardness),
-        totalAlkalinity = totalAlkalinityTextField.text.value.toIntOption.getOrElse(measurement.totalAlkalinity),
-        cyanuricAcid = cyanuricAcidTextField.text.value.toIntOption.getOrElse(measurement.cyanuricAcid),
-        totalBromine = totalBromineTextField.text.value.toIntOption.getOrElse(measurement.totalBromine),
-        temperature = temperatureTextField.text.value.toIntOption.getOrElse(measurement.temperature),
+        freeChlorine = freeChlorineTextSlider.asInt,
+        combinedChlorine = combinedChlorineTextSlider.asDouble,
+        totalChlorine = totalChlorineTextSlider.asInt,
+        ph = phTextSlider.asDouble,
+        calciumHardness = calciumHardnessTextSlider.asInt,
+        totalAlkalinity = totalAlkalinityTextSlider.asInt,
+        cyanuricAcid = cyanuricAcidTextSlider.asInt,
+        totalBromine = totalBromineTextSlider.asInt,
+        temperature = temperatureTextSlider.asInt,
         measured = applyLocalDate(measuredDatePicker.value.value, measurement.measured)
       )
     else null
