@@ -20,6 +20,7 @@ class TextFieldSlider(textFieldText: String,
     showTickLabels = true
     showTickMarks = true
     snapToTicks = true
+    minorTickCount = 0
   }
 
   val textField = new TextField {
@@ -91,6 +92,7 @@ object TextFieldSlider:
                           slider.min = 0
                           slider.max = 1000
                           slider.majorTickUnit = 100
+                          slider.snapToTicks = false
                           slider.value = measurement.calciumHardness
                         }
 
@@ -100,7 +102,8 @@ object TextFieldSlider:
                         formatConverter = formatConverter(integerFormat)) {
                           slider.min = 0
                           slider.max = 240
-                          slider.majorTickUnit = 10
+                          slider.majorTickUnit = 20
+                          slider.snapToTicks = false
                           slider.value = measurement.totalAlkalinity
                         }
 
@@ -110,7 +113,8 @@ object TextFieldSlider:
                         formatConverter = formatConverter(integerFormat)) {
                           slider.min = 0
                           slider.max = 300
-                          slider.majorTickUnit = 10
+                          slider.majorTickUnit = 30
+                          slider.snapToTicks = false
                           slider.value = measurement.totalAlkalinity
                         }
 
