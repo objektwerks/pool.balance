@@ -4,6 +4,7 @@ import java.text.{DecimalFormat, NumberFormat}
 
 import math.BigDecimal.double2bigDecimal
 
+import scalafx.geometry.Insets
 import scalafx.scene.control.{Slider, TextField, TextFormatter}
 import scalafx.scene.layout.HBox
 import scalafx.util.converter.FormatStringConverter
@@ -15,11 +16,13 @@ class TextFieldSlider(textFieldText: String,
   import TextFieldSlider.*
 
   val slider = new Slider {
+    prefWidth = 600
     showTickLabels = true
     showTickMarks = true
   }
 
   val textField = new TextField {
+    prefWidth = 50
     text = textFieldText
     textFormatter = new TextFormatter[Number](formatConverter) {
       value <==> slider.value
@@ -27,6 +30,7 @@ class TextFieldSlider(textFieldText: String,
   }
 
   spacing = 3
+  padding = Insets(6)
   children = List(textField, slider)
 
   def valueAsDouble: Double = slider.value.toDouble
