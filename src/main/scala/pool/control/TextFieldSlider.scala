@@ -14,9 +14,6 @@ class TextFieldSlider(textFieldText: String,
                       formatConverter: FormatStringConverter[Number]) extends HBox:
   import TextFieldSlider.*
 
-  spacing = 3
-  children = List(textField, slider)
-
   val slider = new Slider {
     showTickLabels = true
     showTickMarks = true
@@ -28,6 +25,9 @@ class TextFieldSlider(textFieldText: String,
       value <==> slider.value
     }
   }
+
+  spacing = 3
+  children = List(textField, slider)
 
   def valueAsDouble: Double = slider.value.toDouble
   def valueAsInt: Int = slider.value.toInt
