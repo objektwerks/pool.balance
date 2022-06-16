@@ -16,29 +16,29 @@ class MeasurementDialog(context: Context, measurement: Measurement) extends Dial
   title = context.windowTitle
   headerText = context.dialogMeasurement
 
-  val freeChlorineTextSlider = freeChlorineTextFieldSlider(context, measurement)
-  val combinedChlorineTextSlider = combinedChlorineTextFieldSlider(context, measurement)
-  val totalChlorineTextSlider = totalChlorineTextFieldSlider(context, measurement)
-  val phTextSlider = phTextFieldSlider(context, measurement)
-  val calciumHardnessTextSlider = calciumHardnessTextFieldSlider(context, measurement)
-  val totalAlkalinityTextSlider = totalAlkalinityTextFieldSlider(context, measurement)
-  val cyanuricAcidTextSlider =cyanuricAcidTextFieldSlider(context, measurement)
-  val totalBromineTextSlider = totalBromineTextFieldSlider(context, measurement)
-  val temperatureTextSlider = temperatureTextFieldSlider(context, measurement)
+  val freeChlorineSlider = freeChlorineTextFieldSlider(context, measurement)
+  val combinedChlorineSlider = combinedChlorineTextFieldSlider(context, measurement)
+  val totalChlorineSlider = totalChlorineTextFieldSlider(context, measurement)
+  val phSlider = phTextFieldSlider(context, measurement)
+  val calciumHardnessSlider = calciumHardnessTextFieldSlider(context, measurement)
+  val totalAlkalinitySlider = totalAlkalinityTextFieldSlider(context, measurement)
+  val cyanuricAcidSlider =cyanuricAcidTextFieldSlider(context, measurement)
+  val totalBromineSlider = totalBromineTextFieldSlider(context, measurement)
+  val temperatureSlider = temperatureTextFieldSlider(context, measurement)
   val measuredDatePicker = new DatePicker {
     value = measurement.measured.toLocalDate
   }
 
   val controls = List[(String, Region)](
-    context.labelFreeChlorine -> freeChlorineTextSlider,
-    context.labelCombinedChlorine -> combinedChlorineTextSlider,
-    context.labelTotalChlorine -> totalChlorineTextSlider,
-    context.labelPh -> phTextSlider,
-    context.labelCalciumHardness -> calciumHardnessTextSlider,
-    context.labelTotalAlkalinity -> totalAlkalinityTextSlider,
-    context.labelCyanuricAcid -> cyanuricAcidTextSlider,
-    context.labelTotalBromine -> totalBromineTextSlider,
-    context.labelTemperature -> temperatureTextSlider,
+    context.labelFreeChlorine -> freeChlorineSlider,
+    context.labelCombinedChlorine -> combinedChlorineSlider,
+    context.labelTotalChlorine -> totalChlorineSlider,
+    context.labelPh -> phSlider,
+    context.labelCalciumHardness -> calciumHardnessSlider,
+    context.labelTotalAlkalinity -> totalAlkalinitySlider,
+    context.labelCyanuricAcid -> cyanuricAcidSlider,
+    context.labelTotalBromine -> totalBromineSlider,
+    context.labelTemperature -> temperatureSlider,
     context.labelMeasure -> measuredDatePicker
   )
   val pane = dialogPane()
@@ -51,15 +51,15 @@ class MeasurementDialog(context: Context, measurement: Measurement) extends Dial
   resultConverter = dialogButton => {
     if dialogButton == saveButtonType then
       measurement.copy(
-        freeChlorine = freeChlorineTextSlider.asInt,
-        combinedChlorine = combinedChlorineTextSlider.asDouble,
-        totalChlorine = totalChlorineTextSlider.asInt,
-        ph = phTextSlider.asDouble,
-        calciumHardness = calciumHardnessTextSlider.asInt,
-        totalAlkalinity = totalAlkalinityTextSlider.asInt,
-        cyanuricAcid = cyanuricAcidTextSlider.asInt,
-        totalBromine = totalBromineTextSlider.asInt,
-        temperature = temperatureTextSlider.asInt,
+        freeChlorine = freeChlorineSlider.asInt,
+        combinedChlorine = combinedChlorineSlider.asDouble,
+        totalChlorine = totalChlorineSlider.asInt,
+        ph = phSlider.asDouble,
+        calciumHardness = calciumHardnessSlider.asInt,
+        totalAlkalinity = totalAlkalinitySlider.asInt,
+        cyanuricAcid = cyanuricAcidSlider.asInt,
+        totalBromine = totalBromineSlider.asInt,
+        temperature = temperatureSlider.asInt,
         measured = applyLocalDate(measuredDatePicker.value.value, measurement.measured)
       )
     else null
