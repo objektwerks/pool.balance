@@ -29,8 +29,8 @@ class TextFieldSlider(textFieldText: String,
     }
   }
 
-  def asDouble: Double = slider.value.toDouble
-  def asInt: Int = slider.value.toInt
+  def valueAsDouble: Double = slider.value.toDouble
+  def valueAsInt: Int = slider.value.toInt
 
 object TextFieldSlider:
   def decimalFormat: DecimalFormat = DecimalFormat("####.#")

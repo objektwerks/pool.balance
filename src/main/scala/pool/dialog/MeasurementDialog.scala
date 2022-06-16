@@ -51,15 +51,15 @@ class MeasurementDialog(context: Context, measurement: Measurement) extends Dial
   resultConverter = dialogButton => {
     if dialogButton == saveButtonType then
       measurement.copy(
-        freeChlorine = freeChlorineSlider.asInt,
-        combinedChlorine = combinedChlorineSlider.asDouble,
-        totalChlorine = totalChlorineSlider.asInt,
-        ph = phSlider.asDouble,
-        calciumHardness = calciumHardnessSlider.asInt,
-        totalAlkalinity = totalAlkalinitySlider.asInt,
-        cyanuricAcid = cyanuricAcidSlider.asInt,
-        totalBromine = totalBromineSlider.asInt,
-        temperature = temperatureSlider.asInt,
+        freeChlorine = freeChlorineSlider.valueAsInt,
+        combinedChlorine = combinedChlorineSlider.valueAsDouble,
+        totalChlorine = totalChlorineSlider.valueAsInt,
+        ph = phSlider.valueAsDouble,
+        calciumHardness = calciumHardnessSlider.valueAsInt,
+        totalAlkalinity = totalAlkalinitySlider.valueAsInt,
+        cyanuricAcid = cyanuricAcidSlider.valueAsInt,
+        totalBromine = totalBromineSlider.valueAsInt,
+        temperature = temperatureSlider.valueAsInt,
         measured = applyLocalDate(measuredDatePicker.value.value, measurement.measured)
       )
     else null
