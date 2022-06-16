@@ -7,7 +7,7 @@
 .label {
     -fx-text-fill: navy
 }
-.slider {
+.slider .axis {
     -fx-tick-label-fill: navy
 }
 .tab-label {
