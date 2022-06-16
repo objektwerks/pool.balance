@@ -29,7 +29,7 @@ class TextSlider(textFieldText: String,
     prefWidth = 50
     text = textFieldText
     textFormatter = new TextFormatter[Number](formatConverter) {
-      value <==> slider.value
+      value <== slider.value
     }
   }
 
