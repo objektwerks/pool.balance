@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter
 
 import math.BigDecimal.double2bigDecimal
 
-import scalafx.beans.property.{BooleanProperty, DoubleProperty, ObjectProperty, StringProperty}
+import scalafx.beans.property.ObjectProperty
 
 enum UnitOfMeasure:
   case gl, kg, g, l, ml, lbs, oz
