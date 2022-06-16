@@ -18,7 +18,6 @@ class TextFieldSlider(textFieldText: String,
   children = List(textField, slider)
 
   val slider = new Slider {
-    prefWidth = 600
     showTickLabels = true
     showTickMarks = true
   }
