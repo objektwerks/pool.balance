@@ -1,30 +1,28 @@
 package pool.dialog
 
 import scalafx.Includes.*
-import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.Region
-import scalafx.scene.control.{ButtonType, ComboBox, DatePicker, Dialog, TextField}
+import scalafx.scene.control.{ButtonType, DatePicker, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 
-import pool.{App, Context, Entity, Measurement}
-import pool.UnitOfMeasure
+import pool.{App, Context, Entity, Measurement, UnitOfMeasure}
 import pool.Entity.*
-import pool.control.TextFieldSlider.*
+import pool.control.TextSlider.*
 
 class MeasurementDialog(context: Context, measurement: Measurement) extends Dialog[Measurement]:
   initOwner(App.stage)
   title = context.windowTitle
   headerText = context.dialogMeasurement
 
-  val freeChlorineSlider = freeChlorineTextFieldSlider(context, measurement)
-  val combinedChlorineSlider = combinedChlorineTextFieldSlider(context, measurement)
-  val totalChlorineSlider = totalChlorineTextFieldSlider(context, measurement)
-  val phSlider = phTextFieldSlider(context, measurement)
-  val calciumHardnessSlider = calciumHardnessTextFieldSlider(context, measurement)
-  val totalAlkalinitySlider = totalAlkalinityTextFieldSlider(context, measurement)
-  val cyanuricAcidSlider =cyanuricAcidTextFieldSlider(context, measurement)
-  val totalBromineSlider = totalBromineTextFieldSlider(context, measurement)
-  val temperatureSlider = temperatureTextFieldSlider(context, measurement)
+  val freeChlorineSlider = freeChlorineTextSlider(context, measurement)
+  val combinedChlorineSlider = combinedChlorineTextSlider(context, measurement)
+  val totalChlorineSlider = totalChlorineTextSlider(context, measurement)
+  val phSlider = phTextSlider(context, measurement)
+  val calciumHardnessSlider = calciumHardnessTextSlider(context, measurement)
+  val totalAlkalinitySlider = totalAlkalinityTextSlider(context, measurement)
+  val cyanuricAcidSlider =cyanuricAcidTextSlider(context, measurement)
+  val totalBromineSlider = totalBromineTextSlider(context, measurement)
+  val temperatureSlider = temperatureTextSlider(context, measurement)
   val measuredDatePicker = new DatePicker {
     value = measurement.measured.toLocalDate
   }
