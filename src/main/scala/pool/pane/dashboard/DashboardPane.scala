@@ -27,7 +27,6 @@ class DashboardPane(context: Context) extends HBox:
   val totalBrominePane = TotalBrominePane(context)
   HBox.setHgrow(totalBrominePane, Priority.Always)
 
-
   children = List(freeClorinePane,
                   phPane, 
                   totalAlkalinityPane, 
