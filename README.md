@@ -74,10 +74,10 @@ Model
 * Store 1 --> 1 Context
 * Model 1 --> 1 Context | Store
 * View 1 --> 1 Context | Model
- 
+
 UI
 --
-1. Top: dashboard(free chlorine, total chlorine, ph, total alkalinity, calcium hardness, cyanuric acid, total bromine)
+1. Top: dashboard(free chlorine, total chlorine, ph, calcium hardness, total alkalinity, cyanuric acid, total bromine)
 2. Left: pane(pools)
 3. Center: tabbedpane(cleanings, measurements, chemicals)
 
