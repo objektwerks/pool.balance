@@ -12,6 +12,8 @@ import pool.dialog.MeasurementDialog
 class MeasurementsPane(context: Context) extends VBox with AddEditButtonBar(context):
   spacing = 6
   padding = Insets(6)
+  maxWidth = Double.MaxValue
+  maxHeight = Double.MaxValue
 
   val model = context.model
 
