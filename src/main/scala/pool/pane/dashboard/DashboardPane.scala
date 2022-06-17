@@ -12,6 +12,9 @@ class DashboardPane(context: Context) extends HBox:
   val freeClorinePane = FreeChlorinePane(context)
   HBox.setHgrow(freeClorinePane, Priority.Always)
 
+  val totalChlorinePane = TotalChlorinePane(context)
+  HBox.setHgrow(totalChlorinePane, Priority.Always)
+
   val phPane = PhPane(context)
   HBox.setHgrow(phPane, Priority.Always)
 
