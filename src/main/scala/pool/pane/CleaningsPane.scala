@@ -3,7 +3,7 @@ package pool.pane
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
-import scalafx.scene.control.{Button, Label, SelectionMode, TableColumn, TableView}
+import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import pool.{Cleaning, Context}
@@ -14,10 +14,6 @@ class CleaningsPane(context: Context) extends VBox with AddEditButtonBar(context
   padding = Insets(6)
 
   val model = context.model
-
-  val label = new Label {
-    text = context.labelCleanings
-  }
 
   val tableView = new TableView[Cleaning]() {
     columns ++= List(
@@ -53,7 +49,7 @@ class CleaningsPane(context: Context) extends VBox with AddEditButtonBar(context
     items = model.cleanings(model.selectedPoolId.value).fold( _ => ObservableBuffer[Cleaning](), cleanings => cleanings)
   }
 
-  children = List(label, tableView, addEditButtonBar)
+  children = List(tableView, addEditButtonBar)
   VBox.setVgrow(tableView, Priority.Always)
 
   tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
