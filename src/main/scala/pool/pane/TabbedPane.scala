@@ -2,10 +2,13 @@ package pool.pane
 
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Tab, TabPane}
+import scalafx.scene.layout.{Priority, VBox}
 
 import pool.Context
 
-class TabbedPane(context: Context) extends TabPane:
+class TabbedPane(context: Context) extends VBox:
+  padding = Insets(6)
+
   val cleaningsTab = new Tab {
     text = context.tabCleanings
     closable = false
@@ -24,5 +27,9 @@ class TabbedPane(context: Context) extends TabPane:
   	content = ChemicalsPane(context)
   }
 
-  padding = Insets(6)
-  tabs = Seq(cleaningsTab, measurementsTab, chemicalsTab)
+  val tabPane = new TabPane {
+    tabs = Seq(cleaningsTab, measurementsTab, chemicalsTab)
+  }
+
+  children = List(tabPane)
+  VBox.setVgrow(tabPane, Priority.Always)
