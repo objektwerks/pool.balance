@@ -4,7 +4,7 @@ import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, Label, SelectionMode, TableColumn, TableView}
-import scalafx.scene.layout.{HBox, VBox}
+import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import pool.{Context, Pool, UnitOfMeasure}
 import pool.dialog.PoolDialog
@@ -38,6 +38,7 @@ class PoolsPane(context: Context) extends VBox with AddEditButtonBar(context):
   }
 
   children = List(label, tableView, addEditButtonBar)
+  VBox.setVgrow(tableView, Priority.Always)
 
   tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
   
