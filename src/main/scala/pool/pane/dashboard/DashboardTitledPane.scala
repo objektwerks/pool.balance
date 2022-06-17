@@ -8,7 +8,9 @@ import pool.dialog.ControlGridPane
 
 abstract class DashboardTitledPane(context: Context) extends TitledPane:
   collapsible = false
-
+  maxWidth = Double.MaxValue
+  maxHeight = Double.MaxValue
+  
   val currentValue = new Label {
     alignment = Pos.Center
     text = "0"
