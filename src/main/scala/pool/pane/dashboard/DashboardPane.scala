@@ -31,6 +31,7 @@ class DashboardPane(context: Context) extends HBox:
   HBox.setHgrow(totalBrominePane, Priority.Always)
 
   children = List(freeClorinePane,
+                  totalChlorinePane,
                   phPane, 
                   calciumHardnessPane, 
                   totalAlkalinityPane, 
