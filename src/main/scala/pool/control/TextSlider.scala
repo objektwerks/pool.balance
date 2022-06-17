@@ -12,7 +12,7 @@ import scalafx.util.converter.FormatStringConverter
 import pool.{Context, Measurement}
 
 class TextSlider(textFieldText: String,
-                      formatConverter: FormatStringConverter[Number]) extends HBox:
+                 formatConverter: FormatStringConverter[Number]) extends HBox:
   import TextSlider.*
 
   val slider = new Slider {
