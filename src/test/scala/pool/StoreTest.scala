@@ -29,7 +29,7 @@ final class StoreTest extends AnyFunSuite with Matchers:
   }
 
   def addPool(): Pool =
-    val pool = Pool(name = "pool-a", built = 2010, volume = 10000, unit = UnitOfMeasure.gl)
+    val pool = Pool(name = "pool-a", volume = 10000, unit = UnitOfMeasure.gl)
     val addedPool = store.add(pool)
     addedPool.id should not be 0
     addedPool

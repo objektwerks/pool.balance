@@ -26,10 +26,6 @@ class PoolsPane(context: Context) extends VBox with AddEditButtonBar(context):
         cellValueFactory = _.value.nameProperty
       },
       new TableColumn[Pool, Int] {
-        text = context.tableBuilt
-        cellValueFactory = _.value.builtProperty
-      },
-      new TableColumn[Pool, Int] {
         text = context.tableVolume
         cellValueFactory = _.value.volumeProperty
       },

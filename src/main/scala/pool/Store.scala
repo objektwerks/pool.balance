@@ -10,7 +10,6 @@ final class Store(context: Context):
       .map(rs => Pool(
         rs.long("id"),
         rs.string("name"), 
-        rs.int("built"), 
         rs.int("volume"), 
         UnitOfMeasure.valueOf( rs.string("unit") ))
       )
@@ -19,7 +18,7 @@ final class Store(context: Context):
 
   def add(pool: Pool): Pool = DB localTx { implicit session =>
     val id = sql"""
-      insert into pool(name, built, volume, unit) values(${pool.name}, ${pool.built}, ${pool.volume}, ${pool.unit.toString})
+      insert into pool(name, volume, unit) values(${pool.name}, ${pool.volume}, ${pool.unit.toString})
       """
       .updateAndReturnGeneratedKey()
     pool.copy(id = id)
@@ -27,7 +26,7 @@ final class Store(context: Context):
 
   def update(pool: Pool): Unit = DB localTx { implicit session =>
     sql"""
-      update pool set name = ${pool.name}, built = ${pool.built}, volume = ${pool.volume}, unit = ${pool.unit.toString}
+      update pool set name = ${pool.name}, volume = ${pool.volume}, unit = ${pool.unit.toString}
       where id = ${pool.id}
       """
       .update()
