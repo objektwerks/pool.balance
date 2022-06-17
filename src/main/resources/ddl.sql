@@ -18,9 +18,9 @@ create table if not exists cleaning (
 create table if not exists measurement (
   id long primary key auto_increment,
   pool_id long references pool(id),
+  total_chlorine int not null,
   free_chlorine int not null,
   combined_chlorine double not null,
-  total_chlorine int not null,
   ph double not null,
   calcium_hardness int not null,
   total_alkalinity int not null,

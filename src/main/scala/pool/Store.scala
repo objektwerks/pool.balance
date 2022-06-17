@@ -72,9 +72,9 @@ final class Store(context: Context):
       .map(rs => Measurement(
         rs.long("id"),
         rs.long("pool_id"),
+        rs.int("total_chlorine"),
         rs.int("free_chlorine"),
         rs.double("combined_chlorine"),
-        rs.int("total_chlorine"),
         rs.double("ph"),
         rs.int("calcium_hardness"),
         rs.int("total_alkalinity"),
