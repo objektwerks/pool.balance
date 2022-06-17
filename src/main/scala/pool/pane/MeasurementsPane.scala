@@ -58,7 +58,7 @@ class MeasurementsPane(context: Context) extends VBox with AddEditButtonBar(cont
         cellValueFactory = _.value.measuredProperty
       }
     )
-    items = model.measurements(model.selectedPoolId.value).fold( _ => ObservableBuffer[Measurement](), measurements => measurements)
+    items = model.measurements(model.selectedPoolId.value).fold(_ => ObservableBuffer[Measurement](), measurements => measurements)
   }
 
   children = List(tableView, addEditButtonBar)
