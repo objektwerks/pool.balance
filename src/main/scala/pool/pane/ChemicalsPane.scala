@@ -34,7 +34,7 @@ class ChemicalsPane(context: Context) extends VBox with AddEditButtonBar(context
         cellValueFactory = _.value.addedProperty
       }
     )
-    items = model.chemicals(model.selectedPoolId.value).fold( _ => ObservableBuffer[Chemical](), chemicals => chemicals)
+    items = model.chemicals(model.selectedPoolId.value).fold(_ => ObservableBuffer[Chemical](), chemicals => chemicals)
   }
 
   children = List(tableView, addEditButtonBar)
