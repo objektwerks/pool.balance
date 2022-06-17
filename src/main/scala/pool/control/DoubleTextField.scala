@@ -17,6 +17,6 @@ class DoubleTextField extends TextField:
       change.setRange(change.getRangeStart(), change.getRangeStart()) // don't remove any selected text
       change
   }
-  val formatter = new TextFormatter[Double](converter, 0, filter)
+  val formatter = new TextFormatter[Double](converter, 0.0, filter)
 
   textFormatter = formatter
