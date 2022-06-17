@@ -4,7 +4,7 @@ import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, Label, SelectionMode, TableColumn, TableView}
-import scalafx.scene.layout.{HBox, VBox}
+import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import pool.{Chemical, Context, Pool}
 import pool.dialog.ChemicalDialog
@@ -12,8 +12,6 @@ import pool.dialog.ChemicalDialog
 class ChemicalsPane(context: Context) extends VBox with AddEditButtonBar(context):
   spacing = 6
   padding = Insets(6)
-  maxWidth = Double.MaxValue
-  maxHeight = Double.MaxValue
 
   val model = context.model
 
@@ -44,6 +42,7 @@ class ChemicalsPane(context: Context) extends VBox with AddEditButtonBar(context
   }
 
   children = List(label, tableView, addEditButtonBar)
+  VBox.setVgrow(tableView, Priority.Always)
 
   tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
 

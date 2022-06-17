@@ -4,7 +4,7 @@ import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, Label, SelectionMode, TableColumn, TableView}
-import scalafx.scene.layout.{HBox, VBox}
+import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import pool.{Measurement, Context}
 import pool.dialog.MeasurementDialog
@@ -12,8 +12,6 @@ import pool.dialog.MeasurementDialog
 class MeasurementsPane(context: Context) extends VBox with AddEditButtonBar(context):
   spacing = 6
   padding = Insets(6)
-  maxWidth = Double.MaxValue
-  maxHeight = Double.MaxValue
 
   val model = context.model
 
@@ -68,6 +66,7 @@ class MeasurementsPane(context: Context) extends VBox with AddEditButtonBar(cont
   }
 
   children = List(label, tableView, addEditButtonBar)
+  VBox.setVgrow(tableView, Priority.Always)
 
   tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
 
