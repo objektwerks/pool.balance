@@ -6,10 +6,9 @@ import scalafx.scene.layout.Region
 import scalafx.scene.control.{ButtonType, ComboBox, DatePicker, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 
-import pool.{App, Context, Entity, Chemical}
-import pool.UnitOfMeasure
+import pool.{App, Chemical, Context, Entity, UnitOfMeasure, TypeOfChemical}
 import pool.Entity.*
-import pool.TypeOfChemical
+import pool.control.DoubleTextField
 
 class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemical]:
   initOwner(App.stage)
@@ -21,7 +20,7 @@ class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemic
   	value = chemical.typeof.toString
   }
 
-  val amountTextField = new TextField {
+  val amountTextField = new DoubleTextField {
     text = chemical.amount.toString
   }
 
