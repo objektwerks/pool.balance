@@ -37,11 +37,9 @@ object Entity:
 
 final case class Pool(id: Long = 0,
                       name: String = "", 
-                      built: Int = 0, 
                       volume: Int = 0,
                       unit: UnitOfMeasure = UnitOfMeasure.gl) extends Entity:
   val nameProperty = ObjectProperty[String](this, "name", name)
-  val builtProperty = ObjectProperty[Int](this, "built", built)
   val volumeProperty = ObjectProperty[Int](this, "volume", volume)
   val unitProperty = ObjectProperty[String](this, "unit", unit.toString)
   val pool = this
