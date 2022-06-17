@@ -9,6 +9,7 @@ import scalafx.scene.control.ButtonBar.ButtonData
 import pool.{App, Context, Entity, Pool}
 import pool.UnitOfMeasure
 import pool.Entity.*
+import pool.control.IntTextField
 
 class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
   initOwner(App.stage)
@@ -19,7 +20,7 @@ class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
     text = pool.name
   }
 
-  val volumeTextField = new TextField {
+  val volumeTextField = new IntTextField {
     text = pool.volume.toString
   }
   
