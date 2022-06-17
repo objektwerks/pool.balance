@@ -30,7 +30,7 @@ class PoolsPane(context: Context) extends VBox with AddEditButtonBar(context):
         cellValueFactory = _.value.unitProperty
       }
     )
-    items = model.pools().fold( _ => ObservableBuffer[Pool](), pools => pools)
+    items = model.pools().fold(_ => ObservableBuffer[Pool](), pools => pools)
   }
 
   val tab = new Tab {
