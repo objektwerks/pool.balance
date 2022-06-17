@@ -28,7 +28,7 @@ class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
   }
   
   val unitComboBox = new ComboBox[String] {
-  	items = ObservableBuffer.from(context.listUnits)
+  	items = ObservableBuffer.from(context.listPoolUnits)
   	value = pool.unit.toString
   }
 
