@@ -15,11 +15,11 @@ class DashboardPane(context: Context) extends HBox:
   val phPane = PhPane(context)
   HBox.setHgrow(phPane, Priority.Always)
 
-  val totalAlkalinityPane = TotalAlkalinityPane(context)
-  HBox.setHgrow(totalAlkalinityPane, Priority.Always)
-
   val calciumHardnessPane = CalciumHardnessPane(context)
   HBox.setHgrow(calciumHardnessPane, Priority.Always)
+
+  val totalAlkalinityPane = TotalAlkalinityPane(context)
+  HBox.setHgrow(totalAlkalinityPane, Priority.Always)
 
   val cyanuricAcidPane = CyanuricAcidPane(context)
   HBox.setHgrow(cyanuricAcidPane, Priority.Always)
@@ -29,7 +29,7 @@ class DashboardPane(context: Context) extends HBox:
 
   children = List(freeClorinePane,
                   phPane, 
-                  totalAlkalinityPane, 
                   calciumHardnessPane, 
+                  totalAlkalinityPane, 
                   cyanuricAcidPane, 
                   totalBrominePane)
