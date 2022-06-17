@@ -30,7 +30,7 @@ final class View(context: Context):
     orientation = Orientation.Horizontal
     items.addAll(poolsPane, tabbedPane)
   }
-  splitPane.setDividerPositions(0.3, 0.7)
+  splitPane.setDividerPositions(0.25, 0.75)
   VBox.setVgrow(splitPane, Priority.Always)
 
   borderPane.center = splitPane
