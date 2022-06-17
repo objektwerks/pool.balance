@@ -47,6 +47,16 @@ object TextSlider:
   def formatConverter(format: DecimalFormat): FormatStringConverter[Number] = new FormatStringConverter[Number](format)
   def formatConverter(format: NumberFormat): FormatStringConverter[Number] = new FormatStringConverter[Number](format)
 
+  def totalChlorineTextSlider(context: Context,
+                              measurement: Measurement): TextSlider =
+    new TextSlider(textFieldText = measurement.totalChlorine.toString,
+                   formatConverter = formatConverter(integerFormat)) {
+                     slider.min = 0
+                     slider.max = 10
+                     slider.majorTickUnit = 1
+                     slider.value = measurement.totalChlorine
+                   }
+
   def freeChlorineTextSlider(context: Context,
                              measurement: Measurement): TextSlider =
     new TextSlider(textFieldText = measurement.freeChlorine.toString,
@@ -65,16 +75,6 @@ object TextSlider:
                      slider.max = 0.5
                      slider.majorTickUnit = 0.1
                      slider.value = measurement.combinedChlorine
-                   }
-
-  def totalChlorineTextSlider(context: Context,
-                              measurement: Measurement): TextSlider =
-    new TextSlider(textFieldText = measurement.totalChlorine.toString,
-                   formatConverter = formatConverter(integerFormat)) {
-                     slider.min = 0
-                     slider.max = 10
-                     slider.majorTickUnit = 1
-                     slider.value = measurement.totalChlorine
                    }
 
   def phTextSlider(context: Context,
