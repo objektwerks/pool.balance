@@ -9,11 +9,11 @@ class DashboardPane(context: Context) extends HBox:
   spacing = 6
   padding = Insets(6)
 
-  val freeClorinePane = FreeChlorinePane(context)
-  HBox.setHgrow(freeClorinePane, Priority.Always)
-
   val totalChlorinePane = TotalChlorinePane(context)
   HBox.setHgrow(totalChlorinePane, Priority.Always)
+
+  val freeClorinePane = FreeChlorinePane(context)
+  HBox.setHgrow(freeClorinePane, Priority.Always)
 
   val phPane = PhPane(context)
   HBox.setHgrow(phPane, Priority.Always)
@@ -30,8 +30,8 @@ class DashboardPane(context: Context) extends HBox:
   val totalBrominePane = TotalBrominePane(context)
   HBox.setHgrow(totalBrominePane, Priority.Always)
 
-  children = List(freeClorinePane,
-                  totalChlorinePane,
+  children = List(totalChlorinePane,
+                  freeClorinePane,
                   phPane, 
                   calciumHardnessPane, 
                   totalAlkalinityPane, 
