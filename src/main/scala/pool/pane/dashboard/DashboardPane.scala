@@ -9,9 +9,16 @@ class DashboardPane(context: Context) extends HBox:
   spacing = 6
   padding = Insets(6)
 
-  children = List(FreeChlorinePane(context),
-                  PhPane(context),
-                  TotalAlkalinityPane(context),
-                  CalciumHardnessPane(context),
-                  CyanuricAcidPane(context),
-                  TotalBrominePane(context))
+  val freeClorinePane = FreeChlorinePane(context)
+  val phPane = PhPane(context)
+  val totalAlkalinityPane = TotalAlkalinityPane(context)
+  val calciumHardnessPane = CalciumHardnessPane(context)
+  val cyanuricAcidPane = CyanuricAcidPane(context)
+  val totalBrominePane = TotalBrominePane(context)
+
+  children = List(freeClorinePane,
+                  phPane, 
+                  totalAlkalinityPane, 
+                  calciumHardnessPane, 
+                  cyanuricAcidPane, 
+                  totalBrominePane)
