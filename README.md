@@ -4,7 +4,7 @@ Pool Balance
 
 Todo
 ----
-1. Dashboard Current and Average Values
+1. Dashboard Current and Average Query
 2. Dashboard Pass and Fail Badge
 
 Build
