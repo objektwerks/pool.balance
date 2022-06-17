@@ -77,8 +77,9 @@ Model
  
 UI
 --
-1. West: pane(pools), dashboard(free chlorine, ph, total alkalinity, calcium hardness, cyanuric acid, total bromine)
-2. East: tabpane(cleanings, measurements, chemicals)
+1. Top: dashboard(free chlorine, total chlorine, ph, total alkalinity, calcium hardness, cyanuric acid, total bromine)
+2. Left: pane(pools)
+3. Center: tabbedpane(cleanings, measurements, chemicals)
 
 Resources
 ---------
