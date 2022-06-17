@@ -18,7 +18,6 @@ final class View(context: Context):
 
   val dashboardPane = DashboardPane(context)
   HBox.setHgrow(dashboardPane, Priority.Always)
-  borderPane.top = dashboardPane
 
   val poolsPane = PoolsPane(context)
   VBox.setVgrow(poolsPane, Priority.Always)
@@ -33,6 +32,7 @@ final class View(context: Context):
   splitPane.setDividerPositions(0.25, 0.75)
   VBox.setVgrow(splitPane, Priority.Always)
 
+  borderPane.top = dashboardPane
   borderPane.center = splitPane
 
   val scene = new Scene {
