@@ -18,16 +18,16 @@ class MeasurementsPane(context: Context) extends VBox with AddEditButtonBar(cont
   val tableView = new TableView[Measurement]() {
     columns ++= List(
       new TableColumn[Measurement, Int] {
+        text = context.tableTotalChlorine
+        cellValueFactory = _.value.totalChlorineProperty
+      },
+      new TableColumn[Measurement, Int] {
         text = context.tableFreeChlorine
         cellValueFactory = _.value.freeChlorineProperty
       },
       new TableColumn[Measurement, Double] {
         text = context.tableCombinedChlorine
         cellValueFactory = _.value.combinedChlorineProperty
-      },
-      new TableColumn[Measurement, Int] {
-        text = context.tableTotalChlorine
-        cellValueFactory = _.value.totalChlorineProperty
       },
       new TableColumn[Measurement, Double] {
         text = context.tablePh
