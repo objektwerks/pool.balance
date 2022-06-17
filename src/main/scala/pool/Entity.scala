@@ -64,9 +64,9 @@ final case class Cleaning(id: Long = 0,
 
 final case class Measurement(id: Long = 0,
                              poolId: Long,
+                             totalChlorine: Int = 3,
                              freeChlorine: Int = 3,
                              combinedChlorine: Double = 0.0,
-                             totalChlorine: Int = 3,
                              ph: Double = 7.4,
                              calciumHardness: Int = 375,
                              totalAlkalinity: Int = 100,
@@ -74,9 +74,9 @@ final case class Measurement(id: Long = 0,
                              totalBromine: Int = 5,
                              temperature: Int = 85,
                              measured: LocalDateTime = LocalDateTime.now) extends Entity:
+  val totalChlorineProperty = ObjectProperty[Int](this, "totalChlorine", totalChlorine)
   val freeChlorineProperty = ObjectProperty[Int](this, "freeChlorine", freeChlorine)
   val combinedChlorineProperty = ObjectProperty[Double](this, "combinedChlorine", combinedChlorine)
-  val totalChlorineProperty = ObjectProperty[Int](this, "totalChlorine", totalChlorine)
   val phProperty = ObjectProperty[Double](this, "ph", ph)
   val calciumHardnessProperty = ObjectProperty[Int](this, "calciumHardness", calciumHardness)
   val totalAlkalinityProperty = ObjectProperty[Int](this, "totalAlkalinity", totalAlkalinity)
