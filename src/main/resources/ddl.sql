@@ -1,7 +1,6 @@
 create table if not exists pool (
   id long primary key auto_increment,
   name varchar not null,
-  built int not null,
   volume double not null,
   unit varchar not null
 );
