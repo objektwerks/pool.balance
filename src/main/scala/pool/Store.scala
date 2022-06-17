@@ -6,7 +6,7 @@ final class Store(context: Context):
   ConnectionPool.singleton(DataSourceConnectionPool(context.dataSource))
 
   def pools(): List[Pool] = DB readOnly { implicit session =>
-    sql"select * from pool order by built desc"
+    sql"select * from pool order by name"
       .map(rs => Pool(
         rs.long("id"),
         rs.string("name"), 
