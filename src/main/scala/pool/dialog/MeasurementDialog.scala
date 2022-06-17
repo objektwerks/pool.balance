@@ -14,9 +14,9 @@ class MeasurementDialog(context: Context, measurement: Measurement) extends Dial
   title = context.windowTitle
   headerText = context.dialogMeasurement
 
+  val totalChlorineSlider = totalChlorineTextSlider(context, measurement)
   val freeChlorineSlider = freeChlorineTextSlider(context, measurement)
   val combinedChlorineSlider = combinedChlorineTextSlider(context, measurement)
-  val totalChlorineSlider = totalChlorineTextSlider(context, measurement)
   val phSlider = phTextSlider(context, measurement)
   val calciumHardnessSlider = calciumHardnessTextSlider(context, measurement)
   val totalAlkalinitySlider = totalAlkalinityTextSlider(context, measurement)
@@ -28,9 +28,9 @@ class MeasurementDialog(context: Context, measurement: Measurement) extends Dial
   }
 
   val controls = List[(String, Region)](
+    context.labelTotalChlorine -> totalChlorineSlider,
     context.labelFreeChlorine -> freeChlorineSlider,
     context.labelCombinedChlorine -> combinedChlorineSlider,
-    context.labelTotalChlorine -> totalChlorineSlider,
     context.labelPh -> phSlider,
     context.labelCalciumHardness -> calciumHardnessSlider,
     context.labelTotalAlkalinity -> totalAlkalinitySlider,
@@ -49,9 +49,9 @@ class MeasurementDialog(context: Context, measurement: Measurement) extends Dial
   resultConverter = dialogButton => {
     if dialogButton == saveButtonType then
       measurement.copy(
+        totalChlorine = totalChlorineSlider.valueAsInt,
         freeChlorine = freeChlorineSlider.valueAsInt,
         combinedChlorine = combinedChlorineSlider.valueAsDouble,
-        totalChlorine = totalChlorineSlider.valueAsInt,
         ph = phSlider.valueAsDouble,
         calciumHardness = calciumHardnessSlider.valueAsInt,
         totalAlkalinity = totalAlkalinitySlider.valueAsInt,
