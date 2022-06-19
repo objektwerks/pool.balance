@@ -109,6 +109,10 @@ final class Store(context: Context):
       .update()
   }
 
+  def current(poolId: Long, typeof: TypeOfMeasurement): Double = 0.0
+
+  def average(poolId: Long, typeof: TypeOfMeasurement): Double = 0.0
+
   def chemicals(poolId: Long): List[Chemical] = DB readOnly { implicit session =>
     sql"select * from chemical where pool_id = ${poolId} order by added desc"
       .map(rs => Chemical(
