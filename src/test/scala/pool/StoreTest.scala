@@ -33,11 +33,11 @@ final class StoreTest extends AnyFunSuite with Matchers:
   }
 
   def current(pool: Pool, measurement: Measurement): Unit =
-    val current = store.currentTotalChlorine(pool.id)
+    val current = store.current(pool.id, TypeOfMeasurement.totalChlorine)
     current.get shouldBe measurement.totalChlorine
 
   def average(pool: Pool, measurement: Measurement): Unit =
-    val average = store.averageTotalChlorine(pool.id)
+    val average = store.average(pool.id, TypeOfMeasurement.totalChlorine)
     average.get shouldBe measurement.totalChlorine
 
   def addPool(): Pool =

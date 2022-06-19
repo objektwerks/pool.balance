@@ -109,17 +109,32 @@ final class Store(context: Context):
       .update()
   }
 
-  def currentTotalChlorine(poolId: Long): Option[Int] = DB readOnly { implicit session =>
-    sql"select max(total_chlorine) as current from measurement where pool_id = ${poolId} order by measured desc"
-      .map(rs => rs.int("current"))
-      .single()
-  }
+  def typeofMeasurementToColumn(typeof: TypeOfMeasurement): String = typeof match
+    case TypeOfMeasurement.totalChlorine => "total_chlorine"
+    case TypeOfMeasurement.freeChlorine => "free_chlorine"
+    case TypeOfMeasurement.combinedChlorine => "combined_chlorine"
+    case TypeOfMeasurement.ph => "ph"
+    case TypeOfMeasurement.calciumHardness => "calcium_hardness"
+    case TypeOfMeasurement.totalAlkalinity => "total_alkalinity"
+    case TypeOfMeasurement.cyanuricAcid => "cyanuric_acid"
+    case TypeOfMeasurement.totalBromine => "total_bromine"
+    case TypeOfMeasurement.temperature => "temperature"
 
-  def averageTotalChlorine(poolId: Long): Option[Int] = DB readOnly { implicit session =>
-    sql"select avg(total_chlorine) as average from measurement where pool_id = ${poolId}"
-      .map(rs => rs.int("average"))
-      .single()
-  }
+  def current(poolId: Long, typeof: TypeOfMeasurement): Option[Int] =
+    val expression = s"max(${typeofMeasurementToColumn(typeof)})"
+    DB readOnly { implicit session =>
+      SQL(s"select $expression as current from measurement where pool_id = $poolId")
+        .map(rs => rs.int("current"))
+        .single()
+    }
+
+  def average(poolId: Long, typeof: TypeOfMeasurement): Option[Int] =
+    val expression = s"avg(${typeofMeasurementToColumn(typeof)})"
+    DB readOnly { implicit session =>
+      SQL(s"select $expression as average from measurement where pool_id = $poolId")
+        .map(rs => rs.int("average"))
+        .single()
+    }
 
   def chemicals(poolId: Long): List[Chemical] = DB readOnly { implicit session =>
     sql"select * from chemical where pool_id = ${poolId} order by added desc"
