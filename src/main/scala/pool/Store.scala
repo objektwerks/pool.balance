@@ -120,21 +120,17 @@ final class Store(context: Context):
     case TypeOfMeasurement.totalBromine => "total_bromine"
     case TypeOfMeasurement.temperature => "temperature"
 
-  def current(poolId: Long, typeof: TypeOfMeasurement): Option[Int] =
-    val expression = s"max(${toColumn(typeof)})"
-    DB readOnly { implicit session =>
-      SQL(s"select $expression as current from measurement where pool_id = $poolId")
-        .map(rs => rs.int("current"))
-        .single()
-    }
+  def current(poolId: Long, typeof: TypeOfMeasurement): Option[Int] = DB readOnly { implicit session =>
+    SQL(s"select max(${toColumn(typeof)}) as current from measurement where pool_id = $poolId")
+      .map(rs => rs.int("current"))
+      .single()
+  }
 
-  def average(poolId: Long, typeof: TypeOfMeasurement): Option[Int] =
-    val expression = s"avg(${toColumn(typeof)})"
-    DB readOnly { implicit session =>
-      SQL(s"select $expression as average from measurement where pool_id = $poolId")
-        .map(rs => rs.int("average"))
-        .single()
-    }
+  def average(poolId: Long, typeof: TypeOfMeasurement): Option[Int] = DB readOnly { implicit session =>
+    SQL(s"select avg(${toColumn(typeof)}) as average from measurement where pool_id = $poolId")
+      .map(rs => rs.int("average"))
+      .single()
+  }
 
   def chemicals(poolId: Long): List[Chemical] = DB readOnly { implicit session =>
     sql"select * from chemical where pool_id = ${poolId} order by added desc"
