@@ -62,6 +62,9 @@ final case class Cleaning(id: Long = 0,
   val cleanedProperty = ObjectProperty[String](this, "cleaned", Entity.format(cleaned).toString)
   val cleaning = this
 
+enum TypeOfMeasurement:
+  case totalChlorine, freeChlorine, combinedChlorine, ph, calciumHardness, totalAlkalinity, cyanuricAcid, totalBromine, temperature
+
 final case class Measurement(id: Long = 0,
                              poolId: Long,
                              totalChlorine: Int = 3,
