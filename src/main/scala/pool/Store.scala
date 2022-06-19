@@ -109,7 +109,7 @@ final class Store(context: Context):
       .update()
   }
 
-  def typeofMeasurementToColumn(typeof: TypeOfMeasurement): String = typeof match
+  def toColumn(typeof: TypeOfMeasurement): String = typeof match
     case TypeOfMeasurement.totalChlorine => "total_chlorine"
     case TypeOfMeasurement.freeChlorine => "free_chlorine"
     case TypeOfMeasurement.combinedChlorine => "combined_chlorine"
@@ -121,7 +121,7 @@ final class Store(context: Context):
     case TypeOfMeasurement.temperature => "temperature"
 
   def current(poolId: Long, typeof: TypeOfMeasurement): Option[Int] =
-    val expression = s"max(${typeofMeasurementToColumn(typeof)})"
+    val expression = s"max(${toColumn(typeof)})"
     DB readOnly { implicit session =>
       SQL(s"select $expression as current from measurement where pool_id = $poolId")
         .map(rs => rs.int("current"))
@@ -129,7 +129,7 @@ final class Store(context: Context):
     }
 
   def average(poolId: Long, typeof: TypeOfMeasurement): Option[Int] =
-    val expression = s"avg(${typeofMeasurementToColumn(typeof)})"
+    val expression = s"avg(${toColumn(typeof)})"
     DB readOnly { implicit session =>
       SQL(s"select $expression as average from measurement where pool_id = $poolId")
         .map(rs => rs.int("average"))
