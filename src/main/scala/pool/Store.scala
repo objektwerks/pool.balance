@@ -116,7 +116,12 @@ final class Store(context: Context):
       .headOption
   }
 
-  def average(poolId: Long, typeof: TypeOfMeasurement): Double = 0.0
+  def averageTotalChlorine(poolId: Long): Double = DB readOnly { implicit session =>
+    val list = sql"select total_chlorine from measurement where pool_id = ${poolId}"
+      .map(rs => rs.int("total_chlorine"))
+      .list()
+    list.sum / list.length
+  }
 
   def chemicals(poolId: Long): List[Chemical] = DB readOnly { implicit session =>
     sql"select * from chemical where pool_id = ${poolId} order by added desc"
