@@ -110,14 +110,14 @@ final class Store(context: Context):
   }
 
   def currentTotalChlorine(poolId: Long): Option[Int] = DB readOnly { implicit session =>
-    sql"select max(total_chlorine) from measurement where pool_id = ${poolId} order by measured desc"
-      .map(rs => rs.int("total_chlorine"))
+    sql"select max(total_chlorine) as current from measurement where pool_id = ${poolId} order by measured desc"
+      .map(rs => rs.int("current"))
       .single()
   }
 
   def averageTotalChlorine(poolId: Long): Option[Int] = DB readOnly { implicit session =>
-    sql"select avg(total_chlorine) from measurement where pool_id = ${poolId}"
-      .map(rs => rs.int("total_chlorine"))
+    sql"select avg(total_chlorine) as average from measurement where pool_id = ${poolId}"
+      .map(rs => rs.int("average"))
       .single()
   }
 
