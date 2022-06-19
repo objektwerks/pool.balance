@@ -109,7 +109,12 @@ final class Store(context: Context):
       .update()
   }
 
-  def current(poolId: Long, typeof: TypeOfMeasurement): Double = 0.0
+  def currentTotalChlorine(poolId: Long): Option[Int] = DB readOnly { implicit session =>
+    sql"select total_chlorine from measurement where pool_id = ${poolId} order by measured desc"
+      .map(rs => rs.int("total_chlorine"))
+      .list()
+      .headOption
+  }
 
   def average(poolId: Long, typeof: TypeOfMeasurement): Double = 0.0
 
