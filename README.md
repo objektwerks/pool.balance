@@ -5,7 +5,7 @@ Pool Balance
 Todo
 ----
 1. Bind model current and average properties to dashboard titled panes.
-2. Bind model errors to erros pane.
+2. Bind model errors to errors pane.
 3. Dashboard Pass and Fail Badge
 
 Build
