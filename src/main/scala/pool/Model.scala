@@ -52,7 +52,7 @@ final class Model(context: Context) extends LazyLogging:
     cleanings(poolId)
     measurements(poolId)
     chemicals(poolId)
-    // dashboard
+    dashboard()
   }
 
   pools()
@@ -79,6 +79,9 @@ final class Model(context: Context) extends LazyLogging:
       observableChemicals.clear()
       observableChemicals ++= store.chemicals(poolId) 
     }.recover { case error: Throwable => logger.error(s"Loading chemicals from store failed: ${error.getMessage}") }
+
+  private def dashboard(): Unit =
+    ()
 
   def add(pool: Pool): Either[Throwable, Pool] =
     Try {
