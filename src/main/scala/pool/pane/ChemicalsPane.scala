@@ -37,6 +37,10 @@ class ChemicalsPane(context: Context) extends VBox with AddEditButtonBar(context
     items = model.observableChemicals
   }
 
+  model.selectedPoolId.onChange { (_, _, _) =>
+    addButton.disable = false
+  }
+
   children = List(tableView, addEditButtonBar)
   VBox.setVgrow(tableView, Priority.Always)
 
