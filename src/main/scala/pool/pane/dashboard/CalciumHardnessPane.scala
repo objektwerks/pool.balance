@@ -4,11 +4,5 @@ import pool.Context
 
 class CalciumHardnessPane(context: Context) extends DashboardTitledPane(context):
   text = context.tableCalciumHardness
-
-  context.model.currentCalciumHardness.onChange { (_, _, newValue) =>
-    currentValue.text = newValue.toString
-  }
-
-  context.model.averageCalciumHardness.onChange { (_, _, newValue) =>
-    currentAverage.text = newValue.toString
-  }
+  currentValue.text <== context.model.currentCalciumHardness.asString
+  currentAverage.text <== context.model.averageCalciumHardness.asString
