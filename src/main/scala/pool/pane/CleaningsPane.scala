@@ -46,7 +46,7 @@ class CleaningsPane(context: Context) extends VBox with AddEditButtonBar(context
         cellValueFactory = _.value.cleanedProperty
       }
     )
-    items = model.cleanings(model.selectedPoolId.value).fold(_ => ObservableBuffer[Cleaning](), cleanings => cleanings)
+    items = model.observableCleanings
   }
 
   children = List(tableView, addEditButtonBar)
