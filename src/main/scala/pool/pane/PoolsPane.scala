@@ -65,7 +65,7 @@ class PoolsPane(context: Context) extends VBox with AddEditButtonBar(context):
   def add(): Unit =
     PoolDialog(context, Pool()).showAndWait() match
       case Some(pool: Pool) => model.add(pool).fold(_ => (), pool => tableView.selectionModel().select(pool))
-      case _ => model.onError("Pool Dialog add failed.")
+      case _ => model.onError("Pool add failed.")
 
   def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
@@ -74,4 +74,4 @@ class PoolsPane(context: Context) extends VBox with AddEditButtonBar(context):
       case Some(pool: Pool) =>
         model.update(selectedIndex, pool)
         tableView.selectionModel().select(selectedIndex)
-      case _ => model.onError("Pool Dialog update failed.")
+      case _ => model.onError("Pool update failed.")

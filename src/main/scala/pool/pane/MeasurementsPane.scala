@@ -80,7 +80,7 @@ class MeasurementsPane(context: Context) extends VBox with AddEditButtonBar(cont
   def add(): Unit =
     MeasurementDialog(context, Measurement(poolId = model.selectedPoolId.value)).showAndWait() match
       case Some(measurement: Measurement) => model.add(measurement).fold(_ => (), measurement => tableView.selectionModel().select(measurement))
-      case _ =>
+      case _ => model.onError("Measurement add failed.")
 
   def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
@@ -89,4 +89,4 @@ class MeasurementsPane(context: Context) extends VBox with AddEditButtonBar(cont
       case Some(measurement: Measurement) =>
         model.update(selectedIndex, measurement)
         tableView.selectionModel().select(selectedIndex)
-      case _ =>
+      case _ => model.onError("Measurement update failed.")

@@ -56,7 +56,7 @@ class ChemicalsPane(context: Context) extends VBox with AddEditButtonBar(context
   def add(): Unit =
     ChemicalDialog(context, Chemical(poolId = model.selectedPoolId.value)).showAndWait() match
       case Some(chemical: Chemical) => model.add(chemical).fold(_ => (), chemical => tableView.selectionModel().select(chemical))
-      case _ => model.onError("Chemical Dialog add failed.")
+      case _ => model.onError("Chemical add failed.")
 
   def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
@@ -65,4 +65,4 @@ class ChemicalsPane(context: Context) extends VBox with AddEditButtonBar(context
       case Some(chemical: Chemical) =>
         model.update(selectedIndex, chemical)
         tableView.selectionModel().select(selectedIndex)
-      case _ => model.onError("Chemical Dialog update failed.")
+      case _ => model.onError("Chemical update failed.")
