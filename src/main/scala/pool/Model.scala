@@ -48,11 +48,10 @@ final class Model(context: Context) extends LazyLogging:
   val averageTotalBromine = ObjectProperty[Int](0)
 
   selectedPoolId.onChange { (_, _, newPoolId) =>
-    val poolId = newPoolId.asInstanceOf[Long]
-    cleanings(poolId)
-    measurements(poolId)
-    chemicals(poolId)
-    dashboard()
+    cleanings(newPoolId)
+    measurements(newPoolId)
+    chemicals(newPoolId)
+    dashboard(newPoolId)
   }
 
   pools()
@@ -80,7 +79,7 @@ final class Model(context: Context) extends LazyLogging:
       observableChemicals ++= store.chemicals(poolId) 
     }.recover { case error: Throwable => logger.error(s"Loading chemicals from store failed: ${error.getMessage}") }
 
-  private def dashboard(): Unit =
+  private def dashboard(poolId: Long): Unit =
     ()
 
   def add(pool: Pool): Either[Throwable, Pool] =
