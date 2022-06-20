@@ -92,6 +92,14 @@ final class Model(context: Context) extends LazyLogging:
         currentCyanuricAcid.value = measurement.cyanuricAcid
         currentTotalBromine.value = measurement.totalBromine
       }
+      averageTotalChlorine.value = measurements.map(_.totalChlorine).sum / measurements.length
+      averageFreeChlorine.value = measurements.map(_.freeChlorine).sum / measurements.length
+      averageCombinedChlorine.value = measurements.map(_.combinedChlorine).sum / measurements.length
+      averagePh.value = measurements.map(_.ph).sum / measurements.length
+      averageCalciumHardness.value = measurements.map(_.calciumHardness).sum / measurements.length
+      averageTotalAlkalinity.value = measurements.map(_.totalAlkalinity).sum / measurements.length
+      averageCyanuricAcid.value = measurements.map(_.cyanuricAcid).sum / measurements.length
+      averageTotalBromine.value = measurements.map(_.totalBromine).sum / measurements.length
     }.recover { case error: Throwable => logger.error(s"Loading dashboard data failed: ${error.getMessage}") }
 
   def add(pool: Pool): Either[Throwable, Pool] =
