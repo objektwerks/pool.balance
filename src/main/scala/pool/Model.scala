@@ -43,6 +43,10 @@ final class Model(context: Context):
   val currentTotalBromine = ObjectProperty[Int](0)
   val averageTotalBromine = ObjectProperty[Int](0)
 
+  selectedPoolId.onChange { (_, _, newValue) =>
+    // TODO!
+  }
+
   def pools(): Either[Throwable, ObservableBuffer[Pool]] =
     Try {
       observablePools ++= store.pools()
