@@ -49,6 +49,10 @@ class CleaningsPane(context: Context) extends VBox with AddEditButtonBar(context
     items = model.observableCleanings
   }
 
+  model.selectedPoolId.onChange { (_, _, _) =>
+    addButton.disable = false
+  }
+
   children = List(tableView, addEditButtonBar)
   VBox.setVgrow(tableView, Priority.Always)
 
