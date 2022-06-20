@@ -87,11 +87,11 @@ final case class Measurement(id: Long = 0,
   val measurement = this
 
 enum TypeOfChemical:
-  case liquidChlorine, trichlor, dichlor, calciumHypochlorite, stabilizer, algaecide, muriaticAcid
+  case LiquidChlorine, Trichlor, Dichlor, CalciumHypochlorite, Stabilizer, Algaecide, MuriaticAcid
 
 final case class Chemical(id: Long = 0,
                           poolId: Long,
-                          typeof: TypeOfChemical = TypeOfChemical.liquidChlorine,
+                          typeof: TypeOfChemical = TypeOfChemical.LiquidChlorine,
                           amount: Double = 1.0, 
                           unit: UnitOfMeasure = UnitOfMeasure.gl,
                           added: LocalDateTime = LocalDateTime.now) extends Entity:
