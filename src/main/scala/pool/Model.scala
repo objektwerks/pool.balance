@@ -2,7 +2,7 @@ package pool
 
 import scala.util.Try
 import scalafx.collections.ObservableBuffer
-import scalafx.beans.property.LongProperty
+import scalafx.beans.property.{LongProperty, ObjectProperty}
 
 import Entity.given
 
@@ -18,6 +18,30 @@ final class Model(context: Context):
   val selectedCleaningId = LongProperty(0)
   val selectedMeasurementId = LongProperty(0)
   val selectedChemicalId = LongProperty(0)
+
+  val currentTotalChlorine = ObjectProperty[Int](0)
+  val averageTotalChlorine = ObjectProperty[Int](0)
+
+  val currentFreeChlorine = ObjectProperty[Int](0)
+  val averageFreeChlorine = ObjectProperty[Int](0)
+
+  val currentCombinedChlorine = ObjectProperty[Int](0)
+  val averageCombinedChlorine = ObjectProperty[Int](0)
+
+  val currentPh = ObjectProperty[Int](0)
+  val averagePh = ObjectProperty[Int](0)
+
+  val currentCalciumHardness = ObjectProperty[Int](0)
+  val averageCalciumHardness = ObjectProperty[Int](0)
+
+  val currentTotalAlkalinity = ObjectProperty[Int](0)
+  val averageTotalAlkalinity = ObjectProperty[Int](0)
+
+  val currentCyanuricAcid = ObjectProperty[Int](0)
+  val averageCyanuricAcid = ObjectProperty[Int](0)
+
+  val currentTotalBromine = ObjectProperty[Int](0)
+  val averageTotalBromine = ObjectProperty[Int](0)
 
   def pools(): Either[Throwable, ObservableBuffer[Pool]] =
     Try {
