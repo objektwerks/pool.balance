@@ -4,7 +4,7 @@ Pool Balance
 
 Todo
 ----
-1. Bind model current and average properties to dashboard titled panes.
+1. Format table view dates.
 2. Bind model errors to errors pane.
 3. Consider dashboard pass and fail badge.
 
