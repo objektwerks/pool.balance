@@ -26,19 +26,7 @@ final class StoreTest extends AnyFunSuite with Matchers:
     var chemical = addChemical(pool)
     chemical = updateChemical(chemical)
     listChemicals(pool, chemical)
-
-    current(pool, measurement)
-
-    average(pool, measurement)
   }
-
-  def current(pool: Pool, measurement: Measurement): Unit =
-    val current = store.current(pool.id, TypeOfMeasurement.totalChlorine)
-    current.get shouldBe measurement.totalChlorine
-
-  def average(pool: Pool, measurement: Measurement): Unit =
-    val average = store.average(pool.id, TypeOfMeasurement.totalChlorine)
-    average.get shouldBe measurement.totalChlorine
 
   def addPool(): Pool =
     val pool = Pool(name = "pool-a", volume = 10000, unit = UnitOfMeasure.gl)
