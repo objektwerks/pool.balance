@@ -9,6 +9,7 @@ trait AddEditButtonBar(val context: Context):
   val addButton = new Button {
     graphic = context.addImage
     text = context.paneAdd
+    disable = true
     onAction = { _ => add() }
   }
 

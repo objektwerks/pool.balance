@@ -33,6 +33,8 @@ class PoolsPane(context: Context) extends VBox with AddEditButtonBar(context):
     items = model.observablePools
   }
 
+  addButton.disable = false
+  
   val tab = new Tab {
   	text = context.labelPools
   	closable = false
