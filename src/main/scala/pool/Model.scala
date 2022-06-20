@@ -29,11 +29,11 @@ final class Model(context: Context) extends LazyLogging:
   val currentFreeChlorine = ObjectProperty[Int](0)
   val averageFreeChlorine = ObjectProperty[Int](0)
 
-  val currentCombinedChlorine = ObjectProperty[Int](0)
-  val averageCombinedChlorine = ObjectProperty[Int](0)
+  val currentCombinedChlorine = ObjectProperty[Double](0)
+  val averageCombinedChlorine = ObjectProperty[Double](0)
 
-  val currentPh = ObjectProperty[Int](0)
-  val averagePh = ObjectProperty[Int](0)
+  val currentPh = ObjectProperty[Double](0)
+  val averagePh = ObjectProperty[Double](0)
 
   val currentCalciumHardness = ObjectProperty[Int](0)
   val averageCalciumHardness = ObjectProperty[Int](0)
@@ -80,7 +80,19 @@ final class Model(context: Context) extends LazyLogging:
     }.recover { case error: Throwable => logger.error(s"Loading chemicals data failed: ${error.getMessage}") }
 
   private def dashboard(poolId: Long): Unit =
-    ()
+    Try {
+      val measurements = store.measurements(poolId)
+      measurements.headOption.foreach { measurement =>
+        currentTotalChlorine.value = measurement.totalChlorine
+        currentFreeChlorine.value = measurement.freeChlorine
+        currentCombinedChlorine.value = measurement.combinedChlorine
+        currentPh.value = measurement.ph
+        currentCalciumHardness.value = measurement.calciumHardness
+        currentTotalAlkalinity.value = measurement.totalAlkalinity
+        currentCyanuricAcid.value = measurement.cyanuricAcid
+        currentTotalBromine.value = measurement.totalBromine
+      }
+    }.recover { case error: Throwable => logger.error(s"Loading dashboard data failed: ${error.getMessage}") }
 
   def add(pool: Pool): Either[Throwable, Pool] =
     Try {
