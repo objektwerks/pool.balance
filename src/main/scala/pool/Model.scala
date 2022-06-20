@@ -9,7 +9,7 @@ import Entity.given
 final class Model(context: Context):
   private val store = context.store
 
-  private val observablePools = ObservableBuffer[Pool]()
+  val observablePools = ObservableBuffer[Pool]()
   val observableCleanings = ObservableBuffer[Cleaning]()
   val observableMeasurements = ObservableBuffer[Measurement]()
   val observableChemicals = ObservableBuffer[Chemical]()
@@ -51,9 +51,28 @@ final class Model(context: Context):
     // dashboard
   }
 
-  def pools(): Either[Throwable, ObservableBuffer[Pool]] =
+  private def pools(): Either[Throwable, ObservableBuffer[Pool]] =
     Try {
       observablePools ++= store.pools()
+    }.toEither
+
+  private def cleanings(poolId: Long): Either[Throwable, Unit] =
+    Try {
+      observableCleanings.clear()
+      observableCleanings ++= store.cleanings(poolId)
+      ()
+    }.toEither
+
+  private def measurements(poolId: Long): Either[Throwable, ObservableBuffer[Measurement]] =
+    Try {
+      observableMeasurements.clear()
+      observableMeasurements ++= store.measurements(poolId) 
+    }.toEither
+
+  private def chemicals(poolId: Long): Either[Throwable, ObservableBuffer[Chemical]] =
+    Try {
+      observableChemicals.clear()
+      observableChemicals ++= store.chemicals(poolId) 
     }.toEither
 
   def add(pool: Pool): Either[Throwable, Pool] =
@@ -73,13 +92,6 @@ final class Model(context: Context):
       selectedPoolId.value = pool.id
     }.toEither
 
-  def cleanings(poolId: Long): Either[Throwable, Unit] =
-    Try {
-      observableCleanings.clear()
-      observableCleanings ++= store.cleanings(poolId)
-      ()
-    }.toEither
-
   def add(cleaning: Cleaning): Either[Throwable, Cleaning] =
     Try {
       val newCleaning = store.add(cleaning)
@@ -95,12 +107,6 @@ final class Model(context: Context):
       observableCleanings.update(selectedIndex, cleaning)
       observableCleanings.sort()
       selectedCleaningId.value = cleaning.id
-    }.toEither
-
-  def measurements(poolId: Long): Either[Throwable, ObservableBuffer[Measurement]] =
-    Try {
-      observableMeasurements.clear()
-      observableMeasurements ++= store.measurements(poolId) 
     }.toEither
   
   def add(measurement: Measurement): Either[Throwable, Measurement] =
@@ -118,12 +124,6 @@ final class Model(context: Context):
       observableMeasurements.update(selectedIndex, measurement)
       observableMeasurements.sort()
       selectedMeasurementId.value = measurement.id
-    }.toEither
-
-  def chemicals(poolId: Long): Either[Throwable, ObservableBuffer[Chemical]] =
-    Try {
-      observableChemicals.clear()
-      observableChemicals ++= store.chemicals(poolId) 
     }.toEither
   
   def add(chemical: Chemical): Either[Throwable, Chemical] =
