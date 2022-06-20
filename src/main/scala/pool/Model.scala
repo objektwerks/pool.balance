@@ -47,7 +47,8 @@ final class Model(context: Context) extends LazyLogging:
   val currentTotalBromine = ObjectProperty[Int](0)
   val averageTotalBromine = ObjectProperty[Int](0)
 
-  selectedPoolId.onChange { (_, _, newPoolId) =>
+  selectedPoolId.onChange { (_, oldPoolId, newPoolId) =>
+    logger.info(s"Selected Pool Id Change: $oldPoolId -> $newPoolId")
     cleanings(newPoolId)
     measurements(newPoolId)
     chemicals(newPoolId)
