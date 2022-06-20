@@ -1,13 +1,17 @@
 package pool
 
+import com.typesafe.scalalogging.LazyLogging
+
 import scala.util.Try
 import scalafx.collections.ObservableBuffer
 import scalafx.beans.property.{LongProperty, ObjectProperty}
 
 import Entity.given
 
-final class Model(context: Context):
+final class Model(context: Context) extends LazyLogging:
   private val store = context.store
+
+  val observableErrors = ObservableBuffer[String]()
 
   val observablePools = ObservableBuffer[Pool]()
   val observableCleanings = ObservableBuffer[Cleaning]()
@@ -51,29 +55,30 @@ final class Model(context: Context):
     // dashboard
   }
 
-  private def pools(): Either[Throwable, ObservableBuffer[Pool]] =
+  pools()
+
+  private def pools(): Unit =
     Try {
       observablePools ++= store.pools()
-    }.toEither
+    }.recover { case error: Throwable => logger.error(s"Loading pools from store failed: ${error.getMessage}") }
 
-  private def cleanings(poolId: Long): Either[Throwable, Unit] =
+  private def cleanings(poolId: Long): Unit =
     Try {
       observableCleanings.clear()
       observableCleanings ++= store.cleanings(poolId)
-      ()
-    }.toEither
+    }.recover { case error: Throwable => logger.error(s"Loading cleanings from store failed: ${error.getMessage}") }
 
-  private def measurements(poolId: Long): Either[Throwable, ObservableBuffer[Measurement]] =
+  private def measurements(poolId: Long): Unit =
     Try {
       observableMeasurements.clear()
       observableMeasurements ++= store.measurements(poolId) 
-    }.toEither
+    }.recover { case error: Throwable => logger.error(s"Loading measurements from store failed: ${error.getMessage}") }
 
-  private def chemicals(poolId: Long): Either[Throwable, ObservableBuffer[Chemical]] =
+  private def chemicals(poolId: Long): Unit =
     Try {
       observableChemicals.clear()
       observableChemicals ++= store.chemicals(poolId) 
-    }.toEither
+    }.recover { case error: Throwable => logger.error(s"Loading chemicals from store failed: ${error.getMessage}") }
 
   def add(pool: Pool): Either[Throwable, Pool] =
     Try {
