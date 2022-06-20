@@ -14,12 +14,12 @@ sealed trait Entity:
   val id: Long
 
 object Entity:
-  def newDateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")
   def newDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
   def newTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
-  def format(localDateTime: LocalDateTime): LocalDateTime = LocalDateTime.parse( localDateTime.format(newDateTimeFormatter) )
-  def format(localDate: LocalDate): LocalDate = LocalDate.parse( localDate.format(newDateFormatter) )
-  def format(localTime: LocalTime): LocalTime = LocalTime.parse( localTime.format(newTimeFormatter) )
+
+  def format(localDateTime: LocalDateTime): String = localDateTime.format(newDateFormatter)
+  def format(localDate: LocalDate): String = localDate.format(newDateFormatter)
+  def format(localTime: LocalTime): String = localTime.format(newTimeFormatter)
 
   def applyLocalDate(localDate: LocalDate, localDateTime: LocalDateTime): LocalDateTime =
     localDateTime
@@ -59,7 +59,7 @@ final case class Cleaning(id: Long = 0,
   val pumpBasketProperty = ObjectProperty[Boolean](this, "pumpBasket", pumpBasket)
   val pumpFilterProperty = ObjectProperty[Boolean](this, "pumpFilter", pumpFilter)
   val vacuumProperty = ObjectProperty[Boolean](this, "vacuum", vacuum)
-  val cleanedProperty = ObjectProperty[String](this, "cleaned", Entity.format(cleaned).toString)
+  val cleanedProperty = ObjectProperty[String](this, "cleaned", Entity.format(cleaned))
   val cleaning = this
 
 final case class Measurement(id: Long = 0,
@@ -83,7 +83,7 @@ final case class Measurement(id: Long = 0,
   val cyanuricAcidProperty = ObjectProperty[Int](this, "cyanuricAcid", cyanuricAcid)
   val totalBromineProperty = ObjectProperty[Int](this, "totalBromine", totalBromine)
   val temperatureProperty = ObjectProperty[Int](this, "temperature", temperature)
-  val measuredProperty = ObjectProperty[String](this, "measured", Entity.format(measured).toString)
+  val measuredProperty = ObjectProperty[String](this, "measured", Entity.format(measured))
   val measurement = this
 
 enum TypeOfChemical:
@@ -98,5 +98,5 @@ final case class Chemical(id: Long = 0,
   val typeofProperty = ObjectProperty[String](this, "typeof", typeof.toString)
   val amountProperty = ObjectProperty[Double](this, "amount", amount)
   val unitProperty = ObjectProperty[String](this, "unit", unit.toString)
-  val addedProperty = ObjectProperty[String](this, "added", Entity.format(added).toString)
+  val addedProperty = ObjectProperty[String](this, "added", Entity.format(added))
   val chemical = this
