@@ -61,6 +61,10 @@ class MeasurementsPane(context: Context) extends VBox with AddEditButtonBar(cont
     items = model.observableMeasurements
   }
 
+  model.selectedPoolId.onChange { (_, _, _) =>
+    addButton.disable = false
+  }
+
   children = List(tableView, addEditButtonBar)
   VBox.setVgrow(tableView, Priority.Always)
 
