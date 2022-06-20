@@ -18,10 +18,10 @@ final class Model(context: Context) extends LazyLogging:
   val observableMeasurements = ObservableBuffer[Measurement]()
   val observableChemicals = ObservableBuffer[Chemical]()
 
-  val selectedPoolId = LongProperty(0)
-  val selectedCleaningId = LongProperty(0)
-  val selectedMeasurementId = LongProperty(0)
-  val selectedChemicalId = LongProperty(0)
+  val selectedPoolId = ObjectProperty[Long](0)
+  val selectedCleaningId = ObjectProperty[Long](0)
+  val selectedMeasurementId = ObjectProperty[Long](0)
+  val selectedChemicalId = ObjectProperty[Long](0)
 
   val currentTotalChlorine = ObjectProperty[Int](0)
   val averageTotalChlorine = ObjectProperty[Int](0)
