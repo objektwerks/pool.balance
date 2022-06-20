@@ -15,10 +15,10 @@ class EnumTest extends AnyFunSuite with Matchers:
   }
 
   test("type of chemical") {
-    TypeOfChemical.valueOf(TypeOfChemical.liquidChlorine.toString) shouldBe TypeOfChemical.liquidChlorine
-    TypeOfChemical.valueOf(TypeOfChemical.trichlor.toString) shouldBe TypeOfChemical.trichlor
-    TypeOfChemical.valueOf(TypeOfChemical.dichlor.toString) shouldBe TypeOfChemical.dichlor
-    TypeOfChemical.valueOf(TypeOfChemical.calciumHypochlorite.toString) shouldBe TypeOfChemical.calciumHypochlorite
-    TypeOfChemical.valueOf(TypeOfChemical.stabilizer.toString) shouldBe TypeOfChemical.stabilizer
-    TypeOfChemical.valueOf(TypeOfChemical.algaecide.toString) shouldBe TypeOfChemical.algaecide
+    TypeOfChemical.valueOf(TypeOfChemical.LiquidChlorine.toString) shouldBe TypeOfChemical.LiquidChlorine
+    TypeOfChemical.valueOf(TypeOfChemical.Trichlor.toString) shouldBe TypeOfChemical.Trichlor
+    TypeOfChemical.valueOf(TypeOfChemical.Dichlor.toString) shouldBe TypeOfChemical.Dichlor
+    TypeOfChemical.valueOf(TypeOfChemical.CalciumHypochlorite.toString) shouldBe TypeOfChemical.CalciumHypochlorite
+    TypeOfChemical.valueOf(TypeOfChemical.Stabilizer.toString) shouldBe TypeOfChemical.Stabilizer
+    TypeOfChemical.valueOf(TypeOfChemical.Algaecide.toString) shouldBe TypeOfChemical.Algaecide
   }
