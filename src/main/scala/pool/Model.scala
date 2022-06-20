@@ -105,7 +105,9 @@ final class Model(context: Context) extends LazyLogging:
       }
     }.recover { case error: Throwable => onError(error, s"Loading dashboard data failed: ${error.getMessage}") }
 
-  def onError(error: Throwable, message: String) =
+  def onError(message: String): Unit = logger.error(message)
+  
+  def onError(error: Throwable, message: String): Unit =
     observableErrors += message
     logger.error(message, error)
 
