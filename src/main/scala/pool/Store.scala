@@ -109,29 +109,6 @@ final class Store(context: Context):
       .update()
   }
 
-  def toColumn(typeof: TypeOfMeasurement): String = typeof match
-    case TypeOfMeasurement.totalChlorine => "total_chlorine"
-    case TypeOfMeasurement.freeChlorine => "free_chlorine"
-    case TypeOfMeasurement.combinedChlorine => "combined_chlorine"
-    case TypeOfMeasurement.ph => "ph"
-    case TypeOfMeasurement.calciumHardness => "calcium_hardness"
-    case TypeOfMeasurement.totalAlkalinity => "total_alkalinity"
-    case TypeOfMeasurement.cyanuricAcid => "cyanuric_acid"
-    case TypeOfMeasurement.totalBromine => "total_bromine"
-    case TypeOfMeasurement.temperature => "temperature"
-
-  def current(poolId: Long, typeof: TypeOfMeasurement): Option[Int] = DB readOnly { implicit session =>
-    SQL(s"select max(${toColumn(typeof)}) as current from measurement where pool_id = $poolId")
-      .map(rs => rs.int("current"))
-      .single()
-  }
-
-  def average(poolId: Long, typeof: TypeOfMeasurement): Option[Int] = DB readOnly { implicit session =>
-    SQL(s"select avg(${toColumn(typeof)}) as average from measurement where pool_id = $poolId")
-      .map(rs => rs.int("average"))
-      .single()
-  }
-
   def chemicals(poolId: Long): List[Chemical] = DB readOnly { implicit session =>
     sql"select * from chemical where pool_id = ${poolId} order by added desc"
       .map(rs => Chemical(
