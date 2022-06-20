@@ -65,4 +65,4 @@ class ChemicalsPane(context: Context) extends VBox with AddEditButtonBar(context
       case Some(chemical: Chemical) =>
         model.update(selectedIndex, chemical)
         tableView.selectionModel().select(selectedIndex)
-      case _ => model.onError("Chemical Dialog edit failed.")
+      case _ => model.onError("Chemical Dialog update failed.")

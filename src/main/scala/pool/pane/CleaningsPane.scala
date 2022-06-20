@@ -68,7 +68,7 @@ class CleaningsPane(context: Context) extends VBox with AddEditButtonBar(context
   def add(): Unit =
     CleaningDialog(context, Cleaning(poolId = model.selectedPoolId.value)).showAndWait() match
       case Some(cleaning: Cleaning) => model.add(cleaning).fold(_ => (), cleaning => tableView.selectionModel().select(cleaning))
-      case _ =>
+      case _ => model.onError("Cleaning Dialog add failed.")
 
   def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
@@ -77,4 +77,4 @@ class CleaningsPane(context: Context) extends VBox with AddEditButtonBar(context
       case Some(cleaning: Cleaning) =>
         model.update(selectedIndex, cleaning)
         tableView.selectionModel().select(selectedIndex)
-      case _ =>
+      case _ => model.onError("Cleaning Dialog update failed.")
