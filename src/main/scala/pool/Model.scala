@@ -92,14 +92,15 @@ final class Model(context: Context) extends LazyLogging:
         currentCyanuricAcid.value = measurement.cyanuricAcid
         currentTotalBromine.value = measurement.totalBromine
       }
-      averageTotalChlorine.value = measurements.map(_.totalChlorine).sum / measurements.length
-      averageFreeChlorine.value = measurements.map(_.freeChlorine).sum / measurements.length
-      averageCombinedChlorine.value = measurements.map(_.combinedChlorine).sum / measurements.length
-      averagePh.value = measurements.map(_.ph).sum / measurements.length
-      averageCalciumHardness.value = measurements.map(_.calciumHardness).sum / measurements.length
-      averageTotalAlkalinity.value = measurements.map(_.totalAlkalinity).sum / measurements.length
-      averageCyanuricAcid.value = measurements.map(_.cyanuricAcid).sum / measurements.length
-      averageTotalBromine.value = measurements.map(_.totalBromine).sum / measurements.length
+      val count = measurements.length
+      averageTotalChlorine.value = measurements.map(_.totalChlorine).sum / count
+      averageFreeChlorine.value = measurements.map(_.freeChlorine).sum / count
+      averageCombinedChlorine.value = measurements.map(_.combinedChlorine).sum / count
+      averagePh.value = measurements.map(_.ph).sum / count
+      averageCalciumHardness.value = measurements.map(_.calciumHardness).sum / count
+      averageTotalAlkalinity.value = measurements.map(_.totalAlkalinity).sum / count
+      averageCyanuricAcid.value = measurements.map(_.cyanuricAcid).sum / count
+      averageTotalBromine.value = measurements.map(_.totalBromine).sum / count
     }.recover { case error: Throwable => onError(error, s"Loading dashboard data failed: ${error.getMessage}") }
 
   private def onError(error: Throwable, message: String) =
