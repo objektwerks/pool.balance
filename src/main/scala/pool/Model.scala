@@ -59,25 +59,25 @@ final class Model(context: Context) extends LazyLogging:
   private def pools(): Unit =
     Try {
       observablePools ++= store.pools()
-    }.recover { case error: Throwable => logger.error(s"Loading pools from store failed: ${error.getMessage}") }
+    }.recover { case error: Throwable => logger.error(s"Loading pools data failed: ${error.getMessage}") }
 
   private def cleanings(poolId: Long): Unit =
     Try {
       observableCleanings.clear()
       observableCleanings ++= store.cleanings(poolId)
-    }.recover { case error: Throwable => logger.error(s"Loading cleanings from store failed: ${error.getMessage}") }
+    }.recover { case error: Throwable => logger.error(s"Loading cleanings data failed: ${error.getMessage}") }
 
   private def measurements(poolId: Long): Unit =
     Try {
       observableMeasurements.clear()
       observableMeasurements ++= store.measurements(poolId) 
-    }.recover { case error: Throwable => logger.error(s"Loading measurements from store failed: ${error.getMessage}") }
+    }.recover { case error: Throwable => logger.error(s"Loading measurements data failed: ${error.getMessage}") }
 
   private def chemicals(poolId: Long): Unit =
     Try {
       observableChemicals.clear()
       observableChemicals ++= store.chemicals(poolId) 
-    }.recover { case error: Throwable => logger.error(s"Loading chemicals from store failed: ${error.getMessage}") }
+    }.recover { case error: Throwable => logger.error(s"Loading chemicals data failed: ${error.getMessage}") }
 
   private def dashboard(poolId: Long): Unit =
     ()
