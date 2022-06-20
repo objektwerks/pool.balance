@@ -59,25 +59,37 @@ final class Model(context: Context) extends LazyLogging:
   private def pools(): Unit =
     Try {
       observablePools ++= store.pools()
-    }.recover { case error: Throwable => logger.error(s"Loading pools data failed: ${error.getMessage}") }
+    }.recover { case error: Throwable =>
+      val message = s"Loading pools data failed: ${error.getMessage}"
+      onError(error, message) 
+    }
 
   private def cleanings(poolId: Long): Unit =
     Try {
       observableCleanings.clear()
       observableCleanings ++= store.cleanings(poolId)
-    }.recover { case error: Throwable => logger.error(s"Loading cleanings data failed: ${error.getMessage}") }
+    }.recover { case error: Throwable =>
+      val message = s"Loading cleanings data failed: ${error.getMessage}"
+      onError(error, message) 
+    }
 
   private def measurements(poolId: Long): Unit =
     Try {
       observableMeasurements.clear()
       observableMeasurements ++= store.measurements(poolId) 
-    }.recover { case error: Throwable => logger.error(s"Loading measurements data failed: ${error.getMessage}") }
+    }.recover { case error: Throwable =>
+      val message = s"Loading measurements data failed: ${error.getMessage}"
+      onError(error, message) 
+    }
 
   private def chemicals(poolId: Long): Unit =
     Try {
       observableChemicals.clear()
       observableChemicals ++= store.chemicals(poolId) 
-    }.recover { case error: Throwable => logger.error(s"Loading chemicals data failed: ${error.getMessage}") }
+    }.recover { case error: Throwable =>
+      val message = s"Loading chemicals data failed: ${error.getMessage}"
+      onError(error, message) 
+    }
 
   private def dashboard(poolId: Long): Unit =
     Try {
@@ -100,7 +112,14 @@ final class Model(context: Context) extends LazyLogging:
       averageTotalAlkalinity.value = measurements.map(_.totalAlkalinity).sum / measurements.length
       averageCyanuricAcid.value = measurements.map(_.cyanuricAcid).sum / measurements.length
       averageTotalBromine.value = measurements.map(_.totalBromine).sum / measurements.length
-    }.recover { case error: Throwable => logger.error(s"Loading dashboard data failed: ${error.getMessage}") }
+    }.recover { case error: Throwable =>
+      val message = s"Loading dashboard data failed: ${error.getMessage}"
+      onError(error, message) 
+    }
+
+  private def onError(error: Throwable, message: String) =
+    observableErrors += message
+    logger.error(message, error)
 
   def add(pool: Pool): Either[Throwable, Pool] =
     Try {
