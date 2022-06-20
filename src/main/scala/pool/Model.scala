@@ -10,9 +10,9 @@ final class Model(context: Context):
   private val store = context.store
 
   private val observablePools = ObservableBuffer[Pool]()
-  private val observableCleanings = ObservableBuffer[Cleaning]()
-  private val observableMeasurements = ObservableBuffer[Measurement]()
-  private val observableChemicals = ObservableBuffer[Chemical]()
+  val observableCleanings = ObservableBuffer[Cleaning]()
+  val observableMeasurements = ObservableBuffer[Measurement]()
+  val observableChemicals = ObservableBuffer[Chemical]()
 
   val selectedPoolId = LongProperty(0)
   val selectedCleaningId = LongProperty(0)
@@ -21,10 +21,6 @@ final class Model(context: Context):
 
   def pools(): Either[Throwable, ObservableBuffer[Pool]] =
     Try {
-      observablePools.clear()
-      observableCleanings.clear()
-      observableMeasurements.clear()
-      observableChemicals.clear()
       observablePools ++= store.pools()
     }.toEither
 
