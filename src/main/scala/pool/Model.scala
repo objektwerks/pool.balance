@@ -43,8 +43,12 @@ final class Model(context: Context):
   val currentTotalBromine = ObjectProperty[Int](0)
   val averageTotalBromine = ObjectProperty[Int](0)
 
-  selectedPoolId.onChange { (_, _, newValue) =>
-    // TODO!
+  selectedPoolId.onChange { (_, _, newPoolId) =>
+    val poolId = newPoolId.asInstanceOf[Long]
+    cleanings(poolId)
+    measurements(poolId)
+    chemicals(poolId)
+    // dashboard
   }
 
   def pools(): Either[Throwable, ObservableBuffer[Pool]] =
@@ -69,10 +73,11 @@ final class Model(context: Context):
       selectedPoolId.value = pool.id
     }.toEither
 
-  def cleanings(poolId: Long): Either[Throwable, ObservableBuffer[Cleaning]] =
+  def cleanings(poolId: Long): Either[Throwable, Unit] =
     Try {
       observableCleanings.clear()
       observableCleanings ++= store.cleanings(poolId)
+      ()
     }.toEither
 
   def add(cleaning: Cleaning): Either[Throwable, Cleaning] =
