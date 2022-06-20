@@ -6,7 +6,7 @@ Todo
 ----
 1. Bind model current and average properties to dashboard titled panes.
 2. Bind model errors to errors pane.
-3. Dashboard Pass and Fail Badge
+3. Consider dashboard pass and fail badge.
 
 Build
 -----
