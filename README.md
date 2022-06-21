@@ -4,7 +4,7 @@ Pool Balance
 
 Todo
 ----
-1. Bind errors to status pane.
+1. Bind errors to south status pane.
 2. Consider dashboard pass and fail badge.
 
 Build
