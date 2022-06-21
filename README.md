@@ -81,6 +81,12 @@ UI
 2. Left: pane(pools)
 3. Center: tabbedpane(cleanings, measurements, chemicals)
 
+Charts
+------
+* cleanings - line chart ( x = cleaned, y = typeof )
+* measurements - line chart ( x = measured, y = measurement )
+* chemicals - bar chart ( x = added, y = amount/typeof )
+
 Resources
 ---------
 1. [JavaFX](https://openjfx.io/index.html)
