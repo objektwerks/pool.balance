@@ -100,7 +100,6 @@ final class Context(config: Config):
 
   val listUnits = config.getStringList("list.units").asScala.toList
   val listPoolUnits = config.getStringList("list.poolUnits").asScala.toList
-  val listChemicals = config.getStringList("list.chemicals").asScala.toList
 
   def addImage = loadImageView("/add.png")
   def editImage = loadImageView("/edit.png")

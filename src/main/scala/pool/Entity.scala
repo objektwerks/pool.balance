@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter
 import math.BigDecimal.double2bigDecimal
 
 import scalafx.beans.property.ObjectProperty
+import ch.qos.logback.core.subst.Token.Type
 
 enum UnitOfMeasure:
   case gl, kg, g, l, ml, lbs, oz
@@ -86,8 +87,18 @@ final case class Measurement(id: Long = 0,
   val measuredProperty = ObjectProperty[String](this, "measured", Entity.format(measured))
   val measurement = this
 
-enum TypeOfChemical:
-  case LiquidChlorine, Trichlor, Dichlor, CalciumHypochlorite, Stabilizer, Algaecide, MuriaticAcid
+enum TypeOfChemical(val display: String):
+  case LiquidChlorine extends TypeOfChemical("Liquid Chlorine")
+  case Trichlor extends TypeOfChemical("Trichlor")
+  case Dichlor extends TypeOfChemical("Dichlor")
+  case CalciumHypochlorite extends TypeOfChemical("Calcium Hypochlorite")
+  case Stabilizer extends TypeOfChemical("Stabilizer")
+  case Algaecide extends TypeOfChemical("Algaecide")
+  case MuriaticAcid extends TypeOfChemical("Muriatic Acid")
+
+object TypeOfChemical:
+  def toEnum(display: String): TypeOfChemical = TypeOfChemical.valueOf(display.filterNot(_.isWhitespace))
+  def toList: List[String] = TypeOfChemical.values.map(t => t.display).toList
 
 final case class Chemical(id: Long = 0,
                           poolId: Long,
@@ -95,7 +106,7 @@ final case class Chemical(id: Long = 0,
                           amount: Double = 1.0, 
                           unit: UnitOfMeasure = UnitOfMeasure.gl,
                           added: LocalDateTime = LocalDateTime.now) extends Entity:
-  val typeofProperty = ObjectProperty[String](this, "typeof", typeof.toString)
+  val typeofProperty = ObjectProperty[String](this, "typeof", typeof.display)
   val amountProperty = ObjectProperty[Double](this, "amount", amount)
   val unitProperty = ObjectProperty[String](this, "unit", unit.toString)
   val addedProperty = ObjectProperty[String](this, "added", Entity.format(added))

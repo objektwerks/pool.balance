@@ -21,4 +21,13 @@ class EnumTest extends AnyFunSuite with Matchers:
     TypeOfChemical.valueOf(TypeOfChemical.CalciumHypochlorite.toString) shouldBe TypeOfChemical.CalciumHypochlorite
     TypeOfChemical.valueOf(TypeOfChemical.Stabilizer.toString) shouldBe TypeOfChemical.Stabilizer
     TypeOfChemical.valueOf(TypeOfChemical.Algaecide.toString) shouldBe TypeOfChemical.Algaecide
+    TypeOfChemical.valueOf(TypeOfChemical.MuriaticAcid.toString) shouldBe TypeOfChemical.MuriaticAcid
+
+    TypeOfChemical.toEnum(TypeOfChemical.LiquidChlorine.display) shouldBe TypeOfChemical.LiquidChlorine
+    TypeOfChemical.toEnum(TypeOfChemical.Trichlor.display) shouldBe TypeOfChemical.Trichlor
+    TypeOfChemical.toEnum(TypeOfChemical.Dichlor.display) shouldBe TypeOfChemical.Dichlor
+    TypeOfChemical.toEnum(TypeOfChemical.CalciumHypochlorite.display) shouldBe TypeOfChemical.CalciumHypochlorite
+    TypeOfChemical.toEnum(TypeOfChemical.Stabilizer.display) shouldBe TypeOfChemical.Stabilizer
+    TypeOfChemical.toEnum(TypeOfChemical.Algaecide.display) shouldBe TypeOfChemical.Algaecide
+    TypeOfChemical.toEnum(TypeOfChemical.MuriaticAcid.display) shouldBe TypeOfChemical.MuriaticAcid
   }
