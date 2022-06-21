@@ -11,6 +11,10 @@ import ch.qos.logback.core.subst.Token.Type
 enum UnitOfMeasure:
   case gl, kg, g, l, ml, lbs, oz
 
+object UnitOfMeasure:
+  def toList: List[String] = UnitOfMeasure.values.map(u => u.toString).toList
+  def toPoolList: List[String] = List( UnitOfMeasure.gl.toString, UnitOfMeasure.l.toString )
+
 sealed trait Entity:
   val id: Long
 

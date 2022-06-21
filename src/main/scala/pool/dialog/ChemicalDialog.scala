@@ -25,7 +25,7 @@ class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemic
   }
 
   val unitComboBox = new ComboBox[String] {
-  	items = ObservableBuffer.from(context.listUnits)
+  	items = ObservableBuffer.from( UnitOfMeasure.toList )
   	value = chemical.unit.toString
   }
 

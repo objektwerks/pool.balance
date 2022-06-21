@@ -98,9 +98,6 @@ final class Context(config: Config):
   val tabMeasurements = config.getString("tab.measurements")
   val tabChemicals = config.getString("tab.chemicals")
 
-  val listUnits = config.getStringList("list.units").asScala.toList
-  val listPoolUnits = config.getStringList("list.poolUnits").asScala.toList
-
   def addImage = loadImageView("/add.png")
   def editImage = loadImageView("/edit.png")
 
