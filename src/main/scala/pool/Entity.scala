@@ -102,7 +102,7 @@ enum TypeOfChemical(val display: String):
 
 object TypeOfChemical:
   def toEnum(display: String): TypeOfChemical = TypeOfChemical.valueOf(display.filterNot(_.isWhitespace))
-  def toList: List[String] = TypeOfChemical.values.map(t => t.display).toList
+  def toList: List[String] = TypeOfChemical.values.map(toc => toc.display).toList
 
 final case class Chemical(id: Long = 0,
                           poolId: Long,
