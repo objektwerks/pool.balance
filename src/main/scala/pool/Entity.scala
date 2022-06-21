@@ -12,7 +12,7 @@ enum UnitOfMeasure:
   case gl, kg, g, l, ml, lbs, oz
 
 object UnitOfMeasure:
-  def toList: List[String] = UnitOfMeasure.values.map(u => u.toString).toList
+  def toList: List[String] = UnitOfMeasure.values.map(uom => uom.toString).toList
   def toPoolList: List[String] = List( UnitOfMeasure.gl.toString, UnitOfMeasure.l.toString )
 
 sealed trait Entity:
