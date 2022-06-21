@@ -4,9 +4,8 @@ Pool Balance
 
 Todo
 ----
-1. Handle errors in pane add and update.
-2. Bind model errors to errors pane.
-3. Consider dashboard pass and fail badge.
+1. Bind errors to status pane.
+2. Consider dashboard pass and fail badge.
 
 Build
 -----
