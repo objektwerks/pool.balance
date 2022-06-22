@@ -4,8 +4,10 @@ Pool Balance
 
 Todo
 ----
-1. Bind errors to south status pane.
-2. Consider dashboard pass and fail badge.
+1. Consider binding errors to status pane or dialog.
+2. Consider async IO with status pane integration.
+3. Build charts for cleanings, measurements and chemicals.
+4. Consider dashboard pass and fail badge.
 
 Build
 -----
