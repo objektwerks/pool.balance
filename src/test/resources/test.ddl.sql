@@ -4,7 +4,7 @@ create table if not exists pool (
   volume double not null,
   unit varchar not null
 );
-create index pool_name_idx ON pool(name);
+create index if not exists pool_name_idx ON pool(name);
 create table if not exists cleaning (
   id long primary key auto_increment,
   pool_id long references pool(id),
@@ -16,7 +16,7 @@ create table if not exists cleaning (
   vacuum bool not null,
   cleaned timestamp not null
 );
-create index cleaning_cleaned_idx ON cleaning(cleaned);
+create index if not exists cleaning_cleaned_idx ON cleaning(cleaned);
 create table if not exists measurement (
   id long primary key auto_increment,
   pool_id long references pool(id),
@@ -31,7 +31,7 @@ create table if not exists measurement (
   temperature int not null,
   measured timestamp not null
 );
-create index measurement_measured_idx ON measurement(measured);
+create index if not exists measurement_measured_idx ON measurement(measured);
 create table if not exists chemical (
   id long primary key auto_increment,
   pool_id long references pool(id),
@@ -40,4 +40,4 @@ create table if not exists chemical (
   unit varchar not null,
   added timestamp not null
 );
-create index chemical_added_idx ON chemical(added);
+create index if not exists chemical_added_idx ON chemical(added);
