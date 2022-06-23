@@ -9,7 +9,7 @@ import scalafx.scene.layout.{HBox, Priority, VBox}
 import pool.{Chemical, Context, Pool}
 import pool.dialog.ChemicalDialog
 
-class ChemicalsPane(context: Context) extends VBox with AddEditButtonBar(context):
+class ChemicalsPane(context: Context) extends VBox with PaneButtonBar(context):
   spacing = 6
   padding = Insets(6)
 

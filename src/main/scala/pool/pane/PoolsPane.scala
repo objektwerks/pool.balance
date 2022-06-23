@@ -9,7 +9,7 @@ import scalafx.scene.layout.{Priority, VBox}
 import pool.{Context, Pool, UnitOfMeasure}
 import pool.dialog.PoolDialog
 
-class PoolsPane(context: Context) extends VBox with AddEditButtonBar(context):
+class PoolsPane(context: Context) extends VBox with PaneButtonBar(context):
   spacing = 6
   padding = Insets(6)
 

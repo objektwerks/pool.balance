@@ -9,7 +9,7 @@ import scalafx.scene.layout.{HBox, Priority, VBox}
 import pool.{Cleaning, Context}
 import pool.dialog.CleaningDialog
 
-class CleaningsPane(context: Context) extends VBox with AddEditButtonBar(context):
+class CleaningsPane(context: Context) extends VBox with PaneButtonBar(context):
   spacing = 6
   padding = Insets(6)
 

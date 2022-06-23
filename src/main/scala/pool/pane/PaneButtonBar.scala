@@ -5,7 +5,7 @@ import scalafx.scene.layout.{HBox, VBox}
 
 import pool.Context
 
-trait AddEditButtonBar(val context: Context):
+trait PaneButtonBar(val context: Context):
   val addButton = new Button {
     graphic = context.addImage
     text = context.buttonAdd

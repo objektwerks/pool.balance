@@ -9,7 +9,7 @@ import scalafx.scene.layout.{HBox, Priority, VBox}
 import pool.{Measurement, Context}
 import pool.dialog.MeasurementDialog
 
-class MeasurementsPane(context: Context) extends VBox with AddEditButtonBar(context):
+class MeasurementsPane(context: Context) extends VBox with PaneButtonBar(context):
   spacing = 6
   padding = Insets(6)
 
