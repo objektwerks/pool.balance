@@ -27,12 +27,12 @@ trait PaneButtonBar(val context: Context):
     onAction = { _ => chart() }
   }
 
-  val addEditButtonBar = new HBox {
+  val paneButtonBar = new HBox {
     spacing = 6
     children = List(addButton, editButton)
   }
 
-  def addChartButton(): Unit = addEditButtonBar.children += chartButton
+  def addChartButton(): Unit = paneButtonBar.children += chartButton
 
   def add(): Unit
 
