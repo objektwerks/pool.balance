@@ -53,14 +53,7 @@ class CleaningsPane(context: Context) extends VBox with AddEditButtonBar(context
     addButton.disable = false
   }
 
-  val chartButton = new Button {
-    graphic = context.lineChartImage
-    text = context.buttonChart
-    disable = true
-    onAction = { _ => chart() }
-  }
-
-  addEditButtonBar.children += chartButton
+  addChartButton()
   children = List(tableView, addEditButtonBar)
   VBox.setVgrow(tableView, Priority.Always)
 

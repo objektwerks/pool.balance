@@ -41,6 +41,7 @@ class ChemicalsPane(context: Context) extends VBox with AddEditButtonBar(context
     addButton.disable = false
   }
 
+  addChartButton()
   children = List(tableView, addEditButtonBar)
   VBox.setVgrow(tableView, Priority.Always)
 
@@ -66,3 +67,5 @@ class ChemicalsPane(context: Context) extends VBox with AddEditButtonBar(context
         model.update(selectedIndex, chemical)
         tableView.selectionModel().select(selectedIndex)
       case _ => model.onError("Chemical update failed.")
+
+  def chart(): Unit = ()

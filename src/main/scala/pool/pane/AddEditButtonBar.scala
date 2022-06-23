@@ -20,11 +20,22 @@ trait AddEditButtonBar(val context: Context):
     onAction = { _ => update() }
   }
 
+  val chartButton = new Button {
+    graphic = context.chartImage
+    text = context.buttonChart
+    disable = true
+    onAction = { _ => chart() }
+  }
+
   val addEditButtonBar = new HBox {
     spacing = 6
     children = List(addButton, editButton)
   }
 
+  def addChartButton(): Unit = addEditButtonBar.children += chartButton
+
   def add(): Unit
 
   def update(): Unit
+
+  def chart(): Unit
