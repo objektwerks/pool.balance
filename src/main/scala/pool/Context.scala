@@ -29,7 +29,7 @@ final class Context(config: Config):
   val windowHeight = config.getDouble("window.height")
 
   val buttonAdd = config.getString("button.add")
-  val buttonEdit = config.getString("botton.edit")
+  val buttonEdit = config.getString("button.edit")
   val buttonSave = config.getString("button.save")
   val buttonChart = config.getString("button.chart")
 

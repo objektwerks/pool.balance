@@ -8,14 +8,14 @@ import pool.Context
 trait AddEditButtonBar(val context: Context):
   val addButton = new Button {
     graphic = context.addImage
-    text = context.paneAdd
+    text = context.buttonAdd
     disable = true
     onAction = { _ => add() }
   }
 
   val editButton = new Button {
     graphic = context.editImage
-    text = context.paneEdit
+    text = context.buttonEdit
     disable = true
     onAction = { _ => update() }
   }
