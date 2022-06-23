@@ -39,6 +39,7 @@ class ChemicalsPane(context: Context) extends VBox with AddEditButtonBar(context
 
   model.selectedPoolId.onChange { (_, _, _) =>
     addButton.disable = false
+    chartButton.disable = false
   }
 
   addChartButton()

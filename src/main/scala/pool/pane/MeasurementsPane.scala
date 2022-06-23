@@ -63,6 +63,7 @@ class MeasurementsPane(context: Context) extends VBox with AddEditButtonBar(cont
 
   model.selectedPoolId.onChange { (_, _, _) =>
     addButton.disable = false
+    chartButton.disable = false
   }
 
   addChartButton()
