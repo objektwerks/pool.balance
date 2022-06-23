@@ -53,6 +53,14 @@ class CleaningsPane(context: Context) extends VBox with AddEditButtonBar(context
     addButton.disable = false
   }
 
+  val chartButton = new Button {
+    graphic = context.lineChartImage
+    text = context.buttonChart
+    disable = true
+    onAction = { _ => chart() }
+  }
+
+  addEditButtonBar.children += chartButton
   children = List(tableView, addEditButtonBar)
   VBox.setVgrow(tableView, Priority.Always)
 
@@ -78,3 +86,5 @@ class CleaningsPane(context: Context) extends VBox with AddEditButtonBar(context
         model.update(selectedIndex, cleaning)
         tableView.selectionModel().select(selectedIndex)
       case _ => model.onError("Cleaning update failed.")
+
+  def chart(): Unit = ()
