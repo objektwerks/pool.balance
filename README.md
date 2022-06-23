@@ -4,9 +4,9 @@ Pool Balance
 
 Todo
 ----
-1. Consider binding errors to status pane or dialog.
-2. Consider async IO with status pane integration.
-3. Build charts for cleanings, measurements and chemicals.
+1. Build charts for cleanings, measurements and chemicals.
+2. Bind errors to status pane or dialog.
+3. Consider async IO with optional UI integration.
 4. Consider dashboard pass and fail badge.
 
 Build
