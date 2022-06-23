@@ -69,4 +69,4 @@ class ChemicalsPane(context: Context) extends VBox with AddEditButtonBar(context
         tableView.selectionModel().select(selectedIndex)
       case _ => model.onError("Chemical update failed.")
 
-  def chart(): Unit = ()
+  override def chart(): Unit = ()

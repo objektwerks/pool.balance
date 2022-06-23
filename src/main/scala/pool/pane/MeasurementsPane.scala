@@ -93,4 +93,4 @@ class MeasurementsPane(context: Context) extends VBox with AddEditButtonBar(cont
         tableView.selectionModel().select(selectedIndex)
       case _ => model.onError("Measurement update failed.")
 
-  def chart(): Unit = ()
+  override def chart(): Unit = ()

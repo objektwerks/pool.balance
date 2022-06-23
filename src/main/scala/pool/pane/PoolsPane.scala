@@ -75,5 +75,3 @@ class PoolsPane(context: Context) extends VBox with AddEditButtonBar(context):
         model.update(selectedIndex, pool)
         tableView.selectionModel().select(selectedIndex)
       case _ => model.onError("Pool update failed.")
-
-  def chart(): Unit = ()

@@ -38,4 +38,4 @@ trait AddEditButtonBar(val context: Context):
 
   def update(): Unit
 
-  def chart(): Unit
+  def chart(): Unit = ()
