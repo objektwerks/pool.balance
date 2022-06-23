@@ -65,6 +65,14 @@ class MeasurementsPane(context: Context) extends VBox with AddEditButtonBar(cont
     addButton.disable = false
   }
 
+  val chartButton = new Button {
+    graphic = context.lineChartImage
+    text = context.buttonChart
+    disable = true
+    onAction = { _ => chart() }
+  }
+
+  addEditButtonBar.children += chartButton
   children = List(tableView, addEditButtonBar)
   VBox.setVgrow(tableView, Priority.Always)
 
@@ -90,3 +98,5 @@ class MeasurementsPane(context: Context) extends VBox with AddEditButtonBar(cont
         model.update(selectedIndex, measurement)
         tableView.selectionModel().select(selectedIndex)
       case _ => model.onError("Measurement update failed.")
+
+  def chart(): Unit = ()
