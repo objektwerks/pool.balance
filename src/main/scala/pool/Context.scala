@@ -28,8 +28,10 @@ final class Context(config: Config):
   val windowWidth = config.getDouble("window.width")
   val windowHeight = config.getDouble("window.height")
 
-  val paneAdd = config.getString("pane.add")
-  val paneEdit = config.getString("pane.edit")
+  val buttonAdd = config.getString("button.add")
+  val buttonEdit = config.getString("botton.edit")
+  val buttonSave = config.getString("button.save")
+  val buttonChart = config.getString("button.chart")
 
   val labelPools = config.getString("label.pools")
   val labelCleanings = config.getString("label.cleanings")
@@ -86,8 +88,6 @@ final class Context(config: Config):
   val tableTypeof = config.getString("table.typeof")
   val tableAmount = config.getString("table.amount")
   val tableAdded = config.getString("table.added")
-
-  val buttonSave = config.getString("button.save")
 
   val dialogPool = config.getString("dialog.pool")
   val dialogCleaning = config.getString("dialog.cleaning")
