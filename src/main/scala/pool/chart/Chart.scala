@@ -1,3 +1,3 @@
 package pool.chart
 
-abstract class Chart
+trait Chart
