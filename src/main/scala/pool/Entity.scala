@@ -32,13 +32,13 @@ object Entity:
       .withMonth(localDate.getMonthValue)
       .withDayOfMonth(localDate.getDayOfMonth)
 
+  def isNotInt(text: String): Boolean = !text.matches("\\d+")
+  def isNotDouble(text: String): Boolean = !text.matches("\\d{0,7}([\\.]\\d{0,4})?")
+
   given poolOrdering: Ordering[Pool] = Ordering.by[Pool, String](p => p.name).reverse
   given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => c.cleaned.toLocalDate.toEpochDay).reverse
   given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => m.measured.toLocalDate.toEpochDay).reverse
   given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => c.added.toLocalDate.toEpochDay).reverse
-
-  def isNotInt(text: String): Boolean = !text.matches("\\d+")
-  def isNotDouble(text: String): Boolean = !text.matches("\\d{0,7}([\\.]\\d{0,4})?")
 
 final case class Pool(id: Long = 0,
                       name: String = "", 
