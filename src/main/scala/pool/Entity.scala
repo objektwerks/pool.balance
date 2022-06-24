@@ -19,12 +19,12 @@ sealed trait Entity:
   val id: Long
 
 object Entity:
-  private def newDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-  private def newTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+  private def dateFormatterInstance: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+  private def timeFormatterInstance: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
-  def format(localDateTime: LocalDateTime): String = localDateTime.format(newDateFormatter)
-  def format(localDate: LocalDate): String = localDate.format(newDateFormatter)
-  def format(localTime: LocalTime): String = localTime.format(newTimeFormatter)
+  def format(localDateTime: LocalDateTime): String = localDateTime.format(dateFormatterInstance)
+  def format(localDate: LocalDate): String = localDate.format(dateFormatterInstance)
+  def format(localTime: LocalTime): String = localTime.format(timeFormatterInstance)
 
   def applyLocalDate(localDate: LocalDate, localDateTime: LocalDateTime): LocalDateTime =
     localDateTime
