@@ -18,15 +18,15 @@ class PoolsPane(context: Context) extends VBox with PaneButtonBar(context):
   val tableView = new TableView[Pool]() {
     columns ++= List(
       new TableColumn[Pool, String] {
-        text = context.tableName
+        text = context.headerName
         cellValueFactory = _.value.nameProperty
       },
       new TableColumn[Pool, Int] {
-        text = context.tableVolume
+        text = context.headerVolume
         cellValueFactory = _.value.volumeProperty
       },
       new TableColumn[Pool, String] {
-        text = context.tableUnit
+        text = context.headerUnit
         cellValueFactory = _.value.unitProperty
       }
     )

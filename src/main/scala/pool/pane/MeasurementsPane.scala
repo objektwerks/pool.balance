@@ -18,43 +18,43 @@ class MeasurementsPane(context: Context) extends VBox with PaneButtonBar(context
   val tableView = new TableView[Measurement]() {
     columns ++= List(
       new TableColumn[Measurement, Int] {
-        text = context.tableTotalChlorine
+        text = context.headerTotalChlorine
         cellValueFactory = _.value.totalChlorineProperty
       },
       new TableColumn[Measurement, Int] {
-        text = context.tableFreeChlorine
+        text = context.headerFreeChlorine
         cellValueFactory = _.value.freeChlorineProperty
       },
       new TableColumn[Measurement, Double] {
-        text = context.tableCombinedChlorine
+        text = context.headerCombinedChlorine
         cellValueFactory = _.value.combinedChlorineProperty
       },
       new TableColumn[Measurement, Double] {
-        text = context.tablePh
+        text = context.headerPh
         cellValueFactory = _.value.phProperty
       },
       new TableColumn[Measurement, Int] {
-        text = context.tableCalciumHardness
+        text = context.headerCalciumHardness
         cellValueFactory = _.value.calciumHardnessProperty
       },
       new TableColumn[Measurement, Int] {
-        text = context.tableTotalAlkalinity
+        text = context.headerTotalAlkalinity
         cellValueFactory = _.value.totalAlkalinityProperty
       },
       new TableColumn[Measurement, Int] {
-        text = context.tableCyanuricAcid
+        text = context.headerCyanuricAcid
         cellValueFactory = _.value.cyanuricAcidProperty
       },
       new TableColumn[Measurement, Int] {
-        text = context.tableTotalBromine
+        text = context.headerTotalBromine
         cellValueFactory = _.value.totalBromineProperty
       },
       new TableColumn[Measurement, Int] {
-        text = context.tableTemperature
+        text = context.headerTemperature
         cellValueFactory = _.value.temperatureProperty
       },
       new TableColumn[Measurement, String] {
-        text = context.tableMeasured
+        text = context.headerMeasured
         cellValueFactory = _.value.measuredProperty
       }
     )

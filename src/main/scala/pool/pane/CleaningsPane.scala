@@ -18,31 +18,31 @@ class CleaningsPane(context: Context) extends VBox with PaneButtonBar(context):
   val tableView = new TableView[Cleaning]() {
     columns ++= List(
       new TableColumn[Cleaning, Boolean] {
-        text = context.tableBrush
+        text = context.headerBrush
         cellValueFactory = _.value.brushProperty
       },
       new TableColumn[Cleaning, Boolean] {
-        text = context.tableNet
+        text = context.headerNet
         cellValueFactory = _.value.netProperty
       },
       new TableColumn[Cleaning, Boolean] {
-        text = context.tableSkimmerBasket
+        text = context.headerSkimmerBasket
         cellValueFactory = _.value.skimmerBasketProperty
       },
       new TableColumn[Cleaning, Boolean] {
-        text = context.tablePumpBasket
+        text = context.headerPumpBasket
         cellValueFactory = _.value.pumpBasketProperty
       },
       new TableColumn[Cleaning, Boolean] {
-        text = context.tablePumpFilter
+        text = context.headerPumpFilter
         cellValueFactory = _.value.pumpFilterProperty
       },
       new TableColumn[Cleaning, Boolean] {
-        text = context.tableVacuum
+        text = context.headerVacuum
         cellValueFactory = _.value.vacuumProperty
       },
       new TableColumn[Cleaning, String] {
-        text = context.tableCleaned
+        text = context.headerCleaned
         cellValueFactory = _.value.cleanedProperty
       }
     )

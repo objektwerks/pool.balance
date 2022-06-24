@@ -18,19 +18,19 @@ class ChemicalsPane(context: Context) extends VBox with PaneButtonBar(context):
   val tableView = new TableView[Chemical]() {
     columns ++= List(
       new TableColumn[Chemical, String] {
-        text = context.tableTypeof
+        text = context.headerTypeof
         cellValueFactory = _.value.typeofProperty
       },
       new TableColumn[Chemical, Double] {
-        text = context.tableAmount
+        text = context.headerAmount
         cellValueFactory = _.value.amountProperty
       },
       new TableColumn[Chemical, String] {
-        text = context.tableUnit
+        text = context.headerUnit
         cellValueFactory = _.value.unitProperty
       },
       new TableColumn[Chemical, String] {
-        text = context.tableAdded
+        text = context.headerAdded
         cellValueFactory = _.value.addedProperty
       }
     )
