@@ -4,10 +4,11 @@ Pool Balance
 
 Todo
 ----
-1. Build charts for cleanings, measurements and chemicals.
-2. Bind errors to status pane or dialog.
-3. Consider async IO with optional UI integration.
-4. Consider dashboard pass and fail badge.
+1. Test int and double textfields.
+2. Build charts for cleanings, measurements and chemicals.
+3. Bind errors to status pane or dialog.
+4. Consider async IO with optional UI integration.
+5. Consider dashboard pass and fail badge.
 
 Build
 -----
