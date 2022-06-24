@@ -33,6 +33,14 @@ final class Context(config: Config):
   val buttonSave = config.getString("button.save")
   val buttonChart = config.getString("button.chart")
 
+  val chartChemicals = config.getString("chart.chemicals")
+  val chartMeasurements = config.getString("chart.measurements")
+
+  val dialogPool = config.getString("dialog.pool")
+  val dialogCleaning = config.getString("dialog.cleaning")
+  val dialogMeasurement = config.getString("dialog.measurement")
+  val dialogChemical = config.getString("dialog.chemical")
+
   val labelPools = config.getString("label.pools")
   val labelCleanings = config.getString("label.cleanings")
   val labelMeasurements = config.getString("label.measurements")
@@ -88,11 +96,6 @@ final class Context(config: Config):
   val tableTypeof = config.getString("table.typeof")
   val tableAmount = config.getString("table.amount")
   val tableAdded = config.getString("table.added")
-
-  val dialogPool = config.getString("dialog.pool")
-  val dialogCleaning = config.getString("dialog.cleaning")
-  val dialogMeasurement = config.getString("dialog.measurement")
-  val dialogChemical = config.getString("dialog.chemical")
 
   val tabCleanings = config.getString("tab.cleanings")
   val tabMeasurements = config.getString("tab.measurements")

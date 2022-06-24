@@ -1,5 +1,19 @@
 package pool.dialog
 
-import scalafx.scene.control.Dialog
+import scalafx.Includes.*
+import scalafx.scene.control.{ButtonType, Dialog}
+import scalafx.scene.control.ButtonBar.ButtonData
+import scalafx.scene.layout.VBox
 
-class ChemicalChartDialog extends Dialog[Unit]
+import pool.{App, Context}
+
+class ChemicalChartDialog(context: Context) extends Dialog[Unit]:
+  initOwner(App.stage)
+  title = context.windowTitle
+  headerText = context.chartChemicals
+  
+  dialogPane().buttonTypes = List(ButtonType.Close)
+  dialogPane().content = new VBox {
+    spacing = 6
+    children = List()
+  }
