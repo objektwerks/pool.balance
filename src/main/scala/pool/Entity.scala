@@ -19,8 +19,8 @@ sealed trait Entity:
   val id: Long
 
 object Entity:
-  def newDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-  def newTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+  private def newDateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+  private def newTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
   def format(localDateTime: LocalDateTime): String = localDateTime.format(newDateFormatter)
   def format(localDate: LocalDate): String = localDate.format(newDateFormatter)
