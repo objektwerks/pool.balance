@@ -35,7 +35,8 @@ final class Context(config: Config):
 
   val chartChemicals = config.getString("chart.chemicals")
   val chartMeasurements = config.getString("chart.measurements")
-
+  val chartYearDay = config.getString("chart.yearDay")
+  
   val dialogPool = config.getString("dialog.pool")
   val dialogCleaning = config.getString("dialog.cleaning")
   val dialogMeasurement = config.getString("dialog.measurement")
