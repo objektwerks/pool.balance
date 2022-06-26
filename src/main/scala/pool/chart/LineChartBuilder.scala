@@ -7,7 +7,8 @@ import scalafx.scene.chart.{LineChart, NumberAxis, XYChart}
 import pool.Context
 
 object LineChartBuilder:
-  def build(xLabel: String,
+  def build(context: Context,
+            xLabel: String,
             xMinDate: Double,
             xMaxDate: Double,
             yLabel: String,
@@ -31,6 +32,7 @@ object LineChartBuilder:
     val series = new XYChart.Series[Number, Number]()
     chart.padding = Insets(6)
     val (min, max, avg) = toMinMaxAvg(yValues)
+    series.name = s"${context.chartMin} $min  ${context.chartMax} $max  ${context.chartAvg} $avg"
     (chart, series, min, max, avg)
 
   private def toMinMaxAvg(numbers: ObservableBuffer[Double]): (Double, Double, Double) =

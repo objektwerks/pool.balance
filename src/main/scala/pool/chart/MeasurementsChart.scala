@@ -26,7 +26,8 @@ class MeasurementsChart(context: Context) extends TabPane:
   tabs = List(totalChlorineTab)
 
   def buildTotalChlorineChart(): LineChart[Number, Number] =
-    val (chart, series, min, max, avg) = LineChartBuilder.build(xLabel = context.chartYearMonth,
+    val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
+                                                                xLabel = context.chartYearMonth,
                                                                 minDate,
                                                                 maxDate,
                                                                 yLabel = context.chartTotalChlorine,
@@ -38,5 +39,4 @@ class MeasurementsChart(context: Context) extends TabPane:
       series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.totalChlorine)
     }
     chart.data = series
-    series.name = s"${context.chartMin} $min  ${context.chartMax} $max  ${context.chartAvg} $avg"
     chart
