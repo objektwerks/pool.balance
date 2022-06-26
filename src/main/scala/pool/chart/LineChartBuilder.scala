@@ -6,19 +6,19 @@ import scalafx.scene.chart.{LineChart, NumberAxis, XYChart}
 
 import pool.Context
 
-trait Chart:
-  def buildLineChart(xLabel: String,
-                     xMinDate: Double,
-                     xMaxDate: Double,
-                     yLabel: String,
-                     yLowerBound: Double,
-                     yUpperBound: Double,
-                     yTickUnit: Double,
-                     yValues: ObservableBuffer[Double]): (LineChart[Number, Number],
-                                                          XYChart.Series[Number, Number],
-                                                          Number,
-                                                          Number,
-                                                          Number) =
+object LineChartBuilder:
+  def build(xLabel: String,
+            xMinDate: Double,
+            xMaxDate: Double,
+            yLabel: String,
+            yLowerBound: Double,
+            yUpperBound: Double,
+            yTickUnit: Double,
+            yValues: ObservableBuffer[Double]): (LineChart[Number, Number],
+                                                 XYChart.Series[Number, Number],
+                                                 Number,
+                                                 Number,
+                                                 Number) =
     val xAxis = NumberAxis(axisLabel = s"$xLabel [$xMinDate - $xMaxDate]",
                            lowerBound = xMinDate,
                            upperBound = xMaxDate,
