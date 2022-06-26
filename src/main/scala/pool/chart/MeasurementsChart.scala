@@ -12,7 +12,7 @@ import pool.Context
 
 class MeasurementsChart(context: Context) extends TabPane:
   val measurements = context.model.observableMeasurements
-  val formatter = DateTimeFormatter.ofPattern("yy.D")
+  val formatter = DateTimeFormatter.ofPattern("yy.M")
   val minDate = measurements.map(m => m.measured).min.format(formatter).toDouble
   val maxDate = measurements.map(m => m.measured).max.format(formatter).toDouble
 
@@ -26,11 +26,11 @@ class MeasurementsChart(context: Context) extends TabPane:
   tabs = List(totalChlorineTab)
 
   def buildTotalChlorineChart(): LineChart[Number, Number] =
-    val (chart, series, min, max, avg) = LineChartBuilder.build(xLabel = context.chartYearDay,
+    val (chart, series, min, max, avg) = LineChartBuilder.build(xLabel = context.chartYearMonth,
                                                                 minDate,
                                                                 maxDate,
                                                                 yLabel = context.chartTotalChlorine,
-                                                                yLowerBound = 0,
+                                                                yLowerBound = 1,
                                                                 yUpperBound = 10,
                                                                 yTickUnit = 1,
                                                                 measurements.map(m => m.totalChlorine))
