@@ -30,7 +30,7 @@ class MeasurementsChart(context: Context) extends TabPane:
                                                                 minDate,
                                                                 maxDate,
                                                                 yLabel = context.chartTotalChlorine,
-                                                                yLowerBound = 1,
+                                                                yLowerBound = 0,
                                                                 yUpperBound = 10,
                                                                 yTickUnit = 1,
                                                                 measurements.map(m => m.totalChlorine))
