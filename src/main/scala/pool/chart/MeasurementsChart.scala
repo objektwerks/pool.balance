@@ -18,7 +18,7 @@ class MeasurementsChart(context: Context) extends TabPane with Chart:
 
   val totalChlorineTab = new Tab {
     closable = false
-    text = context.headerTotalChlorine
+    text = context.chartTotalChlorine
     content = buildTotalChlorineLineChart()
   }
 
@@ -27,13 +27,13 @@ class MeasurementsChart(context: Context) extends TabPane with Chart:
 
   def buildTotalChlorineLineChart(): LineChart[Number, Number] =
     val (chart, series) = buildLineChart(xLabel = context.chartYearDay,
-                                         minDate, 
-                                         maxDate, 
-                                         yLabel = context.headerTotalChlorine, 
+                                         minDate,
+                                         maxDate,
+                                         yLabel = context.chartTotalChlorine,
                                          yUpperBound = 10,
                                          yLowerBound = 0,
                                          yTickUnit = 1)
-    measurements foreach { measurement => 
+    measurements foreach { measurement =>
       series.data() += XYChart.Data[Number, Number](measurement.measured.format(dateFormatter).toDouble, measurement.totalChlorine) 
     }
     chart.data = series

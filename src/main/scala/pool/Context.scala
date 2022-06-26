@@ -39,7 +39,15 @@ final class Context(config: Config):
   val chartMin = config.getString("chart.min")
   val chartMax = config.getString("chart.max")
   val chartAvg = config.getString("chart.avg")
-  
+  val chartTotalChlorine = config.getString("chart.totalChlorine")
+  val chartFreeChlorine = config.getString("chart.freeChlorine")
+  val chartCombinedChlorine = config.getString("chart.combinedChlorine")
+  val chartPh = config.getString("chart.ph")
+  val chartCalciumHardness = config.getString("chart.calciumHardness")
+  val chartTotalAlkalinity = config.getString("chart.totalAlkalinity")
+  val chartCyanuricAcid = config.getString("chart.cyanuricAcid")
+  val chartTotalBromine = config.getString("chart.totalBromine")
+
   val dialogPool = config.getString("dialog.pool")
   val dialogCleaning = config.getString("dialog.cleaning")
   val dialogMeasurement = config.getString("dialog.measurement")
