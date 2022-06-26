@@ -3,9 +3,9 @@ package pool.chart
 import java.time.format.DateTimeFormatter
 
 import scalafx.Includes._
+import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
 import scalafx.scene.chart.{LineChart, XYChart}
-import scalafx.collections.ObservableBuffer
 import scalafx.scene.control.{Tab, TabPane}
 
 import pool.Context
