@@ -7,7 +7,7 @@ import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import pool.{Measurement, Context}
-import pool.dialog.MeasurementDialog
+import pool.dialog.{MeasurementDialog, MeasurementChartDialog}
 
 class MeasurementsPane(context: Context) extends VBox with PaneButtonBar(context):
   spacing = 6
@@ -93,4 +93,7 @@ class MeasurementsPane(context: Context) extends VBox with PaneButtonBar(context
         tableView.selectionModel().select(selectedIndex)
       case _ => model.onError("Measurement update failed.")
 
-  override def chart(): Unit = ()
+  override def chart(): Unit =
+    MeasurementChartDialog(context).showAndWait() match
+      case Some(_) =>
+      case _ => model.onError("Measurement chart failed.")
