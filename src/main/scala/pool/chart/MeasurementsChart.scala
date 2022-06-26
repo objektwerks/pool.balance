@@ -37,8 +37,6 @@ class MeasurementsChart(context: Context) extends TabPane with Chart:
       series.data() += XYChart.Data[Number, Number](m.measured.format(dateFormatter).toDouble, m.totalChlorine) 
     }
     chart.data = series
-    val min = measurements.map(m => m.totalChlorine).min
-    val max = measurements.map(m => m.totalChlorine).max
-    val avg = measurements.map(m => m.totalChlorine).sum / measurements.length
+    val (min, max, avg) = minMaxAvgAsInt( measurements.map(m => m.totalChlorine) )
     series.name = s"${context.chartMin} $min  ${context.chartMax} $max  ${context.chartAvg} $avg"
     chart
