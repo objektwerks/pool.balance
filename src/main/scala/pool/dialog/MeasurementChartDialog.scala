@@ -6,6 +6,7 @@ import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.layout.VBox
 
 import pool.{App, Context}
+import pool.chart.MeasurementsChart
 
 class MeasurementChartDialog(context: Context) extends Dialog[Unit]:
   initOwner(App.stage)
@@ -15,5 +16,5 @@ class MeasurementChartDialog(context: Context) extends Dialog[Unit]:
   dialogPane().buttonTypes = List(ButtonType.Close)
   dialogPane().content = new VBox {
     spacing = 6
-    children = List()
+    children = List( MeasurementsChart(context) )
   }
