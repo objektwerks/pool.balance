@@ -30,10 +30,10 @@ object LineChartBuilder:
     val chart = LineChart[Number, Number](xAxis, yAxis)
     val series = new XYChart.Series[Number, Number]()
     chart.padding = Insets(6)
-    val (min, max, avg) = minMaxAvgAsDouble(yValues)
+    val (min, max, avg) = toMinMaxAvg(yValues)
     (chart, series, min, max, avg)
 
-  private def minMaxAvgAsDouble(numbers: ObservableBuffer[Double]): (Double, Double, Double) =
+  private def toMinMaxAvg(numbers: ObservableBuffer[Double]): (Double, Double, Double) =
     val min = numbers.min
     val max = numbers.max
     val avg = numbers.sum / numbers.length
