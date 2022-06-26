@@ -13,7 +13,12 @@ trait Chart:
                      yLabel: String,
                      yLowerBound: Double,
                      yUpperBound: Double,
-                     yTickUnit: Double): (LineChart[Number, Number], XYChart.Series[Number, Number]) =
+                     yTickUnit: Double,
+                     yValues: ObservableBuffer[Double]): (LineChart[Number, Number],
+                                                          XYChart.Series[Number, Number],
+                                                          Number,
+                                                          Number,
+                                                          Number) =
     val xAxis = NumberAxis(axisLabel = s"$xLabel [$xMinDate - $xMaxDate]",
                            lowerBound = xMinDate,
                            upperBound = xMaxDate,
@@ -25,16 +30,11 @@ trait Chart:
     val chart = LineChart[Number, Number](xAxis, yAxis)
     val series = new XYChart.Series[Number, Number]()
     chart.padding = Insets(6)
-    (chart, series)
+    val (min, max, avg) = minMaxAvgAsDouble(yValues)
+    (chart, series, min, max, avg)
 
-  def minMaxAvgAsInt(integers: ObservableBuffer[Int]): (Int, Int, Int) =
-    val min = integers.min
-    val max = integers.max
-    val avg = integers.sum / integers.length
-    (min, max, avg)
-
-  def minMaxAvgAsDouble(doubles: ObservableBuffer[Double]): (Double, Double, Double) =
-    val min = doubles.min
-    val max = doubles.max
-    val avg = doubles.sum / doubles.length
+  private def minMaxAvgAsDouble(numbers: ObservableBuffer[Double]): (Double, Double, Double) =
+    val min = numbers.min
+    val max = numbers.max
+    val avg = numbers.sum / numbers.length
     (min, max, avg)
