@@ -33,8 +33,8 @@ class MeasurementsChart(context: Context) extends TabPane with Chart:
                                          yLowerBound = 0,
                                          yUpperBound = 10,
                                          yTickUnit = 1)
-    measurements foreach { measurement =>
-      series.data() += XYChart.Data[Number, Number](measurement.measured.format(dateFormatter).toDouble, measurement.totalChlorine) 
+    measurements foreach { m =>
+      series.data() += XYChart.Data[Number, Number](m.measured.format(dateFormatter).toDouble, m.totalChlorine) 
     }
     chart.data = series
     val min = measurements.map(m => m.totalChlorine).min
