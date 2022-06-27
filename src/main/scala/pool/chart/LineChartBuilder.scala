@@ -1,11 +1,12 @@
 package pool.chart
 
+import java.text.DecimalFormat
+
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
 import scalafx.scene.chart.{LineChart, NumberAxis, XYChart}
 
 import pool.Context
-import java.text.DecimalFormat
 
 object LineChartBuilder:
   def build(context: Context,
