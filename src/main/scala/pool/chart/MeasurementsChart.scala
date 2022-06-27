@@ -34,7 +34,7 @@ class MeasurementsChart(context: Context) extends TabPane:
                                                                 yLowerBound = 0,
                                                                 yUpperBound = 10,
                                                                 yTickUnit = 1,
-                                                                measurements.map(m => m.totalChlorine))
+                                                                yValues = measurements.map(m => m.totalChlorine))
     measurements foreach { m =>
       series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.totalChlorine)
     }
