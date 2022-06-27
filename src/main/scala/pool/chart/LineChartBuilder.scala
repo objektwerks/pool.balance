@@ -33,8 +33,8 @@ object LineChartBuilder:
     val series = new XYChart.Series[Number, Number]()
     chart.padding = Insets(6)
     val (min, max, avg) = toMinMaxAvg(yValues)
-    val decimalFormat = new DecimalFormat("#.##");
-    series.name = s"${context.chartMin} $min  ${context.chartMax} $max  ${context.chartAvg} ${decimalFormat.format(avg)}"
+    val formatter = new DecimalFormat("#.##");
+    series.name = s"${context.chartMin} $min  ${context.chartMax} $max  ${context.chartAvg} ${formatter.format(avg)}"
     (chart, series, min, max, avg)
 
   private def toMinMaxAvg(numbers: ObservableBuffer[Double]): (Double, Double, Double) =
