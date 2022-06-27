@@ -28,8 +28,8 @@ class MeasurementsChart(context: Context) extends TabPane:
   def buildTotalChlorineChart(): LineChart[Number, Number] =
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
                                                                 xLabel = context.chartYearMonth,
-                                                                minDate,
-                                                                maxDate,
+                                                                xMinDate = minDate,
+                                                                xMaxDate = maxDate,
                                                                 yLabel = context.chartTotalChlorine,
                                                                 yLowerBound = 0,
                                                                 yUpperBound = 10,
