@@ -41,7 +41,10 @@ class MeasurementsChart(context: Context) extends TabPane:
   }
 
   padding = Insets(6)
-  tabs = List(totalChlorineTab, freeChlorineTab, combinedChlorineTab)
+  tabs = List(totalChlorineTab,
+              freeChlorineTab,
+              combinedChlorineTab,
+              phTab)
 
   def buildTotalChlorineChart(): LineChart[Number, Number] =
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
