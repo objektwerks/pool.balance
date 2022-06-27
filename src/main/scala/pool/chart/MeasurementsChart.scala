@@ -58,6 +58,12 @@ class MeasurementsChart(context: Context) extends TabPane:
     content = buildCyanuricAcidChart()
   }
 
+  val totalBromineTab = new Tab {
+    closable = false
+    text = context.chartTotalBromine
+    content = buildTotalBromineChart()
+  }
+
   padding = Insets(6)
   tabs = List(totalChlorineTab,
               freeChlorineTab,
@@ -65,7 +71,8 @@ class MeasurementsChart(context: Context) extends TabPane:
               phTab,
               calciumHardnessTab,
               totalAlkalinityTab,
-              cyanuricAcidTab)
+              cyanuricAcidTab,
+              totalBromineTab)
 
   def buildTotalChlorineChart(): LineChart[Number, Number] =
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
@@ -175,6 +182,22 @@ class MeasurementsChart(context: Context) extends TabPane:
                                                                 yValues = measurements.map(m => m.cyanuricAcid))
     measurements foreach { m =>
       series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.cyanuricAcid)
+    }
+    chart.data = series
+    chart
+
+  def buildTotalBromineChart(): LineChart[Number, Number] =
+    val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
+                                                                xLabel = context.chartYearMonth,
+                                                                xMinDate = minDate,
+                                                                xMaxDate = maxDate,
+                                                                yLabel = context.chartTotalBromine,
+                                                                yLowerBound = 0,
+                                                                yUpperBound = 20,
+                                                                yTickUnit = 1,
+                                                                yValues = measurements.map(m => m.totalBromine))
+    measurements foreach { m =>
+      series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.totalBromine)
     }
     chart.data = series
     chart
