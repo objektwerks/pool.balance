@@ -22,6 +22,12 @@ class MeasurementsChart(context: Context) extends TabPane:
     content = buildTotalChlorineChart()
   }
 
+  val freeChlorineTab = new Tab {
+    closable = false
+    text = context.chartFreeChlorine
+    content = buildFreeChlorineChart()
+  }
+
   padding = Insets(6)
   tabs = List(totalChlorineTab)
 
@@ -37,6 +43,22 @@ class MeasurementsChart(context: Context) extends TabPane:
                                                                 yValues = measurements.map(m => m.totalChlorine))
     measurements foreach { m =>
       series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.totalChlorine)
+    }
+    chart.data = series
+    chart
+
+  def buildFreeChlorineChart(): LineChart[Number, Number] =
+    val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
+                                                                xLabel = context.chartYearMonth,
+                                                                xMinDate = minDate,
+                                                                xMaxDate = maxDate,
+                                                                yLabel = context.chartTotalChlorine,
+                                                                yLowerBound = 0,
+                                                                yUpperBound = 10,
+                                                                yTickUnit = 1,
+                                                                yValues = measurements.map(m => m.freeChlorine))
+    measurements foreach { m =>
+      series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.freeChlorine)
     }
     chart.data = series
     chart
