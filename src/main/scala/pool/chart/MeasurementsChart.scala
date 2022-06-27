@@ -40,11 +40,18 @@ class MeasurementsChart(context: Context) extends TabPane:
     content = buildPhChart()
   }
 
+  val calciumHardnessTab = new Tab {
+    closable = false
+    text = context.chartCalciumHardness
+    content = buildCalciumHardnessChart()
+  }
+
   padding = Insets(6)
   tabs = List(totalChlorineTab,
               freeChlorineTab,
               combinedChlorineTab,
-              phTab)
+              phTab,
+              calciumHardnessTab)
 
   def buildTotalChlorineChart(): LineChart[Number, Number] =
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
@@ -106,6 +113,22 @@ class MeasurementsChart(context: Context) extends TabPane:
                                                                 yValues = measurements.map(m => m.ph))
     measurements foreach { m =>
       series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.ph)
+    }
+    chart.data = series
+    chart
+
+  def buildCalciumHardnessChart(): LineChart[Number, Number] =
+    val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
+                                                                xLabel = context.chartYearMonth,
+                                                                xMinDate = minDate,
+                                                                xMaxDate = maxDate,
+                                                                yLabel = context.chartCalciumHardness,
+                                                                yLowerBound = 0,
+                                                                yUpperBound = 1000,
+                                                                yTickUnit = 100,
+                                                                yValues = measurements.map(m => m.calciumHardness))
+    measurements foreach { m =>
+      series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.calciumHardness)
     }
     chart.data = series
     chart
