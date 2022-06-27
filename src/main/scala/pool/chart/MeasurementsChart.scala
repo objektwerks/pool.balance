@@ -94,7 +94,6 @@ class MeasurementsChart(context: Context) extends TabPane:
     chart.data = series
     chart
 
-
   def buildPhChart(): LineChart[Number, Number] =
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
                                                                 xLabel = context.chartYearMonth,
