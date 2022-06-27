@@ -52,13 +52,20 @@ class MeasurementsChart(context: Context) extends TabPane:
     content = buildTotalAlkalinityChart()
   }
 
+  val cyanuricAcidTab = new Tab {
+    closable = false
+    text = context.chartCyanuricAcid
+    content = buildCyanuricAcidChart()
+  }
+
   padding = Insets(6)
   tabs = List(totalChlorineTab,
               freeChlorineTab,
               combinedChlorineTab,
               phTab,
               calciumHardnessTab,
-              totalAlkalinityTab)
+              totalAlkalinityTab,
+              cyanuricAcidTab)
 
   def buildTotalChlorineChart(): LineChart[Number, Number] =
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
@@ -152,6 +159,22 @@ class MeasurementsChart(context: Context) extends TabPane:
                                                                 yValues = measurements.map(m => m.totalAlkalinity))
     measurements foreach { m =>
       series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.totalAlkalinity)
+    }
+    chart.data = series
+    chart
+
+  def buildCyanuricAcidChart(): LineChart[Number, Number] =
+    val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
+                                                                xLabel = context.chartYearMonth,
+                                                                xMinDate = minDate,
+                                                                xMaxDate = maxDate,
+                                                                yLabel = context.chartCyanuricAcid,
+                                                                yLowerBound = 0,
+                                                                yUpperBound = 300,
+                                                                yTickUnit = 30,
+                                                                yValues = measurements.map(m => m.cyanuricAcid))
+    measurements foreach { m =>
+      series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.cyanuricAcid)
     }
     chart.data = series
     chart
