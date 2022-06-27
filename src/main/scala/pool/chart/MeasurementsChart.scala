@@ -26,8 +26,18 @@ class MeasurementsChart(context: Context) extends TabPane:
     content = buildChart(totalChlorineSeries)
   }
 
+  val freeChlorineSeries = new XYChart.Series[Number, Number]()
+  measurements foreach { m =>
+    freeChlorineSeries.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.freeChlorine)
+  }
+  val freeChlorineTab = new Tab {
+    closable = false
+    text = context.chartFreeChlorine
+    content = buildChart(freeChlorineSeries)
+  }
+
   padding = Insets(6)
-  tabs = List(totalChlorineTab)
+  tabs = List(totalChlorineTab, freeChlorineTab)
 
   def buildChart(series: XYChart.Series[Number, Number]): LineChart[Number, Number] =
     val (chart, min, max, avg) = LineChartBuilder.build(xLabel = context.chartYearMonth,
