@@ -47,6 +47,9 @@ final class Model(context: Context) extends LazyLogging:
   val currentTotalBromine = ObjectProperty[Int](0)
   val averageTotalBromine = ObjectProperty[Int](0)
 
+  val currentSalt = ObjectProperty[Int](0)
+  val averageSalt = ObjectProperty[Int](0)
+
   selectedPoolId.onChange { (_, oldPoolId, newPoolId) =>
     logger.info(s"Selected Pool Id onChange event: $oldPoolId -> $newPoolId")
     cleanings(newPoolId)
@@ -92,6 +95,7 @@ final class Model(context: Context) extends LazyLogging:
         currentTotalAlkalinity.value = measurement.totalAlkalinity
         currentCyanuricAcid.value = measurement.cyanuricAcid
         currentTotalBromine.value = measurement.totalBromine
+        currentSalt = measurement.salt
 
         val count = measurements.length
         averageTotalChlorine.value = measurements.map(_.totalChlorine).sum / count
@@ -102,6 +106,7 @@ final class Model(context: Context) extends LazyLogging:
         averageTotalAlkalinity.value = measurements.map(_.totalAlkalinity).sum / count
         averageCyanuricAcid.value = measurements.map(_.cyanuricAcid).sum / count
         averageTotalBromine.value = measurements.map(_.totalBromine).sum / count
+        averageSalt.value = measurements.map(_.salt).sum / count
       }
     }.recover { case error: Throwable => onError(error, s"Loading dashboard data failed: ${error.getMessage}") }
 
