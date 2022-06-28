@@ -99,6 +99,7 @@ enum TypeOfChemical(val display: String):
   case Stabilizer extends TypeOfChemical("Stabilizer")
   case Algaecide extends TypeOfChemical("Algaecide")
   case MuriaticAcid extends TypeOfChemical("Muriatic Acid")
+  case Salt extends TypeOfChemical("Salt")
 
 object TypeOfChemical:
   def toEnum(display: String): TypeOfChemical = TypeOfChemical.valueOf(display.filterNot(_.isWhitespace))
