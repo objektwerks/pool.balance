@@ -95,7 +95,7 @@ final class Model(context: Context) extends LazyLogging:
         currentTotalAlkalinity.value = measurement.totalAlkalinity
         currentCyanuricAcid.value = measurement.cyanuricAcid
         currentTotalBromine.value = measurement.totalBromine
-        currentSalt = measurement.salt
+        currentSalt.value = measurement.salt
 
         val count = measurements.length
         averageTotalChlorine.value = measurements.map(_.totalChlorine).sum / count
