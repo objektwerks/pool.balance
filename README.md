@@ -65,7 +65,7 @@ Measurements
 
 Chemicals
 ---------
-* LiquidChlorine, Trichlor, Dichlor, CalciumHypochlorite, Stabilizer, Algaecide
+* LiquidChlorine, Trichlor, Dichlor, CalciumHypochlorite, Stabilizer, Algaecide, Salt
 
 Entity
 ------
