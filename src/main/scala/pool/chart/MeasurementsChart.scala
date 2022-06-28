@@ -112,6 +112,7 @@ class MeasurementsChart(context: Context) extends TabPane:
       series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.freeChlorine)
     }
     chart.data = series
+    LineChartBuilder.addTooltip(chart)
     chart
 
   def buildCombinedChlorineChart(): LineChart[Number, Number] =
@@ -128,6 +129,7 @@ class MeasurementsChart(context: Context) extends TabPane:
       series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.combinedChlorine)
     }
     chart.data = series
+    LineChartBuilder.addTooltip(chart)
     chart
 
   def buildPhChart(): LineChart[Number, Number] =
@@ -144,6 +146,7 @@ class MeasurementsChart(context: Context) extends TabPane:
       series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.ph)
     }
     chart.data = series
+    LineChartBuilder.addTooltip(chart)
     chart
 
   def buildCalciumHardnessChart(): LineChart[Number, Number] =
@@ -160,6 +163,7 @@ class MeasurementsChart(context: Context) extends TabPane:
       series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.calciumHardness)
     }
     chart.data = series
+    LineChartBuilder.addTooltip(chart)
     chart
 
   def buildTotalAlkalinityChart(): LineChart[Number, Number] =
@@ -176,6 +180,7 @@ class MeasurementsChart(context: Context) extends TabPane:
       series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.totalAlkalinity)
     }
     chart.data = series
+    LineChartBuilder.addTooltip(chart)
     chart
 
   def buildCyanuricAcidChart(): LineChart[Number, Number] =
@@ -192,6 +197,7 @@ class MeasurementsChart(context: Context) extends TabPane:
       series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.cyanuricAcid)
     }
     chart.data = series
+    LineChartBuilder.addTooltip(chart)
     chart
 
   def buildTotalBromineChart(): LineChart[Number, Number] =
@@ -208,6 +214,7 @@ class MeasurementsChart(context: Context) extends TabPane:
       series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.totalBromine)
     }
     chart.data = series
+    LineChartBuilder.addTooltip(chart)
     chart
 
   def buildSaltChart(): LineChart[Number, Number] =
@@ -224,4 +231,5 @@ class MeasurementsChart(context: Context) extends TabPane:
       series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.salt)
     }
     chart.data = series
+    LineChartBuilder.addTooltip(chart)
     chart
