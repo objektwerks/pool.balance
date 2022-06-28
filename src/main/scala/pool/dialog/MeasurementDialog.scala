@@ -22,6 +22,7 @@ class MeasurementDialog(context: Context, measurement: Measurement) extends Dial
   val totalAlkalinitySlider = totalAlkalinityTextSlider(context, measurement)
   val cyanuricAcidSlider =cyanuricAcidTextSlider(context, measurement)
   val totalBromineSlider = totalBromineTextSlider(context, measurement)
+  val saltSlider = saltTextSlider(context, measurement)
   val temperatureSlider = temperatureTextSlider(context, measurement)
   val measuredDatePicker = new DatePicker {
     value = measurement.measured.toLocalDate
@@ -36,6 +37,7 @@ class MeasurementDialog(context: Context, measurement: Measurement) extends Dial
     context.labelTotalAlkalinity -> totalAlkalinitySlider,
     context.labelCyanuricAcid -> cyanuricAcidSlider,
     context.labelTotalBromine -> totalBromineSlider,
+    context.labelSalt -> saltSlider,
     context.labelTemperature -> temperatureSlider,
     context.labelMeasure -> measuredDatePicker
   )
