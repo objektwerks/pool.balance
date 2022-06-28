@@ -28,6 +28,7 @@ create table if not exists measurement (
   total_alkalinity int not null,
   cyanuric_acid int not null,
   total_bromine int not null,
+  salt int not null,
   temperature int not null,
   measured timestamp not null
 );
