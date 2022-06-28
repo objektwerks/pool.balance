@@ -30,6 +30,7 @@ class MeasurementsPane(context: Context) extends VBox with PaneButtonBar(context
         cellValueFactory = _.value.combinedChlorineProperty
       },
       new TableColumn[Measurement, Double] {
+        prefWidth = 50
         text = context.headerPh
         cellValueFactory = _.value.phProperty
       },
@@ -50,11 +51,12 @@ class MeasurementsPane(context: Context) extends VBox with PaneButtonBar(context
         cellValueFactory = _.value.totalBromineProperty
       },
       new TableColumn[Measurement, Int] {
+        prefWidth = 60
         text = context.headerSalt
         cellValueFactory = _.value.saltProperty
       },
       new TableColumn[Measurement, Int] {
-        prefWidth = 60
+        prefWidth = 50
         text = context.headerTemperature
         cellValueFactory = _.value.temperatureProperty
       },
