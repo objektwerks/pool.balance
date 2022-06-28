@@ -10,6 +10,14 @@ import scalafx.scene.control.{Tab, TabPane}
 
 import pool.Context
 
+/*
+  Loop through data and add tooltip - after adding data!
+  for (Data<Number, Number> entry : series.getData()) {                
+    System.out.println("Entered!");
+    Tooltip t = new Tooltip(entry.getYValue().toString());
+    Tooltip.install(entry.getNode(), t);
+  }
+*/
 class MeasurementsChart(context: Context) extends TabPane:
   val measurements = context.model.observableMeasurements.reverse
   val formatter = DateTimeFormatter.ofPattern("yy.M")
