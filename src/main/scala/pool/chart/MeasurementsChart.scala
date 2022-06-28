@@ -135,8 +135,8 @@ class MeasurementsChart(context: Context) extends TabPane:
                                                                 xMinDate = minDate,
                                                                 xMaxDate = maxDate,
                                                                 yLabel = context.chartPh,
-                                                                yLowerBound = 0.0,
-                                                                yUpperBound = 0.5,
+                                                                yLowerBound = 6.2,
+                                                                yUpperBound = 8.4,
                                                                 yTickUnit = 0.1,
                                                                 yValues = measurements.map(m => m.ph))
     measurements foreach { m =>
@@ -216,8 +216,8 @@ class MeasurementsChart(context: Context) extends TabPane:
                                                                 xMaxDate = maxDate,
                                                                 yLabel = context.chartSalt,
                                                                 yLowerBound = 0,
-                                                                yUpperBound = 20,
-                                                                yTickUnit = 1,
+                                                                yUpperBound = 3600,
+                                                                yTickUnit = 300,
                                                                 yValues = measurements.map(m => m.salt))
     measurements foreach { m =>
       series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.salt)
