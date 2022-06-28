@@ -64,6 +64,12 @@ class MeasurementsChart(context: Context) extends TabPane:
     content = buildTotalBromineChart()
   }
 
+  val saltTab = new Tab {
+    closable = false
+    text = context.chartSalt
+    content = buildSaltChart()
+  }
+
   padding = Insets(6)
   tabs = List(totalChlorineTab,
               freeChlorineTab,
@@ -72,7 +78,8 @@ class MeasurementsChart(context: Context) extends TabPane:
               calciumHardnessTab,
               totalAlkalinityTab,
               cyanuricAcidTab,
-              totalBromineTab)
+              totalBromineTab,
+              saltTab)
 
   def buildTotalChlorineChart(): LineChart[Number, Number] =
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
@@ -198,6 +205,22 @@ class MeasurementsChart(context: Context) extends TabPane:
                                                                 yValues = measurements.map(m => m.totalBromine))
     measurements foreach { m =>
       series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.totalBromine)
+    }
+    chart.data = series
+    chart
+
+  def buildSaltChart(): LineChart[Number, Number] =
+    val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
+                                                                xLabel = context.chartYearMonth,
+                                                                xMinDate = minDate,
+                                                                xMaxDate = maxDate,
+                                                                yLabel = context.chartSalt,
+                                                                yLowerBound = 0,
+                                                                yUpperBound = 20,
+                                                                yTickUnit = 1,
+                                                                yValues = measurements.map(m => m.salt))
+    measurements foreach { m =>
+      series.data() += XYChart.Data[Number, Number](m.measured.format(formatter).toDouble, m.salt)
     }
     chart.data = series
     chart

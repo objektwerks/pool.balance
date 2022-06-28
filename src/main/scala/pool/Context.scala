@@ -47,6 +47,7 @@ final class Context(config: Config):
   val chartTotalAlkalinity = config.getString("chart.totalAlkalinity")
   val chartCyanuricAcid = config.getString("chart.cyanuricAcid")
   val chartTotalBromine = config.getString("chart.totalBromine")
+  val chartSalt = config.getString("chart.salt")
 
   val dialogPool = config.getString("dialog.pool")
   val dialogCleaning = config.getString("dialog.cleaning")
