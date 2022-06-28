@@ -130,6 +130,17 @@ object TextSlider:
                      slider.value = measurement.totalBromine
                    }
 
+  def saltTextSlider(context: Context,
+                     measurement: Measurement): TextSlider =
+    new TextSlider(textFieldText = measurement.salt.toString,
+                   formatConverter = formatConverter(integerFormat)) {
+                     slider.min = 0
+                     slider.max = 3600
+                     slider.majorTickUnit = 300
+                     slider.snapToTicks = false
+                     slider.value = measurement.salt
+                   }
+
   def temperatureTextSlider(context: Context,
                             measurement: Measurement): TextSlider =
     new TextSlider(textFieldText = measurement.temperature.toString,
