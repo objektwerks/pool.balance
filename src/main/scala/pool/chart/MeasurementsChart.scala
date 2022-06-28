@@ -83,7 +83,7 @@ class MeasurementsChart(context: Context) extends TabPane:
 
   def buildTotalChlorineChart(): LineChart[Number, Number] =
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
-                                                                xLabel = context.chartYearMonth,
+                                                                xLabel = context.chartMonthDay,
                                                                 xMinDate = minDate,
                                                                 xMaxDate = maxDate,
                                                                 yLabel = context.chartTotalChlorine,
@@ -100,7 +100,7 @@ class MeasurementsChart(context: Context) extends TabPane:
 
   def buildFreeChlorineChart(): LineChart[Number, Number] =
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
-                                                                xLabel = context.chartYearMonth,
+                                                                xLabel = context.chartMonthDay,
                                                                 xMinDate = minDate,
                                                                 xMaxDate = maxDate,
                                                                 yLabel = context.chartTotalChlorine,
@@ -116,7 +116,7 @@ class MeasurementsChart(context: Context) extends TabPane:
 
   def buildCombinedChlorineChart(): LineChart[Number, Number] =
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
-                                                                xLabel = context.chartYearMonth,
+                                                                xLabel = context.chartMonthDay,
                                                                 xMinDate = minDate,
                                                                 xMaxDate = maxDate,
                                                                 yLabel = context.chartCombinedChlorine,
@@ -132,7 +132,7 @@ class MeasurementsChart(context: Context) extends TabPane:
 
   def buildPhChart(): LineChart[Number, Number] =
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
-                                                                xLabel = context.chartYearMonth,
+                                                                xLabel = context.chartMonthDay,
                                                                 xMinDate = minDate,
                                                                 xMaxDate = maxDate,
                                                                 yLabel = context.chartPh,
@@ -148,7 +148,7 @@ class MeasurementsChart(context: Context) extends TabPane:
 
   def buildCalciumHardnessChart(): LineChart[Number, Number] =
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
-                                                                xLabel = context.chartYearMonth,
+                                                                xLabel = context.chartMonthDay,
                                                                 xMinDate = minDate,
                                                                 xMaxDate = maxDate,
                                                                 yLabel = context.chartCalciumHardness,
@@ -164,7 +164,7 @@ class MeasurementsChart(context: Context) extends TabPane:
 
   def buildTotalAlkalinityChart(): LineChart[Number, Number] =
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
-                                                                xLabel = context.chartYearMonth,
+                                                                xLabel = context.chartMonthDay,
                                                                 xMinDate = minDate,
                                                                 xMaxDate = maxDate,
                                                                 yLabel = context.chartTotalAlkalinity,
@@ -180,7 +180,7 @@ class MeasurementsChart(context: Context) extends TabPane:
 
   def buildCyanuricAcidChart(): LineChart[Number, Number] =
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
-                                                                xLabel = context.chartYearMonth,
+                                                                xLabel = context.chartMonthDay,
                                                                 xMinDate = minDate,
                                                                 xMaxDate = maxDate,
                                                                 yLabel = context.chartCyanuricAcid,
@@ -196,7 +196,7 @@ class MeasurementsChart(context: Context) extends TabPane:
 
   def buildTotalBromineChart(): LineChart[Number, Number] =
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
-                                                                xLabel = context.chartYearMonth,
+                                                                xLabel = context.chartMonthDay,
                                                                 xMinDate = minDate,
                                                                 xMaxDate = maxDate,
                                                                 yLabel = context.chartTotalBromine,
@@ -212,7 +212,7 @@ class MeasurementsChart(context: Context) extends TabPane:
 
   def buildSaltChart(): LineChart[Number, Number] =
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
-                                                                xLabel = context.chartYearMonth,
+                                                                xLabel = context.chartMonthDay,
                                                                 xMinDate = minDate,
                                                                 xMaxDate = maxDate,
                                                                 yLabel = context.chartSalt,

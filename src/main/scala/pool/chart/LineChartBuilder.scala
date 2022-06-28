@@ -46,7 +46,7 @@ object LineChartBuilder:
       items.data.value.forEach { item =>
         val xValue = item.XValue.value
         val yValue = item.YValue.value
-        val message = s"$yValue ppm on $xValue"
+        val message = s"$yValue on $xValue"
         val tooltip = new Tooltip(message)
         val node: Node = item.node.value
         Tooltip.install(node, tooltip)
