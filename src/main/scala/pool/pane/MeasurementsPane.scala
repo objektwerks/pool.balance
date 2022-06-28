@@ -50,6 +50,10 @@ class MeasurementsPane(context: Context) extends VBox with PaneButtonBar(context
         cellValueFactory = _.value.totalBromineProperty
       },
       new TableColumn[Measurement, Int] {
+        text = context.headerTotalBromine
+        cellValueFactory = _.value.saltProperty
+      },
+      new TableColumn[Measurement, Int] {
         text = context.headerTemperature
         cellValueFactory = _.value.temperatureProperty
       },
