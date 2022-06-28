@@ -12,7 +12,7 @@ import pool.Context
 
 class MeasurementsChart(context: Context) extends TabPane:
   val measurements = context.model.observableMeasurements.reverse
-  val formatter = DateTimeFormatter.ofPattern("yy.M")
+  val formatter = DateTimeFormatter.ofPattern("M.dd")
   val minDate = measurements.map(m => m.measured).min.format(formatter).toDouble
   val maxDate = measurements.map(m => m.measured).max.format(formatter).toDouble
 
