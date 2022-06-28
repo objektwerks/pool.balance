@@ -80,6 +80,7 @@ final class Store(context: Context):
         rs.int("total_alkalinity"),
         rs.int("cyanuric_acid"),
         rs.int("total_bromine"),
+        rs.int("salt"),
         rs.int("temperature"),
         rs.localDateTime("measured"))
       )
@@ -89,10 +90,10 @@ final class Store(context: Context):
   def add(measurement: Measurement): Measurement = DB localTx { implicit session =>
     val id = sql"""
       insert into measurement(pool_id, total_chlorine, free_chlorine, combined_chlorine, ph, calcium_hardness,
-      total_alkalinity, cyanuric_acid, total_bromine, temperature, measured)
+      total_alkalinity, cyanuric_acid, total_bromine, salt, temperature, measured)
       values(${measurement.poolId}, ${measurement.totalChlorine}, ${measurement.freeChlorine}, ${measurement.combinedChlorine},
       ${measurement.ph}, ${measurement.calciumHardness}, ${measurement.totalAlkalinity}, ${measurement.cyanuricAcid},
-      ${measurement.totalBromine}, ${measurement.temperature}, ${measurement.measured})
+      ${measurement.totalBromine}, ${measurement.salt}, ${measurement.temperature}, ${measurement.measured})
       """
       .updateAndReturnGeneratedKey()
     measurement.copy(id = id)
@@ -103,7 +104,8 @@ final class Store(context: Context):
       update measurement set total_chlorine = ${measurement.totalChlorine}, free_chlorine = ${measurement.freeChlorine},
       combined_chlorine = ${measurement.combinedChlorine}, ph = ${measurement.ph}, calcium_hardness = ${measurement.calciumHardness},
       total_alkalinity = ${measurement.totalAlkalinity}, cyanuric_acid = ${measurement.cyanuricAcid},
-      total_bromine = ${measurement.totalBromine}, temperature = ${measurement.temperature}, measured = ${measurement.measured}
+      total_bromine = ${measurement.totalBromine}, salt = ${measurement.salt}, temperature = ${measurement.temperature},
+      measured = ${measurement.measured}
       where id = ${measurement.id}
       """
       .update()
