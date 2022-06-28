@@ -18,6 +18,7 @@ class ChemicalsPane(context: Context) extends VBox with PaneButtonBar(context):
   val tableView = new TableView[Chemical]() {
     columns ++= List(
       new TableColumn[Chemical, String] {
+        prefWidth = 100
         text = context.headerTypeof
         cellValueFactory = _.value.typeofProperty
       },
