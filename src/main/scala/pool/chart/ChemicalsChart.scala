@@ -32,7 +32,7 @@ class ChemicalsChart(context: Context) extends TabPane:
                                                                 xLabel = context.chartMonthDay,
                                                                 xMinDate = minDate,
                                                                 xMaxDate = maxDate,
-                                                                yLabel = context.chartTotalChlorine,
+                                                                yLabel = context.chartLiquidChlorine,
                                                                 yLowerBound = 0,
                                                                 yUpperBound = 10,
                                                                 yTickUnit = 1,

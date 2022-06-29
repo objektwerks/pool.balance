@@ -48,6 +48,13 @@ final class Context(config: Config):
   val chartCyanuricAcid = config.getString("chart.cyanuricAcid")
   val chartTotalBromine = config.getString("chart.totalBromine")
   val chartSalt = config.getString("chart.salt")
+  val chartLiquidChlorine = config.getString("chart.liquidChlorine")
+  val chartTrichlor = config.getString("chart.trichlor")
+  val chartDichlor = config.getString("chart.dichlor")
+  val chartCalciumHypochlorite = config.getString("chart.calciumHypochlorite")
+  val chartStabilizer = config.getString("chart.stabilizer")
+  val chartAlgaecide = config.getString("chart.algaecide")
+  val chartMuriaticAcid = config.getString("chart.muriaticAcid")
 
   val dialogPool = config.getString("dialog.pool")
   val dialogCleaning = config.getString("dialog.cleaning")
