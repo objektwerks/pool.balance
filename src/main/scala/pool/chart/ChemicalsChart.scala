@@ -27,7 +27,7 @@ class ChemicalsChart(context: Context) extends TabPane:
   tabs = List(liquidChlorineTab)
 
   def buildLiquidChlorineChart(): LineChart[Number, Number] =
-    val filtered = chemicals filter(t => t.typeof == LiquidChlorine)
+    val filtered = chemicals filter(c => c.typeof == LiquidChlorine)
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
                                                                 xLabel = context.chartMonthDay,
                                                                 xMinDate = minDate,
