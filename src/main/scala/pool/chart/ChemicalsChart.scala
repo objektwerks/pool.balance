@@ -5,9 +5,11 @@ import java.time.format.DateTimeFormatter
 import scalafx.Includes._
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
-import scalafx.scene.control.TabPane
+import scalafx.scene.chart.{LineChart, XYChart}
+import scalafx.scene.control.{Tab, TabPane}
 
 import pool.Context
+import pool.TypeOfChemical.*
 
 class ChemicalsChart(context: Context) extends TabPane:
   val chemicals = context.model.observableChemicals.reverse
@@ -15,5 +17,29 @@ class ChemicalsChart(context: Context) extends TabPane:
   val minDate = chemicals.map(c => c.added).min.format(formatter).toDouble
   val maxDate = chemicals.map(c => c.added).max.format(formatter).toDouble
 
+  val liquidChlorineTab = new Tab {
+    closable = false
+    text = context.chartTotalChlorine
+    content = buildLiquidChlorineChart()
+  }
+
   padding = Insets(6)
-  tabs = List()
+  tabs = List(liquidChlorineTab)
+
+  def buildLiquidChlorineChart(): LineChart[Number, Number] =
+    val events = chemicals filter(t => t.typeof == LiquidChlorine)
+    val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
+                                                                xLabel = context.chartMonthDay,
+                                                                xMinDate = minDate,
+                                                                xMaxDate = maxDate,
+                                                                yLabel = context.chartTotalChlorine,
+                                                                yLowerBound = 0,
+                                                                yUpperBound = 10,
+                                                                yTickUnit = 1,
+                                                                yValues = events.map(e => e.amount))
+    events foreach { e =>
+      series.data() += XYChart.Data[Number, Number](e.added.format(formatter).toDouble, e.amount)
+    }
+    chart.data = series
+    LineChartBuilder.addTooltip(chart)
+    chart
