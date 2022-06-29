@@ -27,7 +27,7 @@ class ChemicalsChart(context: Context) extends TabPane:
   tabs = List(liquidChlorineTab)
 
   def buildLiquidChlorineChart(): LineChart[Number, Number] =
-    val events = chemicals filter(t => t.typeof == LiquidChlorine)
+    val filtered = chemicals filter(t => t.typeof == LiquidChlorine)
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
                                                                 xLabel = context.chartMonthDay,
                                                                 xMinDate = minDate,
@@ -36,9 +36,9 @@ class ChemicalsChart(context: Context) extends TabPane:
                                                                 yLowerBound = 0,
                                                                 yUpperBound = 10,
                                                                 yTickUnit = 1,
-                                                                yValues = events.map(e => e.amount))
-    events foreach { e =>
-      series.data() += XYChart.Data[Number, Number](e.added.format(formatter).toDouble, e.amount)
+                                                                yValues = filtered.map(c => c.amount))
+    filtered foreach { c =>
+      series.data() += XYChart.Data[Number, Number](c.added.format(formatter).toDouble, c.amount)
     }
     chart.data = series
     LineChartBuilder.addTooltip(chart)
