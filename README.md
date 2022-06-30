@@ -4,8 +4,8 @@ Pool Balance
 
 Todo
 ----
-1. Test int and double textfields.
-2. Build charts for cleanings, measurements and chemicals.
+1. Build cleanings chart.
+2. Test int and double textfields.
 3. Build converters for gl/l and lbs/kg.
 4. Bind errors to status pane or dialog.
 5. Consider async IO with optional UI integration.
