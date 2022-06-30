@@ -51,8 +51,8 @@ class ChemicalsChart(context: Context) extends TabPane:
                                                                 xMinDate = minDate,
                                                                 xMaxDate = maxDate,
                                                                 yLabel = context.chartLiquidChlorine,
-                                                                yLowerBound = 0,
-                                                                yUpperBound = 10,
+                                                                yLowerBound = 1,
+                                                                yUpperBound = 40,
                                                                 yTickUnit = 1,
                                                                 yValues = filtered.map(c => c.amount))
     buildChart(filtered, series, chart)
@@ -64,7 +64,7 @@ class ChemicalsChart(context: Context) extends TabPane:
                                                                 xMinDate = minDate,
                                                                 xMaxDate = maxDate,
                                                                 yLabel = context.chartTrichlor,
-                                                                yLowerBound = 0,
+                                                                yLowerBound = 1,
                                                                 yUpperBound = 10,
                                                                 yTickUnit = 1,
                                                                 yValues = filtered.map(c => c.amount))
