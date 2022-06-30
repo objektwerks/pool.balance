@@ -1,4 +1,4 @@
-package pool.pane.dashboard
+package pool.dashboard
 
 import pool.Context
 

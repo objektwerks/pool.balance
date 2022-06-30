@@ -1,4 +1,4 @@
-package pool.pane.dashboard
+package pool.dashboard
 
 import scalafx.geometry.Pos
 import scalafx.scene.control.{Label, TitledPane}

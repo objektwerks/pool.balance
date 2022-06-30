@@ -7,7 +7,7 @@ import scalafx.scene.control.SplitPane
 import scalafx.scene.layout.{BorderPane, HBox, Priority, VBox}
 
 import pool.pane.{PoolsPane, TabbedPane}
-import pool.pane.dashboard.DashboardPane
+import pool.dashboard.DashboardPane
 
 final class View(context: Context):
   val borderPane = new BorderPane {
