@@ -7,7 +7,7 @@ import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import pool.{Cleaning, Context}
-import pool.dialog.CleaningDialog
+import pool.dialog.{CleaningDialog, CleaningsChartDialog}
 
 class CleaningsPane(context: Context) extends VBox with PaneButtonBar(context):
   spacing = 6
@@ -81,4 +81,7 @@ class CleaningsPane(context: Context) extends VBox with PaneButtonBar(context):
         tableView.selectionModel().select(selectedIndex)
       case _ => model.onError("Cleaning update failed.")
 
-  override def chart(): Unit = ()
+  override def chart(): Unit =
+    CleaningsChartDialog(context).showAndWait() match
+      case Some(_) =>
+      case _ => model.onError("Cleanings chart failed.")
