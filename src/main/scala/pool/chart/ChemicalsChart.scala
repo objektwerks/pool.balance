@@ -31,9 +31,16 @@ class ChemicalsChart(context: Context) extends TabPane:
     content = buildTrichlorChart()
   }
 
+  val dichlorTab = new Tab {
+    closable = false
+    text = context.chartDichlor
+    content = buildDichlorChart()
+  }
+
   padding = Insets(6)
   tabs = List(liquidChlorineTab,
-               trichlorTab)
+               trichlorTab,
+               dichlorTab)
 
   private def buildChart(typeof: TypeOfChemical,
                          yLabel: String,
@@ -67,6 +74,13 @@ class ChemicalsChart(context: Context) extends TabPane:
   def buildTrichlorChart(): LineChart[Number, Number] =
     buildChart(typeof = Trichlor,
                yLabel = context.chartTrichlor, 
+               yLowerBound = 1, 
+               yUpperBound = 40, 
+               yTickUnit = 1)
+
+  def buildDichlorChart(): LineChart[Number, Number] =
+    buildChart(typeof = Dichlor,
+               yLabel = context.chartDichlor, 
                yLowerBound = 1, 
                yUpperBound = 10, 
                yTickUnit = 1)
