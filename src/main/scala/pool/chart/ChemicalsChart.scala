@@ -66,21 +66,21 @@ class ChemicalsChart(context: Context) extends TabPane:
 
   def buildLiquidChlorineChart(): LineChart[Number, Number] =
     buildChart(typeof = LiquidChlorine,
-               yLabel = context.chartLiquidChlorine, 
-               yLowerBound = 1, 
-               yUpperBound = 40, 
-               yTickUnit = 5)
+               yLabel = context.chartLiquidChlorine,
+               yLowerBound = 1,
+               yUpperBound = 10,
+               yTickUnit = 1)
 
   def buildTrichlorChart(): LineChart[Number, Number] =
     buildChart(typeof = Trichlor,
-               yLabel = context.chartTrichlor, 
-               yLowerBound = 1, 
-               yUpperBound = 40, 
+               yLabel = context.chartTrichlor,
+               yLowerBound = 1,
+               yUpperBound = 4,
                yTickUnit = 1)
 
   def buildDichlorChart(): LineChart[Number, Number] =
     buildChart(typeof = Dichlor,
-               yLabel = context.chartDichlor, 
-               yLowerBound = 1, 
-               yUpperBound = 10, 
+               yLabel = context.chartDichlor,
+               yLowerBound = 1,
+               yUpperBound = 4,
                yTickUnit = 1)
