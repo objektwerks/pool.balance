@@ -1,5 +1,6 @@
 package pool.chart
 
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 import scalafx.Includes._
@@ -9,6 +10,8 @@ import scalafx.scene.chart.{LineChart, XYChart}
 import scalafx.scene.control.{Tab, TabPane}
 
 import pool.{Cleaning, Context}
+
+final case class CleaningXY(xDate: LocalDateTime, yCount: Int)
 
 class CleaningsChart(context: Context) extends TabPane:
   val cleanings = context.model.observableCleanings.reverse
@@ -36,7 +39,7 @@ class CleaningsChart(context: Context) extends TabPane:
     count
 
   def buildChart(): LineChart[Number, Number] =
-    val filtered = cleanings.map(c => (c.cleaned, cleaningsToInt(c)))
+    val filtered = cleanings.map(c => CleaningXY(c.cleaned, cleaningsToInt(c)))
     val (chart, series) = LineChartBuilder.build(context = context,
                                                  xLabel = context.chartMonthDay,
                                                  xMinDate = minDate,
@@ -45,9 +48,9 @@ class CleaningsChart(context: Context) extends TabPane:
                                                  yLowerBound = 1,
                                                  yUpperBound = 6,
                                                  yTickUnit = 1,
-                                                 yValues = filtered.map(t => t._2))
-    filtered foreach { t =>
-      series.data() += XYChart.Data[Number, Number](t._1.format(formatter).toDouble, t._2)
+                                                 yValues = filtered.map(cxy => cxy.yCount))
+    filtered foreach { cxy =>
+      series.data() += XYChart.Data[Number, Number](cxy.xDate.format(formatter).toDouble, cxy.yCount)
     }
     chart.data = series
     LineChartBuilder.addTooltip(chart)
