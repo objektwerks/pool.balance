@@ -74,7 +74,8 @@ Chemicals
 4. CalciumHypochlorite ( lbs/kg )
 5. Stabilizer ( lbs/kg )
 6. Algaecide ( gl/l )
-7. Salt ( lbs/kg )
+7. MuriaticAcid ( gl/l )
+8. Salt ( lbs/kg )
 
 Entity
 ------
