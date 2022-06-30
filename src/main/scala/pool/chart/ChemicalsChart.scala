@@ -11,6 +11,7 @@ import scalafx.scene.control.{Tab, TabPane}
 
 import pool.{Chemical, Context}
 import pool.TypeOfChemical.*
+import pool.TypeOfChemical
 
 class ChemicalsChart(context: Context) extends TabPane:
   val chemicals = context.model.observableChemicals.reverse
@@ -34,9 +35,21 @@ class ChemicalsChart(context: Context) extends TabPane:
   tabs = List(liquidChlorineTab,
                trichlorTab)
 
-  private def buildChart(filtered: ObservableBuffer[Chemical],
-                         series: Series[Number, Number],
-                         chart: LineChart[Number, Number]): LineChart[Number, Number] =
+  private def buildChart(typeof: TypeOfChemical,
+                         yLabel: String,
+                         yLowerBound: Int,
+                         yUpperBound: Int,
+                         yTickUnit: Int): LineChart[Number, Number] =
+    val filtered = chemicals filter(c => c.typeof == typeof)
+    val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
+                                                                xLabel = context.chartMonthDay,
+                                                                xMinDate = minDate,
+                                                                xMaxDate = maxDate,
+                                                                yLabel = yLabel,
+                                                                yLowerBound = yLowerBound,
+                                                                yUpperBound = yUpperBound,
+                                                                yTickUnit = yTickUnit,
+                                                                yValues = filtered.map(c => c.amount))
     filtered foreach { c =>
       series.data() += XYChart.Data[Number, Number](c.added.format(formatter).toDouble, c.amount)
     }
@@ -45,27 +58,15 @@ class ChemicalsChart(context: Context) extends TabPane:
     chart
 
   def buildLiquidChlorineChart(): LineChart[Number, Number] =
-    val filtered = chemicals filter(c => c.typeof == LiquidChlorine)
-    val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
-                                                                xLabel = context.chartMonthDay,
-                                                                xMinDate = minDate,
-                                                                xMaxDate = maxDate,
-                                                                yLabel = context.chartLiquidChlorine,
-                                                                yLowerBound = 1,
-                                                                yUpperBound = 40,
-                                                                yTickUnit = 5,
-                                                                yValues = filtered.map(c => c.amount))
-    buildChart(filtered, series, chart)
+    buildChart(typeof = LiquidChlorine,
+               yLabel = context.chartLiquidChlorine, 
+               yLowerBound = 1, 
+               yUpperBound = 40, 
+               yTickUnit = 5)
 
   def buildTrichlorChart(): LineChart[Number, Number] =
-    val filtered = chemicals filter(c => c.typeof == Trichlor)
-    val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
-                                                                xLabel = context.chartMonthDay,
-                                                                xMinDate = minDate,
-                                                                xMaxDate = maxDate,
-                                                                yLabel = context.chartTrichlor,
-                                                                yLowerBound = 1,
-                                                                yUpperBound = 10,
-                                                                yTickUnit = 1,
-                                                                yValues = filtered.map(c => c.amount))
-    buildChart(filtered, series, chart)
+    buildChart(typeof = Trichlor,
+               yLabel = context.chartTrichlor, 
+               yLowerBound = 1, 
+               yUpperBound = 10, 
+               yTickUnit = 1)
