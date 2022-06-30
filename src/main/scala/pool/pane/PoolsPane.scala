@@ -41,7 +41,7 @@ class PoolsPane(context: Context) extends VBox with PaneButtonBar(context):
   	content = new VBox {
       spacing = 6
       padding = Insets(6)
-      children = List(tableView, paneButtonBar)
+      children = List(tableView, addEditButtonBar)
     }
   }
 

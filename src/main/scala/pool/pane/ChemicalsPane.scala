@@ -44,7 +44,7 @@ class ChemicalsPane(context: Context) extends VBox with PaneButtonBar(context):
   }
 
   addChartButton()
-  children = List(tableView, paneButtonBar)
+  children = List(tableView, addEditButtonBar)
   VBox.setVgrow(tableView, Priority.Always)
 
   tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
