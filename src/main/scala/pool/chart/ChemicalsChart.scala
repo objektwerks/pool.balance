@@ -14,9 +14,9 @@ import pool.TypeOfChemical
 
 class ChemicalsChart(context: Context) extends TabPane:
   val chemicals = context.model.observableChemicals.reverse
-  val formatter = DateTimeFormatter.ofPattern("M.dd")
-  val minDate = chemicals.map(c => c.added).min.format(formatter).toDouble
-  val maxDate = chemicals.map(c => c.added).max.format(formatter).toDouble
+  val dateFormat = DateTimeFormatter.ofPattern("M.dd")
+  val minDate = chemicals.map(c => c.added).min.format(dateFormat).toDouble
+  val maxDate = chemicals.map(c => c.added).max.format(dateFormat).toDouble
 
   val liquidChlorineTab = new Tab {
     closable = false
@@ -92,7 +92,7 @@ class ChemicalsChart(context: Context) extends TabPane:
                                                  yTickUnit = yTickUnit,
                                                  yValues = filtered.map(c => c.amount))
     filtered foreach { c =>
-      series.data() += XYChart.Data[Number, Number](c.added.format(formatter).toDouble, c.amount)
+      series.data() += XYChart.Data[Number, Number](c.added.format(dateFormat).toDouble, c.amount)
     }
     chart.data = series
     LineChartBuilder.addTooltip(chart)
