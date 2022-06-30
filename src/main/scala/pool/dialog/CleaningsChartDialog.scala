@@ -11,7 +11,7 @@ import pool.chart.CleaningsChart
 class CleaningsChartDialog(context: Context) extends Dialog[Unit]:
   initOwner(App.stage)
   title = context.windowTitle
-  headerText = context.chartChemicals
+  headerText = context.chartCleanings
   
   dialogPane().buttonTypes = List(ButtonType.Close)
   dialogPane().content = new VBox {
