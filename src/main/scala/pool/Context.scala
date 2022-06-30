@@ -55,6 +55,7 @@ final class Context(config: Config):
   val chartStabilizer = config.getString("chart.stabilizer")
   val chartAlgaecide = config.getString("chart.algaecide")
   val chartMuriaticAcid = config.getString("chart.muriaticAcid")
+  val chartGranularSalt = config.getString("chart.granularSalt")
 
   val dialogPool = config.getString("dialog.pool")
   val dialogCleaning = config.getString("dialog.cleaning")
