@@ -66,15 +66,15 @@ Measurements
 
 Chemicals
 ---------
-1. Liquids measured in: gallons ( gl ) and liters ( l ).
-2. Granules measured in: pounds ( lbs ) and kilograms ( kg ).
-* LiquidChlorine ( gl/l )
-* Trichlor ( tablet )
-* Dichlor ( lbs/kg )
-* CalciumHypochlorite ( lbs/kg )
-* Stabilizer ( lbs/kg )
-* Algaecide ( gl/l )
-* Salt ( lbs/kg )
+* Liquids measured in: gallons ( gl ) and liters ( l ).
+* Granules measured in: pounds ( lbs ) and kilograms ( kg ).
+1. LiquidChlorine ( gl/l )
+2. Trichlor ( tablet )
+3. Dichlor ( lbs/kg )
+4. CalciumHypochlorite ( lbs/kg )
+5. Stabilizer ( lbs/kg )
+6. Algaecide ( gl/l )
+7. Salt ( lbs/kg )
 
 Entity
 ------
