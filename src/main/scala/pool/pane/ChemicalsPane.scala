@@ -7,7 +7,7 @@ import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import pool.{Chemical, Context, Pool}
-import pool.dialog.ChemicalDialog
+import pool.dialog.{ChemicalDialog, ChemicalChartDialog}
 
 class ChemicalsPane(context: Context) extends VBox with PaneButtonBar(context):
   spacing = 6
@@ -70,4 +70,7 @@ class ChemicalsPane(context: Context) extends VBox with PaneButtonBar(context):
         tableView.selectionModel().select(selectedIndex)
       case _ => model.onError("Chemical update failed.")
 
-  override def chart(): Unit = ()
+  override def chart(): Unit =
+    ChemicalChartDialog(context).showAndWait() match
+      case Some(_) =>
+      case _ => model.onError("Chemicals chart failed.")

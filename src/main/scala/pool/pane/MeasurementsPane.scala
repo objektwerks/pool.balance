@@ -103,4 +103,4 @@ class MeasurementsPane(context: Context) extends VBox with PaneButtonBar(context
   override def chart(): Unit =
     MeasurementChartDialog(context).showAndWait() match
       case Some(_) =>
-      case _ => model.onError("Measurement chart failed.")
+      case _ => model.onError("Measurements chart failed.")
