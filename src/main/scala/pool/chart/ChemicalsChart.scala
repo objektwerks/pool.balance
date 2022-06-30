@@ -6,9 +6,10 @@ import scalafx.Includes._
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
 import scalafx.scene.chart.{LineChart, XYChart}
+import scalafx.scene.chart.XYChart.Series
 import scalafx.scene.control.{Tab, TabPane}
 
-import pool.Context
+import pool.{Chemical, Context}
 import pool.TypeOfChemical.*
 
 class ChemicalsChart(context: Context) extends TabPane:
@@ -23,8 +24,25 @@ class ChemicalsChart(context: Context) extends TabPane:
     content = buildLiquidChlorineChart()
   }
 
+  val tricholorTab = new Tab {
+    closable = false
+    text = context.chartTrichlor
+    content = buildLiquidChlorineChart()
+  }
+
   padding = Insets(6)
-  tabs = List(liquidChlorineTab)
+  tabs = List(liquidChlorineTab,
+               tricholorTab)
+
+  private def buildChart(filtered: ObservableBuffer[Chemical],
+                         series: Series[Number, Number],
+                         chart: LineChart[Number, Number]): LineChart[Number, Number] =
+    filtered foreach { c =>
+      series.data() += XYChart.Data[Number, Number](c.added.format(formatter).toDouble, c.amount)
+    }
+    chart.data = series
+    LineChartBuilder.addTooltip(chart)
+    chart
 
   def buildLiquidChlorineChart(): LineChart[Number, Number] =
     val filtered = chemicals filter(c => c.typeof == LiquidChlorine)
@@ -37,9 +55,17 @@ class ChemicalsChart(context: Context) extends TabPane:
                                                                 yUpperBound = 10,
                                                                 yTickUnit = 1,
                                                                 yValues = filtered.map(c => c.amount))
-    filtered foreach { c =>
-      series.data() += XYChart.Data[Number, Number](c.added.format(formatter).toDouble, c.amount)
-    }
-    chart.data = series
-    LineChartBuilder.addTooltip(chart)
-    chart
+    buildChart(filtered, series, chart)
+
+  def buildTricholorChart(): LineChart[Number, Number] =
+    val filtered = chemicals filter(c => c.typeof == Trichlor)
+    val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
+                                                                xLabel = context.chartMonthDay,
+                                                                xMinDate = minDate,
+                                                                xMaxDate = maxDate,
+                                                                yLabel = context.chartTrichlor,
+                                                                yLowerBound = 0,
+                                                                yUpperBound = 10,
+                                                                yTickUnit = 1,
+                                                                yValues = filtered.map(c => c.amount))
+    buildChart(filtered, series, chart)
