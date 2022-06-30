@@ -8,8 +8,7 @@ import scalafx.geometry.Insets
 import scalafx.scene.chart.{LineChart, XYChart}
 import scalafx.scene.control.{Tab, TabPane}
 
-import pool.Context
-import scalafx.collections.ObservableBuffer
+import pool.{Cleaning, Context}
 
 class CleaningsChart(context: Context) extends TabPane:
   val cleanings = context.model.observableCleanings.reverse
@@ -26,7 +25,18 @@ class CleaningsChart(context: Context) extends TabPane:
   padding = Insets(6)
   tabs = List(tab)
 
+  private def cleaningsToInt(cleaning: Cleaning): Int =
+    val count = 0
+    if cleaning.brush then count +1
+    if cleaning.net then count +1
+    if cleaning.skimmerBasket then count +1
+    if cleaning.pumpBasket then count +1
+    if cleaning.pumpFilter then count +1
+    if cleaning.vacuum then count +1
+    count
+
   def buildChart(): LineChart[Number, Number] =
+    val filtered = cleanings.map(c => (c.cleaned, cleaningsToInt(c)))
     val (chart, series) = LineChartBuilder.build(context = context,
                                                  xLabel = context.chartMonthDay,
                                                  xMinDate = minDate,
@@ -35,10 +45,10 @@ class CleaningsChart(context: Context) extends TabPane:
                                                  yLowerBound = 1,
                                                  yUpperBound = 6,
                                                  yTickUnit = 1,
-                                                 yValues = ObservableBuffer(0))
-    cleanings foreach { c =>
-      series.data() += XYChart.Data[Number, Number](c.cleaned.format(formatter).toDouble, 0)
+                                                 yValues = filtered.map(t => t._2))
+    filtered foreach { t =>
+      series.data() += XYChart.Data[Number, Number](t._1.format(formatter).toDouble, t._2)
     }
     chart.data = series
-    // LineChartBuilder.addTooltip(chart)
+    LineChartBuilder.addTooltip(chart)
     chart
