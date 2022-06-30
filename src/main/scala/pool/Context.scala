@@ -40,6 +40,7 @@ final class Context(config: Config):
   val chartMin = config.getString("chart.min")
   val chartMax = config.getString("chart.max")
   val chartAvg = config.getString("chart.avg")
+  val chartYCleanings = config.getString("chart.yCleanings")
   val chartTotalChlorine = config.getString("chart.totalChlorine")
   val chartFreeChlorine = config.getString("chart.freeChlorine")
   val chartCombinedChlorine = config.getString("chart.combinedChlorine")
