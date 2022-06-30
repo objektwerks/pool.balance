@@ -43,11 +43,18 @@ class ChemicalsChart(context: Context) extends TabPane:
     content = buildCalciumHypochloriteChart()
   }
 
+  val stabilizerTab = new Tab {
+    closable = false
+    text = context.chartStabilizer
+    content = buildStabilizerChart()
+  }
+
   padding = Insets(6)
   tabs = List(liquidChlorineTab,
                trichlorTab,
                dichlorTab,
-               calciumHypochloriteTab)
+               calciumHypochloriteTab,
+               stabilizerTab)
 
   private def buildChart(typeof: TypeOfChemical,
                          yLabel: String,
@@ -97,4 +104,11 @@ class ChemicalsChart(context: Context) extends TabPane:
                yLabel = context.chartCalciumHypochlorite,
                yLowerBound = 1,
                yUpperBound = 10,
+               yTickUnit = 1)
+
+  def buildStabilizerChart(): LineChart[Number, Number] =
+    buildChart(typeof = Stabilizer,
+               yLabel = context.chartStabilizer,
+               yLowerBound = 1,
+               yUpperBound = 4,
                yTickUnit = 1)
