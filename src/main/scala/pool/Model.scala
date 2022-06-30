@@ -88,9 +88,7 @@ final class Model(context: Context) extends LazyLogging:
   private def dashboard(poolId: Long): Unit =
     Try {
       val formatter = NumberFormat.getNumberInstance()
-      formatter.setMaximumFractionDigits(1);
-      // format(doubleValue)
-
+      formatter.setMaximumFractionDigits(1)
       val measurements = store.measurements(poolId)
       measurements.headOption.foreach { measurement =>
         currentTotalChlorine.value = measurement.totalChlorine
