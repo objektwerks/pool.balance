@@ -41,7 +41,7 @@ class CleaningsChart(context: Context) extends TabPane:
                                                  xLabel = context.chartMonthDay,
                                                  xMinDate = minDate,
                                                  xMaxDate = maxDate,
-                                                 yLabel = context.chartTotalChlorine,
+                                                 yLabel = context.chartCleanings,
                                                  yLowerBound = 1,
                                                  yUpperBound = 6,
                                                  yTickUnit = 1,
