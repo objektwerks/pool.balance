@@ -53,7 +53,7 @@ class ChemicalsChart(context: Context) extends TabPane:
                                                                 yLabel = context.chartLiquidChlorine,
                                                                 yLowerBound = 1,
                                                                 yUpperBound = 40,
-                                                                yTickUnit = 1,
+                                                                yTickUnit = 5,
                                                                 yValues = filtered.map(c => c.amount))
     buildChart(filtered, series, chart)
 
