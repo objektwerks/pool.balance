@@ -83,15 +83,15 @@ class ChemicalsChart(context: Context) extends TabPane:
                          yUpperBound: Int = 4,
                          yTickUnit: Int = 1): LineChart[Number, Number] =
     val filtered = chemicals filter(c => c.typeof == typeof)
-    val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
-                                                                xLabel = context.chartMonthDay,
-                                                                xMinDate = minDate,
-                                                                xMaxDate = maxDate,
-                                                                yLabel = yLabel,
-                                                                yLowerBound = yLowerBound,
-                                                                yUpperBound = yUpperBound,
-                                                                yTickUnit = yTickUnit,
-                                                                yValues = filtered.map(c => c.amount))
+    val (chart, series) = LineChartBuilder.build(context = context,
+                                                 xLabel = context.chartMonthDay,
+                                                 xMinDate = minDate,
+                                                 xMaxDate = maxDate,
+                                                 yLabel = yLabel,
+                                                 yLowerBound = yLowerBound,
+                                                 yUpperBound = yUpperBound,
+                                                 yTickUnit = yTickUnit,
+                                                 yValues = filtered.map(c => c.amount))
     filtered foreach { c =>
       series.data() += XYChart.Data[Number, Number](c.added.format(formatter).toDouble, c.amount)
     }

@@ -21,10 +21,7 @@ object LineChartBuilder:
             yUpperBound: Double,
             yTickUnit: Double,
             yValues: ObservableBuffer[Double]): (LineChart[Number, Number],
-                                                 XYChart.Series[Number, Number],
-                                                 Number,
-                                                 Number,
-                                                 Number) =
+                                                 XYChart.Series[Number, Number]) =
     val xAxis = NumberAxis(axisLabel = s"$xLabel [$xMinDate - $xMaxDate]",
                            lowerBound = xMinDate,
                            upperBound = xMaxDate,
@@ -39,7 +36,7 @@ object LineChartBuilder:
     val (min, max, avg) = toMinMaxAvg(yValues)
     val formatter = new DecimalFormat("#.##");
     series.name = s"${context.chartMin} $min  ${context.chartMax} $max  ${context.chartAvg} ${formatter.format(avg)}"
-    (chart, series, min, max, avg)
+    (chart, series)
 
   def addTooltip(chart: LineChart[Number, Number]): Unit =
     chart.data().foreach { items =>
