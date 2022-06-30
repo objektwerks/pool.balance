@@ -4,12 +4,11 @@ Pool Balance
 
 Todo
 ----
-1. Build cleanings chart.
-2. Test int and double textfields.
-3. Build converters for gl/l and lbs/kg.
-4. Bind errors to status pane or dialog.
-5. Consider async IO with optional UI integration.
-6. Consider dashboard pass and fail badge.
+1. Test int and double textfields.
+2. Build converters for gl/l and lbs/kg.
+3. Bind errors to status pane or dialog.
+4. Consider async IO with optional UI integration.
+5. Consider dashboard pass and fail badge.
 
 Build
 -----
