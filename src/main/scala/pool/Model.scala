@@ -87,14 +87,14 @@ final class Model(context: Context) extends LazyLogging:
 
   private def dashboard(poolId: Long): Unit =
     Try {
-      val formatter = NumberFormat.getNumberInstance()
-      formatter.setMaximumFractionDigits(1)
+      val numberFormat = NumberFormat.getNumberInstance()
+      numberFormat.setMaximumFractionDigits(1)
       val measurements = store.measurements(poolId)
       measurements.headOption.foreach { measurement =>
         currentTotalChlorine.value = measurement.totalChlorine
         currentFreeChlorine.value = measurement.freeChlorine
-        currentCombinedChlorine.value = formatter.format( measurement.combinedChlorine ).toDouble
-        currentPh.value = formatter.format( measurement.ph ).toDouble
+        currentCombinedChlorine.value = numberFormat.format( measurement.combinedChlorine ).toDouble
+        currentPh.value = numberFormat.format( measurement.ph ).toDouble
         currentCalciumHardness.value = measurement.calciumHardness
         currentTotalAlkalinity.value = measurement.totalAlkalinity
         currentCyanuricAcid.value = measurement.cyanuricAcid
@@ -104,8 +104,8 @@ final class Model(context: Context) extends LazyLogging:
         val count = measurements.length
         averageTotalChlorine.value = measurements.map(_.totalChlorine).sum / count
         averageFreeChlorine.value = measurements.map(_.freeChlorine).sum / count
-        averageCombinedChlorine.value = formatter.format( measurements.map(_.combinedChlorine).sum / count ).toDouble
-        averagePh.value = formatter.format( measurements.map(_.ph).sum / count ).toDouble
+        averageCombinedChlorine.value = numberFormat.format( measurements.map(_.combinedChlorine).sum / count ).toDouble
+        averagePh.value = numberFormat.format( measurements.map(_.ph).sum / count ).toDouble
         averageCalciumHardness.value = measurements.map(_.calciumHardness).sum / count
         averageTotalAlkalinity.value = measurements.map(_.totalAlkalinity).sum / count
         averageCyanuricAcid.value = measurements.map(_.cyanuricAcid).sum / count
