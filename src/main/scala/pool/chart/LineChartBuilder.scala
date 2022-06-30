@@ -1,7 +1,5 @@
 package pool.chart
 
-import java.text.DecimalFormat
-
 import scalafx.Includes._
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
@@ -34,8 +32,7 @@ object LineChartBuilder:
     val series = new XYChart.Series[Number, Number]()
     chart.padding = Insets(6)
     val (min, max, avg) = toMinMaxAvg(yValues)
-    val formatter = new DecimalFormat("#.##");
-    series.name = s"${context.chartMin} $min  ${context.chartMax} $max  ${context.chartAvg} ${formatter.format(avg)}"
+    series.name = s"${context.chartMin} $min  ${context.chartMax} $max  ${context.chartAvg} $avg"
     (chart, series)
 
   def addTooltip(chart: LineChart[Number, Number]): Unit =
@@ -51,7 +48,7 @@ object LineChartBuilder:
     }
 
   private def toMinMaxAvg(numbers: ObservableBuffer[Double]): (Double, Double, Double) =
-    val min = numbers.min
-    val max = numbers.max
-    val avg = numbers.sum / numbers.length
+    val min = numbers.minOption.getOrElse(0.0)
+    val max = numbers.maxOption.getOrElse(0.0)
+    val avg = ( numbers.sum / numbers.length ).toDouble
     (min, max, avg)
