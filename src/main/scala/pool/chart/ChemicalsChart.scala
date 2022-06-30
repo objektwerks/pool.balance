@@ -6,7 +6,6 @@ import scalafx.Includes._
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
 import scalafx.scene.chart.{LineChart, XYChart}
-import scalafx.scene.chart.XYChart.Series
 import scalafx.scene.control.{Tab, TabPane}
 
 import pool.{Chemical, Context}
