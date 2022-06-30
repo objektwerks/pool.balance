@@ -54,8 +54,7 @@ class CleaningsPane(context: Context) extends VBox with PaneButtonBar(context):
     chartButton.disable = false
   }
 
-  addChartButton()
-  children = List(tableView, addEditButtonBar)
+  children = List(tableView, addEditChartButtonBar)
   VBox.setVgrow(tableView, Priority.Always)
 
   tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
