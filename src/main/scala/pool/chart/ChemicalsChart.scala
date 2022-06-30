@@ -24,15 +24,15 @@ class ChemicalsChart(context: Context) extends TabPane:
     content = buildLiquidChlorineChart()
   }
 
-  val tricholorTab = new Tab {
+  val trichlorTab = new Tab {
     closable = false
     text = context.chartTrichlor
-    content = buildLiquidChlorineChart()
+    content = buildTrichlorChart()
   }
 
   padding = Insets(6)
   tabs = List(liquidChlorineTab,
-               tricholorTab)
+               trichlorTab)
 
   private def buildChart(filtered: ObservableBuffer[Chemical],
                          series: Series[Number, Number],
@@ -57,7 +57,7 @@ class ChemicalsChart(context: Context) extends TabPane:
                                                                 yValues = filtered.map(c => c.amount))
     buildChart(filtered, series, chart)
 
-  def buildTricholorChart(): LineChart[Number, Number] =
+  def buildTrichlorChart(): LineChart[Number, Number] =
     val filtered = chemicals filter(c => c.typeof == Trichlor)
     val (chart, series, min, max, avg) = LineChartBuilder.build(context = context,
                                                                 xLabel = context.chartMonthDay,
