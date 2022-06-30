@@ -6,15 +6,15 @@ import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.layout.VBox
 
 import pool.{App, Context}
-import pool.chart.ChemicalsChart
+import pool.chart.MeasurementsChart
 
-class ChemicalChartDialog(context: Context) extends Dialog[Unit]:
+class MeasurementsChartDialog(context: Context) extends Dialog[Unit]:
   initOwner(App.stage)
   title = context.windowTitle
-  headerText = context.chartChemicals
+  headerText = context.chartMeasurements
   
   dialogPane().buttonTypes = List(ButtonType.Close)
   dialogPane().content = new VBox {
     spacing = 6
-    children = List( ChemicalsChart(context) )
+    children = List( MeasurementsChart(context) )
   }
