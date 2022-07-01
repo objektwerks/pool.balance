@@ -78,8 +78,8 @@ class ChemicalsChart(context: Context) extends TabPane:
 
   private def buildChart(typeof: TypeOfChemical,
                          yLabel: String,
-                         yLowerBound: Int = 1,
-                         yUpperBound: Int = 4,
+                         yLowerBound: Int = 0,
+                         yUpperBound: Int = 10,
                          yTickUnit: Int = 1): LineChart[String, Number] =
     val filtered = chemicals filter(c => c.typeof == typeof)
     val (chart, series) = LineChartBuilder.build(context = context,
