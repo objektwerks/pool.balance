@@ -67,7 +67,7 @@ final class Model(context: Context) extends LazyLogging:
   observableMeasurements.onChange{ (_, _) =>
     println(s"observable measurements onchange event in fx thread: ${Platform.isFxApplicationThread}")
     logger.info(s"observable measurements onchange event.")
-    dashboard()
+    Platform.runLater( dashboard() )
   }
 
   pools()
@@ -79,55 +79,53 @@ final class Model(context: Context) extends LazyLogging:
     }.recover { case error: Throwable => onError(error, s"Loading pools data failed: ${error.getMessage}") }
 
   private def cleanings(poolId: Long): Unit =
-    Try {
+    Future {
       println(s"cleanings in fx thread: ${Platform.isFxApplicationThread}")
       observableCleanings.clear()
       observableCleanings ++= store.cleanings(poolId)
     }.recover { case error: Throwable => onError(error, s"Loading cleanings data failed: ${error.getMessage}") }
 
   private def measurements(poolId: Long): Unit =
-    Try {
+    Future {
       println(s"measurements in fx thread: ${Platform.isFxApplicationThread}")
       observableMeasurements.clear()
       observableMeasurements ++= store.measurements(poolId) 
     }.recover { case error: Throwable => onError(error, s"Loading measurements data failed: ${error.getMessage}") }
 
   private def chemicals(poolId: Long): Unit =
-    Try {
+    Future {
       println(s"chemicals in fx thread: ${Platform.isFxApplicationThread}")
       observableChemicals.clear()
       observableChemicals ++= store.chemicals(poolId) 
     }.recover { case error: Throwable => onError(error, s"Loading chemicals data failed: ${error.getMessage}") }
 
   private def dashboard(): Unit =
-    Try {
-      println(s"dashboard in fx thread: ${Platform.isFxApplicationThread}")
-      val numberFormat = NumberFormat.getNumberInstance()
-      numberFormat.setMaximumFractionDigits(1)
-      val measurements = observableMeasurements
-      measurements.headOption.foreach { measurement =>
-        currentTotalChlorine.value = measurement.totalChlorine
-        currentFreeChlorine.value = measurement.freeChlorine
-        currentCombinedChlorine.value = numberFormat.format( measurement.combinedChlorine ).toDouble
-        currentPh.value = numberFormat.format( measurement.ph ).toDouble
-        currentCalciumHardness.value = measurement.calciumHardness
-        currentTotalAlkalinity.value = measurement.totalAlkalinity
-        currentCyanuricAcid.value = measurement.cyanuricAcid
-        currentTotalBromine.value = measurement.totalBromine
-        currentSalt.value = measurement.salt
+    println(s"dashboard in fx thread: ${Platform.isFxApplicationThread}")
+    val numberFormat = NumberFormat.getNumberInstance()
+    numberFormat.setMaximumFractionDigits(1)
+    val measurements = observableMeasurements
+    measurements.headOption.foreach { measurement =>
+      currentTotalChlorine.value = measurement.totalChlorine
+      currentFreeChlorine.value = measurement.freeChlorine
+      currentCombinedChlorine.value = numberFormat.format( measurement.combinedChlorine ).toDouble
+      currentPh.value = numberFormat.format( measurement.ph ).toDouble
+      currentCalciumHardness.value = measurement.calciumHardness
+      currentTotalAlkalinity.value = measurement.totalAlkalinity
+      currentCyanuricAcid.value = measurement.cyanuricAcid
+      currentTotalBromine.value = measurement.totalBromine
+      currentSalt.value = measurement.salt
 
-        val count = measurements.length
-        averageTotalChlorine.value = measurements.map(_.totalChlorine).sum / count
-        averageFreeChlorine.value = measurements.map(_.freeChlorine).sum / count
-        averageCombinedChlorine.value = numberFormat.format( measurements.map(_.combinedChlorine).sum / count ).toDouble
-        averagePh.value = numberFormat.format( measurements.map(_.ph).sum / count ).toDouble
-        averageCalciumHardness.value = measurements.map(_.calciumHardness).sum / count
-        averageTotalAlkalinity.value = measurements.map(_.totalAlkalinity).sum / count
-        averageCyanuricAcid.value = measurements.map(_.cyanuricAcid).sum / count
-        averageTotalBromine.value = measurements.map(_.totalBromine).sum / count
-        averageSalt.value = measurements.map(_.salt).sum / count
-      }
-    }.recover { case error: Throwable => onError(error, s"Loading dashboard data failed: ${error.getMessage}") }
+      val count = measurements.length
+      averageTotalChlorine.value = measurements.map(_.totalChlorine).sum / count
+      averageFreeChlorine.value = measurements.map(_.freeChlorine).sum / count
+      averageCombinedChlorine.value = numberFormat.format( measurements.map(_.combinedChlorine).sum / count ).toDouble
+      averagePh.value = numberFormat.format( measurements.map(_.ph).sum / count ).toDouble
+      averageCalciumHardness.value = measurements.map(_.calciumHardness).sum / count
+      averageTotalAlkalinity.value = measurements.map(_.totalAlkalinity).sum / count
+      averageCyanuricAcid.value = measurements.map(_.cyanuricAcid).sum / count
+      averageTotalBromine.value = measurements.map(_.totalBromine).sum / count
+      averageSalt.value = measurements.map(_.salt).sum / count
+    }
 
   def onError(message: String): Unit =
     println(s"on error message in fx thread: ${Platform.isFxApplicationThread}")
