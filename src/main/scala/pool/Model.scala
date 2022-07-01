@@ -54,7 +54,7 @@ final class Model(context: Context) extends LazyLogging:
   val averageSalt = ObjectProperty[Int](0)
 
   selectedPoolId.onChange { (_, oldPoolId, newPoolId) =>
-    println(s"selected pool id onchange event is in fx thread: ${Platform.isFxApplicationThread}")
+    println(s"selected pool id onchange event in fx thread: ${Platform.isFxApplicationThread}")
     logger.info(s"selected oool id onchange event: $oldPoolId -> $newPoolId")
     cleanings(newPoolId)
     measurements(newPoolId)
@@ -62,7 +62,7 @@ final class Model(context: Context) extends LazyLogging:
   }
 
   observableMeasurements.onChange{ (_, _) =>
-    println(s"observable measurements onchange event is in fx thread: ${Platform.isFxApplicationThread}")
+    println(s"observable measurements onchange event in fx thread: ${Platform.isFxApplicationThread}")
     logger.info(s"observable measurements onchange event.")
     dashboard()
   }
@@ -71,34 +71,34 @@ final class Model(context: Context) extends LazyLogging:
 
   private def pools(): Unit =
     Try {
-      println(s"pools is in fx thread: ${Platform.isFxApplicationThread}")
+      println(s"pools in fx thread: ${Platform.isFxApplicationThread}")
       observablePools ++= store.pools()
     }.recover { case error: Throwable => onError(error, s"Loading pools data failed: ${error.getMessage}") }
 
   private def cleanings(poolId: Long): Unit =
     Try {
-      println(s"cleanings is in fx thread: ${Platform.isFxApplicationThread}")
+      println(s"cleanings in fx thread: ${Platform.isFxApplicationThread}")
       observableCleanings.clear()
       observableCleanings ++= store.cleanings(poolId)
     }.recover { case error: Throwable => onError(error, s"Loading cleanings data failed: ${error.getMessage}") }
 
   private def measurements(poolId: Long): Unit =
     Try {
-      println(s"measurements is in fx thread: ${Platform.isFxApplicationThread}")
+      println(s"measurements in fx thread: ${Platform.isFxApplicationThread}")
       observableMeasurements.clear()
       observableMeasurements ++= store.measurements(poolId) 
     }.recover { case error: Throwable => onError(error, s"Loading measurements data failed: ${error.getMessage}") }
 
   private def chemicals(poolId: Long): Unit =
     Try {
-      println(s"chemicals is in fx thread: ${Platform.isFxApplicationThread}")
+      println(s"chemicals in fx thread: ${Platform.isFxApplicationThread}")
       observableChemicals.clear()
       observableChemicals ++= store.chemicals(poolId) 
     }.recover { case error: Throwable => onError(error, s"Loading chemicals data failed: ${error.getMessage}") }
 
   private def dashboard(): Unit =
     Try {
-      println(s"dashboard is in fx thread: ${Platform.isFxApplicationThread}")
+      println(s"dashboard in fx thread: ${Platform.isFxApplicationThread}")
       val numberFormat = NumberFormat.getNumberInstance()
       numberFormat.setMaximumFractionDigits(1)
       val measurements = observableMeasurements
@@ -127,16 +127,18 @@ final class Model(context: Context) extends LazyLogging:
     }.recover { case error: Throwable => onError(error, s"Loading dashboard data failed: ${error.getMessage}") }
 
   def onError(message: String): Unit =
+    println(s"on error message in fx thread: ${Platform.isFxApplicationThread}")
     observableErrors += message
     logger.error(message)
 
   def onError(error: Throwable, message: String): Unit =
+    println(s"on error throwable, message in fx thread: ${Platform.isFxApplicationThread}")
     observableErrors += message
     logger.error(message, error)
 
   def add(pool: Pool): Either[Throwable, Pool] =
     Try {
-      println(s"add pool is in fx thread: ${Platform.isFxApplicationThread}")
+      println(s"add pool in fx thread: ${Platform.isFxApplicationThread}")
       val newPool = store.add(pool)
       observablePools += newPool
       observablePools.sort()
@@ -146,7 +148,7 @@ final class Model(context: Context) extends LazyLogging:
 
   def update(selectedIndex: Int, pool: Pool): Either[Throwable, Unit] =
     Try {
-      println(s"update pool is in fx thread: ${Platform.isFxApplicationThread}")
+      println(s"update pool in fx thread: ${Platform.isFxApplicationThread}")
       store.update(pool)
       observablePools.update(selectedIndex, pool)
       observablePools.sort()
@@ -155,7 +157,7 @@ final class Model(context: Context) extends LazyLogging:
 
   def add(cleaning: Cleaning): Either[Throwable, Cleaning] =
     Try {
-      println(s"add cleaning is in fx thread: ${Platform.isFxApplicationThread}")
+      println(s"add cleaning in fx thread: ${Platform.isFxApplicationThread}")
       val newCleaning = store.add(cleaning)
       observableCleanings += newCleaning
       observableCleanings.sort()
@@ -165,7 +167,7 @@ final class Model(context: Context) extends LazyLogging:
 
   def update(selectedIndex: Int, cleaning: Cleaning): Either[Throwable, Unit] =
     Try {
-      println(s"update cleaning is in fx thread: ${Platform.isFxApplicationThread}")
+      println(s"update cleaning in fx thread: ${Platform.isFxApplicationThread}")
       store.update(cleaning)
       observableCleanings.update(selectedIndex, cleaning)
       observableCleanings.sort()
@@ -174,7 +176,7 @@ final class Model(context: Context) extends LazyLogging:
   
   def add(measurement: Measurement): Either[Throwable, Measurement] =
     Try {
-      println(s"add measurement is in fx thread: ${Platform.isFxApplicationThread}")
+      println(s"add measurement in fx thread: ${Platform.isFxApplicationThread}")
       val newMeasurement = store.add(measurement)
       observableMeasurements += newMeasurement
       observableMeasurements.sort()
@@ -184,7 +186,7 @@ final class Model(context: Context) extends LazyLogging:
 
   def update(selectedIndex: Int, measurement: Measurement): Either[Throwable, Unit] =
     Try {
-      println(s"update measurement is in fx thread: ${Platform.isFxApplicationThread}")
+      println(s"update measurement in fx thread: ${Platform.isFxApplicationThread}")
       store.update(measurement)
       observableMeasurements.update(selectedIndex, measurement)
       observableMeasurements.sort()
@@ -193,7 +195,7 @@ final class Model(context: Context) extends LazyLogging:
   
   def add(chemical: Chemical): Either[Throwable, Chemical] =
     Try {
-      println(s"add chemical is in fx thread: ${Platform.isFxApplicationThread}")
+      println(s"add chemical in fx thread: ${Platform.isFxApplicationThread}")
       val newChemical = store.add(chemical)
       observableChemicals += newChemical
       observableChemicals.sort()
@@ -203,7 +205,7 @@ final class Model(context: Context) extends LazyLogging:
 
   def update(selectedIndex: Int, chemical: Chemical): Either[Throwable, Unit] =
     Try {
-      println(s"update chemical is in fx thread: ${Platform.isFxApplicationThread}")
+      println(s"update chemical in fx thread: ${Platform.isFxApplicationThread}")
       store.update(chemical)
       observableChemicals.update(selectedIndex, chemical)
       observableChemicals.sort()
