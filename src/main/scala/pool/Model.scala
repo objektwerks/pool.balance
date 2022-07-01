@@ -57,7 +57,11 @@ final class Model(context: Context) extends LazyLogging:
     cleanings(newPoolId)
     measurements(newPoolId)
     chemicals(newPoolId)
-    dashboard(newPoolId)
+  }
+
+  observableMeasurements.onChange{ (_, _) =>
+    logger.info(s"Observable measurements onChange event.")
+    dashboard()
   }
 
   pools()
@@ -85,11 +89,11 @@ final class Model(context: Context) extends LazyLogging:
       observableChemicals ++= store.chemicals(poolId) 
     }.recover { case error: Throwable => onError(error, s"Loading chemicals data failed: ${error.getMessage}") }
 
-  private def dashboard(poolId: Long): Unit =
+  private def dashboard(): Unit =
     Try {
       val numberFormat = NumberFormat.getNumberInstance()
       numberFormat.setMaximumFractionDigits(1)
-      val measurements = store.measurements(poolId)
+      val measurements = observableMeasurements
       measurements.headOption.foreach { measurement =>
         currentTotalChlorine.value = measurement.totalChlorine
         currentFreeChlorine.value = measurement.freeChlorine
