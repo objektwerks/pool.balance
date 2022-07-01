@@ -76,7 +76,4 @@ class ChemicalsPane(context: Context) extends VBox with PaneButtonBar(context):
         
       case _ => model.onError("Chemical update failed.")
 
-  override def chart(): Unit =
-    ChemicalsChartDialog(context).showAndWait() match
-      case Some(_) =>
-      case _ => model.onError("Chemicals chart failed.")
+  override def chart(): Unit = ChemicalsChartDialog(context).showAndWait()

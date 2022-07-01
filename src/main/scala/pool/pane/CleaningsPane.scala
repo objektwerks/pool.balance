@@ -86,7 +86,4 @@ class CleaningsPane(context: Context) extends VBox with PaneButtonBar(context):
                 cleaning => tableView.selectionModel().select(selectedIndex))
       case _ => model.onError("Cleaning update failed.")
 
-  override def chart(): Unit =
-    CleaningsChartDialog(context).showAndWait() match
-      case Some(_) =>
-      case _ => model.onError("Cleanings chart failed.")
+  override def chart(): Unit = CleaningsChartDialog(context).showAndWait()
