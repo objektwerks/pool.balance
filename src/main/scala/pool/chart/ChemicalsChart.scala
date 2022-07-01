@@ -15,8 +15,8 @@ import pool.TypeOfChemical
 class ChemicalsChart(context: Context) extends TabPane:
   val chemicals = context.model.observableChemicals.reverse
   val dateFormat = DateTimeFormatter.ofPattern("M.dd")
-  val minDate = chemicals.map(c => c.added).min.format(dateFormat).toDouble
-  val maxDate = chemicals.map(c => c.added).max.format(dateFormat).toDouble
+  val minDate = chemicals.map(c => c.added).min.format(dateFormat)
+  val maxDate = chemicals.map(c => c.added).max.format(dateFormat)
 
   val liquidChlorineTab = new Tab {
     closable = false
@@ -80,7 +80,7 @@ class ChemicalsChart(context: Context) extends TabPane:
                          yLabel: String,
                          yLowerBound: Int = 1,
                          yUpperBound: Int = 4,
-                         yTickUnit: Int = 1): LineChart[Number, Number] =
+                         yTickUnit: Int = 1): LineChart[String, Number] =
     val filtered = chemicals filter(c => c.typeof == typeof)
     val (chart, series) = LineChartBuilder.build(context = context,
                                                  xLabel = context.chartMonthDay,
@@ -92,32 +92,32 @@ class ChemicalsChart(context: Context) extends TabPane:
                                                  yTickUnit = yTickUnit,
                                                  yValues = filtered.map(c => c.amount))
     filtered foreach { c =>
-      series.data() += XYChart.Data[Number, Number](c.added.format(dateFormat).toDouble, c.amount)
+      series.data() += XYChart.Data[String, Number](c.added.format(dateFormat), c.amount)
     }
     chart.data = series
     LineChartBuilder.addTooltip(chart)
     chart
 
-  def buildLiquidChlorineChart(): LineChart[Number, Number] =
+  def buildLiquidChlorineChart(): LineChart[String, Number] =
     buildChart(typeof = LiquidChlorine, yLabel = context.chartLiquidChlorine)
 
-  def buildTrichlorChart(): LineChart[Number, Number] =
+  def buildTrichlorChart(): LineChart[String, Number] =
     buildChart(typeof = Trichlor, yLabel = context.chartTrichlor)
 
-  def buildDichlorChart(): LineChart[Number, Number] =
+  def buildDichlorChart(): LineChart[String, Number] =
     buildChart(typeof = Dichlor, yLabel = context.chartDichlor)
 
-  def buildCalciumHypochloriteChart(): LineChart[Number, Number] =
+  def buildCalciumHypochloriteChart(): LineChart[String, Number] =
     buildChart(typeof = CalciumHypochlorite, yLabel = context.chartCalciumHypochlorite)
 
-  def buildStabilizerChart(): LineChart[Number, Number] =
+  def buildStabilizerChart(): LineChart[String, Number] =
     buildChart(typeof = Stabilizer, yLabel = context.chartStabilizer)
 
-  def buildAlgaecideChart(): LineChart[Number, Number] =
+  def buildAlgaecideChart(): LineChart[String, Number] =
     buildChart(typeof = Algaecide, yLabel = context.chartAlgaecide)
 
-  def buildMuriaticAcidChart(): LineChart[Number, Number] =
+  def buildMuriaticAcidChart(): LineChart[String, Number] =
     buildChart(typeof = MuriaticAcid, yLabel = context.chartMuriaticAcid)
 
-  def buildSaltChart(): LineChart[Number, Number] =
+  def buildSaltChart(): LineChart[String, Number] =
     buildChart(typeof = Salt, yLabel = context.chartSalt)

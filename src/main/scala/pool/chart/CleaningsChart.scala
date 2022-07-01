@@ -16,8 +16,8 @@ final case class CleaningXY(xDate: LocalDateTime, yCount: Int)
 class CleaningsChart(context: Context) extends TabPane:
   val cleanings = context.model.observableCleanings.reverse
   val dateFormat = DateTimeFormatter.ofPattern("M.dd")
-  val minDate = cleanings.map(c => c.cleaned).min.format(dateFormat).toDouble
-  val maxDate = cleanings.map(c => c.cleaned).max.format(dateFormat).toDouble
+  val minDate = cleanings.map(c => c.cleaned).min.format(dateFormat)
+  val maxDate = cleanings.map(c => c.cleaned).max.format(dateFormat)
 
   val tab = new Tab {
     closable = false
@@ -38,7 +38,7 @@ class CleaningsChart(context: Context) extends TabPane:
     if cleaning.vacuum then count += 1
     count
 
-  def buildChart(): LineChart[Number, Number] =
+  def buildChart(): LineChart[String, Number] =
     val filtered = cleanings.map(c => CleaningXY(c.cleaned, cleaningsToInt(c)))
     val (chart, series) = LineChartBuilder.build(context = context,
                                                  xLabel = context.chartMonthDay,
@@ -50,7 +50,7 @@ class CleaningsChart(context: Context) extends TabPane:
                                                  yTickUnit = 1,
                                                  yValues = filtered.map(cxy => cxy.yCount))
     filtered foreach { cxy =>
-      series.data() += XYChart.Data[Number, Number](cxy.xDate.format(dateFormat).toDouble, cxy.yCount)
+      series.data() += XYChart.Data[String, Number](cxy.xDate.format(dateFormat), cxy.yCount)
     }
     chart.data = series
     LineChartBuilder.addTooltip(chart)
