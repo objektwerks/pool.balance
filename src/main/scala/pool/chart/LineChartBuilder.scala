@@ -8,8 +8,6 @@ import scalafx.scene.chart.{CategoryAxis, LineChart, NumberAxis, XYChart}
 import scalafx.scene.control.Tooltip
 
 import pool.Context
-import scalafx.scene.chart.CategoryAxis
-import scala.util.Try
 
 object LineChartBuilder:
   def build(context: Context,
