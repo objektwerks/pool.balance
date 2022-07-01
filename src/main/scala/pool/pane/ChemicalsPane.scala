@@ -46,6 +46,10 @@ class ChemicalsPane(context: Context) extends VBox with PaneButtonBar(context):
   children = List(tableView, addEditChartButtonBar)
   VBox.setVgrow(tableView, Priority.Always)
 
+  tableView.onMouseClicked = { event =>
+    if (event.getClickCount == 2 && tableView.selectionModel().getSelectedItem != null) update()
+  }
+
   tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
 
   tableView.selectionModel().selectedItemProperty().addListener { (_, _, selectedItem) =>
