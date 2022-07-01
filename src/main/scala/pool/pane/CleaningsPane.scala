@@ -68,7 +68,11 @@ class CleaningsPane(context: Context) extends VBox with PaneButtonBar(context):
 
   def add(): Unit =
     CleaningDialog(context, Cleaning(poolId = model.selectedPoolId.value)).showAndWait() match
-      case Some(cleaning: Cleaning) => model.add(cleaning).fold(_ => (), cleaning => tableView.selectionModel().select(cleaning))
+      case Some(cleaning: Cleaning) =>
+        model
+          .add(cleaning)
+          .fold(error => model.onError(error, "Cleaing add failed."),
+                cleaning => tableView.selectionModel().select(cleaning))
       case _ => model.onError("Cleaning add failed.")
 
   def update(): Unit =
@@ -76,8 +80,10 @@ class CleaningsPane(context: Context) extends VBox with PaneButtonBar(context):
     val cleaning = tableView.selectionModel().getSelectedItem.cleaning
     CleaningDialog(context, cleaning).showAndWait() match
       case Some(cleaning: Cleaning) =>
-        model.update(selectedIndex, cleaning)
-        tableView.selectionModel().select(selectedIndex)
+        model
+          .update(selectedIndex, cleaning)
+          .fold(error => model.onError(error, "Cleaing add failed."),
+                cleaning => tableView.selectionModel().select(selectedIndex))
       case _ => model.onError("Cleaning update failed.")
 
   override def chart(): Unit =
