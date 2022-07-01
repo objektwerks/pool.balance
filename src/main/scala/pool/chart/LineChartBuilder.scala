@@ -34,7 +34,7 @@ object LineChartBuilder:
 
   def addTooltip(chart: LineChart[String, Number]): Unit =
     chart.data().foreach { items =>
-      items.data.value.forEach { item =>
+      items.data.value.foreach { item =>
         val xValue = item.XValue.value
         val yValue = item.YValue.value
         val message = s"$yValue on $xValue"
