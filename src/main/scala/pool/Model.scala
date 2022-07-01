@@ -4,7 +4,10 @@ import com.typesafe.scalalogging.LazyLogging
 
 import java.text.NumberFormat
 
+import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.Try
+
 import scalafx.application.Platform
 import scalafx.collections.ObservableBuffer
 import scalafx.beans.property.{LongProperty, ObjectProperty}
@@ -70,7 +73,7 @@ final class Model(context: Context) extends LazyLogging:
   pools()
 
   private def pools(): Unit =
-    Try {
+    Future {
       println(s"pools in fx thread: ${Platform.isFxApplicationThread}")
       observablePools ++= store.pools()
     }.recover { case error: Throwable => onError(error, s"Loading pools data failed: ${error.getMessage}") }
