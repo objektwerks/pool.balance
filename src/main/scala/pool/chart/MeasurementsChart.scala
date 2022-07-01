@@ -121,8 +121,8 @@ class MeasurementsChart(context: Context) extends TabPane:
                                                  xMinDate = minDate,
                                                  xMaxDate = maxDate,
                                                  yLabel = context.chartCombinedChlorine,
-                                                 yLowerBound = 0.0,
-                                                 yUpperBound = 0.5,
+                                                 yLowerBound = -0.1,
+                                                 yUpperBound = 0.7,
                                                  yTickUnit = 0.1,
                                                  yValues = measurements.map(m => m.combinedChlorine))
     measurements foreach { m =>
