@@ -47,7 +47,9 @@ object LineChartBuilder:
     }
 
   private def toMinMaxAvg(numbers: ObservableBuffer[Double]): (Double, Double, Double) =
-    val min = numbers.minOption.getOrElse(0.0)
-    val max = numbers.maxOption.getOrElse(0.0)
-    val avg = Try { ( numbers.sum / numbers.length ).toDouble }.toOption.getOrElse(0.0)
-    (min, max, avg)
+    if numbers.nonEmpty then
+      val min = numbers.min
+      val max = numbers.max
+      val avg = numbers.sum / numbers.length
+      (min, max, avg)
+    else (0.0, 0.0, 0.0)
