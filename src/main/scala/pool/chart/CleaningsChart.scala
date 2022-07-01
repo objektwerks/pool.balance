@@ -21,7 +21,7 @@ class CleaningsChart(context: Context) extends TabPane:
 
   val tab = new Tab {
     closable = false
-    text = context.chartCleanings
+    text = context.chartYCleanings
     content = buildChart()
   }
 
@@ -45,8 +45,8 @@ class CleaningsChart(context: Context) extends TabPane:
                                                  xMinDate = minDate,
                                                  xMaxDate = maxDate,
                                                  yLabel = context.chartYCleanings,
-                                                 yLowerBound = 1,
-                                                 yUpperBound = 6,
+                                                 yLowerBound = 0,
+                                                 yUpperBound = 7,
                                                  yTickUnit = 1,
                                                  yValues = filtered.map(cxy => cxy.yCount))
     filtered foreach { cxy =>
