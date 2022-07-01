@@ -82,7 +82,7 @@ class CleaningsPane(context: Context) extends VBox with PaneButtonBar(context):
       case Some(cleaning: Cleaning) =>
         model
           .update(selectedIndex, cleaning)
-          .fold(error => model.onError(error, "Cleaing add failed."),
+          .fold(error => model.onError(error, "Cleaing update failed."),
                 cleaning => tableView.selectionModel().select(selectedIndex))
       case _ => model.onError("Cleaning update failed.")
 
