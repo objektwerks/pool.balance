@@ -57,7 +57,11 @@ class ChemicalsPane(context: Context) extends VBox with PaneButtonBar(context):
 
   def add(): Unit =
     ChemicalDialog(context, Chemical(poolId = model.selectedPoolId.value)).showAndWait() match
-      case Some(chemical: Chemical) => model.add(chemical).fold(_ => (), chemical => tableView.selectionModel().select(chemical))
+      case Some(chemical: Chemical) =>
+        model
+          .add(chemical)
+          .fold(error => model.onError(error, "Chemical add failed."),
+                chemical => tableView.selectionModel().select(chemical))
       case _ => model.onError("Chemical add failed.")
 
   def update(): Unit =
@@ -65,8 +69,11 @@ class ChemicalsPane(context: Context) extends VBox with PaneButtonBar(context):
     val chemical = tableView.selectionModel().getSelectedItem.chemical
     ChemicalDialog(context, chemical).showAndWait() match
       case Some(chemical: Chemical) =>
-        model.update(selectedIndex, chemical)
-        tableView.selectionModel().select(selectedIndex)
+        model
+          .update(selectedIndex, chemical)
+          .fold(error => model.onError(error, "Chemical update failed."),
+                chemical => tableView.selectionModel().select(selectedIndex))
+        
       case _ => model.onError("Chemical update failed.")
 
   override def chart(): Unit =
