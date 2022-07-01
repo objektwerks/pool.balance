@@ -53,6 +53,10 @@ class PoolsPane(context: Context) extends VBox with PaneButtonBar(context):
   VBox.setVgrow(tableView, Priority.Always)
   VBox.setVgrow(tabPane, Priority.Always)
 
+  tableView.onMouseClicked = { event =>
+    if (event.getClickCount == 2 && tableView.selectionModel().getSelectedItem != null) update()
+  }
+
   tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
   
   tableView.selectionModel().selectedItemProperty().addListener { (_, _, selectedItem) =>
