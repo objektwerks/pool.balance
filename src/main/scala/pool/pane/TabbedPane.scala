@@ -28,7 +28,7 @@ class TabbedPane(context: Context) extends VBox:
   }
 
   val tabPane = new TabPane {
-    tabs = Seq(cleaningsTab, measurementsTab, chemicalsTab)
+    tabs = List(cleaningsTab, measurementsTab, chemicalsTab)
   }
 
   children = List(tabPane)
