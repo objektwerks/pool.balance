@@ -9,7 +9,7 @@ import scalafx.scene.layout.{HBox, Priority, VBox}
 import pool.{Measurement, Context}
 import pool.dialog.{MeasurementDialog, MeasurementsChartDialog}
 
-class MeasurementsPane(context: Context) extends VBox with PaneButtonBar(context):
+class MeasurementsPane(context: Context) extends VBox:
   spacing = 6
   padding = Insets(6)
 
@@ -68,6 +68,32 @@ class MeasurementsPane(context: Context) extends VBox with PaneButtonBar(context
     items = model.observableMeasurements
   }
 
+  val addButton = new Button {
+    graphic = context.addImage
+    text = context.buttonAdd
+    disable = true
+    onAction = { _ => add() }
+  }
+
+  val editButton = new Button {
+    graphic = context.editImage
+    text = context.buttonEdit
+    disable = true
+    onAction = { _ => update() }
+  }
+
+  val chartButton = new Button {
+    graphic = context.chartImage
+    text = context.buttonChart
+    disable = true
+    onAction = { _ => chart() }
+  }
+
+  val addEditChartButtonBar = new HBox {
+    spacing = 6
+    children = List(addButton, editButton, chartButton)
+  }
+
   model.selectedPoolId.onChange { (_, _, _) =>
     addButton.disable = false
     chartButton.disable = false
@@ -109,4 +135,4 @@ class MeasurementsPane(context: Context) extends VBox with PaneButtonBar(context
                 measurement => tableView.selectionModel().select(selectedIndex))
       case _ => model.onError("Measurement update failed.")
 
-  override def chart(): Unit = MeasurementsChartDialog(context).showAndWait()
+  def chart(): Unit = MeasurementsChartDialog(context).showAndWait()
