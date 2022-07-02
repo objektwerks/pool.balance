@@ -137,24 +137,24 @@ final class Model(context: Context) extends LazyLogging:
     observableErrors += message
     logger.error(message, error)
 
-  def add(pool: Pool): Either[Throwable, Pool] =
-    Try {
+  def add(pool: Pool): Future[Pool] =
+    Future {
       println(s"add pool in fx thread: ${Platform.isFxApplicationThread}")
       val newPool = store.add(pool)
       observablePools += newPool
       observablePools.sort()
       selectedPoolId.value = newPool.id
       newPool
-    }.toEither
+    }
 
-  def update(selectedIndex: Int, pool: Pool): Either[Throwable, Unit] =
-    Try {
+  def update(selectedIndex: Int, pool: Pool): Future[Unit] =
+    Future {
       println(s"update pool in fx thread: ${Platform.isFxApplicationThread}")
       store.update(pool)
       observablePools.update(selectedIndex, pool)
       observablePools.sort()
       selectedPoolId.value = pool.id
-    }.toEither
+    }
 
   def add(cleaning: Cleaning): Either[Throwable, Cleaning] =
     Try {

@@ -1,15 +1,17 @@
 package pool.pane
 
+import scala.concurrent.ExecutionContext.Implicits.global
+
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, Tab, TabPane, TableColumn, TableView}
-import scalafx.scene.layout.{Priority, VBox}
+import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import pool.{Context, Pool, UnitOfMeasure}
 import pool.dialog.PoolDialog
 
-class PoolsPane(context: Context) extends VBox with PaneButtonBar(context):
+class PoolsPane(context: Context) extends VBox:
   spacing = 6
   padding = Insets(6)
 
@@ -33,7 +35,24 @@ class PoolsPane(context: Context) extends VBox with PaneButtonBar(context):
     items = model.observablePools
   }
 
-  addButton.disable = false
+  val addButton = new Button {
+    graphic = context.addImage
+    text = context.buttonAdd
+    disable = false
+    onAction = { _ => add() }
+  }
+
+  val editButton = new Button {
+    graphic = context.editImage
+    text = context.buttonEdit
+    disable = true
+    onAction = { _ => update() }
+  }
+
+  val addEditButtonBar = new HBox {
+    spacing = 6
+    children = List(addButton, editButton)
+  }
   
   val tab = new Tab {
   	text = context.labelPools
@@ -46,7 +65,7 @@ class PoolsPane(context: Context) extends VBox with PaneButtonBar(context):
   }
 
   val tabPane = new TabPane {
-    tabs = Seq(tab)
+    tabs = List(tab)
   }
 
   children = List(tabPane)
@@ -71,8 +90,8 @@ class PoolsPane(context: Context) extends VBox with PaneButtonBar(context):
       case Some(pool: Pool) =>
         model
           .add(pool)
-          .fold(error => model.onError(error, "Pool add failed."),
-                pool => tableView.selectionModel().select(pool))
+          .map(pool => tableView.selectionModel().select(pool))
+          .recover { case error: Throwable => model.onError(error, "Pool add failed.") }
       case _ => model.onError("Pool add failed.")
 
   def update(): Unit =
@@ -82,6 +101,6 @@ class PoolsPane(context: Context) extends VBox with PaneButtonBar(context):
       case Some(pool: Pool) =>
         model
           .update(selectedIndex, pool)
-          .fold(error => model.onError(error, "Pool update failed."),
-                pool => tableView.selectionModel().select(selectedIndex))
+          .map(pool => tableView.selectionModel().select(selectedIndex))
+          .recover { case error: Throwable => model.onError(error, "Pool update failed.") }
       case _ => model.onError("Pool update failed.")
