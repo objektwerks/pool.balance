@@ -9,7 +9,7 @@ import scalafx.scene.layout.{HBox, Priority, VBox}
 import pool.{Chemical, Context, Pool}
 import pool.dialog.{ChemicalDialog, ChemicalsChartDialog}
 
-class ChemicalsPane(context: Context) extends VBox with PaneButtonBar(context):
+class ChemicalsPane(context: Context) extends VBox:
   spacing = 6
   padding = Insets(6)
 
@@ -36,6 +36,32 @@ class ChemicalsPane(context: Context) extends VBox with PaneButtonBar(context):
       }
     )
     items = model.observableChemicals
+  }
+
+  val addButton = new Button {
+    graphic = context.addImage
+    text = context.buttonAdd
+    disable = true
+    onAction = { _ => add() }
+  }
+
+  val editButton = new Button {
+    graphic = context.editImage
+    text = context.buttonEdit
+    disable = true
+    onAction = { _ => update() }
+  }
+
+  val chartButton = new Button {
+    graphic = context.chartImage
+    text = context.buttonChart
+    disable = true
+    onAction = { _ => chart() }
+  }
+
+  val addEditChartButtonBar = new HBox {
+    spacing = 6
+    children = List(addButton, editButton, chartButton)
   }
 
   model.selectedPoolId.onChange { (_, _, _) =>
@@ -80,4 +106,4 @@ class ChemicalsPane(context: Context) extends VBox with PaneButtonBar(context):
         
       case _ => model.onError("Chemical update failed.")
 
-  override def chart(): Unit = ChemicalsChartDialog(context).showAndWait()
+  def chart(): Unit = ChemicalsChartDialog(context).showAndWait()
