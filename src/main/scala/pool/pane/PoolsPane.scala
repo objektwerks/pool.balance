@@ -49,7 +49,7 @@ class PoolsPane(context: Context) extends VBox:
     onAction = { _ => update() }
   }
 
-  val addEditButtonBar = new HBox {
+  val buttonBar = new HBox {
     spacing = 6
     children = List(addButton, editButton)
   }
@@ -60,7 +60,7 @@ class PoolsPane(context: Context) extends VBox:
   	content = new VBox {
       spacing = 6
       padding = Insets(6)
-      children = List(tableView, addEditButtonBar)
+      children = List(tableView, buttonBar)
     }
   }
 
