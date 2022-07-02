@@ -59,7 +59,7 @@ class ChemicalsPane(context: Context) extends VBox:
     onAction = { _ => chart() }
   }
 
-  val addEditChartButtonBar = new HBox {
+  val buttonBar = new HBox {
     spacing = 6
     children = List(addButton, editButton, chartButton)
   }
@@ -69,7 +69,7 @@ class ChemicalsPane(context: Context) extends VBox:
     chartButton.disable = false
   }
 
-  children = List(tableView, addEditChartButtonBar)
+  children = List(tableView, buttonBar)
   VBox.setVgrow(tableView, Priority.Always)
 
   tableView.onMouseClicked = { event =>
