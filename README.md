@@ -5,7 +5,7 @@ Pool Balance
 Todo
 ----
 1. Build converters for gl/l and lbs/kg.
-2. Bind errors to status pane or dialog.
+2. Bind errors to status pane and/or dialog.
 3. Consider async IO with optional UI integration.
 4. Consider dashboard pass and fail badge.
 
