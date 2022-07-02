@@ -9,7 +9,7 @@ import scalafx.scene.layout.{HBox, Priority, VBox}
 import pool.{Cleaning, Context}
 import pool.dialog.{CleaningDialog, CleaningsChartDialog}
 
-class CleaningsPane(context: Context) extends VBox with PaneButtonBar(context):
+class CleaningsPane(context: Context) extends VBox:
   spacing = 6
   padding = Insets(6)
 
@@ -47,6 +47,32 @@ class CleaningsPane(context: Context) extends VBox with PaneButtonBar(context):
       }
     )
     items = model.observableCleanings
+  }
+
+  val addButton = new Button {
+    graphic = context.addImage
+    text = context.buttonAdd
+    disable = true
+    onAction = { _ => add() }
+  }
+
+  val editButton = new Button {
+    graphic = context.editImage
+    text = context.buttonEdit
+    disable = true
+    onAction = { _ => update() }
+  }
+
+  val chartButton = new Button {
+    graphic = context.chartImage
+    text = context.buttonChart
+    disable = true
+    onAction = { _ => chart() }
+  }
+
+  val addEditChartButtonBar = new HBox {
+    spacing = 6
+    children = List(addButton, editButton, chartButton)
   }
 
   model.selectedPoolId.onChange { (_, _, _) =>
@@ -90,4 +116,4 @@ class CleaningsPane(context: Context) extends VBox with PaneButtonBar(context):
                 cleaning => tableView.selectionModel().select(selectedIndex))
       case _ => model.onError("Cleaning update failed.")
 
-  override def chart(): Unit = CleaningsChartDialog(context).showAndWait()
+  def chart(): Unit = CleaningsChartDialog(context).showAndWait()
