@@ -17,7 +17,7 @@ class CleaningsPane(context: Context) extends VBox:
 
   val model = context.model
 
-  val yesOrNo = (bool: Boolean) => if bool then "yes" else "no"
+  val yesOrNo = (bool: Boolean) => if bool then context.columnYes else context.columnNo
 
   val tableView = new TableView[Cleaning]() {
     columns ++= List(
