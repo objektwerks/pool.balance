@@ -8,7 +8,7 @@ Todo
    1. n gl = n gl * ( 3.785 l / 1 gl )
    2. n l = n l * 0.26417 gl
    3. n lb = n lb * 0.454 kg
-   4. n kg = ( n kg/ 1 ) * ( 2.2046 / 1 lb )
+   4. n kg = n kg * 2.2046 lb
 2. Bind errors to status pane and/or dialog.
 3. Consider dashboard pass and fail badge.
 
