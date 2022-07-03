@@ -57,7 +57,7 @@ final class Model(context: Context) extends LazyLogging:
   val averageSalt = ObjectProperty[Int](0)
 
   selectedPoolId.onChange { (_, oldPoolId, newPoolId) =>
-    require(Platform.isFxApplicationThread, "selected pool id onchange event should be in fx thread.")
+    require(Platform.isFxApplicationThread, "selected pool id onchange should be in fx thread.")
     logger.info(s"selected oool id onchange event: $oldPoolId -> $newPoolId")
     cleanings(newPoolId)
     measurements(newPoolId)
@@ -65,7 +65,7 @@ final class Model(context: Context) extends LazyLogging:
   }
 
   observableMeasurements.onChange{ (_, _) =>
-    require(!Platform.isFxApplicationThread, "via measurements, observable measurements onchange event should not be in fx thread.")
+    require(!Platform.isFxApplicationThread, "via measurements, observable measurements onchange should not be in fx thread.")
     logger.info(s"observable measurements onchange event.")
     Platform.runLater( dashboard() )
   }
