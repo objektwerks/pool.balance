@@ -65,7 +65,7 @@ final class Model(context: Context) extends LazyLogging:
   }
 
   observableMeasurements.onChange{ (_, _) =>
-    require(!Platform.isFxApplicationThread, "observable measurements onchange event should not be in fx thread.")
+    require(!Platform.isFxApplicationThread, "via measurements, observable measurements onchange event should not be in fx thread.")
     logger.info(s"observable measurements onchange event.")
     Platform.runLater( dashboard() )
   }
