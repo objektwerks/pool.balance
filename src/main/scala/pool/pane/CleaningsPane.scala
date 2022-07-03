@@ -17,31 +17,51 @@ class CleaningsPane(context: Context) extends VBox:
 
   val model = context.model
 
+  val yesOrNo = (bool: Boolean) => if bool then "yes" else "no"
+
   val tableView = new TableView[Cleaning]() {
     columns ++= List(
       new TableColumn[Cleaning, Boolean] {
         text = context.headerBrush
         cellValueFactory = _.value.brushProperty
+        cellFactory = (cell, bool) => {
+          cell.text = yesOrNo(bool)
+        }
       },
       new TableColumn[Cleaning, Boolean] {
         text = context.headerNet
         cellValueFactory = _.value.netProperty
+        cellFactory = (cell, bool) => {
+          cell.text = yesOrNo(bool)
+        }
       },
       new TableColumn[Cleaning, Boolean] {
         text = context.headerSkimmerBasket
         cellValueFactory = _.value.skimmerBasketProperty
+        cellFactory = (cell, bool) => {
+          cell.text = yesOrNo(bool)
+        }
       },
       new TableColumn[Cleaning, Boolean] {
         text = context.headerPumpBasket
         cellValueFactory = _.value.pumpBasketProperty
+        cellFactory = (cell, bool) => {
+          cell.text = yesOrNo(bool)
+        }
       },
       new TableColumn[Cleaning, Boolean] {
         text = context.headerPumpFilter
         cellValueFactory = _.value.pumpFilterProperty
+        cellFactory = (cell, bool) => {
+          cell.text = yesOrNo(bool)
+        }
       },
       new TableColumn[Cleaning, Boolean] {
         text = context.headerVacuum
         cellValueFactory = _.value.vacuumProperty
+        cellFactory = (cell, bool) => {
+          cell.text = yesOrNo(bool)
+        }
       },
       new TableColumn[Cleaning, String] {
         text = context.headerCleaned
