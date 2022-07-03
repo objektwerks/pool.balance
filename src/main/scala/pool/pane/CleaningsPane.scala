@@ -1,5 +1,7 @@
 package pool.pane
 
+import scala.concurrent.ExecutionContext.Implicits.global
+
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
@@ -101,8 +103,8 @@ class CleaningsPane(context: Context) extends VBox:
       case Some(cleaning: Cleaning) =>
         model
           .add(cleaning)
-          .fold(error => model.onError(error, "Cleaing add failed."),
-                cleaning => tableView.selectionModel().select(cleaning))
+          .map(cleaning => tableView.selectionModel().select(cleaning))
+          .recover { case error: Throwable => model.onError(error, "Cleaing add failed.") }
       case _ => model.onError("Cleaning add failed.")
 
   def update(): Unit =
@@ -112,8 +114,8 @@ class CleaningsPane(context: Context) extends VBox:
       case Some(cleaning: Cleaning) =>
         model
           .update(selectedIndex, cleaning)
-          .fold(error => model.onError(error, "Cleaing update failed."),
-                cleaning => tableView.selectionModel().select(selectedIndex))
+          .map(cleaning => tableView.selectionModel().select(selectedIndex))
+          .recover { case error: Throwable => model.onError(error, "Cleaing update failed.") }
       case _ => model.onError("Cleaning update failed.")
 
   def chart(): Unit = CleaningsChartDialog(context).showAndWait()
