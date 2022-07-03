@@ -53,7 +53,7 @@ class MeasurementsPane(context: Context) extends VBox:
         cellValueFactory = _.value.totalBromineProperty
       },
       new TableColumn[Measurement, Int] {
-        prefWidth = 60
+        prefWidth = 50
         text = context.headerSalt
         cellValueFactory = _.value.saltProperty
       },
