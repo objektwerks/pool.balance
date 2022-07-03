@@ -59,6 +59,9 @@ final class Context(config: Config):
   val chartMuriaticAcid = config.getString("chart.muriaticAcid")
   val chartGranularSalt = config.getString("chart.granularSalt")
 
+  val columnYes = config.getString("column.yes")
+  val columnNo = config.getString("column.no")
+
   val dialogPool = config.getString("dialog.pool")
   val dialogCleaning = config.getString("dialog.cleaning")
   val dialogMeasurement = config.getString("dialog.measurement")
