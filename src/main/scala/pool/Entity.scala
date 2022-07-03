@@ -9,7 +9,7 @@ import scalafx.beans.property.ObjectProperty
 import ch.qos.logback.core.subst.Token.Type
 
 enum UnitOfMeasure:
-  case gl, l, lbs, kg, tablet
+  case gl, l, lb, kg, tablet
 
 object UnitOfMeasure:
   def toList: List[String] = UnitOfMeasure.values.map(uom => uom.toString).toList
