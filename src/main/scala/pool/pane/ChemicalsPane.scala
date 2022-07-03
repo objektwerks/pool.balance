@@ -1,5 +1,7 @@
 package pool.pane
 
+import scala.concurrent.ExecutionContext.Implicits.global
+
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
@@ -90,8 +92,8 @@ class ChemicalsPane(context: Context) extends VBox:
       case Some(chemical: Chemical) =>
         model
           .add(chemical)
-          .fold(error => model.onError(error, "Chemical add failed."),
-                chemical => tableView.selectionModel().select(chemical))
+          .map(chemical => tableView.selectionModel().select(chemical))
+          .recover { case error: Throwable => model.onError(error, "Chemical add failed.") }
       case _ => model.onError("Chemical add failed.")
 
   def update(): Unit =
@@ -101,9 +103,8 @@ class ChemicalsPane(context: Context) extends VBox:
       case Some(chemical: Chemical) =>
         model
           .update(selectedIndex, chemical)
-          .fold(error => model.onError(error, "Chemical update failed."),
-                chemical => tableView.selectionModel().select(selectedIndex))
-        
+          .map(chemical => tableView.selectionModel().select(selectedIndex))
+          .recover { case error: Throwable => model.onError(error, "Chemical update failed.") }
       case _ => model.onError("Chemical update failed.")
 
   def chart(): Unit = ChemicalsChartDialog(context).showAndWait()
