@@ -175,24 +175,24 @@ final class Model(context: Context) extends LazyLogging:
       selectedCleaningId.value = cleaning.id
     }
   
-  def add(measurement: Measurement): Either[Throwable, Measurement] =
-    Try {
+  def add(measurement: Measurement): Future[Measurement] =
+    Future {
       println(s"add measurement in fx thread: ${Platform.isFxApplicationThread}")
       val newMeasurement = store.add(measurement)
       observableMeasurements += newMeasurement
       observableMeasurements.sort()
       selectedMeasurementId.value = newMeasurement.id
       newMeasurement
-    }.toEither
+    }
 
-  def update(selectedIndex: Int, measurement: Measurement): Either[Throwable, Unit] =
-    Try {
+  def update(selectedIndex: Int, measurement: Measurement): Future[Unit] =
+    Future {
       println(s"update measurement in fx thread: ${Platform.isFxApplicationThread}")
       store.update(measurement)
       observableMeasurements.update(selectedIndex, measurement)
       observableMeasurements.sort()
       selectedMeasurementId.value = measurement.id
-    }.toEither
+    }
   
   def add(chemical: Chemical): Either[Throwable, Chemical] =
     Try {

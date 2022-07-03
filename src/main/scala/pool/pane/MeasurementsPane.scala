@@ -1,5 +1,7 @@
 package pool.pane
 
+import scala.concurrent.ExecutionContext.Implicits.global
+
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
@@ -120,8 +122,8 @@ class MeasurementsPane(context: Context) extends VBox:
       case Some(measurement: Measurement) =>
         model
           .add(measurement)
-          .fold(error => model.onError(error, "Measurement add failed."),
-                measurement => tableView.selectionModel().select(measurement))
+          .map(measurement => tableView.selectionModel().select(measurement))
+          .recover { case error: Throwable => model.onError(error, "Measurement add failed.") }
       case _ => model.onError("Measurement add failed.")
 
   def update(): Unit =
@@ -131,8 +133,8 @@ class MeasurementsPane(context: Context) extends VBox:
       case Some(measurement: Measurement) =>
         model
           .update(selectedIndex, measurement)
-          .fold(error => model.onError(error, "Measurement update failed."),
-                measurement => tableView.selectionModel().select(selectedIndex))
+          .map(measurement => tableView.selectionModel().select(selectedIndex))
+          .recover { case error: Throwable => model.onError(error, "Measurement update failed.") }
       case _ => model.onError("Measurement update failed.")
 
   def chart(): Unit = MeasurementsChartDialog(context).showAndWait()
