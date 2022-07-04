@@ -23,6 +23,7 @@ class UnitOfMeasureTest extends AnyFunSuite with Matchers:
 
   test("liters to gallons") {
     litersToGallons(1.0) shouldBe 0.264
+    litersToGallons(2.0) shouldBe 0.528
   }
 
   test("pounds to kilograms") {
@@ -31,4 +32,5 @@ class UnitOfMeasureTest extends AnyFunSuite with Matchers:
 
   test("kilograms to pounds") {
     kilogramsToPounds(1.0) shouldBe 2.205
+    kilogramsToPounds(2.0) shouldBe 4.41
   }
