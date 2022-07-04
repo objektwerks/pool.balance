@@ -11,3 +11,19 @@ class UnitOfMeasureTest extends AnyFunSuite with Matchers:
     UnitOfMeasure.valueOf(UnitOfMeasure.lb.toString) shouldBe UnitOfMeasure.lb
     UnitOfMeasure.valueOf(UnitOfMeasure.tablet.toString) shouldBe UnitOfMeasure.tablet
   }
+
+  test("gallons to liters") {
+
+  }
+
+  test("liters to gallons") {
+
+  }
+
+  test("pounds to kilograms") {
+
+  }
+
+  test("kilograms to pounds") {
+    
+  }
