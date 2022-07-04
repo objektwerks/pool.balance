@@ -18,7 +18,8 @@ class UnitOfMeasureTest extends AnyFunSuite with Matchers:
 
   test("gallons to liters") {
     gallonsToLiters(1.0) shouldBe 3.785
-  }
+    gallonsToLiters(2.0) shouldBe 7.57
+ }
 
   test("liters to gallons") {
     litersToGallons(1.0) shouldBe 0.264
