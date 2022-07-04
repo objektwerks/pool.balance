@@ -16,8 +16,9 @@ object UnitOfMeasure:
   def toPoolList: List[String] = List( UnitOfMeasure.gl.toString, UnitOfMeasure.l.toString )
   def gallonsToLiters(gallons: Double): Double = gallons * 3.7854
   def litersToGallons(liters: Double): Double = liters * 0.2641729
+  def poundsToKilograms(pounds: Double): Double = pounds * 0.45359237
   def kilogramsToPounds(kilograms: Double): Double = kilograms * 2.20462
-  
+
 sealed trait Entity:
   val id: Long
 
