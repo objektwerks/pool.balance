@@ -7,11 +7,13 @@ import UnitOfMeasure.*
 
 class UnitOfMeasureTest extends AnyFunSuite with Matchers:
   test("unit of measure") {
-    UnitOfMeasure.valueOf(UnitOfMeasure.gl.toString) shouldBe UnitOfMeasure.gl
-    UnitOfMeasure.valueOf(UnitOfMeasure.l.toString) shouldBe UnitOfMeasure.l
-    UnitOfMeasure.valueOf(UnitOfMeasure.kg.toString) shouldBe UnitOfMeasure.kg
-    UnitOfMeasure.valueOf(UnitOfMeasure.lb.toString) shouldBe UnitOfMeasure.lb
-    UnitOfMeasure.valueOf(UnitOfMeasure.tablet.toString) shouldBe UnitOfMeasure.tablet
+    valueOf(gl.toString) shouldBe gl
+    valueOf(l.toString) shouldBe l
+    valueOf(kg.toString) shouldBe kg
+    valueOf(lb.toString) shouldBe lb
+    valueOf(tablet.toString) shouldBe tablet
+    toList.length shouldBe 5
+    toPoolList.length shouldBe 2
   }
 
   test("gallons to liters") {
