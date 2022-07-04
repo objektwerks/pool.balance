@@ -4,13 +4,14 @@ Pool Balance
 
 Todo
 ----
-1. Build converters for gl <-> l and lb <-> kg.
-   1. n l = n gl * 3.7854 l
-   2. n gl = n l * 0.0.2641729 gl
-   3. n kg = n lb * 0.45359237 kg
-   4. n lb = n kg * 2.20462 lb
-2. Bind errors to status pane and/or dialog.
-3. Consider dashboard pass and fail badge.
+1. Build gl <-> l converter.
+   1. n gl = n l * 0.2641729 gl
+   2. n l = n gl * 3.7854 l
+2. Build lb <-> kg converter.
+   1. n lb = n kg * 2.20462 lb
+   2. n kg = n lb * 0.45359237 kg
+3. Bind errors to status pane and/or dialog.
+4. Consider dashboard pass and fail badge.
 
 Build
 -----
