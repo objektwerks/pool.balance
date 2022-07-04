@@ -3,7 +3,7 @@ package pool
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
-class EnumTest extends AnyFunSuite with Matchers:
+class TypeOfChemicalTest extends AnyFunSuite with Matchers:
   test("unit of measure") {
     UnitOfMeasure.valueOf(UnitOfMeasure.gl.toString) shouldBe UnitOfMeasure.gl
     UnitOfMeasure.valueOf(UnitOfMeasure.l.toString) shouldBe UnitOfMeasure.l
