@@ -25,7 +25,7 @@ class UnitOfMeasureTest extends AnyFunSuite with Matchers:
   }
 
   test("pounds to kilograms") {
-    poundsToKilograms(1.0) should be > 0.0
+    poundsToKilograms(1.0) shouldBe 0.454
   }
 
   test("kilograms to pounds") {
