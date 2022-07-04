@@ -14,6 +14,7 @@ enum UnitOfMeasure:
 object UnitOfMeasure:
   def toList: List[String] = UnitOfMeasure.values.map(uom => uom.toString).toList
   def toPoolList: List[String] = List( UnitOfMeasure.gl.toString, UnitOfMeasure.l.toString )
+  def litersToGallons(liters: Double): Double = liters * 0.2641729
 
 sealed trait Entity:
   val id: Long
