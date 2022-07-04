@@ -21,7 +21,7 @@ class UnitOfMeasureTest extends AnyFunSuite with Matchers:
   }
 
   test("liters to gallons") {
-    litersToGallons(1.0) should be > 0.0
+    litersToGallons(1.0) shouldBe 0.264
   }
 
   test("pounds to kilograms") {
