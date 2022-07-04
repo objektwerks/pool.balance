@@ -5,7 +5,8 @@ Pool Balance
 Todo
 ----
 1. Bind errors to status pane and/or dialog.
-2. Consider dashboard pass and fail badge.
+2. Consider building unit of measure controls.
+3. Consider dashboard pass and fail badge.
 
 Build
 -----
