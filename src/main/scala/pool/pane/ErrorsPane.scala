@@ -10,3 +10,5 @@ class ErrorsPane(context: Context) extends VBox:
   padding = Insets(6)
 
   val model = context.model
+
+  children = List()
