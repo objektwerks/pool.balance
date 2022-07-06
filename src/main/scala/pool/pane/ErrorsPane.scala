@@ -18,11 +18,11 @@ class ErrorsPane(context: Context) extends VBox:
     columns ++= List(
       new TableColumn[Error, String] {
         prefWidth = 150
-        text = context.headerAdded
+        text = context.headerOccurred
         cellValueFactory = _.value.messageProperty
       },
       new TableColumn[Error, String] {
-        text = context.headerAdded
+        text = context.headerError
         cellValueFactory = _.value.occurredProperty
       }
     )

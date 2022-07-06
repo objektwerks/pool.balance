@@ -33,7 +33,6 @@ final class View(context: Context):
   VBox.setVgrow(splitPane, Priority.Always)
 
   val errorsPane = ErrorsPane(context)
-  VBox.setVgrow(errorsPane, Priority.Always)
 
   borderPane.top = dashboardPane
   borderPane.center = splitPane
