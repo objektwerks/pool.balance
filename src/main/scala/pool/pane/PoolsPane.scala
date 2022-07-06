@@ -79,6 +79,10 @@ class PoolsPane(context: Context) extends VBox:
   VBox.setVgrow(tableView, Priority.Always)
   VBox.setVgrow(tabPane, Priority.Always)
 
+  model.observableErrors.onChange { (_, _) =>
+    errorsButton.disable = false
+  }
+
   tableView.onMouseClicked = { event =>
     if (event.getClickCount == 2 && tableView.selectionModel().getSelectedItem != null) update()
   }
@@ -112,4 +116,5 @@ class PoolsPane(context: Context) extends VBox:
           .recover { case error: Throwable => model.onError(error, "Pool update failed.") }
       case _ => model.onError("Pool update failed.")
 
-  def errors(): Unit = ErrorsDialog(context).showAndWait()
+  def errors(): Unit = ErrorsDialog(context).showAndWait() match
+    case _ => errorsButton.disable = true
