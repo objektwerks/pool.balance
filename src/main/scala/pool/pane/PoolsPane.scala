@@ -117,4 +117,4 @@ class PoolsPane(context: Context) extends VBox:
       case _ => model.onError("Pool update failed.")
 
   def errors(): Unit = ErrorsDialog(context).showAndWait() match
-    case _ => errorsButton.disable = true
+    case _ => errorsButton.disable = model.observableErrors.isEmpty
