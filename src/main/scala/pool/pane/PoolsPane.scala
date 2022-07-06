@@ -50,7 +50,7 @@ class PoolsPane(context: Context) extends VBox:
   }
 
   val errorsButton = new Button {
-    graphic = context.editImage
+    graphic = context.errorsImage
     text = context.buttonErrors
     disable = true
     onAction = { _ => errors() }

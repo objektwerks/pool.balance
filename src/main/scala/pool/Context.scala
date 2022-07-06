@@ -136,6 +136,7 @@ final class Context(config: Config):
   def addImage = loadImageView("/add.png")
   def editImage = loadImageView("/edit.png")
   def chartImage = loadImageView("/chart.png")
+  def errorsImage = loadImageView("/errors.png")
 
   def logo = new Image(Image.getClass.getResourceAsStream("/logo.png"))
 
