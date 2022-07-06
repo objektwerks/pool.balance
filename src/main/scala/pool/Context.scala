@@ -66,6 +66,7 @@ final class Context(config: Config):
   val dialogCleaning = config.getString("dialog.cleaning")
   val dialogMeasurement = config.getString("dialog.measurement")
   val dialogChemical = config.getString("dialog.chemical")
+  val dialogErrors = config.getString("dialog.errors")
 
   val headerName = config.getString("header.name")
   val headerBuilt = config.getString("header.built")
@@ -95,7 +96,6 @@ final class Context(config: Config):
   val headerOccurred = config.getString("header.occurred")
   val headerError = config.getString("header.error")
 
-  val labelErrors = config.getString("label.errors")
   val labelPools = config.getString("label.pools")
   val labelCleanings = config.getString("label.cleanings")
   val labelMeasurements = config.getString("label.measurements")
