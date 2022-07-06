@@ -71,7 +71,7 @@ final class Model(context: Context) extends LazyLogging:
     shouldNotBeInFxThread("via measurements, observable measurements onchange should not be in fx thread.")
     logger.info(s"observable measurements onchange event.")
     Platform.runLater( dashboard() )
-    Platform.runLater( onError("Test error message!") ) // test!
+    // Platform.runLater( onError("Test error message!") ) // use to test errors dialog!
   }
 
   pools()
