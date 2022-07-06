@@ -1,11 +1,12 @@
 package pool.pane
 
+import scalafx.Includes.*
+import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
 import scalafx.scene.control.{TableColumn, TableView}
 import scalafx.scene.layout.VBox
 
-import pool.Context
-import scalafx.beans.value.ObservableValue
+import pool.{Error, Context}
 
 class ErrorsPane(context: Context) extends VBox:
   spacing = 6
@@ -18,11 +19,11 @@ class ErrorsPane(context: Context) extends VBox:
       new TableColumn[Error, String] {
         prefWidth = 150
         text = context.headerAdded
-        cellValueFactory = _.value.
+        cellValueFactory = _.value.messageProperty
       },
       new TableColumn[Error, String] {
         text = context.headerAdded
-        cellValueFactory = _.value.
+        cellValueFactory = _.value.occurredProperty
       }
     )
     items = model.observableErrors

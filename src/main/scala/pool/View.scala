@@ -8,7 +8,6 @@ import scalafx.scene.layout.{BorderPane, HBox, Priority, VBox}
 
 import pool.pane.{ErrorsPane, PoolsPane, TabbedPane}
 import pool.dashboard.DashboardPane
-import pool.pane.ErrorsPane.apply
 
 final class View(context: Context):
   val borderPane = new BorderPane {

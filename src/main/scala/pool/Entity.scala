@@ -8,6 +8,10 @@ import math.BigDecimal.double2bigDecimal
 import scalafx.beans.property.ObjectProperty
 import ch.qos.logback.core.subst.Token.Type
 
+final case class Error(message: String, occurred: LocalDateTime = LocalDateTime.now):
+  val messageProperty = ObjectProperty[String](this, "message", message)
+  val occurredProperty = ObjectProperty[String](this, "occurred", Entity.format(occurred))
+
 enum UnitOfMeasure:
   case gl, l, lb, kg, tablet
 

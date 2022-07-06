@@ -17,7 +17,7 @@ import Entity.given
 final class Model(context: Context) extends LazyLogging:
   private val store = context.store
 
-  val observableErrors = ObservableBuffer[String]()
+  val observableErrors = ObservableBuffer[Error]()
 
   val observablePools = ObservableBuffer[Pool]()
   val observableCleanings = ObservableBuffer[Cleaning]()
@@ -132,12 +132,12 @@ final class Model(context: Context) extends LazyLogging:
 
   def onError(message: String): Unit =
     shouldBeInFxThread("onerror message should be in fx thread.")
-    observableErrors += message
+    observableErrors += Error(message)
     logger.error(message)
 
   def onError(error: Throwable, message: String): Unit =
     shouldBeInFxThread("onerror error, message should be in fx thread.")
-    observableErrors += message
+    observableErrors += Error(message)
     logger.error(message, error)
 
   def add(pool: Pool): Future[Pool] =
