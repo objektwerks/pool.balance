@@ -16,7 +16,6 @@ class ErrorsDialog(context: Context) extends Dialog[Unit]:
   val tableView = new TableView[Error]() {
     columns ++= List(
       new TableColumn[Error, String] {
-        prefWidth = 150
         text = context.headerOccurred
         cellValueFactory = _.value.occurredProperty
       },
