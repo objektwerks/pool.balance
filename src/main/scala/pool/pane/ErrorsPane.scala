@@ -3,7 +3,7 @@ package pool.pane
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
-import scalafx.scene.control.{TableColumn, TableView}
+import scalafx.scene.control.{Tab, TabPane, TableColumn, TableView}
 import scalafx.scene.layout.VBox
 
 import pool.{Error, Context}
@@ -30,4 +30,18 @@ class ErrorsPane(context: Context) extends VBox:
     items = model.observableErrors
   }
 
-  children = List(tableView)
+  val tab = new Tab {
+  	text = context.labelPools
+  	closable = false
+  	content = new VBox {
+      spacing = 6
+      padding = Insets(6)
+      children = List(tableView)
+    }
+  }
+
+  val tabPane = new TabPane {
+    tabs = List(tab)
+  }
+
+  children = List(tabPane)
