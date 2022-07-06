@@ -9,7 +9,7 @@ import scalafx.scene.layout.VBox
 import pool.{Error, Context}
 
 class ErrorsPane(context: Context) extends VBox:
-  prefHeight = 50
+  prefHeight = 100
   spacing = 6
   padding = Insets(6)
 
