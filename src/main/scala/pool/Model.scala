@@ -135,10 +135,10 @@ final class Model(context: Context) extends LazyLogging:
     observableErrors += Error(message)
     logger.error(message)
 
-  def onError(throwable: Throwable, message: String): Unit =
+  def onError(error: Throwable, message: String): Unit =
     shouldBeInFxThread("onerror error, message should be in fx thread.")
     observableErrors += Error(message)
-    logger.error(message, throwable)
+    logger.error(message, error)
 
   def add(pool: Pool): Future[Pool] =
     Future {
