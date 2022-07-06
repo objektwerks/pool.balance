@@ -20,6 +20,7 @@ class ErrorsDialog(context: Context) extends Dialog[Unit]:
         cellValueFactory = _.value.occurredProperty
       },
       new TableColumn[Error, String] {
+        prefWidth = 425
         text = context.headerError
         cellValueFactory = _.value.messageProperty
       }
@@ -29,7 +30,7 @@ class ErrorsDialog(context: Context) extends Dialog[Unit]:
 
   dialogPane().buttonTypes = List(ButtonType.Close)
   dialogPane().content = new VBox {
-    prefWidth = 400
+    prefWidth = 600
     prefHeight = 200
     spacing = 6
     children = List(tableView)
