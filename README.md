@@ -4,9 +4,8 @@ Pool Balance
 
 Todo
 ----
-1. Bind errors to status pane and/or dialog.
-2. Consider unit of measure converters.
-3. Consider dashboard state indicators.
+1. Build unit of measure converter dialog.
+2. Consider dashboard state indicators.
 
 Build
 -----
