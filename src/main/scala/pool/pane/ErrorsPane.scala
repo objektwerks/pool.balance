@@ -31,7 +31,7 @@ class ErrorsPane(context: Context) extends VBox:
   }
 
   val tab = new Tab {
-  	text = context.labelPools
+  	text = context.labelErrors
   	closable = false
   	content = new VBox {
       spacing = 6

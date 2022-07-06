@@ -95,6 +95,7 @@ final class Context(config: Config):
   val headerOccurred = config.getString("header.occurred")
   val headerError = config.getString("header.error")
 
+  val labelErrors = config.getString("label.errors")
   val labelPools = config.getString("label.pools")
   val labelCleanings = config.getString("label.cleanings")
   val labelMeasurements = config.getString("label.measurements")
