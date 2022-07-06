@@ -32,6 +32,7 @@ final class Context(config: Config):
   val buttonEdit = config.getString("button.edit")
   val buttonSave = config.getString("button.save")
   val buttonChart = config.getString("button.chart")
+  val buttonErrors = config.getString("button.errors")
 
   val chartCleanings = config.getString("chart.cleanings")
   val chartChemicals = config.getString("chart.chemicals")

@@ -49,9 +49,16 @@ class PoolsPane(context: Context) extends VBox:
     onAction = { _ => update() }
   }
 
+  val errorsButton = new Button {
+    graphic = context.editImage
+    text = context.buttonErrors
+    disable = true
+    onAction = { _ => errors() }
+  }
+
   val buttonBar = new HBox {
     spacing = 6
-    children = List(addButton, editButton)
+    children = List(addButton, editButton, errorsButton)
   }
   
   val tab = new Tab {
@@ -104,3 +111,5 @@ class PoolsPane(context: Context) extends VBox:
           .map(pool => tableView.selectionModel().select(selectedIndex))
           .recover { case error: Throwable => model.onError(error, "Pool update failed.") }
       case _ => model.onError("Pool update failed.")
+
+  def errors(): Unit = ErrorsDialog(context).showAndWait()
