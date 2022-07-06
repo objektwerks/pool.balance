@@ -9,7 +9,7 @@ import pool.{App, Error, Context}
 class ErrorsDialog(context: Context) extends Dialog[Unit]:
   initOwner(App.stage)
   title = context.windowTitle
-  headerText = context.labelErrors
+  headerText = context.dialogErrors
 
   val model = context.model
 
