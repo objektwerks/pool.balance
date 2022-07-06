@@ -6,8 +6,9 @@ import scalafx.scene.Scene
 import scalafx.scene.control.SplitPane
 import scalafx.scene.layout.{BorderPane, HBox, Priority, VBox}
 
-import pool.pane.{PoolsPane, TabbedPane}
+import pool.pane.{ErrorsPane, PoolsPane, TabbedPane}
 import pool.dashboard.DashboardPane
+import pool.pane.ErrorsPane.apply
 
 final class View(context: Context):
   val borderPane = new BorderPane {
@@ -32,8 +33,12 @@ final class View(context: Context):
   splitPane.setDividerPositions(0.20, 0.80)
   VBox.setVgrow(splitPane, Priority.Always)
 
+  val errorsPane = ErrorsPane(context)
+  VBox.setVgrow(errorsPane, Priority.Always)
+
   borderPane.top = dashboardPane
   borderPane.center = splitPane
+  borderPane.bottom = errorsPane
 
   val scene = new Scene {
     root = borderPane
