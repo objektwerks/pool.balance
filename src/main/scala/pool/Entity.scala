@@ -10,7 +10,10 @@ import ch.qos.logback.core.subst.Token.Type
 
 final case class Error(message: String, occurred: LocalDateTime = LocalDateTime.now):
   val messageProperty = ObjectProperty[String](this, "message", message)
-  val occurredProperty = ObjectProperty[String](this, "occurred", Entity.format(occurred))
+  val occurredProperty = ObjectProperty[String](this, "occurred", Error.format(occurred))
+
+object Error:
+  def format(localDateTime: LocalDateTime): String = localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd,HH:mm"))
 
 enum UnitOfMeasure:
   case gl, l, lb, kg, tablet
