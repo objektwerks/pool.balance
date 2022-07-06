@@ -67,7 +67,7 @@ final class Model(context: Context) extends LazyLogging:
     chemicals(newPoolId)
   }
 
-  observableMeasurements.onChange{ (_, _) =>
+  observableMeasurements.onChange { (_, _) =>
     shouldNotBeInFxThread("via measurements, observable measurements onchange should not be in fx thread.")
     logger.info(s"observable measurements onchange event.")
     Platform.runLater( dashboard() )
