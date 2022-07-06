@@ -6,7 +6,7 @@ import scalafx.scene.layout.VBox
 
 import pool.{App, Error, Context}
 
-class ErrorsPane(context: Context) extends Dialog[Unit]:
+class ErrorsDialog(context: Context) extends Dialog[Unit]:
   initOwner(App.stage)
   title = context.windowTitle
   headerText = context.labelErrors
