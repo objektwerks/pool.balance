@@ -5,7 +5,7 @@ Pool Balance
 Todo
 ----
 1. Build unit of measure converter dialog.
-2. Consider dashboard state indicators.
+2. Consider dashboard state indicators and/or range and ideal range text.
 
 Build
 -----
