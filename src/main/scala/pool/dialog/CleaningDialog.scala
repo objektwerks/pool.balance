@@ -57,7 +57,6 @@ class CleaningDialog(context: Context, cleaning: Cleaning) extends Dialog[Cleani
 
   val saveButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
   pane.buttonTypes = List(saveButtonType, ButtonType.Cancel)
-  val saveButton = pane.lookupButton(saveButtonType)
 
   resultConverter = dialogButton => {
     if dialogButton == saveButtonType then
