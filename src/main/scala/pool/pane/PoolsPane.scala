@@ -103,7 +103,7 @@ class PoolsPane(context: Context) extends VBox:
           .add(pool)
           .map(pool => tableView.selectionModel().select(pool))
           .recover { case error: Throwable => model.onError(error, "Pool add failed.") }
-      case _ => model.onError("Pool add failed.")
+      case _ =>
 
   def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
@@ -114,7 +114,7 @@ class PoolsPane(context: Context) extends VBox:
           .update(selectedIndex, pool)
           .map(pool => tableView.selectionModel().select(selectedIndex))
           .recover { case error: Throwable => model.onError(error, "Pool update failed.") }
-      case _ => model.onError("Pool update failed.")
+      case _ =>
 
   def errors(): Unit = ErrorsDialog(context).showAndWait() match
     case _ => errorsButton.disable = model.observableErrors.isEmpty
