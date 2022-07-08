@@ -124,7 +124,7 @@ class MeasurementsPane(context: Context) extends VBox:
           .add(measurement)
           .map(measurement => tableView.selectionModel().select(measurement))
           .recover { case error: Throwable => model.onError(error, "Measurement add failed.") }
-      case _ => model.onError("Measurement add failed.")
+      case _ =>
 
   def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
@@ -135,6 +135,6 @@ class MeasurementsPane(context: Context) extends VBox:
           .update(selectedIndex, measurement)
           .map(measurement => tableView.selectionModel().select(selectedIndex))
           .recover { case error: Throwable => model.onError(error, "Measurement update failed.") }
-      case _ => model.onError("Measurement update failed.")
+      case _ =>
 
   def chart(): Unit = MeasurementsChartDialog(context).showAndWait()
