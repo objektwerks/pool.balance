@@ -125,7 +125,7 @@ class CleaningsPane(context: Context) extends VBox:
           .add(cleaning)
           .map(cleaning => tableView.selectionModel().select(cleaning))
           .recover { case error: Throwable => model.onError(error, "Cleaning add failed.") }
-      case _ => model.onError("Cleaning add failed.")
+      case _ =>
 
   def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
@@ -136,6 +136,6 @@ class CleaningsPane(context: Context) extends VBox:
           .update(selectedIndex, cleaning)
           .map(cleaning => tableView.selectionModel().select(selectedIndex))
           .recover { case error: Throwable => model.onError(error, "Cleaning update failed.") }
-      case _ => model.onError("Cleaning update failed.")
+      case _ =>
 
   def chart(): Unit = CleaningsChartDialog(context).showAndWait()
