@@ -14,7 +14,7 @@ class DoubleTextField extends TextField:
       change // only if change is a number
     else
       change.setText("") // else make no change
-      change.setRange(change.getRangeStart(), change.getRangeStart()) // don't remove any selected text
+      // change.setRange(change.getRangeStart(), change.getRangeStart()) // don't remove any selected text
       change
   }
   val formatter = new TextFormatter[Double](converter, 0.0, filter)
