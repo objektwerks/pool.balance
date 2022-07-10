@@ -10,10 +10,9 @@ class ControlGridPane(controls: List[(String, Region)]) extends GridPane:
   padding = Insets(top = 6, right = 6, bottom = 6, left = 6)
   var row = 0
   for ((label, control) <- controls)
-    val columnLabel = new Label {
+    val columnLabel = new Label:
       alignment = Pos.CenterLeft
-      text = label 
-    }
+      text = label
     add(columnLabel, columnIndex = 0, rowIndex = row)
     add(control, columnIndex = 1, rowIndex = row)
     row += 1
