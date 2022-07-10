@@ -16,4 +16,4 @@ class ControlGridPane(controls: List[(String, Region)]) extends GridPane:
     }
     add(columnLabel, columnIndex = 0, rowIndex = row)
     add(control, columnIndex = 1, rowIndex = row)
-    row = row + 1
+    row += 1
