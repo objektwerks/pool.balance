@@ -11,7 +11,7 @@ class IntTextField extends TextField:
   val converter = IntStringConverter()
   val filter: (Change) => Change = { (change: Change) =>
     if change.text.matches(IntTextField.regex) then
-      change // only if change is a number
+      change // only if change is an integer
     else
       change.setText("") // else make no change
       change
