@@ -11,7 +11,7 @@ class DoubleTextField extends TextField:
   val converter = DoubleStringConverter()
   val filter: (Change) => Change = { (change: Change) =>
     if change.text.matches(DoubleTextField.regex) then
-      change // only if change is a number
+      change // only if change is a double
     else
       change.setText("") // else make no change
       change
