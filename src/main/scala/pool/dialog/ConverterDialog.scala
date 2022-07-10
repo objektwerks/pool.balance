@@ -12,9 +12,8 @@ class ConverterDialog(context: Context) extends Dialog[Unit]:
   headerText = context.dialogConverters
 
   dialogPane().buttonTypes = List(ButtonType.Close)
-  dialogPane().content = new VBox {
+  dialogPane().content = new VBox:
     prefWidth = 600
     prefHeight = 200
     spacing = 6
     children = List()
-  }
