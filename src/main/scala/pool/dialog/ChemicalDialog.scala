@@ -57,5 +57,8 @@ class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemic
         unit = UnitOfMeasure.valueOf(unitComboBox.value.value),
         added = applyLocalDate(addedDatePicker.value.value, chemical.added)
       )
+    else if dialogButton == converterButtonType then
+      ConverterDialog(context).showAndWait() match
+        case _ => null
     else null
   }
