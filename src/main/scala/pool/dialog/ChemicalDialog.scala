@@ -45,8 +45,9 @@ class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemic
   val pane = dialogPane()
   pane.content = ControlGridPane(controls)
 
+  val converterButtonType = new ButtonType(context.buttonConverter)
   val saveButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
-  pane.buttonTypes = List(saveButtonType, ButtonType.Cancel)
+  pane.buttonTypes = List(saveButtonType, ButtonType.Cancel, converterButtonType)
 
   resultConverter = dialogButton => {
     if dialogButton == saveButtonType then
