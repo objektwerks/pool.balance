@@ -1,4 +1,4 @@
-package pool.pane
+package pool.dialog
 
 import scalafx.Includes.*
 import scalafx.scene.control.{ButtonType, Dialog, TableColumn, TableView}
