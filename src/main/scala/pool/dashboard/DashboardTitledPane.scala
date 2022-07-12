@@ -38,6 +38,7 @@ abstract class DashboardTitledPane(context: Context) extends TitledPane:
 
   val controls = List[(String, Label)](
     context.labelRange -> range,
+    context.labelGood -> good,
     context.labelIdeal -> ideal,
     context.labelCurrent -> current,
     context.labelAverage -> average
