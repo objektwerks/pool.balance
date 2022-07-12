@@ -16,6 +16,11 @@ abstract class DashboardTitledPane(context: Context) extends TitledPane:
     text = ""
   }
 
+  val good = new Label {
+    alignment = Pos.Center
+    text = ""
+  }
+
   val ideal = new Label {
     alignment = Pos.Center
     text = ""
