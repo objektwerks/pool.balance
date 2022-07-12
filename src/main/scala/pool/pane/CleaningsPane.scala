@@ -134,7 +134,7 @@ class CleaningsPane(context: Context) extends VBox:
       case Some(cleaning: Cleaning) =>
         model
           .update(selectedIndex, cleaning)
-          .map(cleaning => tableView.selectionModel().select(selectedIndex))
+          .map(_ => tableView.selectionModel().select(selectedIndex))
           .recover { case error: Throwable => model.onError(error, "Cleaning update failed.") }
       case _ =>
 
