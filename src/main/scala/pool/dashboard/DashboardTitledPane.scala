@@ -13,12 +13,12 @@ abstract class DashboardTitledPane(context: Context) extends TitledPane:
 
   val range = new Label {
     alignment = Pos.Center
-    text = "(0 - 0)"
+    text = ""
   }
 
   val ideal = new Label {
     alignment = Pos.Center
-    text = "0"
+    text = ""
   }
   
   val current = new Label {
