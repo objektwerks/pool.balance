@@ -133,7 +133,7 @@ class MeasurementsPane(context: Context) extends VBox:
       case Some(measurement: Measurement) =>
         model
           .update(selectedIndex, measurement)
-          .map(measurement => tableView.selectionModel().select(selectedIndex))
+          .map(_ => tableView.selectionModel().select(selectedIndex))
           .recover { case error: Throwable => model.onError(error, "Measurement update failed.") }
       case _ =>
 
