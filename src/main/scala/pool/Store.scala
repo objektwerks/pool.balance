@@ -33,7 +33,7 @@ final class Store(context: Context):
   }
 
   def cleanings(poolId: Long): List[Cleaning] = DB readOnly { implicit session =>
-    sql"select * from cleaning where pool_id = ${poolId} order by cleaned desc"
+    sql"select * from cleaning where pool_id = $poolId order by cleaned desc"
       .map(rs => Cleaning(
         rs.long("id"),
         rs.long("pool_id"),
@@ -68,7 +68,7 @@ final class Store(context: Context):
   }
 
   def measurements(poolId: Long): List[Measurement] = DB readOnly { implicit session =>
-    sql"select * from measurement where pool_id = ${poolId} order by measured desc"
+    sql"select * from measurement where pool_id = $poolId order by measured desc"
       .map(rs => Measurement(
         rs.long("id"),
         rs.long("pool_id"),
@@ -112,7 +112,7 @@ final class Store(context: Context):
   }
 
   def chemicals(poolId: Long): List[Chemical] = DB readOnly { implicit session =>
-    sql"select * from chemical where pool_id = ${poolId} order by added desc"
+    sql"select * from chemical where pool_id = $poolId order by added desc"
       .map(rs => Chemical(
         rs.long("id"),
         rs.long("pool_id"),
