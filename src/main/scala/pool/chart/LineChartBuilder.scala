@@ -41,7 +41,7 @@ object LineChartBuilder:
         val yValue = item.YValue.value
         val message = s"$yValue on $xValue"
         val tooltip = new Tooltip(message)
-        tooltip.setShowDelay(Duration.millis(100.0));
+        tooltip.setShowDelay(Duration.millis(100.0))
         tooltip.setShowDuration(Duration.seconds(6.0))
         val node: Node = item.node.value
         Tooltip.install(node, tooltip)
