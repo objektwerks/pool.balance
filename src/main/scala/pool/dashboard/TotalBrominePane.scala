@@ -4,5 +4,5 @@ import pool.Context
 
 class TotalBrominePane(context: Context) extends DashboardTitledPane(context):
   text = context.headerTotalBromine
-  currentValue.text <== context.model.currentTotalBromine.asString
-  currentAverage.text <== context.model.averageTotalBromine.asString
+  current.text <== context.model.currentTotalBromine.asString
+  average.text <== context.model.averageTotalBromine.asString

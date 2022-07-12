@@ -10,20 +10,30 @@ abstract class DashboardTitledPane(context: Context) extends TitledPane:
   collapsible = false
   maxWidth = Double.MaxValue
   maxHeight = Double.MaxValue
-  
-  val currentValue = new Label {
+
+  val range = new Label {
+    alignment = Pos.Center
+    text = "(0 - 0)"
+  }
+
+  val ideal = new Label {
     alignment = Pos.Center
     text = "0"
   }
   
-  val currentAverage = new Label {
+  val current = new Label {
+    alignment = Pos.Center
+    text = "0"
+  }
+  
+  val average = new Label {
     alignment = Pos.Center
     text = "0"
   }
 
   val controls = List[(String, Label)](
-    context.labelCurrent -> currentValue,
-    context.labelAverage -> currentAverage
+    context.labelCurrent -> current,
+    context.labelAverage -> average
   )
   
   content = ControlGridPane(controls)

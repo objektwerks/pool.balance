@@ -4,5 +4,5 @@ import pool.Context
 
 class PhPane(context: Context) extends DashboardTitledPane(context):
   text = context.headerPh
-  currentValue.text <== context.model.currentPh.asString
-  currentAverage.text <== context.model.averagePh.asString
+  current.text <== context.model.currentPh.asString
+  average.text <== context.model.averagePh.asString
