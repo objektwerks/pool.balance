@@ -112,7 +112,7 @@ class PoolsPane(context: Context) extends VBox:
       case Some(pool: Pool) =>
         model
           .update(selectedIndex, pool)
-          .map(pool => tableView.selectionModel().select(selectedIndex))
+          .map(_ => tableView.selectionModel().select(selectedIndex))
           .recover { case error: Throwable => model.onError(error, "Pool update failed.") }
       case _ =>
 
