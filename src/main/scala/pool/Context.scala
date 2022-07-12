@@ -127,6 +127,8 @@ final class Context(config: Config):
   val labelTypeof = config.getString("label.typeof")
   val labelAmount = config.getString("label.amount")
   val labelAdded = config.getString("label.added")
+  val labelRange = config.getString("label.range")
+  val labelIdeal = config.getString("label.ideal")
   val labelCurrent = config.getString("label.current")
   val labelAverage = config.getString("label.average")
 
