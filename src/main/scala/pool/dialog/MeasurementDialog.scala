@@ -14,16 +14,16 @@ class MeasurementDialog(context: Context, measurement: Measurement) extends Dial
   title = context.windowTitle
   headerText = context.dialogMeasurement
 
-  val totalChlorineSlider = totalChlorineTextSlider(context, measurement)
-  val freeChlorineSlider = freeChlorineTextSlider(context, measurement)
-  val combinedChlorineSlider = combinedChlorineTextSlider(context, measurement)
-  val phSlider = phTextSlider(context, measurement)
-  val calciumHardnessSlider = calciumHardnessTextSlider(context, measurement)
-  val totalAlkalinitySlider = totalAlkalinityTextSlider(context, measurement)
-  val cyanuricAcidSlider =cyanuricAcidTextSlider(context, measurement)
-  val totalBromineSlider = totalBromineTextSlider(context, measurement)
-  val saltSlider = saltTextSlider(context, measurement)
-  val temperatureSlider = temperatureTextSlider(context, measurement)
+  val totalChlorineSlider = totalChlorineTextSlider(measurement)
+  val freeChlorineSlider = freeChlorineTextSlider(measurement)
+  val combinedChlorineSlider = combinedChlorineTextSlider(measurement)
+  val phSlider = phTextSlider(measurement)
+  val calciumHardnessSlider = calciumHardnessTextSlider(measurement)
+  val totalAlkalinitySlider = totalAlkalinityTextSlider(measurement)
+  val cyanuricAcidSlider =cyanuricAcidTextSlider(measurement)
+  val totalBromineSlider = totalBromineTextSlider(measurement)
+  val saltSlider = saltTextSlider(measurement)
+  val temperatureSlider = temperatureTextSlider(measurement)
   val measuredDatePicker = new DatePicker {
     value = measurement.measured.toLocalDate
   }
