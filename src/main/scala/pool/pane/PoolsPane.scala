@@ -9,7 +9,7 @@ import scalafx.scene.control.{Button, SelectionMode, Tab, TabPane, TableColumn, 
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import pool.{Context, Pool, UnitOfMeasure}
-import pool.dialog.PoolDialog
+import pool.dialog.{ErrorsDialog, PoolDialog}
 
 class PoolsPane(context: Context) extends VBox:
   spacing = 6
