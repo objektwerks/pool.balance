@@ -9,7 +9,7 @@ object DoubleTextField:
 
 class DoubleTextField extends TextField:
   val converter = DoubleStringConverter()
-  val filter: (Change) => Change = { (change: Change) =>
+  val filter: Change => Change = { (change: Change) =>
     if change.text.matches(DoubleTextField.regex) then
       change // only if change is a double
     else
