@@ -28,6 +28,7 @@ class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
   	items = ObservableBuffer.from( UnitOfMeasure.toPoolList )
   	value = pool.unit.toString
   }
+  unitComboBox.prefWidth = 200
 
   val controls = List[(String, Region)](
     context.labelName -> nameTextField,
