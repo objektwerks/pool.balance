@@ -103,7 +103,7 @@ class ChemicalsPane(context: Context) extends VBox:
       case Some(chemical: Chemical) =>
         model
           .update(selectedIndex, chemical)
-          .map(chemical => tableView.selectionModel().select(selectedIndex))
+          .map(_ => tableView.selectionModel().select(selectedIndex))
           .recover { case error: Throwable => model.onError(error, "Chemical update failed.") }
       case _ =>
 
