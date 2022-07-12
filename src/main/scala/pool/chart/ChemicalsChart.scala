@@ -9,8 +9,8 @@ import scalafx.scene.chart.{LineChart, XYChart}
 import scalafx.scene.control.{Tab, TabPane}
 
 import pool.{Chemical, Context}
-import pool.TypeOfChemical.*
 import pool.TypeOfChemical
+import pool.TypeOfChemical.*
 
 class ChemicalsChart(context: Context) extends TabPane:
   val chemicals = context.model.observableChemicals.reverse
