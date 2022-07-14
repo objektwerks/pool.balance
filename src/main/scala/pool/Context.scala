@@ -64,6 +64,11 @@ final class Context(config: Config):
   val columnYes = config.getString("column.yes")
   val columnNo = config.getString("column.no")
 
+  val converterGallongs = config.getString("converter.gallons")
+  val converterLiters = config.getString("converter.liters")
+  val converterPounds = config.getString("converter.pounds")
+  val converterKilograms = config.getString("converter.kilograms")
+
   val dashboardTotalChlorineRange = config.getString("dashboard.totalChlorineRange")
   val dashboardTotalChlorineGood = config.getString("dashboard.totalChlorineGood")
   val dashboardTotalChlorineIdeal = config.getString("dashboard.totalChlorineIdeal")
