@@ -10,6 +10,7 @@ class Converter(context: Context) extends GridPane:
   hgap = 6
   vgap = 6
   padding = Insets(top = 6, right = 6, bottom = 6, left = 6)
+  prefWidth = 200
 
   val glTextField = new DoubleTextField:
     text = "0.0"
