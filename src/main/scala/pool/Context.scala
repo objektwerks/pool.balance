@@ -105,7 +105,6 @@ final class Context(config: Config):
   val dialogMeasurement = config.getString("dialog.measurement")
   val dialogChemical = config.getString("dialog.chemical")
   val dialogErrors = config.getString("dialog.errors")
-  val dialogConverters = config.getString("dialog.converters")
 
   val headerName = config.getString("header.name")
   val headerBuilt = config.getString("header.built")
