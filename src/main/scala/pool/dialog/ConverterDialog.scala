@@ -5,6 +5,7 @@ import scalafx.scene.control.{ButtonType, Dialog}
 import scalafx.scene.layout.VBox
 
 import pool.{App, Context}
+import pool.control.Converter
 
 class ConverterDialog(context: Context) extends Dialog[Unit]:
   initOwner(App.stage)
@@ -16,4 +17,4 @@ class ConverterDialog(context: Context) extends Dialog[Unit]:
     prefWidth = 600
     prefHeight = 200
     spacing = 6
-    children = List()
+    children = List( Converter() )

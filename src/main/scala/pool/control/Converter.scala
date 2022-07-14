@@ -4,7 +4,7 @@ import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.control.Label
 import scalafx.scene.layout.GridPane
 
-class Conveter extends GridPane:
+class Converter extends GridPane:
   hgap = 6
   vgap = 6
   padding = Insets(top = 6, right = 6, bottom = 6, left = 6)
