@@ -1,10 +1,12 @@
 package pool.control
 
+import scalafx.Includes.*
 import scalafx.geometry.Insets
 import scalafx.scene.control.Label
 import scalafx.scene.layout.GridPane
 
 import pool.Context
+import pool.UnitOfMeasure.*
 
 class Converter(context: Context) extends GridPane:
   hgap = 6
@@ -35,6 +37,23 @@ class Converter(context: Context) extends GridPane:
 
   val kgLabel = new Label:
     text = context.converterKilograms
+
+  glTextField.textProperty.addListener { (_, _, newValue) =>
+    lTextField.text = gallonsToLiters( newValue.toDouble ).toString
+  }
+
+  lTextField.textProperty.addListener { (_, _, newValue) =>
+    glTextField.text = litersToGallons( newValue.toDouble ).toString
+  }
+
+  lbTextField.textProperty.addListener { (_, _, newValue) =>
+    kgTextField.text = poundsToKilograms( newValue.toDouble ).toString
+
+  }
+
+  kgTextField.textProperty.addListener { (_, _, newValue) =>
+    lbTextField.text = kilogramsToPounds( newValue.toDouble ).toString
+  }
 
   add(glTextField, columnIndex = 0, rowIndex = 0)
   add(lTextField, columnIndex = 1, rowIndex = 0)
