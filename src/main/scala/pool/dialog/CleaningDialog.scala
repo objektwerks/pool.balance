@@ -51,11 +51,10 @@ class CleaningDialog(context: Context, cleaning: Cleaning) extends Dialog[Cleani
     context.labelVacuum -> vacuumCheckBox,
     context.labelCleaned -> cleanedDatePicker
   )
-  val pane = dialogPane()
-  pane.content = ControlGridPane(controls)
+  dialogPane().content = ControlGridPane(controls)
 
   val saveButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
-  pane.buttonTypes = List(saveButtonType, ButtonType.Cancel)
+  dialogPane().buttonTypes = List(saveButtonType, ButtonType.Cancel)
 
   resultConverter = dialogButton => {
     if dialogButton == saveButtonType then
