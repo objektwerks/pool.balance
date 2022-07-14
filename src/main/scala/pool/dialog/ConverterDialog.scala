@@ -17,4 +17,4 @@ class ConverterDialog(context: Context) extends Dialog[Unit]:
     prefWidth = 600
     prefHeight = 200
     spacing = 6
-    children = List( Converter() )
+    children = List( Converter(context) )

@@ -4,7 +4,9 @@ import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.control.Label
 import scalafx.scene.layout.GridPane
 
-class Converter extends GridPane:
+import pool.Context
+
+class Converter(context: Context) extends GridPane:
   hgap = 6
   vgap = 6
   padding = Insets(top = 6, right = 6, bottom = 6, left = 6)
@@ -14,28 +16,28 @@ class Converter extends GridPane:
 
   val glLabel = new Label:
     alignment = Pos.Center
-    text = "gallons - gl"
+    text = context.converterGallons
 
   val lTextField = new DoubleTextField:
     text = "0.0"
 
   val lLabel = new Label:
     alignment = Pos.Center
-    text = "liters - l"
+    text = context.converterLiters
 
   val lbTextField = new DoubleTextField:
     text = "0.0"
 
   val lbLabel = new Label:
     alignment = Pos.Center
-    text = "pounds - lb"
+    text = context.converterPounds
 
   val kgTextField = new DoubleTextField:
     text = "0.0"
 
   val kgLabel = new Label:
     alignment = Pos.Center
-    text = "kilograms - kg"
+    text = context.converterKilograms
 
   add(glTextField, columnIndex = 0, rowIndex = 0)
   add(lTextField, columnIndex = 1, rowIndex = 0)
