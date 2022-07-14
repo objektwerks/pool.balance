@@ -5,7 +5,7 @@ import scalafx.scene.control.TextFormatter.Change
 import scalafx.util.converter.DoubleStringConverter
 
 object DoubleTextField:
-  val regex = """((\d+\.?\d*)|(\.\d+))""".r
+  val regex = """([0-9]+([.][0-9]*)?|[.][0-9]+)""".r
 
 class DoubleTextField extends TextField:
   val converter = DoubleStringConverter()
