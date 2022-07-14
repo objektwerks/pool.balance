@@ -2,13 +2,13 @@ package pool.dialog
 
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
-import scalafx.scene.layout.Region
-import scalafx.scene.control.{ButtonType, ComboBox, DatePicker, Dialog, TextField}
+import scalafx.scene.layout.{Region, VBox}
+import scalafx.scene.control.{ButtonType, ComboBox, DatePicker, Dialog, Separator, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import pool.{App, Chemical, Context, Entity, UnitOfMeasure, TypeOfChemical}
 import pool.Entity.*
-import pool.control.DoubleTextField
+import pool.control.{Converter, DoubleTextField}
 
 class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemical]:
   initOwner(App.stage)
@@ -42,7 +42,11 @@ class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemic
     context.labelUnit -> unitComboBox,
     context.labelAdded -> addedDatePicker
   )
-  dialogPane().content = ControlGridPane(controls)
+  val controlsPane = ControlGridPane(controls)
+  val converterPane = Converter(context)
+  
+  dialogPane().content = new VBox:
+    children = List(controlsPane, new Separator(), converterPane)
 
   val saveButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
   dialogPane().buttonTypes = List(saveButtonType, ButtonType.Cancel)
