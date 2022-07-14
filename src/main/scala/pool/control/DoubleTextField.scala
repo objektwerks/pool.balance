@@ -11,14 +11,11 @@ class DoubleTextField extends TextField:
   val converter = DoubleStringConverter()
   val filter: Change => Change = { (change: Change) =>
     if DoubleTextField.regex.matches(change.text) then
-      println(s"double match: ${change.text}")
       change // if double, make change
     else
       if !change.controlText.contains(".") && change.text.contains(".") then
-        println(s"'.' match: ${change.text}")
-        change // if only . then make change
+        change // if . then make change
       else 
-        println(s"'.' already in double: ${change.text}")
         change.setText("") // else make no change
       change
   }
