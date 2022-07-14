@@ -1,6 +1,6 @@
 package pool.control
 
-import scalafx.geometry.{Insets, Pos}
+import scalafx.geometry.Insets
 import scalafx.scene.control.Label
 import scalafx.scene.layout.GridPane
 
@@ -15,28 +15,24 @@ class Converter(context: Context) extends GridPane:
     text = "0.0"
 
   val glLabel = new Label:
-    alignment = Pos.Center
     text = context.converterGallons
 
   val lTextField = new DoubleTextField:
     text = "0.0"
 
   val lLabel = new Label:
-    alignment = Pos.Center
     text = context.converterLiters
 
   val lbTextField = new DoubleTextField:
     text = "0.0"
 
   val lbLabel = new Label:
-    alignment = Pos.Center
     text = context.converterPounds
 
   val kgTextField = new DoubleTextField:
     text = "0.0"
 
   val kgLabel = new Label:
-    alignment = Pos.Center
     text = context.converterKilograms
 
   add(glTextField, columnIndex = 0, rowIndex = 0)
