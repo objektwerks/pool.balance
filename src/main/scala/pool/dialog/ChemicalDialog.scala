@@ -19,10 +19,10 @@ class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemic
   	items = ObservableBuffer.from( TypeOfChemical.toList )
   	value = chemical.typeof.display
   }
-  typeofComboBox.prefWidth = 150
+  typeofComboBox.prefWidth = 200
 
   val amountTextField = new DoubleTextField {
-    prefWidth = 150
+    prefWidth = 200
     text = chemical.amount.toString
   }
 
@@ -30,10 +30,10 @@ class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemic
   	items = ObservableBuffer.from( UnitOfMeasure.toList )
   	value = chemical.unit.toString
   }
-  unitComboBox.prefWidth = 150
+  unitComboBox.prefWidth = 200
 
   val addedDatePicker = new DatePicker {
-    prefWidth = 150
+    prefWidth = 200
     value = chemical.added.toLocalDate
   }
 
