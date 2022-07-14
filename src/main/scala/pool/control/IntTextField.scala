@@ -5,7 +5,7 @@ import scalafx.scene.control.TextFormatter.Change
 import scalafx.util.converter.IntStringConverter
 
 object IntTextField:
-  val regex = """\d+""".r
+  val regex = """[0-9]+""".r
 
 class IntTextField extends TextField:
   val converter = IntStringConverter()
