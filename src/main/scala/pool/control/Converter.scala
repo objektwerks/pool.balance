@@ -38,19 +38,19 @@ class Converter(context: Context) extends GridPane:
   val kilogramsLabel = new Label:
     text = context.converterKilograms
 
-  gallonsTextField.textProperty.addListener { (_, _, newValue) =>
+  gallonsTextField.text.onChange { (_, _, newValue) =>
     litersTextField.text = gallonsToLiters( newValue.toDouble ).toString
   }
 
-  litersTextField.textProperty.addListener { (_, _, newValue) =>
+  litersTextField.text.onChange { (_, _, newValue) =>
     gallonsTextField.text = litersToGallons( newValue.toDouble ).toString
   }
 
-  poundsTextField.textProperty.addListener { (_, _, newValue) =>
+  poundsTextField.text.onChange { (_, _, newValue) =>
     kilogramsTextField.text = poundsToKilograms( newValue.toDouble ).toString
   }
 
-  kilogramsTextField.textProperty.addListener { (_, _, newValue) =>
+  kilogramsTextField.text.onChange { (_, _, newValue) =>
     poundsTextField.text = kilogramsToPounds( newValue.toDouble ).toString
   }
 
