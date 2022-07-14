@@ -5,7 +5,7 @@ import scalafx.scene.control.TextFormatter.Change
 import scalafx.util.converter.DoubleStringConverter
 
 object DoubleTextField:
-  val regex = """([0-9]*[.])?[0-9]+""".r
+  val regex = """([0-9][.])?[0-9]+""".r
 
 class DoubleTextField extends TextField:
   val converter = DoubleStringConverter()
@@ -14,9 +14,12 @@ class DoubleTextField extends TextField:
       println(s"double match: ${change.text}")
       change // if double, make change
     else
-      change.setText("") // else make no change
-      change.setRange(change.getRangeStart(), change.getRangeStart()) // don't remove any selected text
-      println(s"double no match: ${change.text}")
+      if !change.controlText.contains(".") && change.text.contains(".") then
+        println(s"'.' match: ${change.text}")
+        change // if only . then make change
+      else 
+        println(s"'.' already in double: ${change.text}")
+        change.setText("") // else make no change
       change
   }
   val formatter = new TextFormatter[Double](converter, 0.0, filter)
