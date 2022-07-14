@@ -35,11 +35,10 @@ class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
     context.labelVolume -> volumeTextField,
     context.labelUnit -> unitComboBox
   )
-  val pane = dialogPane()
-  pane.content = ControlGridPane(controls)
+  dialogPane().content = ControlGridPane(controls)
 
   val saveButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
-  pane.buttonTypes = List(saveButtonType, ButtonType.Cancel)
+  dialogPane().buttonTypes = List(saveButtonType, ButtonType.Cancel)
 
   resultConverter = dialogButton => {
     if dialogButton == saveButtonType then
