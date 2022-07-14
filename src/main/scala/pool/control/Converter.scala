@@ -36,3 +36,15 @@ class Converter extends GridPane:
   val kgLabel = new Label:
     alignment = Pos.Center
     text = "kilograms - kg"
+
+  add(glTextField, columnIndex = 0, rowIndex = 0)
+  add(lTextField, columnIndex = 1, rowIndex = 0)
+
+  add(glLabel, columnIndex = 0, rowIndex = 1)
+  add(lLabel, columnIndex = 1, rowIndex = 1)
+
+  add(lbTextField, columnIndex = 0, rowIndex = 2)
+  add(kgTextField, columnIndex = 1, rowIndex = 2)
+
+  add(lbLabel, columnIndex = 0, rowIndex = 3)
+  add(kgLabel, columnIndex = 1, rowIndex = 3)
