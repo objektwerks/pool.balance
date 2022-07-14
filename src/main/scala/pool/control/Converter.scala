@@ -14,55 +14,54 @@ class Converter(context: Context) extends GridPane:
   padding = Insets(top = 6, right = 6, bottom = 6, left = 6)
   prefWidth = 200
 
-  val glTextField = new DoubleTextField:
+  val gallonsTextField = new DoubleTextField:
     text = "0.0"
 
-  val glLabel = new Label:
+  val gallonsLabel = new Label:
     text = context.converterGallons
 
-  val lTextField = new DoubleTextField:
+  val litersTextField = new DoubleTextField:
     text = "0.0"
 
-  val lLabel = new Label:
+  val litersLabel = new Label:
     text = context.converterLiters
 
-  val lbTextField = new DoubleTextField:
+  val poundsTextField = new DoubleTextField:
     text = "0.0"
 
-  val lbLabel = new Label:
+  val poundsLabel = new Label:
     text = context.converterPounds
 
-  val kgTextField = new DoubleTextField:
+  val kilogramsTextField = new DoubleTextField:
     text = "0.0"
 
-  val kgLabel = new Label:
+  val kilogramsLabel = new Label:
     text = context.converterKilograms
 
-  glTextField.textProperty.addListener { (_, _, newValue) =>
-    lTextField.text = gallonsToLiters( newValue.toDouble ).toString
+  gallonsTextField.textProperty.addListener { (_, _, newValue) =>
+    litersTextField.text = gallonsToLiters( newValue.toDouble ).toString
   }
 
-  lTextField.textProperty.addListener { (_, _, newValue) =>
-    glTextField.text = litersToGallons( newValue.toDouble ).toString
+  litersTextField.textProperty.addListener { (_, _, newValue) =>
+    gallonsTextField.text = litersToGallons( newValue.toDouble ).toString
   }
 
-  lbTextField.textProperty.addListener { (_, _, newValue) =>
-    kgTextField.text = poundsToKilograms( newValue.toDouble ).toString
-
+  poundsTextField.textProperty.addListener { (_, _, newValue) =>
+    kilogramsTextField.text = poundsToKilograms( newValue.toDouble ).toString
   }
 
-  kgTextField.textProperty.addListener { (_, _, newValue) =>
-    lbTextField.text = kilogramsToPounds( newValue.toDouble ).toString
+  kilogramsTextField.textProperty.addListener { (_, _, newValue) =>
+    poundsTextField.text = kilogramsToPounds( newValue.toDouble ).toString
   }
 
-  add(glTextField, columnIndex = 0, rowIndex = 0)
-  add(lTextField, columnIndex = 1, rowIndex = 0)
+  add(gallonsTextField, columnIndex = 0, rowIndex = 0)
+  add(litersTextField, columnIndex = 1, rowIndex = 0)
 
-  add(glLabel, columnIndex = 0, rowIndex = 1)
-  add(lLabel, columnIndex = 1, rowIndex = 1)
+  add(gallonsLabel, columnIndex = 0, rowIndex = 1)
+  add(litersLabel, columnIndex = 1, rowIndex = 1)
 
-  add(lbTextField, columnIndex = 0, rowIndex = 2)
-  add(kgTextField, columnIndex = 1, rowIndex = 2)
+  add(poundsTextField, columnIndex = 0, rowIndex = 2)
+  add(kilogramsTextField, columnIndex = 1, rowIndex = 2)
 
-  add(lbLabel, columnIndex = 0, rowIndex = 3)
-  add(kgLabel, columnIndex = 1, rowIndex = 3)
+  add(poundsLabel, columnIndex = 0, rowIndex = 3)
+  add(kilogramsLabel, columnIndex = 1, rowIndex = 3)
