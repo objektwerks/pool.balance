@@ -39,19 +39,19 @@ class Converter(context: Context) extends GridPane:
     text = context.converterKilograms
 
   gallonsTextField.text.onChange { (_, _, newValue) =>
-    litersTextField.text = gallonsToLiters( newValue.toDouble ).toString
+    litersTextField.text = gallonsToLiters( newValue.toDoubleOption.getOrElse(1.0) ).toString
   }
 
   litersTextField.text.onChange { (_, _, newValue) =>
-    gallonsTextField.text = litersToGallons( newValue.toDouble ).toString
+    gallonsTextField.text = litersToGallons( newValue.toDoubleOption.getOrElse(1.0) ).toString
   }
 
   poundsTextField.text.onChange { (_, _, newValue) =>
-    kilogramsTextField.text = poundsToKilograms( newValue.toDouble ).toString
+    kilogramsTextField.text = poundsToKilograms( newValue.toDoubleOption.getOrElse(1.0) ).toString
   }
 
   kilogramsTextField.text.onChange { (_, _, newValue) =>
-    poundsTextField.text = kilogramsToPounds( newValue.toDouble ).toString
+    poundsTextField.text = kilogramsToPounds( newValue.toDoubleOption.getOrElse(1.0) ).toString
   }
 
   add(gallonsTextField, columnIndex = 0, rowIndex = 0)
