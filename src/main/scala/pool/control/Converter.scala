@@ -40,22 +40,22 @@ class Converter(context: Context) extends GridPane:
 
   gallonsTextField.text.onChange { (_, oldValue, newValue) =>
     println(s"gallons old: $oldValue new: $newValue")
-    litersTextField.text = gallonsToLiters( newValue.toDoubleOption.getOrElse(1.0) ).toString
+    if newValue.nonEmpty then litersTextField.text = gallonsToLiters( newValue.toDoubleOption.getOrElse(1.0) ).toString
   }
 
   litersTextField.text.onChange { (_, oldValue, newValue) =>
     println(s"liters old: $oldValue new: $newValue")
-    gallonsTextField.text = litersToGallons( newValue.toDoubleOption.getOrElse(1.0) ).toString
+    if newValue.nonEmpty then gallonsTextField.text = litersToGallons( newValue.toDoubleOption.getOrElse(1.0) ).toString
   }
 
   poundsTextField.text.onChange { (_, oldValue, newValue) =>
     println(s"pounds old: $oldValue new: $newValue")
-    kilogramsTextField.text = poundsToKilograms( newValue.toDoubleOption.getOrElse(1.0) ).toString
+    if newValue.nonEmpty then kilogramsTextField.text = poundsToKilograms( newValue.toDoubleOption.getOrElse(1.0) ).toString
   }
 
   kilogramsTextField.text.onChange { (_, oldValue, newValue) =>
     println(s"kilograms old: $oldValue new: $newValue")
-    poundsTextField.text = kilogramsToPounds( newValue.toDoubleOption.getOrElse(1.0) ).toString
+    if newValue.nonEmpty then poundsTextField.text = kilogramsToPounds( newValue.toDoubleOption.getOrElse(1.0) ).toString
   }
 
   add(gallonsTextField, columnIndex = 0, rowIndex = 0)

@@ -5,12 +5,12 @@ import scalafx.scene.control.TextFormatter.Change
 import scalafx.util.converter.DoubleStringConverter
 
 object DoubleTextField:
-  val regex = "\\d+\\.\\d+"
+  val regex = """\d+\.\d+""".r
 
 class DoubleTextField extends TextField:
   val converter = DoubleStringConverter()
   val filter: Change => Change = { (change: Change) =>
-    if change.text.matches(DoubleTextField.regex) then
+    if DoubleTextField.regex.matches(change.text) then
       change // if double, make change
     else
       change.setText("") // else make no change

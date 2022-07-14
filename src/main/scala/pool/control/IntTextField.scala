@@ -5,12 +5,12 @@ import scalafx.scene.control.TextFormatter.Change
 import scalafx.util.converter.IntStringConverter
 
 object IntTextField:
-  val regex = "\\d+"
+  val regex = """\d+""".r
 
 class IntTextField extends TextField:
   val converter = IntStringConverter()
   val filter: Change => Change = { (change: Change) =>
-    if change.text.matches(IntTextField.regex) then
+    if IntTextField.regex.matches(change.text) then
       change // if integer, make change
     else
       change.setText("") // else make no change
