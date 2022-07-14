@@ -45,9 +45,8 @@ class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemic
   val pane = dialogPane()
   pane.content = ControlGridPane(controls)
 
-  val converterButtonType = new ButtonType(context.buttonConverter)
   val saveButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
-  pane.buttonTypes = List(saveButtonType, ButtonType.Cancel, converterButtonType)
+  pane.buttonTypes = List(saveButtonType, ButtonType.Cancel)
 
   resultConverter = dialogButton => {
     if dialogButton == saveButtonType then
@@ -57,8 +56,5 @@ class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemic
         unit = UnitOfMeasure.valueOf(unitComboBox.value.value),
         added = applyLocalDate(addedDatePicker.value.value, chemical.added)
       )
-    else if dialogButton == converterButtonType then
-      ConverterDialog(context).showAndWait() match
-        case _ => null
     else null
   }
