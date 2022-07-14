@@ -41,11 +41,10 @@ class MeasurementDialog(context: Context, measurement: Measurement) extends Dial
     context.labelTemperature -> temperatureSlider,
     context.labelMeasure -> measuredDatePicker
   )
-  val pane = dialogPane()
-  pane.content = ControlGridPane(controls)
+  dialogPane().content = ControlGridPane(controls)
 
   val saveButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
-  pane.buttonTypes = List(saveButtonType, ButtonType.Cancel)
+  dialogPane().buttonTypes = List(saveButtonType, ButtonType.Cancel)
 
   resultConverter = dialogButton => {
     if dialogButton == saveButtonType then
