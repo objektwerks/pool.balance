@@ -16,11 +16,13 @@ class Converter(context: Context) extends GridPane:
 
   val decimalFormat = "%,.2f"
 
+  def format(double: Double): String = String.format(decimalFormat, double)
+
   val gallonsTextField = new DoubleTextField:
     text = "1.0"
   val gallonsTextFieldResult = new DoubleTextField:
     editable = false
-    text = String.format(decimalFormat, gallonsToLiters(1.0))
+    text = format(gallonsToLiters(1.0))
   def gallonsLabel = new Label:
     text = context.converterGallons
 
@@ -28,7 +30,7 @@ class Converter(context: Context) extends GridPane:
     text = "1.0"
   val litersTextFieldResult = new DoubleTextField:
     editable = false
-    text = String.format(decimalFormat, litersToGallons(1.0))
+    text = format(litersToGallons(1.0))
   def litersLabel = new Label:
     text = context.converterLiters
 
@@ -36,7 +38,7 @@ class Converter(context: Context) extends GridPane:
     text = "1.0"
   val poundsTextFieldResult = new DoubleTextField:
     editable = false
-    text = String.format(decimalFormat, poundsToKilograms(1.0))
+    text = format(poundsToKilograms(1.0))
   def poundsLabel = new Label:
     text = context.converterPounds
 
@@ -44,28 +46,24 @@ class Converter(context: Context) extends GridPane:
     text = "1.0"
   val kilogramsTextFieldResult = new DoubleTextField:
     editable = false
-    text = String.format(decimalFormat, kilogramsToPounds(1.0))
+    text = format(kilogramsToPounds(1.0))
   def kilogramsLabel = new Label:
     text = context.converterKilograms
 
   gallonsTextField.text.onChange { (_, oldValue, newValue) =>
-    println(s"gallons old: $oldValue new: $newValue")
-    litersTextFieldResult.text = String.format(decimalFormat, gallonsToLiters( newValue.toDoubleOption.getOrElse(1.0) ))
+    litersTextFieldResult.text = format(gallonsToLiters( newValue.toDoubleOption.getOrElse(1.0) ))
   }
 
   litersTextField.text.onChange { (_, oldValue, newValue) =>
-    println(s"liters old: $oldValue new: $newValue")
-    gallonsTextFieldResult.text = String.format(decimalFormat, litersToGallons( newValue.toDoubleOption.getOrElse(1.0) ))
+    gallonsTextFieldResult.text = format(litersToGallons( newValue.toDoubleOption.getOrElse(1.0) ))
   }
 
   poundsTextField.text.onChange { (_, oldValue, newValue) =>
-    println(s"pounds old: $oldValue new: $newValue")
-    kilogramsTextFieldResult.text = String.format(decimalFormat, poundsToKilograms( newValue.toDoubleOption.getOrElse(1.0) ))
+    kilogramsTextFieldResult.text = format(poundsToKilograms( newValue.toDoubleOption.getOrElse(1.0) ))
   }
 
   kilogramsTextField.text.onChange { (_, oldValue, newValue) =>
-    println(s"kilograms old: $oldValue new: $newValue")
-    poundsTextFieldResult.text = String.format(decimalFormat, kilogramsToPounds( newValue.toDoubleOption.getOrElse(1.0) ))
+    poundsTextFieldResult.text = format(kilogramsToPounds( newValue.toDoubleOption.getOrElse(1.0) ))
   }
 
   add(gallonsTextField, columnIndex = 0, rowIndex = 0)
