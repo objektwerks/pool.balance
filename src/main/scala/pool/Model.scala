@@ -14,6 +14,7 @@ import scalafx.collections.ObservableBuffer
 import scalafx.beans.property.{LongProperty, ObjectProperty}
 
 import Entity.given
+import Measurement.*
 
 final class Model(context: Context) extends LazyLogging:
   private val store = context.store
@@ -130,7 +131,6 @@ final class Model(context: Context) extends LazyLogging:
       averageTotalBromine.value = observableMeasurements.map(_.totalBromine).sum / count
       averageSalt.value = observableMeasurements.map(_.salt).sum / count
 
-      import Measurement.*
       inRangeTotalChlorine.value = withinTotalChlorine( measurement.totalChlorine )
     }
 
