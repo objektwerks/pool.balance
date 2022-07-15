@@ -2,6 +2,10 @@ Pool Balance
 ------------
 >Pool cleaning, measurement and chemical balancing app using ScalaFX and Scala 3.
 
+Todo
+----
+1. Build dashboard pane error indicator.
+
 Build
 -----
 1. sbt clean compile
