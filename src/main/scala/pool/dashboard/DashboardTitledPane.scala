@@ -10,25 +10,20 @@ abstract class DashboardTitledPane(context: Context) extends TitledPane:
   maxWidth = Double.MaxValue
   maxHeight = Double.MaxValue
 
-  val range = new Label {
+  val range = new Label:
     text = ""
-  }
 
-  val good = new Label {
+  val good = new Label:
     text = ""
-  }
 
-  val ideal = new Label {
+  val ideal = new Label:
     text = ""
-  }
   
-  val current = new Label {
+  val current = new Label:
     text = "0"
-  }
   
-  val average = new Label {
+  val average = new Label:
     text = "0"
-  }
 
   val controls = List[(String, Label)](
     context.labelRange -> range,
