@@ -14,7 +14,7 @@ class Converter(context: Context) extends GridPane:
   padding = Insets(top = 6, right = 6, bottom = 6, left = 6)
   prefWidth = 200
 
-  val decimalFormat = "%,.2f"
+  val decimalFormat = "%.2f"
 
   def format(double: Double): String = String.format(decimalFormat, double)
 
@@ -23,7 +23,7 @@ class Converter(context: Context) extends GridPane:
   val gallonsTextFieldResult = new DoubleTextField:
     style = "-fx-background-color: #ececec;"
     editable = false
-    text = format(gallonsToLiters(1.0))
+    text = format(litersToGallons(1.0))
   def gallonsLabel = new Label:
     text = context.converterGallons
 
@@ -32,7 +32,7 @@ class Converter(context: Context) extends GridPane:
   val litersTextFieldResult = new DoubleTextField:
     style = "-fx-background-color: #ececec;"
     editable = false
-    text = format(litersToGallons(1.0))
+    text = format(gallonsToLiters(1.0))
   def litersLabel = new Label:
     text = context.converterLiters
 
@@ -41,7 +41,7 @@ class Converter(context: Context) extends GridPane:
   val poundsTextFieldResult = new DoubleTextField:
     style = "-fx-background-color: #ececec;"
     editable = false
-    text = format(poundsToKilograms(1.0))
+    text = format(kilogramsToPounds(1.0))
   def poundsLabel = new Label:
     text = context.converterPounds
 
@@ -50,7 +50,7 @@ class Converter(context: Context) extends GridPane:
   val kilogramsTextFieldResult = new DoubleTextField:
     style = "-fx-background-color: #ececec;"
     editable = false
-    text = format(kilogramsToPounds(1.0))
+    text = format(poundsToKilograms(1.0))
   def kilogramsLabel = new Label:
     text = context.converterKilograms
 
