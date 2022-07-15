@@ -4,6 +4,7 @@ import com.typesafe.scalalogging.LazyLogging
 
 import java.text.NumberFormat
 
+import scalafx.Includes.*
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.Try
@@ -31,6 +32,7 @@ final class Model(context: Context) extends LazyLogging:
 
   val currentTotalChlorine = ObjectProperty[Int](0)
   val averageTotalChlorine = ObjectProperty[Int](0)
+  val inRangeTotalChlorine = ObjectProperty[Boolean](true)
 
   val currentFreeChlorine = ObjectProperty[Int](0)
   val averageFreeChlorine = ObjectProperty[Int](0)
@@ -127,6 +129,9 @@ final class Model(context: Context) extends LazyLogging:
       averageCyanuricAcid.value = observableMeasurements.map(_.cyanuricAcid).sum / count
       averageTotalBromine.value = observableMeasurements.map(_.totalBromine).sum / count
       averageSalt.value = observableMeasurements.map(_.salt).sum / count
+
+      import Measurement.*
+      inRangeTotalChlorine.value = withinTotalChlorine( measurement.totalChlorine )
     }
 
   def onError(message: String): Unit =

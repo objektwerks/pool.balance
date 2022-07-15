@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter
 
 import math.BigDecimal.double2bigDecimal
 
+import scalafx.Includes.*
 import scalafx.beans.property.ObjectProperty
 
 final case class Error(message: String, occurred: LocalDateTime = LocalDateTime.now):
@@ -76,6 +77,11 @@ final case class Cleaning(id: Long = 0,
   val vacuumProperty = ObjectProperty[Boolean](this, "vacuum", vacuum)
   val cleanedProperty = ObjectProperty[String](this, "cleaned", Entity.format(cleaned))
   val cleaning = this
+
+object Measurement:
+  private val measurementSet = Set(0.0, 10.0)
+
+  def withinTotalChlorine(double: Double): Boolean = measurementSet.contains(double)
 
 final case class Measurement(id: Long = 0,
                              poolId: Long,
