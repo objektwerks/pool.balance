@@ -1,6 +1,5 @@
 package pool.dashboard
 
-import scalafx.geometry.Pos
 import scalafx.scene.control.{Label, TitledPane}
 
 import pool.Context
@@ -12,27 +11,22 @@ abstract class DashboardTitledPane(context: Context) extends TitledPane:
   maxHeight = Double.MaxValue
 
   val range = new Label {
-    alignment = Pos.Center
     text = ""
   }
 
   val good = new Label {
-    alignment = Pos.Center
     text = ""
   }
 
   val ideal = new Label {
-    alignment = Pos.Center
     text = ""
   }
   
   val current = new Label {
-    alignment = Pos.Center
     text = "0"
   }
   
   val average = new Label {
-    alignment = Pos.Center
     text = "0"
   }
 
