@@ -20,35 +20,42 @@ class MeasurementsPane(context: Context) extends VBox:
   val tableView = new TableView[Measurement]() {
     columns ++= List(
       new TableColumn[Measurement, Int] {
+        prefWidth = 75
         text = context.headerTotalChlorine
         cellValueFactory = _.value.totalChlorineProperty
       },
       new TableColumn[Measurement, Int] {
+        prefWidth = 75
         text = context.headerFreeChlorine
         cellValueFactory = _.value.freeChlorineProperty
       },
       new TableColumn[Measurement, Double] {
+        prefWidth = 75
         text = context.headerCombinedChlorine
         cellValueFactory = _.value.combinedChlorineProperty
       },
       new TableColumn[Measurement, Double] {
-        prefWidth = 50
+        prefWidth = 45
         text = context.headerPh
         cellValueFactory = _.value.phProperty
       },
       new TableColumn[Measurement, Int] {
+        prefWidth = 75
         text = context.headerCalciumHardness
         cellValueFactory = _.value.calciumHardnessProperty
       },
       new TableColumn[Measurement, Int] {
+        prefWidth = 75
         text = context.headerTotalAlkalinity
         cellValueFactory = _.value.totalAlkalinityProperty
       },
       new TableColumn[Measurement, Int] {
+        prefWidth = 75
         text = context.headerCyanuricAcid
         cellValueFactory = _.value.cyanuricAcidProperty
       },
       new TableColumn[Measurement, Int] {
+        prefWidth = 75
         text = context.headerTotalBromine
         cellValueFactory = _.value.totalBromineProperty
       },
