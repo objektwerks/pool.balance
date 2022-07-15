@@ -18,7 +18,7 @@ class Converter(context: Context) extends GridPane:
     text = "1.0"
   val gallonsTextFieldResult = new DoubleTextField:
     editable = false
-    text = ""
+    text = gallonsToLiters(1.0).toString
   def gallonsLabel = new Label:
     text = context.converterGallons
 
@@ -26,7 +26,7 @@ class Converter(context: Context) extends GridPane:
     text = "1.0"
   val litersTextFieldResult = new DoubleTextField:
     editable = false
-    text = ""
+    text = litersToGallons(1.0).toString
   def litersLabel = new Label:
     text = context.converterLiters
 
@@ -34,7 +34,7 @@ class Converter(context: Context) extends GridPane:
     text = "1.0"
   val poundsTextFieldResult = new DoubleTextField:
     editable = false
-    text = ""
+    text = poundsToKilograms(1.0).toString
   def poundsLabel = new Label:
     text = context.converterPounds
 
@@ -42,7 +42,7 @@ class Converter(context: Context) extends GridPane:
     text = "1.0"
   val kilogramsTextFieldResult = new DoubleTextField:
     editable = false
-    text = ""
+    text = kilogramsToPounds(1.0).toString
   def kilogramsLabel = new Label:
     text = context.converterKilograms
 
