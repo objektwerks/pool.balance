@@ -173,12 +173,12 @@ final class Context(config: Config):
   val tabMeasurements = config.getString("tab.measurements")
   val tabChemicals = config.getString("tab.chemicals")
 
-  def addImage = loadImageView("/add.png")
-  def editImage = loadImageView("/edit.png")
-  def chartImage = loadImageView("/chart.png")
-  def errorsImage = loadImageView("/errors.png")
+  def addImage = loadImageView("/image/add.png")
+  def editImage = loadImageView("/image/edit.png")
+  def chartImage = loadImageView("/image/chart.png")
+  def errorsImage = loadImageView("/image/errors.png")
 
-  def logo = new Image(Image.getClass.getResourceAsStream("/logo.png"))
+  def logo = new Image(Image.getClass.getResourceAsStream("/image/logo.png"))
 
   val store = Store(this)
   val model = Model(this)
