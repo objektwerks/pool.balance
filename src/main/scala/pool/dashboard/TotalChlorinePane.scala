@@ -1,6 +1,7 @@
 package pool.dashboard
 
 import pool.Context
+import pool.Measurement
 
 class TotalChlorinePane(context: Context) extends DashboardTitledPane(context):
   text = context.headerTotalChlorine
@@ -10,6 +11,6 @@ class TotalChlorinePane(context: Context) extends DashboardTitledPane(context):
   current.text <== context.model.currentTotalChlorine.asString
   average.text <== context.model.averageTotalChlorine.asString
 
-  context.model.inRangeTotalChlorine.onChange { (_, _, _) =>
+  context.model.inRangeTotalChlorine.onChange { (_, _, newValue) =>
     // todo .. paint error condition.
   }
