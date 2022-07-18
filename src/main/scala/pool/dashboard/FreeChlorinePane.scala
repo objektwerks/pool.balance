@@ -9,3 +9,7 @@ class FreeChlorinePane(context: Context) extends DashboardTitledPane(context):
   ideal.text = context.dashboardFreeChlorineIdeal
   current.text <== context.model.currentFreeChlorine.asString
   average.text <== context.model.averageFreeChlorine.asString
+
+  context.model.inRangeFreeChlorine.onChange { (_, _, inRange) =>
+    if inRange then println("free chlorine in range") else println("free chlorine out of range")
+  }
