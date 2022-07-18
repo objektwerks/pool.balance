@@ -79,10 +79,11 @@ final case class Cleaning(id: Long = 0,
   val cleaning = this
 
 object Measurement:
-  val totalChlorineRange = Set(0.0, 10.0)
-  val freeChlorineRange = Set(0.0, 10.0)
+  val totalChlorineRange = Set(0, 10)
+  val freeChlorineRange = Set(0, 10)
   val combinedChlorineRange = Set(0.0, 0.5)
   val phRange = Set(6.2, 8.4)
+  val calciumHardnessRange = Set(0, 1000)
 
 final case class Measurement(id: Long = 0,
                              poolId: Long,
