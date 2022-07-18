@@ -82,7 +82,7 @@ object Measurement:
   val totalChlorineRange = Set(0.0, 10.0)
   val freeChlorineRange = Set(0.0, 10.0)
   val combinedChlorineRange = Set(0.0, 0.5)
-
+  val phRange = Set(6.2, 8.4)
 
 final case class Measurement(id: Long = 0,
                              poolId: Long,
