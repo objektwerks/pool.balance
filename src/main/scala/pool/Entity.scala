@@ -80,8 +80,10 @@ final case class Cleaning(id: Long = 0,
 
 object Measurement:
   private val totalChlorineRange = Set(0.0, 10.0)
+  private val freeChlorineRange = Set(0.0, 10.0)
 
   def withinTotalChlorineRange(value: Double): Boolean = totalChlorineRange.contains(value)
+  def withinFreeChlorineRange(value: Double): Boolean = freeChlorineRange.contains(value)
 
 final case class Measurement(id: Long = 0,
                              poolId: Long,
