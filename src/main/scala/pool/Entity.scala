@@ -84,6 +84,7 @@ object Measurement:
   val combinedChlorineRange = Set(0.0, 0.5)
   val phRange = Set(6.2, 8.4)
   val calciumHardnessRange = Set(0, 1000)
+  val totalAlkalinityRange = Set(0, 240)
 
 final case class Measurement(id: Long = 0,
                              poolId: Long,
