@@ -4,7 +4,7 @@ Pool Balance
 
 Todo
 ----
-1. Build dashboard pane error indicator.
+1. Build error indicator for dashboard panes.
 
 Build
 -----
