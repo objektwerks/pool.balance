@@ -37,27 +37,39 @@ final class Model(context: Context) extends LazyLogging:
 
   val currentFreeChlorine = ObjectProperty[Int](0)
   val averageFreeChlorine = ObjectProperty[Int](0)
+  val inRangeFreeChlorine = ObjectProperty[Boolean](true)
 
   val currentCombinedChlorine = ObjectProperty[Double](0)
   val averageCombinedChlorine = ObjectProperty[Double](0)
+  val inRangeCombinedChlorine = ObjectProperty[Boolean](true)
 
   val currentPh = ObjectProperty[Double](0)
   val averagePh = ObjectProperty[Double](0)
+  val inRangePh = ObjectProperty[Boolean](true)
 
   val currentCalciumHardness = ObjectProperty[Int](0)
   val averageCalciumHardness = ObjectProperty[Int](0)
+  val inRangeCalciumHardness = ObjectProperty[Boolean](true)
 
   val currentTotalAlkalinity = ObjectProperty[Int](0)
   val averageTotalAlkalinity = ObjectProperty[Int](0)
+  val inRangeTotalAlkalinity = ObjectProperty[Boolean](true)
 
   val currentCyanuricAcid = ObjectProperty[Int](0)
   val averageCyanuricAcid = ObjectProperty[Int](0)
+  val inRangeCyanuricAcid = ObjectProperty[Boolean](true)
 
   val currentTotalBromine = ObjectProperty[Int](0)
   val averageTotalBromine = ObjectProperty[Int](0)
+  val inRangeTotalBromine = ObjectProperty[Boolean](true)
 
   val currentSalt = ObjectProperty[Int](0)
   val averageSalt = ObjectProperty[Int](0)
+  val inRangeSalt = ObjectProperty[Boolean](true)
+
+  val currentTemperature = ObjectProperty[Int](0)
+  val averageTemperature = ObjectProperty[Int](0)
+  val inRangeTemperature = ObjectProperty[Boolean](true)
 
   val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
   val shouldNotBeInFxThread = (message: String) => require(!Platform.isFxApplicationThread, message)
