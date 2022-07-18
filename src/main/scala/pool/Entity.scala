@@ -86,6 +86,7 @@ object Measurement:
   val calciumHardnessRange = Set(0, 1000)
   val totalAlkalinityRange = Set(0, 240)
   val cyanuricAcidRange = Set(0, 300)
+  val totalBromineRange = Set(0, 20)
 
 final case class Measurement(id: Long = 0,
                              poolId: Long,
