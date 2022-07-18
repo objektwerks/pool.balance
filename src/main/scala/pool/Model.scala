@@ -144,7 +144,16 @@ final class Model(context: Context) extends LazyLogging:
       averageSalt.value = observableMeasurements.map(_.salt).sum / count
 
       inRangeTotalChlorine.value = totalChlorineRange.contains(measurement.totalChlorine)
-    }
+      inRangeFreeChlorine.value = freeChlorineRange.contains(measurement.freeChlorine)
+      inRangeCombinedChlorine.value = combinedChlorineRange.contains(measurement.combinedChlorine)
+      inRangePh.value = phRange.contains(measurement.ph)
+      inRangeCalciumHardness.value = calciumHardnessRange.contains(measurement.calciumHardness)
+      inRangeTotalAlkalinity.value = totalAlkalinityRange.contains(measurement.totalAlkalinity)
+      inRangeCyanuricAcid.value = cyanuricAcidRange.contains(measurement.cyanuricAcid)
+      inRangeTotalBromine.value = totalBromineRange.contains(measurement.totalBromine)
+      inRangeSalt.value = saltRange.contains(measurement.salt)
+      inRangeTemperature.value = temperatureRange.contains(measurement.temperature)
+   }
 
   def onError(message: String): Unit =
     shouldBeInFxThread("onerror message should be in fx thread.")
