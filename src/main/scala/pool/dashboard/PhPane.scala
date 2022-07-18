@@ -9,3 +9,7 @@ class PhPane(context: Context) extends DashboardTitledPane(context):
   ideal.text = context.dashboardPhIdeal
   current.text <== context.model.currentPh.asString
   average.text <== context.model.averagePh.asString
+
+  context.model.inRangePh.onChange { (_, _, inRange) =>
+    if inRange then println("ph in range") else println("ph out of range")
+  }
