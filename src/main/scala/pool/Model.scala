@@ -131,7 +131,7 @@ final class Model(context: Context) extends LazyLogging:
       averageTotalBromine.value = observableMeasurements.map(_.totalBromine).sum / count
       averageSalt.value = observableMeasurements.map(_.salt).sum / count
 
-      inRangeTotalChlorine.value = withinTotalChlorineRange( measurement.totalChlorine )
+      inRangeTotalChlorine.value = totalChlorineRange.contains(measurement.totalChlorine)
     }
 
   def onError(message: String): Unit =
