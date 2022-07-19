@@ -127,6 +127,7 @@ final class Model(context: Context) extends LazyLogging:
     }
 
   private def onCurrent(measurement: Measurement, numberFormat: NumberFormat): Unit =
+    shouldBeInFxThread("oncurrent should be in fx thread.")
     currentTotalChlorine.value = measurement.totalChlorine
     currentFreeChlorine.value = measurement.freeChlorine
     currentCombinedChlorine.value = numberFormat.format( measurement.combinedChlorine ).toDouble
@@ -138,6 +139,7 @@ final class Model(context: Context) extends LazyLogging:
     currentSalt.value = measurement.salt
 
   private def onAverage(numberFormat: NumberFormat): Unit =
+    shouldBeInFxThread("onaverage should be in fx thread.")
     val count = observableMeasurements.length
     averageTotalChlorine.value = observableMeasurements.map(_.totalChlorine).sum / count
     averageFreeChlorine.value = observableMeasurements.map(_.freeChlorine).sum / count
