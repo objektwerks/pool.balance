@@ -58,7 +58,8 @@ final class Model(context: Context) extends LazyLogging:
 
   val currentTotalAlkalinity = ObjectProperty[Int](0)
   val averageTotalAlkalinity = ObjectProperty[Int](0)
-  val inRangeTotalAlkalinity = ObjectProperty[Boolean](true)
+  val inRangeCurrentTotalAlkalinity = ObjectProperty[Boolean](true)
+  val inRangeAverageTotalAlkalinity = ObjectProperty[Boolean](true)
 
   val currentCyanuricAcid = ObjectProperty[Int](0)
   val averageCyanuricAcid = ObjectProperty[Int](0)
@@ -162,7 +163,7 @@ final class Model(context: Context) extends LazyLogging:
     inRangeAverageCombinedChlorine.value = combinedChlorineRange.contains(averageCombinedChlorine.value)
     inRangeAveragePh.value = phRange.contains(averagePh.value)
     inRangeAverageCalciumHardness.value = calciumHardnessRange.contains(averageCalciumHardness.value)
-    inRangeTotalAlkalinity.value = totalAlkalinityRange.contains(averageTotalAlkalinity.value)
+    inRangeAverageTotalAlkalinity.value = totalAlkalinityRange.contains(averageTotalAlkalinity.value)
     inRangeCyanuricAcid.value = cyanuricAcidRange.contains(averageCyanuricAcid.value)
     inRangeTotalBromine.value = totalBromineRange.contains(averageTotalBromine.value)
     inRangeSalt.value = saltRange.contains(averageSalt.value)
