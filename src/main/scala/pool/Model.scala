@@ -142,17 +142,18 @@ final class Model(context: Context) extends LazyLogging:
       averageCyanuricAcid.value = observableMeasurements.map(_.cyanuricAcid).sum / count
       averageTotalBromine.value = observableMeasurements.map(_.totalBromine).sum / count
       averageSalt.value = observableMeasurements.map(_.salt).sum / count
+      averageTemperature.value = observableMeasurements.map(_.temperature).sum / count
 
-      inRangeTotalChlorine.value = totalChlorineRange.contains(measurement.totalChlorine)
-      inRangeFreeChlorine.value = freeChlorineRange.contains(measurement.freeChlorine)
-      inRangeCombinedChlorine.value = combinedChlorineRange.contains(measurement.combinedChlorine)
-      inRangePh.value = phRange.contains(measurement.ph)
-      inRangeCalciumHardness.value = calciumHardnessRange.contains(measurement.calciumHardness)
-      inRangeTotalAlkalinity.value = totalAlkalinityRange.contains(measurement.totalAlkalinity)
-      inRangeCyanuricAcid.value = cyanuricAcidRange.contains(measurement.cyanuricAcid)
-      inRangeTotalBromine.value = totalBromineRange.contains(measurement.totalBromine)
-      inRangeSalt.value = saltRange.contains(measurement.salt)
-      inRangeTemperature.value = temperatureRange.contains(measurement.temperature)
+      inRangeTotalChlorine.value = totalChlorineRange.contains(averageTotalChlorine.value)
+      inRangeFreeChlorine.value = freeChlorineRange.contains(averageFreeChlorine.value)
+      inRangeCombinedChlorine.value = combinedChlorineRange.contains(averageCombinedChlorine.value)
+      inRangePh.value = phRange.contains(averagePh.value)
+      inRangeCalciumHardness.value = calciumHardnessRange.contains(averageCalciumHardness.value)
+      inRangeTotalAlkalinity.value = totalAlkalinityRange.contains(averageTotalAlkalinity.value)
+      inRangeCyanuricAcid.value = cyanuricAcidRange.contains(averageCyanuricAcid.value)
+      inRangeTotalBromine.value = totalBromineRange.contains(averageTotalBromine.value)
+      inRangeSalt.value = saltRange.contains(averageSalt.value)
+      inRangeTemperature.value = temperatureRange.contains(averageTemperature.value)
    }
 
   def onError(message: String): Unit =
