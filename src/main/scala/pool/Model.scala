@@ -78,7 +78,8 @@ final class Model(context: Context) extends LazyLogging:
 
   val currentTemperature = ObjectProperty[Int](0)
   val averageTemperature = ObjectProperty[Int](0)
-  val inRangeTemperature = ObjectProperty[Boolean](true)
+  val inRangeCurrentTemperature = ObjectProperty[Boolean](true)
+  val inRangeAverageTemperature = ObjectProperty[Boolean](true)
 
   val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
   val shouldNotBeInFxThread = (message: String) => require(!Platform.isFxApplicationThread, message)
@@ -170,7 +171,7 @@ final class Model(context: Context) extends LazyLogging:
     inRangeAverageCyanuricAcid.value = cyanuricAcidRange.contains(averageCyanuricAcid.value)
     inRangeAverageTotalBromine.value = totalBromineRange.contains(averageTotalBromine.value)
     inRangeAverageSalt.value = saltRange.contains(averageSalt.value)
-    inRangeTemperature.value = temperatureRange.contains(averageTemperature.value)
+    inRangeAverageTemperature.value = temperatureRange.contains(averageTemperature.value)
 
   def onError(message: String): Unit =
     shouldBeInFxThread("onerror message should be in fx thread.")
