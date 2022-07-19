@@ -10,6 +10,6 @@ class TotalBrominePane(context: Context) extends DashboardTitledPane(context):
   current.text <== context.model.currentTotalBromine.asString
   average.text <== context.model.averageTotalBromine.asString
 
-  context.model.inRangeTotalBromine.onChange { (_, _, inRange) =>
+  context.model.inRangeAverageTotalBromine.onChange { (_, _, inRange) =>
     if inRange then println("total bromine in range") else println("total bromine out of range")
   }
