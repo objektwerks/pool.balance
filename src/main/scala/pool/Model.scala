@@ -43,7 +43,7 @@ final class Model(context: Context) extends LazyLogging:
 
   val currentCombinedChlorine = ObjectProperty[Double](0)
   val averageCombinedChlorine = ObjectProperty[Double](0)
-  val inRangeCurrentCombinedChlorine = ObjectProperty[Double](0)
+  val inRangeCurrentCombinedChlorine = ObjectProperty[Boolean](true)
   val inRangeAverageCombinedChlorine = ObjectProperty[Boolean](true)
 
   val currentPh = ObjectProperty[Double](0)
@@ -147,6 +147,17 @@ final class Model(context: Context) extends LazyLogging:
     currentCyanuricAcid.value = measurement.cyanuricAcid
     currentTotalBromine.value = measurement.totalBromine
     currentSalt.value = measurement.salt
+
+    inRangeCurrentTotalChlorine.value = totalChlorineRange.contains(currentTotalChlorine.value)
+    inRangeCurrentFreeChlorine.value = freeChlorineRange.contains(currentFreeChlorine.value)
+    inRangeCurrentCombinedChlorine.value = combinedChlorineRange.contains(currentCombinedChlorine.value)
+    inRangeCurrentPh.value = phRange.contains(currentPh.value)
+    inRangeCurrentCalciumHardness.value = calciumHardnessRange.contains(currentCalciumHardness.value)
+    inRangeCurrentTotalAlkalinity.value = totalAlkalinityRange.contains(currentTotalAlkalinity.value)
+    inRangeCurrentCyanuricAcid.value = cyanuricAcidRange.contains(currentCyanuricAcid.value)
+    inRangeCurrentTotalBromine.value = totalBromineRange.contains(currentTotalBromine.value)
+    inRangeCurrentSalt.value = saltRange.contains(currentSalt.value)
+    inRangeCurrentTemperature.value = temperatureRange.contains(currentTemperature.value)
 
   private def onAverage(numberFormat: NumberFormat): Unit =
     shouldBeInFxThread("onaverage should be in fx thread.")
