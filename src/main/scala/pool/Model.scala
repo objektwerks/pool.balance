@@ -147,6 +147,7 @@ final class Model(context: Context) extends LazyLogging:
     currentCyanuricAcid.value = measurement.cyanuricAcid
     currentTotalBromine.value = measurement.totalBromine
     currentSalt.value = measurement.salt
+    currentTemperature.value = measurement.temperature
 
     inRangeCurrentTotalChlorine.value = totalChlorineRange.contains(currentTotalChlorine.value)
     inRangeCurrentFreeChlorine.value = freeChlorineRange.contains(currentFreeChlorine.value)
