@@ -122,39 +122,44 @@ final class Model(context: Context) extends LazyLogging:
     val numberFormat = NumberFormat.getNumberInstance()
     numberFormat.setMaximumFractionDigits(1)
     observableMeasurements.headOption.foreach { measurement =>
-      currentTotalChlorine.value = measurement.totalChlorine
-      currentFreeChlorine.value = measurement.freeChlorine
-      currentCombinedChlorine.value = numberFormat.format( measurement.combinedChlorine ).toDouble
-      currentPh.value = numberFormat.format( measurement.ph ).toDouble
-      currentCalciumHardness.value = measurement.calciumHardness
-      currentTotalAlkalinity.value = measurement.totalAlkalinity
-      currentCyanuricAcid.value = measurement.cyanuricAcid
-      currentTotalBromine.value = measurement.totalBromine
-      currentSalt.value = measurement.salt
+      onCurrent(measurement, numberFormat)
+      onAverage(numberFormat)
+    }
 
-      val count = observableMeasurements.length
-      averageTotalChlorine.value = observableMeasurements.map(_.totalChlorine).sum / count
-      averageFreeChlorine.value = observableMeasurements.map(_.freeChlorine).sum / count
-      averageCombinedChlorine.value = numberFormat.format( observableMeasurements.map(_.combinedChlorine).sum / count ).toDouble
-      averagePh.value = numberFormat.format( observableMeasurements.map(_.ph).sum / count ).toDouble
-      averageCalciumHardness.value = observableMeasurements.map(_.calciumHardness).sum / count
-      averageTotalAlkalinity.value = observableMeasurements.map(_.totalAlkalinity).sum / count
-      averageCyanuricAcid.value = observableMeasurements.map(_.cyanuricAcid).sum / count
-      averageTotalBromine.value = observableMeasurements.map(_.totalBromine).sum / count
-      averageSalt.value = observableMeasurements.map(_.salt).sum / count
-      averageTemperature.value = observableMeasurements.map(_.temperature).sum / count
+  private def onCurrent(measurement: Measurement, numberFormat: NumberFormat): Unit =
+    currentTotalChlorine.value = measurement.totalChlorine
+    currentFreeChlorine.value = measurement.freeChlorine
+    currentCombinedChlorine.value = numberFormat.format( measurement.combinedChlorine ).toDouble
+    currentPh.value = numberFormat.format( measurement.ph ).toDouble
+    currentCalciumHardness.value = measurement.calciumHardness
+    currentTotalAlkalinity.value = measurement.totalAlkalinity
+    currentCyanuricAcid.value = measurement.cyanuricAcid
+    currentTotalBromine.value = measurement.totalBromine
+    currentSalt.value = measurement.salt
 
-      inRangeTotalChlorine.value = totalChlorineRange.contains(averageTotalChlorine.value)
-      inRangeFreeChlorine.value = freeChlorineRange.contains(averageFreeChlorine.value)
-      inRangeCombinedChlorine.value = combinedChlorineRange.contains(averageCombinedChlorine.value)
-      inRangePh.value = phRange.contains(averagePh.value)
-      inRangeCalciumHardness.value = calciumHardnessRange.contains(averageCalciumHardness.value)
-      inRangeTotalAlkalinity.value = totalAlkalinityRange.contains(averageTotalAlkalinity.value)
-      inRangeCyanuricAcid.value = cyanuricAcidRange.contains(averageCyanuricAcid.value)
-      inRangeTotalBromine.value = totalBromineRange.contains(averageTotalBromine.value)
-      inRangeSalt.value = saltRange.contains(averageSalt.value)
-      inRangeTemperature.value = temperatureRange.contains(averageTemperature.value)
-   }
+  private def onAverage(numberFormat: NumberFormat): Unit =
+    val count = observableMeasurements.length
+    averageTotalChlorine.value = observableMeasurements.map(_.totalChlorine).sum / count
+    averageFreeChlorine.value = observableMeasurements.map(_.freeChlorine).sum / count
+    averageCombinedChlorine.value = numberFormat.format( observableMeasurements.map(_.combinedChlorine).sum / count ).toDouble
+    averagePh.value = numberFormat.format( observableMeasurements.map(_.ph).sum / count ).toDouble
+    averageCalciumHardness.value = observableMeasurements.map(_.calciumHardness).sum / count
+    averageTotalAlkalinity.value = observableMeasurements.map(_.totalAlkalinity).sum / count
+    averageCyanuricAcid.value = observableMeasurements.map(_.cyanuricAcid).sum / count
+    averageTotalBromine.value = observableMeasurements.map(_.totalBromine).sum / count
+    averageSalt.value = observableMeasurements.map(_.salt).sum / count
+    averageTemperature.value = observableMeasurements.map(_.temperature).sum / count
+
+    inRangeTotalChlorine.value = totalChlorineRange.contains(averageTotalChlorine.value)
+    inRangeFreeChlorine.value = freeChlorineRange.contains(averageFreeChlorine.value)
+    inRangeCombinedChlorine.value = combinedChlorineRange.contains(averageCombinedChlorine.value)
+    inRangePh.value = phRange.contains(averagePh.value)
+    inRangeCalciumHardness.value = calciumHardnessRange.contains(averageCalciumHardness.value)
+    inRangeTotalAlkalinity.value = totalAlkalinityRange.contains(averageTotalAlkalinity.value)
+    inRangeCyanuricAcid.value = cyanuricAcidRange.contains(averageCyanuricAcid.value)
+    inRangeTotalBromine.value = totalBromineRange.contains(averageTotalBromine.value)
+    inRangeSalt.value = saltRange.contains(averageSalt.value)
+    inRangeTemperature.value = temperatureRange.contains(averageTemperature.value)
 
   def onError(message: String): Unit =
     shouldBeInFxThread("onerror message should be in fx thread.")
