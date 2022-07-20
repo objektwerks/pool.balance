@@ -35,10 +35,10 @@ abstract class DashboardTitledPane(context: Context) extends TitledPane:
   
   content = ControlGridPane(controls)
 
-  def onError: Unit = 
-    println(s"dashboard pane on error : $text")
-    style = "-fx-border-color: red"
+  def currentOutOfRange: Unit = 
+    println(s"current out of range: $text")
+    current.style = "-fx-border-color: red"
 
-  def offError: Unit =
-    println(s"dashboard pane off error : $text")
-    ()
+  def currentInRange: Unit =
+    println(s"current in range: $text")
+    current.style = "-fx-border-color: darkgreen"
