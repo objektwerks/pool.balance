@@ -33,8 +33,8 @@ final class Model(context: Context) extends LazyLogging:
 
   val currentTotalChlorine = ObjectProperty[Int](0)
   val averageTotalChlorine = ObjectProperty[Int](0)
-  val inRangeCurrentTotalChlorine = ObjectProperty[Boolean](false)
-  val inRangeAverageTotalChlorine = ObjectProperty[Boolean](false)
+  val rangeCurrentTotalChlorine = ObjectProperty[Boolean](false)
+  val rangeAverageTotalChlorine = ObjectProperty[Boolean](false)
 
   val currentFreeChlorine = ObjectProperty[Int](0)
   val averageFreeChlorine = ObjectProperty[Int](0)
@@ -150,7 +150,7 @@ final class Model(context: Context) extends LazyLogging:
     currentSalt.value = measurement.salt
     currentTemperature.value = measurement.temperature
 
-    inRangeCurrentTotalChlorine.value = totalChlorineRange.contains(currentTotalChlorine.value)
+    rangeCurrentTotalChlorine.value = totalChlorineRange.contains(currentTotalChlorine.value)
     rangeCurrentFreeChlorine.value = freeChlorineRange.contains(currentFreeChlorine.value)
     inRangeCurrentCombinedChlorine.value = combinedChlorineRange.contains(currentCombinedChlorine.value)
     inRangeCurrentPh.value = phRange.contains(currentPh.value)
@@ -175,7 +175,7 @@ final class Model(context: Context) extends LazyLogging:
     averageSalt.value = observableMeasurements.map(_.salt).sum / count
     averageTemperature.value = observableMeasurements.map(_.temperature).sum / count
 
-    inRangeAverageTotalChlorine.value = totalChlorineRange.contains(averageTotalChlorine.value)
+    rangeAverageTotalChlorine.value = totalChlorineRange.contains(averageTotalChlorine.value)
     rangeAverageFreeChlorine.value = freeChlorineRange.contains(averageFreeChlorine.value)
     inRangeAverageCombinedChlorine.value = combinedChlorineRange.contains(averageCombinedChlorine.value)
     inRangeAveragePh.value = phRange.contains(averagePh.value)
