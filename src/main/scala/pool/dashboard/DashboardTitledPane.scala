@@ -38,3 +38,7 @@ abstract class DashboardTitledPane(context: Context) extends TitledPane:
   def onError: Unit = 
     println(s"dashboard pane on error : $text")
     ()
+
+  def offError: Unit =
+    println(s"dashboard pane off error : $text")
+    ()
