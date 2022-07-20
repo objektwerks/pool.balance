@@ -48,8 +48,8 @@ final class Model(context: Context) extends LazyLogging:
 
   val currentPh = ObjectProperty[Double](0)
   val averagePh = ObjectProperty[Double](0)
-  val inRangeCurrentPh = ObjectProperty[Boolean](false)
-  val inRangeAveragePh = ObjectProperty[Boolean](false)
+  val rangeCurrentPh = ObjectProperty[Boolean](false)
+  val rangeAveragePh = ObjectProperty[Boolean](false)
 
   val currentCalciumHardness = ObjectProperty[Int](0)
   val averageCalciumHardness = ObjectProperty[Int](0)
@@ -153,7 +153,7 @@ final class Model(context: Context) extends LazyLogging:
     rangeCurrentTotalChlorine.value = totalChlorineRange.contains(currentTotalChlorine.value)
     rangeCurrentFreeChlorine.value = freeChlorineRange.contains(currentFreeChlorine.value)
     rangeCurrentCombinedChlorine.value = combinedChlorineRange.contains(currentCombinedChlorine.value)
-    inRangeCurrentPh.value = phRange.contains(currentPh.value)
+    rangeCurrentPh.value = phRange.contains(currentPh.value)
     inRangeCurrentCalciumHardness.value = calciumHardnessRange.contains(currentCalciumHardness.value)
     inRangeCurrentTotalAlkalinity.value = totalAlkalinityRange.contains(currentTotalAlkalinity.value)
     inRangeCurrentCyanuricAcid.value = cyanuricAcidRange.contains(currentCyanuricAcid.value)
@@ -178,7 +178,7 @@ final class Model(context: Context) extends LazyLogging:
     rangeAverageTotalChlorine.value = totalChlorineRange.contains(averageTotalChlorine.value)
     rangeAverageFreeChlorine.value = freeChlorineRange.contains(averageFreeChlorine.value)
     rangeAverageCombinedChlorine.value = combinedChlorineRange.contains(averageCombinedChlorine.value)
-    inRangeAveragePh.value = phRange.contains(averagePh.value)
+    rangeAveragePh.value = phRange.contains(averagePh.value)
     inRangeAverageCalciumHardness.value = calciumHardnessRange.contains(averageCalciumHardness.value)
     inRangeAverageTotalAlkalinity.value = totalAlkalinityRange.contains(averageTotalAlkalinity.value)
     inRangeAverageCyanuricAcid.value = cyanuricAcidRange.contains(averageCyanuricAcid.value)
