@@ -43,8 +43,8 @@ final class Model(context: Context) extends LazyLogging:
 
   val currentCombinedChlorine = ObjectProperty[Double](0)
   val averageCombinedChlorine = ObjectProperty[Double](0)
-  val inRangeCurrentCombinedChlorine = ObjectProperty[Boolean](false)
-  val inRangeAverageCombinedChlorine = ObjectProperty[Boolean](false)
+  val rangeCurrentCombinedChlorine = ObjectProperty[Boolean](false)
+  val rangeAverageCombinedChlorine = ObjectProperty[Boolean](false)
 
   val currentPh = ObjectProperty[Double](0)
   val averagePh = ObjectProperty[Double](0)
@@ -152,7 +152,7 @@ final class Model(context: Context) extends LazyLogging:
 
     rangeCurrentTotalChlorine.value = totalChlorineRange.contains(currentTotalChlorine.value)
     rangeCurrentFreeChlorine.value = freeChlorineRange.contains(currentFreeChlorine.value)
-    inRangeCurrentCombinedChlorine.value = combinedChlorineRange.contains(currentCombinedChlorine.value)
+    rangeCurrentCombinedChlorine.value = combinedChlorineRange.contains(currentCombinedChlorine.value)
     inRangeCurrentPh.value = phRange.contains(currentPh.value)
     inRangeCurrentCalciumHardness.value = calciumHardnessRange.contains(currentCalciumHardness.value)
     inRangeCurrentTotalAlkalinity.value = totalAlkalinityRange.contains(currentTotalAlkalinity.value)
@@ -177,7 +177,7 @@ final class Model(context: Context) extends LazyLogging:
 
     rangeAverageTotalChlorine.value = totalChlorineRange.contains(averageTotalChlorine.value)
     rangeAverageFreeChlorine.value = freeChlorineRange.contains(averageFreeChlorine.value)
-    inRangeAverageCombinedChlorine.value = combinedChlorineRange.contains(averageCombinedChlorine.value)
+    rangeAverageCombinedChlorine.value = combinedChlorineRange.contains(averageCombinedChlorine.value)
     inRangeAveragePh.value = phRange.contains(averagePh.value)
     inRangeAverageCalciumHardness.value = calciumHardnessRange.contains(averageCalciumHardness.value)
     inRangeAverageTotalAlkalinity.value = totalAlkalinityRange.contains(averageTotalAlkalinity.value)

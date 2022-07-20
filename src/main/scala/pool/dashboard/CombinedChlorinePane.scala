@@ -10,10 +10,10 @@ class CombinedChlorinePane(context: Context) extends DashboardTitledPane(context
   current.text <== context.model.currentCombinedChlorine.asString
   average.text <== context.model.averageCombinedChlorine.asString
 
-  context.model.inRangeCurrentCombinedChlorine.onChange { (_, _, inRange) =>
+  context.model.rangeCurrentCombinedChlorine.onChange { (_, _, inRange) =>
     if inRange then println("current combined chlorine in range") else println("current combined chlorine out of range")
   }
 
-  context.model.inRangeAverageCombinedChlorine.onChange { (_, _, inRange) =>
+  context.model.rangeAverageCombinedChlorine.onChange { (_, _, inRange) =>
     if inRange then println("average combined chlorine in range") else println("average combined chlorine out of range")
   }
