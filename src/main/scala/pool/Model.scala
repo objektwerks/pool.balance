@@ -78,8 +78,8 @@ final class Model(context: Context) extends LazyLogging:
 
   val currentTemperature = ObjectProperty[Int](0)
   val averageTemperature = ObjectProperty[Int](0)
-  val inRangeCurrentTemperature = ObjectProperty[Boolean](false)
-  val inRangeAverageTemperature = ObjectProperty[Boolean](false)
+  val rangeCurrentTemperature = ObjectProperty[Boolean](false)
+  val rangeAverageTemperature = ObjectProperty[Boolean](false)
 
   val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
   val shouldNotBeInFxThread = (message: String) => require(!Platform.isFxApplicationThread, message)
@@ -159,7 +159,7 @@ final class Model(context: Context) extends LazyLogging:
     rangeCurrentCyanuricAcid.value = cyanuricAcidRange.contains(currentCyanuricAcid.value)
     rangeCurrentTotalBromine.value = totalBromineRange.contains(currentTotalBromine.value)
     rangeCurrentSalt.value = saltRange.contains(currentSalt.value)
-    inRangeCurrentTemperature.value = temperatureRange.contains(currentTemperature.value)
+    rangeCurrentTemperature.value = temperatureRange.contains(currentTemperature.value)
 
   private def onAverage(numberFormat: NumberFormat): Unit =
     shouldBeInFxThread("onaverage should be in fx thread.")
@@ -184,7 +184,7 @@ final class Model(context: Context) extends LazyLogging:
     rangeAverageCyanuricAcid.value = cyanuricAcidRange.contains(averageCyanuricAcid.value)
     rangeAverageTotalBromine.value = totalBromineRange.contains(averageTotalBromine.value)
     rangeAverageSalt.value = saltRange.contains(averageSalt.value)
-    inRangeAverageTemperature.value = temperatureRange.contains(averageTemperature.value)
+    rangeAverageTemperature.value = temperatureRange.contains(averageTemperature.value)
 
   def onError(message: String): Unit =
     shouldBeInFxThread("onerror message should be in fx thread.")
