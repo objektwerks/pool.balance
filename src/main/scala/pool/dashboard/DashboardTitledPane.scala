@@ -44,9 +44,9 @@ abstract class DashboardTitledPane(context: Context) extends TitledPane:
     current.style = "-fx-border-color: red"
 
   def inRangeAverage: Unit =
-    println(s"average in range: $text")
+    println(s"in range average: $text")
     average.style = "-fx-border-color: darkgreen"
 
   def outOfRangeAverage: Unit = 
-    println(s"average out of range: $text")
+    println(s"out of range average: $text")
     average.style = "-fx-border-color: red"
