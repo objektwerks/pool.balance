@@ -37,7 +37,7 @@ abstract class DashboardTitledPane(context: Context) extends TitledPane:
 
   def onError: Unit = 
     println(s"dashboard pane on error : $text")
-    ()
+    style = "-fx-border-color: red"
 
   def offError: Unit =
     println(s"dashboard pane off error : $text")
