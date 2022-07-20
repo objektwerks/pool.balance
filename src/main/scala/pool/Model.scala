@@ -63,8 +63,8 @@ final class Model(context: Context) extends LazyLogging:
 
   val currentCyanuricAcid = ObjectProperty[Int](0)
   val averageCyanuricAcid = ObjectProperty[Int](0)
-  val inRangeCurrentCyanuricAcid = ObjectProperty[Boolean](false)
-  val inRangeAverageCyanuricAcid = ObjectProperty[Boolean](false)
+  val rangeCurrentCyanuricAcid = ObjectProperty[Boolean](false)
+  val rangeAverageCyanuricAcid = ObjectProperty[Boolean](false)
 
   val currentTotalBromine = ObjectProperty[Int](0)
   val averageTotalBromine = ObjectProperty[Int](0)
@@ -156,7 +156,7 @@ final class Model(context: Context) extends LazyLogging:
     rangeCurrentPh.value = phRange.contains(currentPh.value)
     rangeCurrentCalciumHardness.value = calciumHardnessRange.contains(currentCalciumHardness.value)
     rangeCurrentTotalAlkalinity.value = totalAlkalinityRange.contains(currentTotalAlkalinity.value)
-    inRangeCurrentCyanuricAcid.value = cyanuricAcidRange.contains(currentCyanuricAcid.value)
+    rangeCurrentCyanuricAcid.value = cyanuricAcidRange.contains(currentCyanuricAcid.value)
     inRangeCurrentTotalBromine.value = totalBromineRange.contains(currentTotalBromine.value)
     inRangeCurrentSalt.value = saltRange.contains(currentSalt.value)
     inRangeCurrentTemperature.value = temperatureRange.contains(currentTemperature.value)
@@ -181,7 +181,7 @@ final class Model(context: Context) extends LazyLogging:
     rangeAveragePh.value = phRange.contains(averagePh.value)
     rangeAverageCalciumHardness.value = calciumHardnessRange.contains(averageCalciumHardness.value)
     rangeAverageTotalAlkalinity.value = totalAlkalinityRange.contains(averageTotalAlkalinity.value)
-    inRangeAverageCyanuricAcid.value = cyanuricAcidRange.contains(averageCyanuricAcid.value)
+    rangeAverageCyanuricAcid.value = cyanuricAcidRange.contains(averageCyanuricAcid.value)
     inRangeAverageTotalBromine.value = totalBromineRange.contains(averageTotalBromine.value)
     inRangeAverageSalt.value = saltRange.contains(averageSalt.value)
     inRangeAverageTemperature.value = temperatureRange.contains(averageTemperature.value)
