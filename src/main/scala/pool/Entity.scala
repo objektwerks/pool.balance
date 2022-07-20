@@ -79,15 +79,15 @@ final case class Cleaning(id: Long = 0,
   val cleaning = this
 
 object Measurement:
-  val totalChlorineRange = Range(0, 10)
-  val freeChlorineRange = Range(0, 10)
-  val combinedChlorineRange = Set(0.0, 0.1, 0.2, 0.3, 0.4, 0.5)
-  val phRange = Set(6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7.0, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9, 8.0, 8.1, 8.3, 8.3, 8.4)
-  val calciumHardnessRange = Range(0, 1000)
-  val totalAlkalinityRange = Range(0, 240)
-  val cyanuricAcidRange = Range(0, 300)
-  val totalBromineRange = Range(0, 20)
-  val saltRange = Range(0, 3600)
+  val totalChlorineRange = Range(1, 5)
+  val freeChlorineRange = Range(1, 5)
+  val combinedChlorineRange = Set(0.0, 0.1, 0.2)
+  val phRange = Set(7.2, 7.3, 7.4, 7.5, 7.6)
+  val calciumHardnessRange = Range(250, 500)
+  val totalAlkalinityRange = Range(80, 120)
+  val cyanuricAcidRange = Range(30, 100)
+  val totalBromineRange = Range(2, 10)
+  val saltRange = Range(2700, 3400)
   val temperatureRange = Range(50, 100)
 
 final case class Measurement(id: Long = 0,
