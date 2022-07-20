@@ -58,8 +58,8 @@ final class Model(context: Context) extends LazyLogging:
 
   val currentTotalAlkalinity = ObjectProperty[Int](0)
   val averageTotalAlkalinity = ObjectProperty[Int](0)
-  val inRangeCurrentTotalAlkalinity = ObjectProperty[Boolean](false)
-  val inRangeAverageTotalAlkalinity = ObjectProperty[Boolean](false)
+  val rangeCurrentTotalAlkalinity = ObjectProperty[Boolean](false)
+  val rangeAverageTotalAlkalinity = ObjectProperty[Boolean](false)
 
   val currentCyanuricAcid = ObjectProperty[Int](0)
   val averageCyanuricAcid = ObjectProperty[Int](0)
@@ -155,7 +155,7 @@ final class Model(context: Context) extends LazyLogging:
     rangeCurrentCombinedChlorine.value = combinedChlorineRange.contains(currentCombinedChlorine.value)
     rangeCurrentPh.value = phRange.contains(currentPh.value)
     rangeCurrentCalciumHardness.value = calciumHardnessRange.contains(currentCalciumHardness.value)
-    inRangeCurrentTotalAlkalinity.value = totalAlkalinityRange.contains(currentTotalAlkalinity.value)
+    rangeCurrentTotalAlkalinity.value = totalAlkalinityRange.contains(currentTotalAlkalinity.value)
     inRangeCurrentCyanuricAcid.value = cyanuricAcidRange.contains(currentCyanuricAcid.value)
     inRangeCurrentTotalBromine.value = totalBromineRange.contains(currentTotalBromine.value)
     inRangeCurrentSalt.value = saltRange.contains(currentSalt.value)
@@ -180,7 +180,7 @@ final class Model(context: Context) extends LazyLogging:
     rangeAverageCombinedChlorine.value = combinedChlorineRange.contains(averageCombinedChlorine.value)
     rangeAveragePh.value = phRange.contains(averagePh.value)
     rangeAverageCalciumHardness.value = calciumHardnessRange.contains(averageCalciumHardness.value)
-    inRangeAverageTotalAlkalinity.value = totalAlkalinityRange.contains(averageTotalAlkalinity.value)
+    rangeAverageTotalAlkalinity.value = totalAlkalinityRange.contains(averageTotalAlkalinity.value)
     inRangeAverageCyanuricAcid.value = cyanuricAcidRange.contains(averageCyanuricAcid.value)
     inRangeAverageTotalBromine.value = totalBromineRange.contains(averageTotalBromine.value)
     inRangeAverageSalt.value = saltRange.contains(averageSalt.value)
