@@ -34,3 +34,7 @@ abstract class DashboardTitledPane(context: Context) extends TitledPane:
   )
   
   content = ControlGridPane(controls)
+
+  def onError: Unit = 
+    println(s"dashboard pane on error : $text")
+    ()
