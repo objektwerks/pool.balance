@@ -202,7 +202,7 @@ final class Model(context: Context) extends LazyLogging:
     observableErrors += Error(message)
     logger.error(message, error)
 
-  def dashboard(): Unit =
+  private def dashboard(): Unit =
     shouldBeInFxThread("dashboard should be in fx thread.")
     val numberFormat = NumberFormat.getNumberInstance()
     numberFormat.setMaximumFractionDigits(1)
@@ -211,7 +211,7 @@ final class Model(context: Context) extends LazyLogging:
       onAverage(numberFormat)
     }
 
-  def onCurrent(measurement: Measurement, numberFormat: NumberFormat): Unit =
+  private def onCurrent(measurement: Measurement, numberFormat: NumberFormat): Unit =
     shouldBeInFxThread("oncurrent should be in fx thread.")
     currentTotalChlorine.value = measurement.totalChlorine
     currentFreeChlorine.value = measurement.freeChlorine
@@ -224,7 +224,7 @@ final class Model(context: Context) extends LazyLogging:
     currentSalt.value = measurement.salt
     currentTemperature.value = measurement.temperature
 
-  def onAverage(numberFormat: NumberFormat): Unit =
+  private def onAverage(numberFormat: NumberFormat): Unit =
     shouldBeInFxThread("onaverage should be in fx thread.")
     val count = observableMeasurements.length
     averageTotalChlorine.value = observableMeasurements.map(_.totalChlorine).sum / count
