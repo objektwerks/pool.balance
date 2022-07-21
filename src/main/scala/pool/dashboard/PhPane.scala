@@ -12,9 +12,9 @@ class PhPane(context: Context) extends DashboardTitledPane(context):
   average.text <== context.model.averagePh.asString
 
   context.model.currentPh.onChange { (_, _, newValue) =>
-    if Measurement.phRange.contains(newValue) then inRangeCurrent else outOfRangeCurrent
+    if context.model.phInRange(newValue) then inRangeCurrent else outOfRangeCurrent
   }
 
   context.model.averagePh.onChange { (_, _, newValue) =>
-    if Measurement.phRange.contains(newValue) then inRangeAverage else outOfRangeAverage
+    if context.model.phInRange(newValue) then inRangeAverage else outOfRangeAverage
   }
