@@ -1,6 +1,7 @@
 package pool.dashboard
 
 import pool.Context
+import pool.Measurement
 
 class TotalBrominePane(context: Context) extends DashboardTitledPane(context):
   text = context.headerTotalBromine
@@ -10,10 +11,10 @@ class TotalBrominePane(context: Context) extends DashboardTitledPane(context):
   current.text <== context.model.currentTotalBromine.asString
   average.text <== context.model.averageTotalBromine.asString
 
-  context.model.rangeCurrentTotalBromine.onChange { (_, _, inRange) =>
-    if inRange then inRangeCurrent else outOfRangeCurrent
+  context.model.currentTotalBromine.onChange { (_, _, newValue) =>
+    if Measurement.totalBromineRange.contains(newValue) then inRangeCurrent else outOfRangeCurrent
   }
 
-  context.model.rangeAverageTotalBromine.onChange { (_, _, inRange) =>
-    if inRange then inRangeAverage else outOfRangeAverage
+  context.model.averageTotalBromine.onChange { (_, _, newValue) =>
+    if Measurement.totalBromineRange.contains(newValue) then inRangeAverage else outOfRangeAverage
   }
