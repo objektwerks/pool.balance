@@ -11,57 +11,51 @@ import scalafx.scene.layout.{HBox, Priority, VBox}
 import pool.{Context, Pool, UnitOfMeasure}
 import pool.dialog.{ErrorsDialog, PoolDialog}
 
-class PoolsPane(context: Context) extends VBox:
+final class PoolsPane(context: Context) extends VBox:
   spacing = 6
   padding = Insets(6)
 
   val model = context.model
 
-  val tableView = new TableView[Pool]() {
+  val tableView = new TableView[Pool]():
     columns ++= List(
-      new TableColumn[Pool, String] {
+      new TableColumn[Pool, String]:
         text = context.headerName
         cellValueFactory = _.value.nameProperty
-      },
-      new TableColumn[Pool, Int] {
+      ,
+      new TableColumn[Pool, Int]:
         text = context.headerVolume
         cellValueFactory = _.value.volumeProperty
-      },
-      new TableColumn[Pool, String] {
+      ,
+      new TableColumn[Pool, String]:
         text = context.headerUnit
         cellValueFactory = _.value.unitProperty
-      }
     )
     items = model.observablePools
-  }
 
-  val addButton = new Button {
+  val addButton = new Button:
     graphic = context.addImage
     text = context.buttonAdd
     disable = false
     onAction = { _ => add() }
-  }
 
-  val editButton = new Button {
+  val editButton = new Button:
     graphic = context.editImage
     text = context.buttonEdit
     disable = true
     onAction = { _ => update() }
-  }
 
-  val errorsButton = new Button {
+  val errorsButton = new Button:
     graphic = context.errorsImage
     text = context.buttonErrors
     disable = true
     onAction = { _ => errors() }
-  }
 
-  val buttonBar = new HBox {
+  val buttonBar = new HBox:
     spacing = 6
     children = List(addButton, editButton, errorsButton)
-  }
   
-  val tab = new Tab {
+  val tab = new Tab:
   	text = context.labelPools
   	closable = false
   	content = new VBox {
@@ -69,11 +63,9 @@ class PoolsPane(context: Context) extends VBox:
       padding = Insets(6)
       children = List(tableView, buttonBar)
     }
-  }
 
-  val tabPane = new TabPane {
+  val tabPane = new TabPane:
     tabs = List(tab)
-  }
 
   children = List(tabPane)
   VBox.setVgrow(tableView, Priority.Always)
