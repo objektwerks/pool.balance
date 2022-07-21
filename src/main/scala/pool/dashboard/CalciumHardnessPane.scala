@@ -12,9 +12,9 @@ class CalciumHardnessPane(context: Context) extends DashboardTitledPane(context)
   average.text <== context.model.averageCalciumHardness.asString
 
   context.model.currentCalciumHardness.onChange { (_, _, newValue) =>
-    if Measurement.calciumHardnessRange.contains(newValue) then inRangeCurrent else outOfRangeCurrent
+    if context.model.calciumHardnessInRange(newValue) then inRangeCurrent else outOfRangeCurrent
   }
 
   context.model.averageCalciumHardness.onChange { (_, _, newValue) =>
-    if Measurement.calciumHardnessRange.contains(newValue) then inRangeAverage else outOfRangeAverage
+    if context.model.calciumHardnessInRange(newValue) then inRangeAverage else outOfRangeAverage
   }
