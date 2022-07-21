@@ -3,7 +3,7 @@ package pool.dashboard
 import pool.Context
 import pool.Measurement
 
-class TotalChlorinePane(context: Context) extends DashboardTitledPane(context):
+final class TotalChlorinePane(context: Context) extends DashboardTitledPane(context):
   text = context.headerTotalChlorine
   range.text = context.dashboardTotalChlorineRange
   good.text = context.dashboardTotalChlorineGood
