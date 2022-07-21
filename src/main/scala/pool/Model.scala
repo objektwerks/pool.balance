@@ -11,7 +11,7 @@ import scala.util.Try
 
 import scalafx.application.Platform
 import scalafx.collections.ObservableBuffer
-import scalafx.beans.property.{LongProperty, ObjectProperty}
+import scalafx.beans.property.ObjectProperty
 
 import Entity.given
 import Measurement.*
@@ -33,53 +33,33 @@ final class Model(context: Context) extends LazyLogging:
 
   val currentTotalChlorine = ObjectProperty[Int](0)
   val averageTotalChlorine = ObjectProperty[Int](0)
-  val rangeCurrentTotalChlorine = ObjectProperty[Boolean](false)
-  val rangeAverageTotalChlorine = ObjectProperty[Boolean](false)
 
   val currentFreeChlorine = ObjectProperty[Int](0)
   val averageFreeChlorine = ObjectProperty[Int](0)
-  val rangeCurrentFreeChlorine = ObjectProperty[Boolean](false)
-  val rangeAverageFreeChlorine = ObjectProperty[Boolean](false)
 
   val currentCombinedChlorine = ObjectProperty[Double](0)
   val averageCombinedChlorine = ObjectProperty[Double](0)
-  val rangeCurrentCombinedChlorine = ObjectProperty[Boolean](false)
-  val rangeAverageCombinedChlorine = ObjectProperty[Boolean](false)
 
   val currentPh = ObjectProperty[Double](0)
   val averagePh = ObjectProperty[Double](0)
-  val rangeCurrentPh = ObjectProperty[Boolean](false)
-  val rangeAveragePh = ObjectProperty[Boolean](false)
 
   val currentCalciumHardness = ObjectProperty[Int](0)
   val averageCalciumHardness = ObjectProperty[Int](0)
-  val rangeCurrentCalciumHardness = ObjectProperty[Boolean](false)
-  val rangeAverageCalciumHardness = ObjectProperty[Boolean](false)
 
   val currentTotalAlkalinity = ObjectProperty[Int](0)
   val averageTotalAlkalinity = ObjectProperty[Int](0)
-  val rangeCurrentTotalAlkalinity = ObjectProperty[Boolean](false)
-  val rangeAverageTotalAlkalinity = ObjectProperty[Boolean](false)
 
   val currentCyanuricAcid = ObjectProperty[Int](0)
   val averageCyanuricAcid = ObjectProperty[Int](0)
-  val rangeCurrentCyanuricAcid = ObjectProperty[Boolean](false)
-  val rangeAverageCyanuricAcid = ObjectProperty[Boolean](false)
 
   val currentTotalBromine = ObjectProperty[Int](0)
   val averageTotalBromine = ObjectProperty[Int](0)
-  val rangeCurrentTotalBromine = ObjectProperty[Boolean](false)
-  val rangeAverageTotalBromine = ObjectProperty[Boolean](false)
 
   val currentSalt = ObjectProperty[Int](0)
   val averageSalt = ObjectProperty[Int](0)
-  val rangeCurrentSalt = ObjectProperty[Boolean](false)
-  val rangeAverageSalt = ObjectProperty[Boolean](false)
 
   val currentTemperature = ObjectProperty[Int](0)
   val averageTemperature = ObjectProperty[Int](0)
-  val rangeCurrentTemperature = ObjectProperty[Boolean](false)
-  val rangeAverageTemperature = ObjectProperty[Boolean](false)
 
   val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
   val shouldNotBeInFxThread = (message: String) => require(!Platform.isFxApplicationThread, message)
