@@ -12,9 +12,9 @@ class SaltPane(context: Context) extends DashboardTitledPane(context):
   average.text <== context.model.averageSalt.asString
 
   context.model.currentSalt.onChange { (_, _, newValue) =>
-    if Measurement.saltRange.contains(newValue) then inRangeCurrent else outOfRangeCurrent
+    if context.model.saltInRange(newValue) then inRangeCurrent else outOfRangeCurrent
   }
 
   context.model.averageSalt.onChange { (_, _, newValue) =>
-    if Measurement.saltRange.contains(newValue) then inRangeAverage else outOfRangeAverage
+    if context.model.saltInRange(newValue) then inRangeAverage else outOfRangeAverage
   }
