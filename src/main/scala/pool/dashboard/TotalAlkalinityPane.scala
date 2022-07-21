@@ -1,6 +1,7 @@
 package pool.dashboard
 
 import pool.Context
+import pool.Measurement
 
 class TotalAlkalinityPane(context: Context) extends DashboardTitledPane(context):
   text = context.headerTotalAlkalinity
@@ -10,10 +11,10 @@ class TotalAlkalinityPane(context: Context) extends DashboardTitledPane(context)
   current.text <== context.model.currentTotalAlkalinity.asString
   average.text <== context.model.averageTotalAlkalinity.asString
 
-  context.model.rangeCurrentTotalAlkalinity.onChange { (_, _, inRange) =>
-    if inRange then inRangeCurrent else outOfRangeCurrent
+  context.model.currentTotalAlkalinity.onChange { (_, _, newValue) =>
+    if Measurement.totalAlkalinityRange.contains(newValue) then inRangeCurrent else outOfRangeCurrent
   }
 
-  context.model.rangeAverageTotalAlkalinity.onChange { (_, _, inRange) =>
-    if inRange then inRangeCurrent else outOfRangeAverage
+  context.model.averageTotalAlkalinity.onChange { (_, _, newValue) =>
+    if Measurement.totalAlkalinityRange.contains(newValue) then inRangeCurrent else outOfRangeAverage
   }
