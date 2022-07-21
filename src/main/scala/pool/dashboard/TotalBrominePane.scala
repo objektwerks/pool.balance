@@ -12,9 +12,9 @@ class TotalBrominePane(context: Context) extends DashboardTitledPane(context):
   average.text <== context.model.averageTotalBromine.asString
 
   context.model.currentTotalBromine.onChange { (_, _, newValue) =>
-    if Measurement.totalBromineRange.contains(newValue) then inRangeCurrent else outOfRangeCurrent
+    if context.model.totalBromineInRange(newValue) then inRangeCurrent else outOfRangeCurrent
   }
 
   context.model.averageTotalBromine.onChange { (_, _, newValue) =>
-    if Measurement.totalBromineRange.contains(newValue) then inRangeAverage else outOfRangeAverage
+    if context.model.totalBromineInRange(newValue) then inRangeAverage else outOfRangeAverage
   }
