@@ -3,7 +3,7 @@ package pool.dashboard
 import pool.Context
 import pool.Measurement
 
-class PhPane(context: Context) extends DashboardTitledPane(context):
+final class PhPane(context: Context) extends DashboardTitledPane(context):
   text = context.headerPh
   range.text = context.dashboardPhRange
   good.text = context.dashboardPhGood
