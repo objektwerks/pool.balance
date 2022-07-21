@@ -248,3 +248,4 @@ final class Model(context: Context) extends LazyLogging:
   def phInRange(value: Double): Boolean = phRange.contains(value)
   def calciumHardnessInRange(value: Int): Boolean = calciumHardnessRange.contains(value)
   def totalAlkalinityInRange(value: Int): Boolean = totalAlkalinityRange.contains(value)
+  def cyanuricAcidInRange(value: Int): Boolean = cyanuricAcidRange.contains(value)
