@@ -11,23 +11,20 @@ import pool.UnitOfMeasure
 import pool.Entity.*
 import pool.control.IntTextField
 
-class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
+final class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
   initOwner(App.stage)
   title = context.windowTitle
   headerText = context.dialogPool
 
-  val nameTextField = new TextField {
+  val nameTextField = new TextField:
     text = pool.name
-  }
 
-  val volumeTextField = new IntTextField {
+  val volumeTextField = new IntTextField:
     text = pool.volume.toString
-  }
   
-  val unitComboBox = new ComboBox[String] {
+  val unitComboBox = new ComboBox[String]:
   	items = ObservableBuffer.from( UnitOfMeasure.toPoolList )
   	value = pool.unit.toString
-  }
   unitComboBox.prefWidth = 200
 
   val controls = List[(String, Region)](
