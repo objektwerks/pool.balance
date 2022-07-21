@@ -1,6 +1,7 @@
 package pool.dashboard
 
 import pool.Context
+import pool.Measurement
 
 class PhPane(context: Context) extends DashboardTitledPane(context):
   text = context.headerPh
@@ -10,10 +11,10 @@ class PhPane(context: Context) extends DashboardTitledPane(context):
   current.text <== context.model.currentPh.asString
   average.text <== context.model.averagePh.asString
 
-  context.model.rangeCurrentPh.onChange { (_, _, inRange) =>
-    if inRange then inRangeCurrent else outOfRangeCurrent
+  context.model.currentPh.onChange { (_, _, newValue) =>
+    if Measurement.phRange.contains(newValue) then inRangeCurrent else outOfRangeCurrent
   }
 
-  context.model.rangeAveragePh.onChange { (_, _, inRange) =>
-    if inRange then inRangeAverage else outOfRangeAverage
+  context.model.averagePh.onChange { (_, _, newValue) =>
+    if Measurement.phRange.contains(newValue) then inRangeAverage else outOfRangeAverage
   }
