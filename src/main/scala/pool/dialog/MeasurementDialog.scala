@@ -9,7 +9,7 @@ import pool.{App, Context, Entity, Measurement, UnitOfMeasure}
 import pool.Entity.*
 import pool.control.TextSlider.*
 
-class MeasurementDialog(context: Context, measurement: Measurement) extends Dialog[Measurement]:
+final class MeasurementDialog(context: Context, measurement: Measurement) extends Dialog[Measurement]:
   initOwner(App.stage)
   title = context.windowTitle
   headerText = context.dialogMeasurement
@@ -24,9 +24,8 @@ class MeasurementDialog(context: Context, measurement: Measurement) extends Dial
   val totalBromineSlider = totalBromineTextSlider(measurement)
   val saltSlider = saltTextSlider(measurement)
   val temperatureSlider = temperatureTextSlider(measurement)
-  val measuredDatePicker = new DatePicker {
+  val measuredDatePicker = new DatePicker:
     value = measurement.measured.toLocalDate
-  }
 
   val controls = List[(String, Region)](
     context.labelTotalChlorine -> totalChlorineSlider,
