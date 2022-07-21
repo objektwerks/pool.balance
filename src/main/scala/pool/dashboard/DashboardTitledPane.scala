@@ -36,17 +36,17 @@ abstract class DashboardTitledPane(context: Context) extends TitledPane:
   content = ControlGridPane(controls)
 
   def inRangeCurrent: Unit =
-    println(s"in range current: $text")
-    current.style = "-fx-border-color: darkgreen"
+    println(s"in range current: ${text.value}")
+    current.style = ""
 
   def outOfRangeCurrent: Unit = 
-    println(s"out of range current: $text")
+    println(s"out of range current: ${text.value}")
     current.style = "-fx-border-color: red"
 
   def inRangeAverage: Unit =
-    println(s"in range average: $text")
-    average.style = "-fx-border-color: darkgreen"
+    println(s"in range average: ${text.value}")
+    average.style = ""
 
   def outOfRangeAverage: Unit = 
-    println(s"out of range average: $text")
+    println(s"out of range average: ${text.value}")
     average.style = "-fx-border-color: red"
