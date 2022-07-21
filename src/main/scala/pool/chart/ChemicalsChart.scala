@@ -12,59 +12,51 @@ import pool.{Chemical, Context}
 import pool.TypeOfChemical
 import pool.TypeOfChemical.*
 
-class ChemicalsChart(context: Context) extends TabPane:
+final class ChemicalsChart(context: Context) extends TabPane:
   val chemicals = context.model.observableChemicals.reverse
   val dateFormat = DateTimeFormatter.ofPattern("M.dd")
   val minDate = chemicals.map(c => c.added).min.format(dateFormat)
   val maxDate = chemicals.map(c => c.added).max.format(dateFormat)
 
-  val liquidChlorineTab = new Tab {
+  val liquidChlorineTab = new Tab:
     closable = false
     text = context.chartTotalChlorine
     content = buildLiquidChlorineChart()
-  }
 
-  val trichlorTab = new Tab {
+  val trichlorTab = new Tab:
     closable = false
     text = context.chartTrichlor
     content = buildTrichlorChart()
-  }
 
-  val dichlorTab = new Tab {
+  val dichlorTab = new Tab:
     closable = false
     text = context.chartDichlor
     content = buildDichlorChart()
-  }
 
-  val calciumHypochloriteTab = new Tab {
+  val calciumHypochloriteTab = new Tab:
     closable = false
     text = context.chartCalciumHypochlorite
     content = buildCalciumHypochloriteChart()
-  }
 
-  val stabilizerTab = new Tab {
+  val stabilizerTab = new Tab:
     closable = false
     text = context.chartStabilizer
     content = buildStabilizerChart()
-  }
 
-  val algaecideTab = new Tab {
+  val algaecideTab = new Tab:
     closable = false
     text = context.chartAlgaecide
     content = buildAlgaecideChart()
-  }
 
-  val muriaticAcidTab = new Tab {
+  val muriaticAcidTab = new Tab:
     closable = false
     text = context.chartMuriaticAcid
     content = buildMuriaticAcidChart()
-  }
 
-  val saltTab = new Tab {
+  val saltTab = new Tab:
     closable = false
     text = context.chartSalt
     content = buildSaltChart()
-  }
 
   padding = Insets(6)
   tabs = List(liquidChlorineTab,
