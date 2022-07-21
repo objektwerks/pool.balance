@@ -3,7 +3,7 @@ package pool.dashboard
 import pool.Context
 import pool.Measurement
 
-class SaltPane(context: Context) extends DashboardTitledPane(context):
+final class SaltPane(context: Context) extends DashboardTitledPane(context):
   text = context.headerSalt
   range.text = context.dashboardSaltRange
   good.text = context.dashboardSaltGood
