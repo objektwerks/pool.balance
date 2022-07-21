@@ -13,17 +13,16 @@ import pool.{Cleaning, Context}
 
 final case class CleaningXY(xDate: LocalDateTime, yCount: Int)
 
-class CleaningsChart(context: Context) extends TabPane:
+final class CleaningsChart(context: Context) extends TabPane:
   val cleanings = context.model.observableCleanings.reverse
   val dateFormat = DateTimeFormatter.ofPattern("M.dd")
   val minDate = cleanings.map(c => c.cleaned).min.format(dateFormat)
   val maxDate = cleanings.map(c => c.cleaned).max.format(dateFormat)
 
-  val tab = new Tab {
+  val tab = new Tab:
     closable = false
     text = context.chartYCleanings
     content = buildChart()
-  }
 
   padding = Insets(6)
   tabs = List(tab)
