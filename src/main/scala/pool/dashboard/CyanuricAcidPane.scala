@@ -3,7 +3,7 @@ package pool.dashboard
 import pool.Context
 import pool.Measurement
 
-class CyanuricAcidPane(context: Context) extends DashboardTitledPane(context):
+final class CyanuricAcidPane(context: Context) extends DashboardTitledPane(context):
   text = context.headerCyanuricAcid
   range.text = context.dashboardCyanuricAcidRange
   good.text = context.dashboardCyanuricAcidGood
