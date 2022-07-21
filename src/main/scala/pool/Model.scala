@@ -149,17 +149,6 @@ final class Model(context: Context) extends LazyLogging:
     currentSalt.value = measurement.salt
     currentTemperature.value = measurement.temperature
 
-    rangeCurrentTotalChlorine.value = totalChlorineRange.contains(currentTotalChlorine.value)
-    rangeCurrentFreeChlorine.value = freeChlorineRange.contains(currentFreeChlorine.value)
-    rangeCurrentCombinedChlorine.value = combinedChlorineRange.contains(currentCombinedChlorine.value)
-    rangeCurrentPh.value = phRange.contains(currentPh.value)
-    rangeCurrentCalciumHardness.value = calciumHardnessRange.contains(currentCalciumHardness.value)
-    rangeCurrentTotalAlkalinity.value = totalAlkalinityRange.contains(currentTotalAlkalinity.value)
-    rangeCurrentCyanuricAcid.value = cyanuricAcidRange.contains(currentCyanuricAcid.value)
-    rangeCurrentTotalBromine.value = totalBromineRange.contains(currentTotalBromine.value)
-    rangeCurrentSalt.value = saltRange.contains(currentSalt.value)
-    rangeCurrentTemperature.value = temperatureRange.contains(currentTemperature.value)
-
   private def onAverage(numberFormat: NumberFormat): Unit =
     shouldBeInFxThread("onaverage should be in fx thread.")
     val count = observableMeasurements.length
@@ -173,17 +162,6 @@ final class Model(context: Context) extends LazyLogging:
     averageTotalBromine.value = observableMeasurements.map(_.totalBromine).sum / count
     averageSalt.value = observableMeasurements.map(_.salt).sum / count
     averageTemperature.value = observableMeasurements.map(_.temperature).sum / count
-
-    rangeAverageTotalChlorine.value = totalChlorineRange.contains(averageTotalChlorine.value)
-    rangeAverageFreeChlorine.value = freeChlorineRange.contains(averageFreeChlorine.value)
-    rangeAverageCombinedChlorine.value = combinedChlorineRange.contains(averageCombinedChlorine.value)
-    rangeAveragePh.value = phRange.contains(averagePh.value)
-    rangeAverageCalciumHardness.value = calciumHardnessRange.contains(averageCalciumHardness.value)
-    rangeAverageTotalAlkalinity.value = totalAlkalinityRange.contains(averageTotalAlkalinity.value)
-    rangeAverageCyanuricAcid.value = cyanuricAcidRange.contains(averageCyanuricAcid.value)
-    rangeAverageTotalBromine.value = totalBromineRange.contains(averageTotalBromine.value)
-    rangeAverageSalt.value = saltRange.contains(averageSalt.value)
-    rangeAverageTemperature.value = temperatureRange.contains(averageTemperature.value)
 
   def onError(message: String): Unit =
     shouldBeInFxThread("onerror message should be in fx thread.")
