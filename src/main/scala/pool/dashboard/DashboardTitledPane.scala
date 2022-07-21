@@ -1,11 +1,13 @@
 package pool.dashboard
 
+import com.typesafe.scalalogging.LazyLogging
+
 import scalafx.scene.control.{Label, TitledPane}
 
 import pool.Context
 import pool.dialog.ControlGridPane
 
-abstract class DashboardTitledPane(context: Context) extends TitledPane:
+abstract class DashboardTitledPane(context: Context) extends TitledPane with LazyLogging:
   collapsible = false
   maxWidth = Double.MaxValue
   maxHeight = Double.MaxValue
@@ -38,13 +40,13 @@ abstract class DashboardTitledPane(context: Context) extends TitledPane:
   def inRangeCurrent: Unit =
     current.style = ""
 
-  def outOfRangeCurrent: Unit = 
-    println(s"out of range current: ${text.value}")
+  def outOfRangeCurrent: Unit =
+    logger.info(s"DashboardTitledPane.outOfRangeCurrent: ${text.value}")
     current.style = "-fx-border-color: red; -fx-border-width: 3;"
 
   def inRangeAverage: Unit =
     average.style = ""
 
-  def outOfRangeAverage: Unit = 
-    println(s"out of range average: ${text.value}")
+  def outOfRangeAverage: Unit =
+    logger.info(s"DashboardTitledPane.outOfRangeAverage: ${text.value}")
     average.style = "-fx-border-color: red; -fx-border-width: 3;"
