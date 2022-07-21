@@ -12,9 +12,9 @@ class TotalAlkalinityPane(context: Context) extends DashboardTitledPane(context)
   average.text <== context.model.averageTotalAlkalinity.asString
 
   context.model.currentTotalAlkalinity.onChange { (_, _, newValue) =>
-    if Measurement.totalAlkalinityRange.contains(newValue) then inRangeCurrent else outOfRangeCurrent
+    if context.model.totalAlkalinityInRange(newValue) then inRangeCurrent else outOfRangeCurrent
   }
 
   context.model.averageTotalAlkalinity.onChange { (_, _, newValue) =>
-    if Measurement.totalAlkalinityRange.contains(newValue) then inRangeCurrent else outOfRangeAverage
+    if context.model.totalAlkalinityInRange(newValue) then inRangeCurrent else outOfRangeAverage
   }
