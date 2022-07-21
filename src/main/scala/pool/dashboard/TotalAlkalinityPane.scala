@@ -3,7 +3,7 @@ package pool.dashboard
 import pool.Context
 import pool.Measurement
 
-class TotalAlkalinityPane(context: Context) extends DashboardTitledPane(context):
+final class TotalAlkalinityPane(context: Context) extends DashboardTitledPane(context):
   text = context.headerTotalAlkalinity
   range.text = context.dashboardTotalAlkalinityRange
   good.text = context.dashboardTotalAlkalinityGood
