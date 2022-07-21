@@ -6,30 +6,26 @@ import scalafx.scene.layout.{Priority, VBox}
 
 import pool.Context
 
-class TabbedPane(context: Context) extends VBox:
+final class TabbedPane(context: Context) extends VBox:
   padding = Insets(6)
 
-  val cleaningsTab = new Tab {
+  val cleaningsTab = new Tab:
     text = context.tabCleanings
     closable = false
     content = CleaningsPane(context)
-  }
 
-  val measurementsTab = new Tab {
+  val measurementsTab = new Tab:
   	text = context.tabMeasurements
   	closable = false
   	content = MeasurementsPane(context)
-  }
 
-  val chemicalsTab = new Tab {
+  val chemicalsTab = new Tab:
   	text = context.tabChemicals
   	closable = false
   	content = ChemicalsPane(context)
-  }
 
-  val tabPane = new TabPane {
+  val tabPane = new TabPane:
     tabs = List(cleaningsTab, measurementsTab, chemicalsTab)
-  }
 
   children = List(tabPane)
   VBox.setVgrow(tabPane, Priority.Always)
