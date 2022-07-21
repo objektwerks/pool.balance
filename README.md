@@ -2,10 +2,6 @@ Pool Balance
 ------------
 >Pool cleaning, measurement and chemical balancing app using ScalaFX and Scala 3.
 
-Todo
-----
-1. Replace {} with :
-
 Build
 -----
 1. sbt clean compile
