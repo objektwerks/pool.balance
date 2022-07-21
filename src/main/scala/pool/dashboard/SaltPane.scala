@@ -1,6 +1,7 @@
 package pool.dashboard
 
 import pool.Context
+import pool.Measurement
 
 class SaltPane(context: Context) extends DashboardTitledPane(context):
   text = context.headerSalt
@@ -10,10 +11,10 @@ class SaltPane(context: Context) extends DashboardTitledPane(context):
   current.text <== context.model.currentSalt.asString
   average.text <== context.model.averageSalt.asString
 
-  context.model.rangeCurrentSalt.onChange { (_, _, inRange) =>
-    if inRange then inRangeCurrent else outOfRangeCurrent
+  context.model.currentSalt.onChange { (_, _, newValue) =>
+    if Measurement.saltRange.contains(newValue) then inRangeCurrent else outOfRangeCurrent
   }
 
-  context.model.rangeAverageSalt.onChange { (_, _, inRange) =>
-    if inRange then inRangeAverage else outOfRangeAverage
+  context.model.averageSalt.onChange { (_, _, newValue) =>
+    if Measurement.saltRange.contains(newValue) then inRangeAverage else outOfRangeAverage
   }
