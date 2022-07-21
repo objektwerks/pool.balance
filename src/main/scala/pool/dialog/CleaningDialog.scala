@@ -9,38 +9,31 @@ import scalafx.scene.control.ButtonBar.ButtonData
 import pool.{App, Context, Entity, Cleaning, UnitOfMeasure}
 import pool.Entity.*
 
-class CleaningDialog(context: Context, cleaning: Cleaning) extends Dialog[Cleaning]:
+final class CleaningDialog(context: Context, cleaning: Cleaning) extends Dialog[Cleaning]:
   initOwner(App.stage)
   title = context.windowTitle
   headerText = context.dialogCleaning
 
-  val brushCheckBox = new CheckBox {
+  val brushCheckBox = new CheckBox:
     selected = cleaning.brush
-  }
 
-  val netCheckBox = new CheckBox {
+  val netCheckBox = new CheckBox:
     selected = cleaning.net
-  }
 
-  val skimmerBasketCheckBox = new CheckBox {
+  val skimmerBasketCheckBox = new CheckBox:
     selected = cleaning.skimmerBasket
-  }
 
-  val pumpBasketCheckBox = new CheckBox {
+  val pumpBasketCheckBox = new CheckBox:
     selected = cleaning.pumpBasket
-  }
 
-  val pumpFilterCheckBox = new CheckBox {
+  val pumpFilterCheckBox = new CheckBox:
     selected = cleaning.pumpFilter
-  }
 
-  val vacuumCheckBox = new CheckBox {
+  val vacuumCheckBox = new CheckBox:
     selected = cleaning.vacuum
-  }
 
-  val cleanedDatePicker = new DatePicker {
+  val cleanedDatePicker = new DatePicker:
     value = cleaning.cleaned.toLocalDate
-  }
 
   val controls = List[(String, Region)](
     context.labelBrush -> brushCheckBox,
