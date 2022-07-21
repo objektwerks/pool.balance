@@ -1,6 +1,7 @@
 package pool.dashboard
 
 import pool.Context
+import pool.Measurement
 
 class CombinedChlorinePane(context: Context) extends DashboardTitledPane(context):
   text = context.headerCombinedChlorine
@@ -10,12 +11,12 @@ class CombinedChlorinePane(context: Context) extends DashboardTitledPane(context
   current.text <== context.model.currentCombinedChlorine.asString
   average.text <== context.model.averageCombinedChlorine.asString
 
-  context.model.rangeCurrentCombinedChlorine.onChange { (_, _, inRange) =>
-    println(s"in range current combined chlorine: $inRange")
-    if inRange then inRangeCurrent else outOfRangeCurrent
+  context.model.currentCombinedChlorine.onChange { (_, oldValue, newValue) =>
+    println(s"current combined chlorine: $oldValue -> $newValue")
+    if Measurement.combinedChlorineRange.contains(newValue) then inRangeCurrent else outOfRangeCurrent
   }
 
-  context.model.rangeAverageCombinedChlorine.onChange { (_, _, inRange) =>
-    println(s"in range average combined chlorine: $inRange")
-    if inRange then inRangeAverage else outOfRangeAverage
+  context.model.averageCombinedChlorine.onChange { (_, oldValue, newValue) =>
+    println(s"average combined chlorine: $oldValue -> $newValue")
+    if Measurement.combinedChlorineRange.contains(newValue) then inRangeAverage else outOfRangeAverage
   }

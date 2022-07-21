@@ -152,7 +152,6 @@ final class Model(context: Context) extends LazyLogging:
     rangeCurrentTotalChlorine.value = totalChlorineRange.contains(currentTotalChlorine.value)
     rangeCurrentFreeChlorine.value = freeChlorineRange.contains(currentFreeChlorine.value)
     rangeCurrentCombinedChlorine.value = combinedChlorineRange.contains(currentCombinedChlorine.value)
-    println(s"combined chlorine: ${currentCombinedChlorine.value} in range: ${rangeCurrentCombinedChlorine.value}")
     rangeCurrentPh.value = phRange.contains(currentPh.value)
     rangeCurrentCalciumHardness.value = calciumHardnessRange.contains(currentCalciumHardness.value)
     rangeCurrentTotalAlkalinity.value = totalAlkalinityRange.contains(currentTotalAlkalinity.value)
