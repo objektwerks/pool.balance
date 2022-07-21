@@ -8,7 +8,7 @@ import scalafx.scene.layout.GridPane
 import pool.Context
 import pool.UnitOfMeasure.*
 
-class Converter(context: Context) extends GridPane:
+final class Converter(context: Context) extends GridPane:
   hgap = 6
   vgap = 6
   padding = Insets(top = 6, right = 6, bottom = 6, left = 6)
