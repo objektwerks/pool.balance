@@ -251,4 +251,4 @@ final class Model(context: Context) extends LazyLogging:
   def cyanuricAcidInRange(value: Int): Boolean = cyanuricAcidRange.contains(value)
   def totalBromineInRange(value: Int): Boolean = totalBromineRange.contains(value)
   def saltInRange(value: Int): Boolean = saltRange.contains(value)
-  
+  def temperatureInRange(value: Int): Boolean = temperatureRange.contains(value)
