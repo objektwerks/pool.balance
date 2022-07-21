@@ -3,7 +3,7 @@ package pool.dashboard
 import pool.Context
 import pool.Measurement
 
-class CalciumHardnessPane(context: Context) extends DashboardTitledPane(context):
+final class CalciumHardnessPane(context: Context) extends DashboardTitledPane(context):
   text = context.headerCalciumHardness
   range.text = context.dashboardCalciumHardnessRange
   good.text = context.dashboardCalciumHardnessGood
