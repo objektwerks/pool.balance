@@ -3,7 +3,7 @@ package pool.dashboard
 import pool.Context
 import pool.Measurement
 
-class TotalBrominePane(context: Context) extends DashboardTitledPane(context):
+final class TotalBrominePane(context: Context) extends DashboardTitledPane(context):
   text = context.headerTotalBromine
   range.text = context.dashboardTotalBromineRange
   good.text = context.dashboardTotalBromineGood
