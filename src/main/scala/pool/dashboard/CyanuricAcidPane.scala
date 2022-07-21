@@ -12,9 +12,9 @@ class CyanuricAcidPane(context: Context) extends DashboardTitledPane(context):
   average.text <== context.model.averageCyanuricAcid.asString
 
   context.model.currentCyanuricAcid.onChange { (_, _, newValue) =>
-    if Measurement.cyanuricAcidRange.contains(newValue) then inRangeCurrent else outOfRangeCurrent
+    if context.model.cyanuricAcidInRange(newValue) then inRangeCurrent else outOfRangeCurrent
   }
 
   context.model.averageCyanuricAcid.onChange { (_, _, newValue) =>
-    if Measurement.cyanuricAcidRange.contains(newValue) then inRangeAverage else outOfRangeAverage
+    if context.model.cyanuricAcidInRange(newValue) then inRangeAverage else outOfRangeAverage
   }
