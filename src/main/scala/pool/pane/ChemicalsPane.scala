@@ -11,13 +11,13 @@ import scalafx.scene.layout.{HBox, Priority, VBox}
 import pool.{Chemical, Context, Pool}
 import pool.dialog.{ChemicalDialog, ChemicalsChartDialog}
 
-class ChemicalsPane(context: Context) extends VBox:
+final class ChemicalsPane(context: Context) extends VBox:
   spacing = 6
   padding = Insets(6)
 
   val model = context.model
 
-  val tableView = new TableView[Chemical]() {
+  val tableView = new TableView[Chemical]():
     columns ++= List(
       new TableColumn[Chemical, String] {
         prefWidth = 150
@@ -38,33 +38,28 @@ class ChemicalsPane(context: Context) extends VBox:
       }
     )
     items = model.observableChemicals
-  }
 
-  val addButton = new Button {
+  val addButton = new Button:
     graphic = context.addImage
     text = context.buttonAdd
     disable = true
     onAction = { _ => add() }
-  }
 
-  val editButton = new Button {
+  val editButton = new Button:
     graphic = context.editImage
     text = context.buttonEdit
     disable = true
     onAction = { _ => update() }
-  }
 
-  val chartButton = new Button {
+  val chartButton = new Button:
     graphic = context.chartImage
     text = context.buttonChart
     disable = true
     onAction = { _ => chart() }
-  }
 
-  val buttonBar = new HBox {
+  val buttonBar = new HBox:
     spacing = 6
     children = List(addButton, editButton, chartButton)
-  }
 
   model.selectedPoolId.onChange { (_, _, _) =>
     addButton.disable = false
