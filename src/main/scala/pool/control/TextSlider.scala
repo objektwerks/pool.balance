@@ -110,7 +110,7 @@ object TextSlider:
                      slider.max = 300
                      slider.majorTickUnit = 30
                      slider.snapToTicks = false
-                     slider.value = measurement.totalAlkalinity
+                     slider.value = measurement.cyanuricAcid
                    }
 
   def totalBromineTextSlider(measurement: Measurement): TextSlider =
