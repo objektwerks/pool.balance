@@ -132,7 +132,6 @@ final class Model(context: Context) extends LazyLogging:
     val numberFormat = NumberFormat.getNumberInstance()
     numberFormat.setMaximumFractionDigits(1)
     observableMeasurements.headOption.foreach { measurement =>
-      println(s"in dashboard ... measurement: $measurement")
       onCurrent(measurement, numberFormat)
       onAverage(numberFormat)
     }
