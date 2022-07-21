@@ -40,11 +40,11 @@ abstract class DashboardTitledPane(context: Context) extends TitledPane:
 
   def outOfRangeCurrent: Unit = 
     println(s"out of range current: ${text.value}")
-    current.style = "-fx-border-color: red; -fx-border-width: 2;"
+    current.style = "-fx-border-color: red; -fx-border-width: 3;"
 
   def inRangeAverage: Unit =
     average.style = ""
 
   def outOfRangeAverage: Unit = 
     println(s"out of range average: ${text.value}")
-    average.style = "-fx-border-color: red; -fx-border-width: 2;"
+    average.style = "-fx-border-color: red; -fx-border-width: 3;"
