@@ -10,32 +10,28 @@ import pool.{App, Chemical, Context, Entity, UnitOfMeasure, TypeOfChemical}
 import pool.Entity.*
 import pool.control.{Converter, DoubleTextField}
 
-class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemical]:
+final class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemical]:
   initOwner(App.stage)
   title = context.windowTitle
   headerText = context.dialogChemical
 
-  val typeofComboBox = new ComboBox[String] {
+  val typeofComboBox = new ComboBox[String]:
   	items = ObservableBuffer.from( TypeOfChemical.toList )
   	value = chemical.typeof.display
-  }
   typeofComboBox.prefWidth = 200
 
-  val amountTextField = new DoubleTextField {
+  val amountTextField = new DoubleTextField:
     prefWidth = 200
     text = chemical.amount.toString
-  }
 
-  val unitComboBox = new ComboBox[String] {
+  val unitComboBox = new ComboBox[String]:
   	items = ObservableBuffer.from( UnitOfMeasure.toList )
   	value = chemical.unit.toString
-  }
   unitComboBox.prefWidth = 200
 
-  val addedDatePicker = new DatePicker {
+  val addedDatePicker = new DatePicker:
     prefWidth = 200
     value = chemical.added.toLocalDate
-  }
 
   val controls = List[(String, Region)](
     context.labelTypeof -> typeofComboBox,
