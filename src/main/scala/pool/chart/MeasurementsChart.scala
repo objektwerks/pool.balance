@@ -10,65 +10,56 @@ import scalafx.scene.control.{Tab, TabPane}
 
 import pool.Context
 
-class MeasurementsChart(context: Context) extends TabPane:
+final class MeasurementsChart(context: Context) extends TabPane:
   val measurements = context.model.observableMeasurements.reverse
   val dateFormat = DateTimeFormatter.ofPattern("M.dd")
   val minDate = measurements.map(m => m.measured).min.format(dateFormat)
   val maxDate = measurements.map(m => m.measured).max.format(dateFormat)
 
-  val totalChlorineTab = new Tab {
+  val totalChlorineTab = new Tab:
     closable = false
     text = context.chartTotalChlorine
     content = buildTotalChlorineChart()
-  }
 
-  val freeChlorineTab = new Tab {
+  val freeChlorineTab = new Tab:
     closable = false
     text = context.chartFreeChlorine
     content = buildFreeChlorineChart()
-  }
 
-  val combinedChlorineTab = new Tab {
+  val combinedChlorineTab = new Tab:
     closable = false
     text = context.chartCombinedChlorine
     content = buildCombinedChlorineChart()
-  }
 
-  val phTab = new Tab {
+  val phTab = new Tab:
     closable = false
     text = context.chartPh
     content = buildPhChart()
-  }
 
-  val calciumHardnessTab = new Tab {
+  val calciumHardnessTab = new Tab:
     closable = false
     text = context.chartCalciumHardness
     content = buildCalciumHardnessChart()
-  }
 
-  val totalAlkalinityTab = new Tab {
+  val totalAlkalinityTab = new Tab:
     closable = false
     text = context.chartTotalAlkalinity
     content = buildTotalAlkalinityChart()
-  }
 
-  val cyanuricAcidTab = new Tab {
+  val cyanuricAcidTab = new Tab:
     closable = false
     text = context.chartCyanuricAcid
     content = buildCyanuricAcidChart()
-  }
 
-  val totalBromineTab = new Tab {
+  val totalBromineTab = new Tab:
     closable = false
     text = context.chartTotalBromine
     content = buildTotalBromineChart()
-  }
 
-  val saltTab = new Tab {
+  val saltTab = new Tab:
     closable = false
     text = context.chartSalt
     content = buildSaltChart()
-  }
 
   padding = Insets(6)
   tabs = List(totalChlorineTab,
