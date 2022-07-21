@@ -17,52 +17,12 @@ import Entity.given
 import Measurement.*
 
 final class Model(context: Context) extends LazyLogging:
-  private val store = context.store
-
-  val observableErrors = ObservableBuffer[Error]()
-
-  val observablePools = ObservableBuffer[Pool]()
-  val observableCleanings = ObservableBuffer[Cleaning]()
-  val observableMeasurements = ObservableBuffer[Measurement]()
-  val observableChemicals = ObservableBuffer[Chemical]()
+  val store = context.store
 
   val selectedPoolId = ObjectProperty[Long](0)
   val selectedCleaningId = ObjectProperty[Long](0)
   val selectedMeasurementId = ObjectProperty[Long](0)
   val selectedChemicalId = ObjectProperty[Long](0)
-
-  val currentTotalChlorine = ObjectProperty[Int](0)
-  val averageTotalChlorine = ObjectProperty[Int](0)
-
-  val currentFreeChlorine = ObjectProperty[Int](0)
-  val averageFreeChlorine = ObjectProperty[Int](0)
-
-  val currentCombinedChlorine = ObjectProperty[Double](0)
-  val averageCombinedChlorine = ObjectProperty[Double](0)
-
-  val currentPh = ObjectProperty[Double](0)
-  val averagePh = ObjectProperty[Double](0)
-
-  val currentCalciumHardness = ObjectProperty[Int](0)
-  val averageCalciumHardness = ObjectProperty[Int](0)
-
-  val currentTotalAlkalinity = ObjectProperty[Int](0)
-  val averageTotalAlkalinity = ObjectProperty[Int](0)
-
-  val currentCyanuricAcid = ObjectProperty[Int](0)
-  val averageCyanuricAcid = ObjectProperty[Int](0)
-
-  val currentTotalBromine = ObjectProperty[Int](0)
-  val averageTotalBromine = ObjectProperty[Int](0)
-
-  val currentSalt = ObjectProperty[Int](0)
-  val averageSalt = ObjectProperty[Int](0)
-
-  val currentTemperature = ObjectProperty[Int](0)
-  val averageTemperature = ObjectProperty[Int](0)
-
-  val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
-  val shouldNotBeInFxThread = (message: String) => require(!Platform.isFxApplicationThread, message)
 
   selectedPoolId.onChange { (_, oldPoolId, newPoolId) =>
     shouldBeInFxThread("selected pool id onchange should be in fx thread.")
@@ -72,86 +32,89 @@ final class Model(context: Context) extends LazyLogging:
     chemicals(newPoolId)
   }
 
+  val observableErrors = ObservableBuffer[Error]()
+  val observablePools = ObservableBuffer[Pool]()
+  val observableCleanings = ObservableBuffer[Cleaning]()
+  val observableMeasurements = ObservableBuffer[Measurement]()
+  val observableChemicals = ObservableBuffer[Chemical]()
+
   observableMeasurements.onChange { (_, _) =>
     shouldNotBeInFxThread("via measurements, observable measurements onchange should not be in fx thread.")
     logger.info(s"observable measurements onchange event.")
     Platform.runLater( dashboard() )
   }
 
+  val currentTotalChlorine = ObjectProperty[Int](0)
+  val averageTotalChlorine = ObjectProperty[Int](0)
+  def totalChlorineInRange(value: Int): Boolean = totalChlorineRange.contains(value)
+
+  val currentFreeChlorine = ObjectProperty[Int](0)
+  val averageFreeChlorine = ObjectProperty[Int](0)
+  def freeChlorineInRange(value: Int): Boolean = freeChlorineRange.contains(value)
+
+  val currentCombinedChlorine = ObjectProperty[Double](0)
+  val averageCombinedChlorine = ObjectProperty[Double](0)
+  def combinedChlorineInRange(value: Double): Boolean = combinedChlorineRange.contains(value)
+
+  val currentPh = ObjectProperty[Double](0)
+  val averagePh = ObjectProperty[Double](0)
+  def phInRange(value: Double): Boolean = phRange.contains(value)
+
+  val currentCalciumHardness = ObjectProperty[Int](0)
+  val averageCalciumHardness = ObjectProperty[Int](0)
+  def calciumHardnessInRange(value: Int): Boolean = calciumHardnessRange.contains(value)
+
+  val currentTotalAlkalinity = ObjectProperty[Int](0)
+  val averageTotalAlkalinity = ObjectProperty[Int](0)
+  def totalAlkalinityInRange(value: Int): Boolean = totalAlkalinityRange.contains(value)
+
+  val currentCyanuricAcid = ObjectProperty[Int](0)
+  val averageCyanuricAcid = ObjectProperty[Int](0)
+  def cyanuricAcidInRange(value: Int): Boolean = cyanuricAcidRange.contains(value)
+
+  val currentTotalBromine = ObjectProperty[Int](0)
+  val averageTotalBromine = ObjectProperty[Int](0)
+  def totalBromineInRange(value: Int): Boolean = totalBromineRange.contains(value)
+
+  val currentSalt = ObjectProperty[Int](0)
+  val averageSalt = ObjectProperty[Int](0)
+  def saltInRange(value: Int): Boolean = saltRange.contains(value)
+
+  val currentTemperature = ObjectProperty[Int](0)
+  val averageTemperature = ObjectProperty[Int](0)
+  def temperatureInRange(value: Int): Boolean = temperatureRange.contains(value)
+
+  val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
+  val shouldNotBeInFxThread = (message: String) => require(!Platform.isFxApplicationThread, message)
+
   pools()
 
-  private def pools(): Unit =
+  def pools(): Unit =
     Future {
       shouldNotBeInFxThread("pools should not be in fx thread.")
       observablePools ++= store.pools()
     }.recover { case error: Throwable => onError(error, s"Loading pools data failed: ${error.getMessage}") }
 
-  private def cleanings(poolId: Long): Unit =
+  def cleanings(poolId: Long): Unit =
     Future {
       shouldNotBeInFxThread("cleanings should not be in fx thread.")
       observableCleanings.clear()
       observableCleanings ++= store.cleanings(poolId)
     }.recover { case error: Throwable => onError(error, s"Loading cleanings data failed: ${error.getMessage}") }
 
-  private def measurements(poolId: Long): Unit =
+  def measurements(poolId: Long): Unit =
     Future {
       shouldNotBeInFxThread("measurements should not be in fx thread.")
       observableMeasurements.clear()
       observableMeasurements ++= store.measurements(poolId) 
     }.recover { case error: Throwable => onError(error, s"Loading measurements data failed: ${error.getMessage}") }
 
-  private def chemicals(poolId: Long): Unit =
+  def chemicals(poolId: Long): Unit =
     Future {
       shouldNotBeInFxThread("chemicals should not be in fx thread.")
       observableChemicals.clear()
       observableChemicals ++= store.chemicals(poolId) 
     }.recover { case error: Throwable => onError(error, s"Loading chemicals data failed: ${error.getMessage}") }
-
-  private def dashboard(): Unit =
-    shouldBeInFxThread("dashboard should be in fx thread.")
-    val numberFormat = NumberFormat.getNumberInstance()
-    numberFormat.setMaximumFractionDigits(1)
-    observableMeasurements.headOption.foreach { measurement =>
-      onCurrent(measurement, numberFormat)
-      onAverage(numberFormat)
-    }
-
-  private def onCurrent(measurement: Measurement, numberFormat: NumberFormat): Unit =
-    shouldBeInFxThread("oncurrent should be in fx thread.")
-    currentTotalChlorine.value = measurement.totalChlorine
-    currentFreeChlorine.value = measurement.freeChlorine
-    currentCombinedChlorine.value = numberFormat.format( measurement.combinedChlorine ).toDouble
-    currentPh.value = numberFormat.format( measurement.ph ).toDouble
-    currentCalciumHardness.value = measurement.calciumHardness
-    currentTotalAlkalinity.value = measurement.totalAlkalinity
-    currentCyanuricAcid.value = measurement.cyanuricAcid
-    currentTotalBromine.value = measurement.totalBromine
-    currentSalt.value = measurement.salt
-    currentTemperature.value = measurement.temperature
-
-  private def onAverage(numberFormat: NumberFormat): Unit =
-    shouldBeInFxThread("onaverage should be in fx thread.")
-    val count = observableMeasurements.length
-    averageTotalChlorine.value = observableMeasurements.map(_.totalChlorine).sum / count
-    averageFreeChlorine.value = observableMeasurements.map(_.freeChlorine).sum / count
-    averageCombinedChlorine.value = numberFormat.format( observableMeasurements.map(_.combinedChlorine).sum / count ).toDouble
-    averagePh.value = numberFormat.format( observableMeasurements.map(_.ph).sum / count ).toDouble
-    averageCalciumHardness.value = observableMeasurements.map(_.calciumHardness).sum / count
-    averageTotalAlkalinity.value = observableMeasurements.map(_.totalAlkalinity).sum / count
-    averageCyanuricAcid.value = observableMeasurements.map(_.cyanuricAcid).sum / count
-    averageTotalBromine.value = observableMeasurements.map(_.totalBromine).sum / count
-    averageSalt.value = observableMeasurements.map(_.salt).sum / count
-    averageTemperature.value = observableMeasurements.map(_.temperature).sum / count
-
-  def onError(message: String): Unit =
-    shouldBeInFxThread("onerror message should be in fx thread.")
-    observableErrors += Error(message)
-    logger.error(message)
-
-  def onError(error: Throwable, message: String): Unit =
-    shouldBeInFxThread("onerror error, message should be in fx thread.")
-    observableErrors += Error(message)
-    logger.error(message, error)
 
   def add(pool: Pool): Future[Pool] =
     Future {
@@ -229,26 +192,48 @@ final class Model(context: Context) extends LazyLogging:
       selectedChemicalId.value = chemical.id
     }
 
-    /*
-      val totalChlorineRange = Range(1, 5).inclusive
-      val freeChlorineRange = Range(1, 5).inclusive
-      val combinedChlorineRange = Set(0.0, 0.1, 0.2)
-      val phRange = Set(7.2, 7.3, 7.4, 7.5, 7.6)
-      val calciumHardnessRange = Range(250, 500).inclusive
-      val totalAlkalinityRange = Range(80, 120).inclusive
-      val cyanuricAcidRange = Range(30, 100).inclusive
-      val totalBromineRange = Range(2, 10).inclusive
-      val saltRange = Range(2700, 3400).inclusive
-      val temperatureRange = Range(50, 100).inclusive
-    */
+  def onError(message: String): Unit =
+    shouldBeInFxThread("onerror message should be in fx thread.")
+    observableErrors += Error(message)
+    logger.error(message)
 
-  def totalChlorineInRange(value: Int): Boolean = totalChlorineRange.contains(value)
-  def freeChlorineInRange(value: Int): Boolean = freeChlorineRange.contains(value)
-  def combinedChlorineInRange(value: Double): Boolean = combinedChlorineRange.contains(value)
-  def phInRange(value: Double): Boolean = phRange.contains(value)
-  def calciumHardnessInRange(value: Int): Boolean = calciumHardnessRange.contains(value)
-  def totalAlkalinityInRange(value: Int): Boolean = totalAlkalinityRange.contains(value)
-  def cyanuricAcidInRange(value: Int): Boolean = cyanuricAcidRange.contains(value)
-  def totalBromineInRange(value: Int): Boolean = totalBromineRange.contains(value)
-  def saltInRange(value: Int): Boolean = saltRange.contains(value)
-  def temperatureInRange(value: Int): Boolean = temperatureRange.contains(value)
+  def onError(error: Throwable, message: String): Unit =
+    shouldBeInFxThread("onerror error, message should be in fx thread.")
+    observableErrors += Error(message)
+    logger.error(message, error)
+
+  def dashboard(): Unit =
+    shouldBeInFxThread("dashboard should be in fx thread.")
+    val numberFormat = NumberFormat.getNumberInstance()
+    numberFormat.setMaximumFractionDigits(1)
+    observableMeasurements.headOption.foreach { measurement =>
+      onCurrent(measurement, numberFormat)
+      onAverage(numberFormat)
+    }
+
+  def onCurrent(measurement: Measurement, numberFormat: NumberFormat): Unit =
+    shouldBeInFxThread("oncurrent should be in fx thread.")
+    currentTotalChlorine.value = measurement.totalChlorine
+    currentFreeChlorine.value = measurement.freeChlorine
+    currentCombinedChlorine.value = numberFormat.format( measurement.combinedChlorine ).toDouble
+    currentPh.value = numberFormat.format( measurement.ph ).toDouble
+    currentCalciumHardness.value = measurement.calciumHardness
+    currentTotalAlkalinity.value = measurement.totalAlkalinity
+    currentCyanuricAcid.value = measurement.cyanuricAcid
+    currentTotalBromine.value = measurement.totalBromine
+    currentSalt.value = measurement.salt
+    currentTemperature.value = measurement.temperature
+
+  def onAverage(numberFormat: NumberFormat): Unit =
+    shouldBeInFxThread("onaverage should be in fx thread.")
+    val count = observableMeasurements.length
+    averageTotalChlorine.value = observableMeasurements.map(_.totalChlorine).sum / count
+    averageFreeChlorine.value = observableMeasurements.map(_.freeChlorine).sum / count
+    averageCombinedChlorine.value = numberFormat.format( observableMeasurements.map(_.combinedChlorine).sum / count ).toDouble
+    averagePh.value = numberFormat.format( observableMeasurements.map(_.ph).sum / count ).toDouble
+    averageCalciumHardness.value = observableMeasurements.map(_.calciumHardness).sum / count
+    averageTotalAlkalinity.value = observableMeasurements.map(_.totalAlkalinity).sum / count
+    averageCyanuricAcid.value = observableMeasurements.map(_.cyanuricAcid).sum / count
+    averageTotalBromine.value = observableMeasurements.map(_.totalBromine).sum / count
+    averageSalt.value = observableMeasurements.map(_.salt).sum / count
+    averageTemperature.value = observableMeasurements.map(_.temperature).sum / count
