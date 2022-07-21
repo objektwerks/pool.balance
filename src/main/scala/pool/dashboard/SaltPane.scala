@@ -11,9 +11,9 @@ class SaltPane(context: Context) extends DashboardTitledPane(context):
   average.text <== context.model.averageSalt.asString
 
   context.model.rangeCurrentSalt.onChange { (_, _, inRange) =>
-    if inRange then println("current salt in range") else println("current salt out of range")
+    if inRange then inRangeCurrent else outOfRangeCurrent
   }
 
   context.model.rangeAverageSalt.onChange { (_, _, inRange) =>
-    if inRange then println("average salt in range") else println("average salt out of range")
+    if inRange then inRangeAverage else outOfRangeAverage
   }
