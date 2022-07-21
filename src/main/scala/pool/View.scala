@@ -10,11 +10,10 @@ import pool.pane.{PoolsPane, TabbedPane}
 import pool.dashboard.DashboardPane
 
 final class View(context: Context):
-  val borderPane = new BorderPane {
+  val borderPane = new BorderPane:
     prefWidth = context.windowWidth
     prefHeight = context.windowHeight
     padding = Insets(6)
-  }
 
   val dashboardPane = DashboardPane(context)
   HBox.setHgrow(dashboardPane, Priority.Always)
@@ -35,7 +34,6 @@ final class View(context: Context):
   borderPane.top = dashboardPane
   borderPane.center = splitPane
 
-  val scene = new Scene {
+  val scene = new Scene:
     root = borderPane
     stylesheets = List("/style.css")
-  }
