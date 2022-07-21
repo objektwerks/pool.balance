@@ -12,11 +12,9 @@ class TotalChlorinePane(context: Context) extends DashboardTitledPane(context):
   average.text <== context.model.averageTotalChlorine.asString
 
   context.model.rangeCurrentTotalChlorine.onChange { (_, _, inRange) =>
-    println(s"in range current total chlorine: $inRange")
     if inRange then inRangeCurrent else outOfRangeCurrent
   }
 
   context.model.rangeAverageTotalChlorine.onChange { (_, _, inRange) =>
-    println(s"in range average total chlorine: $inRange")
     if inRange then inRangeAverage else outOfRangeAverage
   }
