@@ -5,7 +5,7 @@ import scalafx.scene.layout.{HBox, Priority}
 
 import pool.Context
 
-class DashboardPane(context: Context) extends HBox:
+final class DashboardPane(context: Context) extends HBox:
   spacing = 6
   padding = Insets(6)
 
