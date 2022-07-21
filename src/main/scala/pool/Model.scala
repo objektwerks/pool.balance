@@ -245,3 +245,4 @@ final class Model(context: Context) extends LazyLogging:
   def totalChlorineInRange(value: Int): Boolean = totalChlorineRange.contains(value)
   def freeChlorineInRange(value: Int): Boolean = freeChlorineRange.contains(value)
   def combinedChlorineInRange(value: Double): Boolean = combinedChlorineRange.contains(value)
+  def phInRange(value: Double): Boolean = phRange.contains(value)
