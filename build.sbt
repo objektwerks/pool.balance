@@ -1,6 +1,6 @@
 name := "pool.balance"
 organization := "objektwerks"
-version := "0.1"
+version := "0.2-SNAPSHOT"
 scalaVersion := "3.2.0-RC2"
 mainClass := Some("pool.App")
 libraryDependencies ++= {
