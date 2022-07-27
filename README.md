@@ -29,7 +29,9 @@ Assembly
 
 Deploy
 ------
-1. Consider using jDeploy ( https://www.npmjs.com/package/jdeploy )
+>Consider these options:
+1. [jDeploy](https://www.npmjs.com/package/jdeploy)
+2. [Hydraulic](https://hydraulic.software/index.html)
 
 Features
 --------
