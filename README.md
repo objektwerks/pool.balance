@@ -2,10 +2,6 @@ Pool Balance
 ------------
 >Pool cleaning, measurement and chemical balancing app using ScalaFX and Scala 3.
 
-Todo
-----
-1. Explore  jDeploy ( https://www.npmjs.com/package/jdeploy )
-
 Build
 -----
 1. sbt clean compile
