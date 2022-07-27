@@ -31,6 +31,10 @@ Assembly
 3. java -jar .assembly/pool-balance-win-0.1.jar
 4. java -jar .assembly/pool-balance-linux-0.1.jar
 
+Deploy
+------
+1. Consider using jDeploy ( https://www.npmjs.com/package/jdeploy )
+
 Features
 --------
 1. dashboard
