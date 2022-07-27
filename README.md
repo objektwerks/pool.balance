@@ -31,7 +31,7 @@ Deploy
 ------
 >Consider these options:
 1. [jDeploy](https://www.npmjs.com/package/jdeploy)
-2. [Hydraulic](https://hydraulic.software/index.html)
+2. [Conveyor](https://hydraulic.software/index.html)
 
 Features
 --------
