@@ -37,16 +37,24 @@ abstract class DashboardTitledPane(context: Context) extends TitledPane with Laz
   
   content = ControlGridPane(controls)
 
+  val greenBorderStyle = "-fx-border-color: green; -fx-border-width: 3;"
+  val redBorderStyle = "-fx-border-color: red; -fx-border-width: 3;"
+  val emptyStyle = ""
+
   def inRangeCurrent: Unit =
-    current.style = ""
+    good.style = emptyStyle
+    current.style = emptyStyle
 
   def outOfRangeCurrent: Unit =
     logger.info(s"DashboardTitledPane.outOfRangeCurrent: ${text.value}")
-    current.style = "-fx-border-color: red; -fx-border-width: 3;"
+    good.style = greenBorderStyle
+    current.style = redBorderStyle
 
   def inRangeAverage: Unit =
-    average.style = ""
+    good.style = emptyStyle
+    average.style = emptyStyle
 
   def outOfRangeAverage: Unit =
     logger.info(s"DashboardTitledPane.outOfRangeAverage: ${text.value}")
-    average.style = "-fx-border-color: red; -fx-border-width: 3;"
+    good.style = greenBorderStyle
+    average.style = redBorderStyle
