@@ -21,7 +21,10 @@ Assembly
 2. sbt -Dtarget="m1" clean test assembly copyAssemblyJar
 3. sbt -Dtarget="win" clean test assembly copyAssemblyJar
 4. sbt -Dtarget="linux" clean test assembly copyAssemblyJar
->To run locally:
+
+Execute
+-------
+>To execute an assembled jar locally:
 1. java -jar .assembly/pool-balance-mac-0.1.jar
 2. java -jar .assembly/pool-balance-m1-0.1.jar
 3. java -jar .assembly/pool-balance-win-0.1.jar
