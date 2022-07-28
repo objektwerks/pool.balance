@@ -51,16 +51,16 @@ Use Cases
 Measurements
 ------------
 >Measured in ppm ( parts per million ).
-1. total chlorine (tc = fc + cc): 0 - 10, ok = 1 - 5, ideal = 3
-2. free chlorine (fc): 0 - 10, ok = 1 - 5, ideal = 3
-3. combined chlorine (cc = tc - fc): 0 - 0.5, ok = 0 - 0.2, ideal = 0
-4. ph: 6.2 - 8.4, ok = 7.2 - 7.6, ideal = 7.4
-5. calcium hardness (ch): 0 - 1000, ok = 250 - 500, ideal = 375
-6. total alkalinity (ta): 0 - 240, ok = 80 - 120, ideal = 100
-7. cyanuric acid (cya): 0 - 300, ok = 30 - 100, ideal = 50
-8. total bromine (tb): 0 - 20, ok = 2 - 10, ideal = 5
-9. salt: 0 - 3600, ok = 2,700-3,400, ideal = 3200
-10. temperature: 50 - 100, ok = 75 - 85, ideal = 82
+1. total chlorine (tc = fc + cc): 0 - 10, good = 1 - 5, ideal = 3
+2. free chlorine (fc): 0 - 10, good = 1 - 5, ideal = 3
+3. combined chlorine (cc = tc - fc): 0 - 0.5, good = 0 - 0.2, ideal = 0
+4. ph: 6.2 - 8.4, good = 7.2 - 7.6, ideal = 7.4
+5. calcium hardness (ch): 0 - 1000, good = 250 - 500, ideal = 375
+6. total alkalinity (ta): 0 - 240, good = 80 - 120, ideal = 100
+7. cyanuric acid (cya): 0 - 300, good = 30 - 100, ideal = 50
+8. total bromine (tb): 0 - 20, good = 2 - 10, ideal = 5
+9. salt: 0 - 3600, good = 2,700-3,400, ideal = 3200
+10. temperature: 50 - 100, good = 75 - 85, ideal = 82
 
 Chemicals
 ---------
