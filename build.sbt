@@ -8,7 +8,7 @@ libraryDependencies ++= {
     "org.scalafx" %% "scalafx" % "18.0.2-R29",
     "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
     "com.zaxxer" % "HikariCP" % "5.0.1" exclude("org.slf4j", "slf4j-api"),
-    "com.h2database" % "h2" % "2.1.212",
+    "com.h2database" % "h2" % "2.1.214",
     "com.typesafe" % "config" % "1.4.2",
     "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
     "ch.qos.logback" % "logback-classic" % "1.2.11",
