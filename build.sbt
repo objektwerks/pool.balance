@@ -69,7 +69,7 @@ else assemblyJarName := "pool-balance-no-valid-target-specified-0.1.jar"
 
 lazy val javafxModules = Seq("base", "controls", "web")
 libraryDependencies ++= javafxModules.map( module =>
-  "org.openjfx" % s"javafx-$module" % "18.0.1" classifier os
+  "org.openjfx" % s"javafx-$module" % "18.0.2" classifier os
 )
 
 assembly / assemblyMergeStrategy := {
