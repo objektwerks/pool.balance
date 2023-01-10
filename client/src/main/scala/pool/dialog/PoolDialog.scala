@@ -7,12 +7,13 @@ import scalafx.scene.control.{ButtonType, ComboBox, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import pool.{Context, Entity, Pool}
-import pool.Appimport pool.UnitOfMeasure
+import pool.Client
+import pool.UnitOfMeasure
 import pool.Entity.*
 import pool.control.IntTextField
 
 final class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
-  initOwner(App.stage)
+  initOwner(Client.stage)
   title = context.windowTitle
   headerText = context.dialogPool
 

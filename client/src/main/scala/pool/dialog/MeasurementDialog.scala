@@ -6,11 +6,12 @@ import scalafx.scene.control.{ButtonType, DatePicker, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import pool.{Context, Entity, Measurement, UnitOfMeasure}
-import pool.Appimport pool.Entity.*
+import pool.Client
+import pool.Entity.*
 import pool.control.TextSlider.*
 
 final class MeasurementDialog(context: Context, measurement: Measurement) extends Dialog[Measurement]:
-  initOwner(App.stage)
+  initOwner(Client.stage)
   title = context.windowTitle
   headerText = context.dialogMeasurement
 

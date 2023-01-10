@@ -7,11 +7,12 @@ import scalafx.scene.control.{ButtonType, ComboBox, DatePicker, Dialog, Separato
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import pool.{Chemical, Context, Entity, UnitOfMeasure, TypeOfChemical}
-import pool.Appimport pool.Entity.*
+import pool.Client
+import pool.Entity.*
 import pool.control.{Converter, DoubleTextField}
 
 final class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemical]:
-  initOwner(App.stage)
+  initOwner(Client.stage)
   title = context.windowTitle
   headerText = context.dialogChemical
 

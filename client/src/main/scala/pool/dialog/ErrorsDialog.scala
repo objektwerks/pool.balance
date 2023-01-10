@@ -5,9 +5,10 @@ import scalafx.scene.control.{ButtonType, Dialog, TableColumn, TableView}
 import scalafx.scene.layout.VBox
 
 import pool.{Error, Context}
-import pool.App
+import pool.Client
+
 final class ErrorsDialog(context: Context) extends Dialog[Unit]:
-  initOwner(App.stage)
+  initOwner(Client.stage)
   title = context.windowTitle
   headerText = context.dialogErrors
 
