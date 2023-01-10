@@ -12,7 +12,7 @@ lazy val poolbalance = (project in file("."))
     publishLocal := {}
   )
 
-// Begin: Client Tasks
+// Begin: Client Assembly Tasks
 
   lazy val createAssemblyDir = taskKey[File]("Create assembly dir.")
   createAssemblyDir := {
@@ -44,7 +44,7 @@ lazy val poolbalance = (project in file("."))
     Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING)
   }
 
-// End: Client Tasks
+// End: Client Assembly Tasks
 
 // Begin: Client Assembly
 
