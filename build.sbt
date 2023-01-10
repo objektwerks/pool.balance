@@ -81,13 +81,9 @@ lazy val client = project
     libraryDependencies ++= {
       Seq(
         "org.scalafx" %% "scalafx" % "19.0.0-R30",
-        "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
-        "com.zaxxer" % "HikariCP" % "5.0.1" exclude("org.slf4j", "slf4j-api"),
-        "com.h2database" % "h2" % "2.1.214",
         "com.typesafe" % "config" % "1.4.2",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
-        "ch.qos.logback" % "logback-classic" % "1.4.5",
-        "org.scalatest" %% "scalatest" % "3.2.14" % Test
+        "ch.qos.logback" % "logback-classic" % "1.4.5"
       )
     }
   )
