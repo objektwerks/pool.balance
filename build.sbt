@@ -1,20 +1,53 @@
-name := "pool.balance"
-organization := "objektwerks"
-version := "0.4-SNAPSHOT"
-scalaVersion := "3.2.1"
-mainClass := Some("pool.App")
-libraryDependencies ++= {
-  Seq(
-    "org.scalafx" %% "scalafx" % "19.0.0-R30",
-    "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
-    "com.zaxxer" % "HikariCP" % "5.0.1" exclude("org.slf4j", "slf4j-api"),
-    "com.h2database" % "h2" % "2.1.214",
-    "com.typesafe" % "config" % "1.4.2",
-    "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
-    "ch.qos.logback" % "logback-classic" % "1.4.5",
-    "org.scalatest" %% "scalatest" % "3.2.14" % Test
+lazy val common = Defaults.coreDefaultSettings ++ Seq(
+  organization := "objektwerks",
+  version := "0.4-SNAPSHOT",
+  scalaVersion := "3.2.1"
+)
+
+lazy val poolbalance = (project in file("."))
+  .aggregate(client, shared, server)
+  .settings(common)
+  .settings(
+    publish := {},
+    publishLocal := {}
   )
-}
+
+lazy val client = project
+  .enablePlugins(JavaAppPackaging)
+  .dependsOn(shared)
+  .settings(common)
+  .settings(
+    libraryDependencies ++= {
+      Seq(
+        "org.scalafx" %% "scalafx" % "19.0.0-R30",
+        "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
+        "com.zaxxer" % "HikariCP" % "5.0.1" exclude("org.slf4j", "slf4j-api"),
+        "com.h2database" % "h2" % "2.1.214",
+        "com.typesafe" % "config" % "1.4.2",
+        "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
+        "ch.qos.logback" % "logback-classic" % "1.4.5",
+        "org.scalatest" %% "scalatest" % "3.2.14" % Test
+      )
+    }
+  )
+
+lazy val shared = project
+  .settings(common)
+
+lazy val server = project
+  .enablePlugins(JavaServerAppPackaging)
+  .dependsOn(shared)
+  .settings(common)
+  .settings(
+    libraryDependencies ++= {
+      Seq(
+        "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
+        "org.postgresql" % "postgresql" % "42.5.1",
+        "org.jodd" % "jodd-mail" % "6.0.5",
+        "org.scalatest" %% "scalatest" % "3.2.14" % Test
+      )
+    }
+  )
 
 lazy val createAssemblyDir = taskKey[File]("Create assembly dir.")
 createAssemblyDir := {
