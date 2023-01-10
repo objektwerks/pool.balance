@@ -5,8 +5,8 @@ import scalafx.scene.control.{ButtonType, Dialog}
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.layout.VBox
 
-import pool.{App, Context}
-import pool.chart.CleaningsChart
+import pool.{Context}
+import pool.Appimport pool.chart.CleaningsChart
 
 final class CleaningsChartDialog(context: Context) extends Dialog[Unit]:
   initOwner(App.stage)

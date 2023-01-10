@@ -5,8 +5,8 @@ import scalafx.scene.layout.Region
 import scalafx.scene.control.{ButtonType, DatePicker, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 
-import pool.{App, Context, Entity, Measurement, UnitOfMeasure}
-import pool.Entity.*
+import pool.{Context, Entity, Measurement, UnitOfMeasure}
+import pool.Appimport pool.Entity.*
 import pool.control.TextSlider.*
 
 final class MeasurementDialog(context: Context, measurement: Measurement) extends Dialog[Measurement]:

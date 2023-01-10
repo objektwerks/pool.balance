@@ -6,8 +6,8 @@ import scalafx.scene.layout.{Region, VBox}
 import scalafx.scene.control.{ButtonType, ComboBox, DatePicker, Dialog, Separator, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 
-import pool.{App, Chemical, Context, Entity, UnitOfMeasure, TypeOfChemical}
-import pool.Entity.*
+import pool.{Chemical, Context, Entity, UnitOfMeasure, TypeOfChemical}
+import pool.Appimport pool.Entity.*
 import pool.control.{Converter, DoubleTextField}
 
 final class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[Chemical]:

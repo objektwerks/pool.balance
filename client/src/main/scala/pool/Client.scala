@@ -9,7 +9,7 @@ import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.layout.VBox
 
-object App extends JFXApp3 with LazyLogging:
+object Client extends JFXApp3 with LazyLogging:
   override def start(): Unit =
     val context = Context( ConfigFactory.load("app.conf") )
     val view = View(context)

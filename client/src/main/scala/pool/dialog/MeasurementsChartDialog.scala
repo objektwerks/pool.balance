@@ -5,8 +5,8 @@ import scalafx.scene.control.{ButtonType, Dialog}
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.layout.VBox
 
-import pool.{App, Context}
-import pool.chart.MeasurementsChart
+import pool.{Context}
+import pool.Appimport pool.chart.MeasurementsChart
 
 final class MeasurementsChartDialog(context: Context) extends Dialog[Unit]:
   initOwner(App.stage)
