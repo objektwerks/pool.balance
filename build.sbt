@@ -13,7 +13,6 @@ lazy val poolbalance = (project in file("."))
   )
 
 lazy val client = project
-  .enablePlugins(JavaAppPackaging)
   .dependsOn(shared)
   .settings(common)
   .settings(
