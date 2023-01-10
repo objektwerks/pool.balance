@@ -93,10 +93,10 @@ Entity
 
 Model
 -----
-* App 1 --> 1 Context | Store | Model | View
-* Store 1 --> 1 Context
-* Model 1 --> 1 Context | Store
-* View 1 --> 1 Context | Model
+* Client 1 --> 1 Context
+* Conext 1 --> 1 Model | View
+* Model 1 --> 1 Proxy
+* View 1 --> 1 Context
 
 UI
 --
