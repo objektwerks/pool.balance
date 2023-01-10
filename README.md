@@ -4,7 +4,7 @@ Pool Balance
 
 TODO
 ----
->Refactor project to use PostgresSql.
+>Refactor into multi-project build using PostgresSql. 2022.1.10
 
 Build
 -----
