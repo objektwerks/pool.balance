@@ -51,7 +51,7 @@ lazy val poolbalance = (project in file("."))
   3. sbt -Dtarget="win" clean test assembly copyAssemblyJar
   4. sbt -Dtarget="linux" clean test assembly copyAssemblyJar
   */
-  lazy val os: String = sys.props.getOrElse("target", "") match {
+  lazy val OS: String = sys.props.getOrElse("target", "") match {
     case name if name.startsWith("mac")   => "mac"
     case name if name.startsWith("m1")    => "mac-aarch64"
     case name if name.startsWith("win")   => "win"
@@ -59,18 +59,16 @@ lazy val poolbalance = (project in file("."))
     case _ => ""
   }
 
-  if (os == "mac") assemblyJarName := "pool-balance-mac-0.3.jar"
-  else if (os == "mac-aarch64") assemblyJarName := "pool-balance-m1-0.3.jar"
-  else if (os == "win") assemblyJarName := "pool-balance-win-0.3.jar"
-  else if (os == "linux") assemblyJarName := "pool-balance-linux-0.3.jar"
+  if (OS == "mac") assemblyJarName := "pool-balance-mac-0.3.jar"
+  else if (OS == "mac-aarch64") assemblyJarName := "pool-balance-m1-0.3.jar"
+  else if (OS == "win") assemblyJarName := "pool-balance-win-0.3.jar"
+  else if (OS == "linux") assemblyJarName := "pool-balance-linux-0.3.jar"
   else assemblyJarName := "pool-balance-no-valid-target-specified-0.3.jar"
 
-  assembly / assemblyMergeStrategy := {
+  client / assembly / assemblyMergeStrategy := {
     case PathList("META-INF", xs @ _*) => MergeStrategy.discard
     case x => MergeStrategy.first
   }
-
-  lazy val javafxModules = Seq("base", "controls", "web")
 
 // End: Client Tasks
 
@@ -88,8 +86,8 @@ lazy val client = project
     }
   )
   .settings(
-    libraryDependencies ++= javafxModules.map( module =>
-      "org.openjfx" % s"javafx-$module" % "18.0.2" classifier os
+    libraryDependencies ++= Seq("base", "controls", "web").map( jfxModule =>
+      "org.openjfx" % s"javafx-$jfxModule" % "18.0.2" classifier OS
     )
   )
 
