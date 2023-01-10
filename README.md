@@ -18,10 +18,17 @@ Test
 
 Run
 ---
-1. sbt run
+1. TODO
 
-Assembly
---------
+Package Server
+--------------
+1. sbt ( interactive session )
+2. project client
+3. test
+4. universal:packageBin
+
+Assembl Client
+--------------
 >To build for a "mac", "m1', "win" or "linux" os target:
 1. sbt -Dtarget="mac" clean test assembly copyAssemblyJar
 2. sbt -Dtarget="m1" clean test assembly copyAssemblyJar
