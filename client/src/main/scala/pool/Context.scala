@@ -161,8 +161,6 @@ final class Context(config: Config):
   val model = Model()
   model.init
 
-  val view = View(this)
-
   def addImage = loadImageView("/image/add.png")
   def editImage = loadImageView("/image/edit.png")
   def chartImage = loadImageView("/image/chart.png")
