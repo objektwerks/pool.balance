@@ -102,7 +102,7 @@ UI
 --
 1. Top: dashboard(total chlorine, free chlorine, ph, calcium hardness, total alkalinity, cyanuric acid, total bromine)
 2. Left: pane(pools)
-3. Center: tabbedpane(cleanings, measurements, chemicals)
+3. Right: tabbedpane(cleanings, measurements, chemicals)
 
 Charts
 ------
