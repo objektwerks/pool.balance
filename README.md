@@ -2,6 +2,10 @@ Pool Balance
 ------------
 >Pool cleaning, measurement and chemical balancing app using Scala3, ScalaFX and PostgreSql.
 
+TODO
+----
+>Refactor project to use PostgresSql.
+
 Build
 -----
 1. sbt clean compile
