@@ -44,6 +44,10 @@ lazy val poolbalance = (project in file("."))
     Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING)
   }
 
+// End: Client Tasks
+
+// Begin: Client Assembly
+
   /*
   See assembly section in readme.
   1. sbt -Dtarget="mac" clean test assembly copyAssemblyJar
@@ -70,7 +74,7 @@ lazy val poolbalance = (project in file("."))
     case x => MergeStrategy.first
   }
 
-// End: Client Tasks
+// End: Client Assembly
 
 lazy val client = project
   .dependsOn(shared)
