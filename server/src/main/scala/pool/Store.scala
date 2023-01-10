@@ -1,9 +1,28 @@
 package pool
 
+import com.typesafe.config.Config
+import com.zaxxer.hikari.HikariDataSource
+
+import javax.sql.DataSource
+
 import scalikejdbc.*
 
-final class Store(context: Context):
-  ConnectionPool.singleton(DataSourceConnectionPool(context.dataSource))
+final class Store(config: Config):
+  val url = config.getString("db.url")
+  val user = config.getString("db.user")
+  val password = config.getString("db.password")
+  val dataSourceClassName = config.getString("db.dataSourceClassName")
+  val maximumPoolSize = config.getInt("db.maximumPoolSize")
+  val dataSource: DataSource = {
+    val ds = new HikariDataSource()
+    ds.setDataSourceClassName(dataSourceClassName)
+    ds.addDataSourceProperty("url", url)
+    ds.addDataSourceProperty("user", user)
+    ds.addDataSourceProperty("password", password)
+    ds.setMaximumPoolSize(maximumPoolSize)
+    ds
+  }
+  ConnectionPool.singleton(DataSourceConnectionPool(dataSource))
 
   def pools(): List[Pool] = DB readOnly { implicit session =>
     sql"select * from pool order by name"

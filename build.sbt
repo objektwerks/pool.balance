@@ -42,7 +42,8 @@ lazy val shared = project
          exclude("org.openjfx", "javafx-graphics")
          exclude("org.openjfx", "javafx-media")
          exclude("org.openjfx", "javafx-swing")
-         exclude("org.openjfx", "javafx-web")
+         exclude("org.openjfx", "javafx-web"),
+        "org.scalatest" %% "scalatest" % "3.2.14" % Test
       )
     }
   )
@@ -55,8 +56,10 @@ lazy val server = project
     libraryDependencies ++= {
       Seq(
         "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
+        "com.zaxxer" % "HikariCP" % "5.0.1" exclude("org.slf4j", "slf4j-api"),
         "org.postgresql" % "postgresql" % "42.5.1",
         "org.jodd" % "jodd-mail" % "6.0.5",
+        "com.typesafe" % "config" % "1.4.2",
         "org.scalatest" %% "scalatest" % "3.2.14" % Test
       )
     }

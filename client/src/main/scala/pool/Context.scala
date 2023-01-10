@@ -165,22 +165,6 @@ final class Context(config: Config):
 
   def logo = new Image(Image.getClass.getResourceAsStream("/image/logo.png"))
 
-  val url = config.getString("db.url")
-  val user = config.getString("db.user")
-  val password = config.getString("db.password")
-  val dataSourceClassName = config.getString("db.dataSourceClassName")
-  val maximumPoolSize = config.getInt("db.maximumPoolSize")
-  val dataSource: DataSource = {
-    val ds = new HikariDataSource()
-    ds.setDataSourceClassName(dataSourceClassName)
-    ds.addDataSourceProperty("url", url)
-    ds.addDataSourceProperty("user", user)
-    ds.addDataSourceProperty("password", password)
-    ds.setMaximumPoolSize(maximumPoolSize)
-    ds
-  }
-
-  val store = Store(this)
   val model = Model(this)
 
   private def loadImageView(path: String): ImageView = new ImageView:
