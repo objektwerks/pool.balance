@@ -1,7 +1,6 @@
 package pool
 
 import com.typesafe.config.{Config, ConfigFactory}
-import com.zaxxer.hikari.HikariDataSource
 
 import javax.sql.DataSource
 
