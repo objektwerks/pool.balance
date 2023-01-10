@@ -33,6 +33,19 @@ lazy val client = project
 
 lazy val shared = project
   .settings(common)
+  .settings(
+    libraryDependencies ++= {
+      Seq(
+        "org.scalafx" %% "scalafx" % "19.0.0-R30"
+         exclude("org.openjfx", "javafx-controls")
+         exclude("org.openjfx", "javafx-fxml")
+         exclude("org.openjfx", "javafx-graphics")
+         exclude("org.openjfx", "javafx-media")
+         exclude("org.openjfx", "javafx-swing")
+         exclude("org.openjfx", "javafx-web")
+      )
+    }
+  )
 
 lazy val server = project
   .enablePlugins(JavaServerAppPackaging)
