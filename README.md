@@ -16,9 +16,17 @@ Test
 ----
 1. sbt clean test
 
-Run
----
-1. TODO
+Server Run
+----------
+1. sbt ( interactive session )
+2. project server
+3. run
+
+Client Run
+----------
+1. sbt ( interactive session )
+2. project client
+3. run
 
 Package Server
 --------------
