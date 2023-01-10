@@ -35,16 +35,16 @@ Package Server
 3. test
 4. universal:packageBin
 
-Assembl Client
---------------
+Client Assembly
+---------------
 >To build for a "mac", "m1', "win" or "linux" os target:
 1. sbt -Dtarget="mac" clean test assembly copyAssemblyJar
 2. sbt -Dtarget="m1" clean test assembly copyAssemblyJar
 3. sbt -Dtarget="win" clean test assembly copyAssemblyJar
 4. sbt -Dtarget="linux" clean test assembly copyAssemblyJar
 
-Execute
--------
+Execute Client
+--------------
 >To execute an assembled jar locally:
 1. java -jar .assembly/pool-balance-mac-0.3.jar
 2. java -jar .assembly/pool-balance-m1-0.3.jar
