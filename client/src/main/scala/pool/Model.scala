@@ -205,11 +205,11 @@ final class Model extends LazyLogging:
     val numberFormat = NumberFormat.getNumberInstance()
     numberFormat.setMaximumFractionDigits(1)
     observableMeasurements.headOption.foreach { measurement =>
-      onCurrent(measurement, numberFormat)
-      onAverage(numberFormat)
+      calculateCurrentMeasurements(measurement, numberFormat)
+      calculateAverageMeasurements(numberFormat)
     }
 
-  private def onCurrent(measurement: Measurement, numberFormat: NumberFormat): Unit =
+  private def calculateCurrentMeasurements(measurement: Measurement, numberFormat: NumberFormat): Unit =
     shouldBeInFxThread("oncurrent should be in fx thread.")
     currentTotalChlorine.value = measurement.totalChlorine
     currentFreeChlorine.value = measurement.freeChlorine
@@ -222,7 +222,7 @@ final class Model extends LazyLogging:
     currentSalt.value = measurement.salt
     currentTemperature.value = measurement.temperature
 
-  private def onAverage(numberFormat: NumberFormat): Unit =
+  private def calculateAverageMeasurements(numberFormat: NumberFormat): Unit =
     shouldBeInFxThread("onaverage should be in fx thread.")
     val count = observableMeasurements.length
     averageTotalChlorine.value = observableMeasurements.map(_.totalChlorine).sum / count
