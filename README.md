@@ -7,6 +7,7 @@ TODO
 1. Server
 2. Serializer
 3. Validator
+4. Proxy
 
 Build
 -----
