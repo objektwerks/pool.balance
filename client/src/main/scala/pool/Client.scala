@@ -10,17 +10,16 @@ import scalafx.scene.Scene
 import scalafx.scene.layout.VBox
 
 object Client extends JFXApp3 with LazyLogging:
-  override def start(): Unit =
-    val context = Context( ConfigFactory.load("app.conf") )
-    val view = View(context)
-    
+  private val context = Context( ConfigFactory.load("app.conf") )
+
+  override def start(): Unit =    
     stage = new JFXApp3.PrimaryStage:
-      scene = view.scene
+      scene = context.view.scene
       title = context.windowTitle
       minWidth = context.windowWidth
       minHeight = context.windowHeight
       icons.add(context.logo)
 
-    logger.info("Client was started ...")
+    logger.info("Client started.")
 
-  override def stopApp(): Unit = logger.info("Client was stopped.")
+  override def stopApp(): Unit = logger.info("Client stopped.")

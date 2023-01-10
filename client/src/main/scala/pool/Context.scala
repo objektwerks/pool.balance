@@ -158,15 +158,17 @@ final class Context(config: Config):
   val tabMeasurements = config.getString("tab.measurements")
   val tabChemicals = config.getString("tab.chemicals")
 
+  val model = Model()
+  model.init
+
+  val view = View(this)
+
   def addImage = loadImageView("/image/add.png")
   def editImage = loadImageView("/image/edit.png")
   def chartImage = loadImageView("/image/chart.png")
   def errorsImage = loadImageView("/image/errors.png")
 
   def logo = new Image(Image.getClass.getResourceAsStream("/image/logo.png"))
-
-  val model = Model()
-  model.init
 
   private def loadImageView(path: String): ImageView = new ImageView:
     image = new Image(Image.getClass.getResourceAsStream(path))
