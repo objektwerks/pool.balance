@@ -65,12 +65,12 @@ lazy val poolbalance = (project in file("."))
   else if (os == "linux") assemblyJarName := "pool-balance-linux-0.3.jar"
   else assemblyJarName := "pool-balance-no-valid-target-specified-0.3.jar"
 
-  lazy val javafxModules = Seq("base", "controls", "web")
-
   assembly / assemblyMergeStrategy := {
     case PathList("META-INF", xs @ _*) => MergeStrategy.discard
     case x => MergeStrategy.first
   }
+
+  lazy val javafxModules = Seq("base", "controls", "web")
 
 // End: Client Tasks
 
