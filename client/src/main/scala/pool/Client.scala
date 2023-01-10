@@ -21,6 +21,6 @@ object Client extends JFXApp3 with LazyLogging:
       minHeight = context.windowHeight
       icons.add(context.logo)
 
-    logger.info("App started.")
+    logger.info("Client was started ...")
 
-  override def stopApp(): Unit = logger.info("App stopped.")
+  override def stopApp(): Unit = logger.info("Client was stopped.")

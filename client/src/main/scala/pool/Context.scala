@@ -166,6 +166,7 @@ final class Context(config: Config):
   def logo = new Image(Image.getClass.getResourceAsStream("/image/logo.png"))
 
   val model = Model()
+  model.init
 
   private def loadImageView(path: String): ImageView = new ImageView:
     image = new Image(Image.getClass.getResourceAsStream(path))

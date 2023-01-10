@@ -85,7 +85,7 @@ final class Model extends LazyLogging:
   val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
   val shouldNotBeInFxThread = (message: String) => require(!Platform.isFxApplicationThread, message)
 
-  pools()
+  def init: Unit = pools()
 
   def pools(): Unit =
     Future {
