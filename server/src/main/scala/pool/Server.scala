@@ -16,7 +16,7 @@ object Server extends LazyLogging:
 
   private val http = HttpServer.create(InetSocketAddress(port), backlog)
   private val handler = new HttpHandler {
-    override def handle(exchange: HttpExchange): Unit =
+    override def handle(exchange: HttpExchange): Unit =  // TODO Refactor!
       val response = Instant.now.toString
       exchange.sendResponseHeaders(200, response.length())
       val outputStream = exchange.getResponseBody
