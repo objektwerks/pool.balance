@@ -49,49 +49,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     pools()
     logger.info(s"*** Model: initialized.")
 
-  val currentTotalChlorine = ObjectProperty[Int](0)
-  val averageTotalChlorine = ObjectProperty[Int](0)
-  def totalChlorineInRange(value: Int): Boolean = totalChlorineRange.contains(value)
-
-  val currentFreeChlorine = ObjectProperty[Int](0)
-  val averageFreeChlorine = ObjectProperty[Int](0)
-  def freeChlorineInRange(value: Int): Boolean = freeChlorineRange.contains(value)
-
-  val currentCombinedChlorine = ObjectProperty[Double](0)
-  val averageCombinedChlorine = ObjectProperty[Double](0)
-  def combinedChlorineInRange(value: Double): Boolean = combinedChlorineRange.contains(value)
-
-  val currentPh = ObjectProperty[Double](0)
-  val averagePh = ObjectProperty[Double](0)
-  def phInRange(value: Double): Boolean = phRange.contains(value)
-
-  val currentCalciumHardness = ObjectProperty[Int](0)
-  val averageCalciumHardness = ObjectProperty[Int](0)
-  def calciumHardnessInRange(value: Int): Boolean = calciumHardnessRange.contains(value)
-
-  val currentTotalAlkalinity = ObjectProperty[Int](0)
-  val averageTotalAlkalinity = ObjectProperty[Int](0)
-  def totalAlkalinityInRange(value: Int): Boolean = totalAlkalinityRange.contains(value)
-
-  val currentCyanuricAcid = ObjectProperty[Int](0)
-  val averageCyanuricAcid = ObjectProperty[Int](0)
-  def cyanuricAcidInRange(value: Int): Boolean = cyanuricAcidRange.contains(value)
-
-  val currentTotalBromine = ObjectProperty[Int](0)
-  val averageTotalBromine = ObjectProperty[Int](0)
-  def totalBromineInRange(value: Int): Boolean = totalBromineRange.contains(value)
-
-  val currentSalt = ObjectProperty[Int](0)
-  val averageSalt = ObjectProperty[Int](0)
-  def saltInRange(value: Int): Boolean = saltRange.contains(value)
-
-  val currentTemperature = ObjectProperty[Int](0)
-  val averageTemperature = ObjectProperty[Int](0)
-  def temperatureInRange(value: Int): Boolean = temperatureRange.contains(value)
-
-  val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
-  val shouldNotBeInFxThread = (message: String) => require(!Platform.isFxApplicationThread, message)
-
   def pools(): Unit =
     Future {
       shouldNotBeInFxThread("pools should not be in fx thread.")
@@ -204,6 +161,49 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     shouldBeInFxThread("onerror error, message should be in fx thread.")
     observableErrors += Error(message)
     logger.error(message, error)
+
+  val currentTotalChlorine = ObjectProperty[Int](0)
+  val averageTotalChlorine = ObjectProperty[Int](0)
+  def totalChlorineInRange(value: Int): Boolean = totalChlorineRange.contains(value)
+
+  val currentFreeChlorine = ObjectProperty[Int](0)
+  val averageFreeChlorine = ObjectProperty[Int](0)
+  def freeChlorineInRange(value: Int): Boolean = freeChlorineRange.contains(value)
+
+  val currentCombinedChlorine = ObjectProperty[Double](0)
+  val averageCombinedChlorine = ObjectProperty[Double](0)
+  def combinedChlorineInRange(value: Double): Boolean = combinedChlorineRange.contains(value)
+
+  val currentPh = ObjectProperty[Double](0)
+  val averagePh = ObjectProperty[Double](0)
+  def phInRange(value: Double): Boolean = phRange.contains(value)
+
+  val currentCalciumHardness = ObjectProperty[Int](0)
+  val averageCalciumHardness = ObjectProperty[Int](0)
+  def calciumHardnessInRange(value: Int): Boolean = calciumHardnessRange.contains(value)
+
+  val currentTotalAlkalinity = ObjectProperty[Int](0)
+  val averageTotalAlkalinity = ObjectProperty[Int](0)
+  def totalAlkalinityInRange(value: Int): Boolean = totalAlkalinityRange.contains(value)
+
+  val currentCyanuricAcid = ObjectProperty[Int](0)
+  val averageCyanuricAcid = ObjectProperty[Int](0)
+  def cyanuricAcidInRange(value: Int): Boolean = cyanuricAcidRange.contains(value)
+
+  val currentTotalBromine = ObjectProperty[Int](0)
+  val averageTotalBromine = ObjectProperty[Int](0)
+  def totalBromineInRange(value: Int): Boolean = totalBromineRange.contains(value)
+
+  val currentSalt = ObjectProperty[Int](0)
+  val averageSalt = ObjectProperty[Int](0)
+  def saltInRange(value: Int): Boolean = saltRange.contains(value)
+
+  val currentTemperature = ObjectProperty[Int](0)
+  val averageTemperature = ObjectProperty[Int](0)
+  def temperatureInRange(value: Int): Boolean = temperatureRange.contains(value)
+
+  val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
+  val shouldNotBeInFxThread = (message: String) => require(!Platform.isFxApplicationThread, message)
 
   private def dashboard(): Unit =
     shouldBeInFxThread("dashboard should be in fx thread.")
