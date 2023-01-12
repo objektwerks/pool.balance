@@ -90,6 +90,14 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     observableFaults += Fault(cause)
     logger.error(cause, error)
 
+  def register(emailAddress: String): Unit = ???
+
+  def login(emailAddress: String, pin: String): Unit = ???
+
+  def deactivate(license: String): Unit = ???
+
+  def reactivate(license: String): Unit = ???
+
   def pools(): Unit =
     Future {
       shouldNotBeInFxThread("pools should not be in fx thread.")
