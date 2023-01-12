@@ -7,7 +7,7 @@ import javax.sql.DataSource
 import scala.jdk.CollectionConverters.*
 import scalafx.scene.image.{Image, ImageView}
 
-final class Context(config: Config):
+final class Context(config: Config, model: Model):
   val windowTitle = config.getString("window.title")
   val windowWidth = config.getDouble("window.width")
   val windowHeight = config.getDouble("window.height")
@@ -156,9 +156,6 @@ final class Context(config: Config):
   val tabCleanings = config.getString("tab.cleanings")
   val tabMeasurements = config.getString("tab.measurements")
   val tabChemicals = config.getString("tab.chemicals")
-
-  val model = Model()
-  model.init
 
   def addImage = loadImageView("/image/add.png")
   def editImage = loadImageView("/image/edit.png")
