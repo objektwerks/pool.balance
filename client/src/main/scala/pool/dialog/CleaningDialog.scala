@@ -34,7 +34,7 @@ final class CleaningDialog(context: Context, cleaning: Cleaning) extends Dialog[
     selected = cleaning.vacuum
 
   val cleanedDatePicker = new DatePicker:
-    value = cleaning.cleaned.toLocalDate
+    value = Entity.toLocalDate(cleaning.cleaned)
 
   val controls = List[(String, Region)](
     context.labelBrush -> brushCheckBox,
@@ -59,7 +59,7 @@ final class CleaningDialog(context: Context, cleaning: Cleaning) extends Dialog[
         pumpBasket = pumpBasketCheckBox.selected.value,
         pumpFilter = pumpFilterCheckBox.selected.value,
         vacuum = vacuumCheckBox.selected.value,
-        cleaned = applyLocalDate(cleanedDatePicker.value.value, cleaning.cleaned)
+        cleaned = Entity.toString(cleanedDatePicker.value.value)
       )
     else null
   }
