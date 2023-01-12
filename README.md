@@ -8,6 +8,7 @@ TODO
 2. Handler
 3. Dispatcher
 4. Fetcher
+5. Model
 
 Build
 -----
