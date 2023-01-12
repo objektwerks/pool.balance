@@ -32,7 +32,7 @@ final class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[
 
   val addedDatePicker = new DatePicker:
     prefWidth = 200
-    value = chemical.added
+    value = Entity.toLocalDate(chemical.added)
 
   val controls = List[(String, Region)](
     context.labelTypeof -> typeofComboBox,
@@ -55,7 +55,7 @@ final class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[
         typeof = typeofComboBox.value.value,
         amount = amountTextField.text.value.toDoubleOption.getOrElse(chemical.amount),
         unit = unitComboBox.value.value,
-        added = applyLocalDate(addedDatePicker.value.value, chemical.added)
+        added = Entity.toString(addedDatePicker.value.value)
       )
     else null
   }
