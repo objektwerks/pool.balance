@@ -1,12 +1,14 @@
 package pool
 
-import java.time.{LocalDate, LocalTime, LocalDateTime}
+import java.time.{Instant, LocalDate, LocalTime, LocalDateTime, ZoneId}
 import java.time.format.DateTimeFormatter
+import java.util.{Date, UUID}
 
 import math.BigDecimal.double2bigDecimal
 
 import scalafx.Includes.*
 import scalafx.beans.property.ObjectProperty
+import scala.util.Random
 
 final case class Error(message: String, occurred: LocalDateTime = LocalDateTime.now):
   val messageProperty = ObjectProperty[String](this, "message", message)
@@ -33,6 +35,10 @@ object Entity:
   private def dateFormatterInstance: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
   private def timeFormatterInstance: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
+  def instant: String = DateTimeFormatter.ISO_INSTANT.withZone(ZoneId.systemDefault()).format(Instant.now)
+  def parse(instant: String): Instant = Instant.parse(instant)
+  def date(instant:String): Date = new Date( parse(instant).toEpochMilli() )
+
   def format(localDateTime: LocalDateTime): String = localDateTime.format(dateFormatterInstance)
   def format(localDate: LocalDate): String = localDate.format(dateFormatterInstance)
   def format(localTime: LocalTime): String = localTime.format(timeFormatterInstance)
@@ -50,6 +56,45 @@ object Entity:
   given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => c.cleaned.toLocalDate.toEpochDay).reverse
   given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => m.measured.toLocalDate.toEpochDay).reverse
   given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => c.added.toLocalDate.toEpochDay).reverse
+
+final case class Account(id: Long = 0,
+                         emailAddress: String = "",
+                         license: String = newLicense,
+                         pin: String = newPin,
+                         activated: String = Entity.instant,
+                         deactivated: String = "") extends Entity:
+  def toArray: Array[Any] = Array(id, license, pin, activated, deactivated)
+
+object Account:
+  private val specialChars = "~!@#$%^&*-+=<>?/:;".toList
+  private val random = new Random
+
+  private def newSpecialChar: Char = specialChars(random.nextInt(specialChars.length))
+
+  /**
+   * 26 letters + 10 numbers + 18 special characters = 54 combinations
+   * 7 alphanumeric char pin = 54^7 ( 1,338,925,209,984 )
+   */
+  private def newPin: String =
+    Random.shuffle(
+      Random
+        .alphanumeric
+        .take(5)
+        .mkString
+        .prepended(newSpecialChar)
+        .appended(newSpecialChar)
+    ).mkString
+
+  private def newLicense: String = UUID.randomUUID.toString
+
+  val empty = Account(
+    emailAddress = "",
+    license = "",
+    pin = "",
+    activated = "",
+    deactivated = ""
+  )
+
 
 final case class Pool(id: Long = 0,
                       name: String = "", 
