@@ -124,6 +124,7 @@ lazy val server = project
         "org.postgresql" % "postgresql" % "42.5.1",
         "org.jodd" % "jodd-mail" % "6.0.5",
         "com.typesafe" % "config" % "1.4.2",
+        "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "org.scalatest" %% "scalatest" % "3.2.14" % Test
       )
     }
