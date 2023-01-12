@@ -16,7 +16,7 @@ import scalafx.beans.property.ObjectProperty
 import Entity.given
 import Measurement.*
 
-final class Model extends LazyLogging:
+final class Model(proxy: Proxy) extends LazyLogging:
   given executionContext: ExecutionContext = ExecutionContext.fromExecutor( Executors.newVirtualThreadPerTaskExecutor() )
 
   val selectedPoolId = ObjectProperty[Long](0)
@@ -92,34 +92,34 @@ final class Model extends LazyLogging:
   def pools(): Unit =
     Future {
       shouldNotBeInFxThread("pools should not be in fx thread.")
-      observablePools ++= Proxy.pools()
+      observablePools ++= proxy.pools()
     }.recover { case error: Throwable => onError(error, s"Loading pools data failed: ${error.getMessage}") }
 
   def cleanings(poolId: Long): Unit =
     Future {
       shouldNotBeInFxThread("cleanings should not be in fx thread.")
       observableCleanings.clear()
-      observableCleanings ++= Proxy.cleanings(poolId)
+      observableCleanings ++= proxy.cleanings(poolId)
     }.recover { case error: Throwable => onError(error, s"Loading cleanings data failed: ${error.getMessage}") }
 
   def measurements(poolId: Long): Unit =
     Future {
       shouldNotBeInFxThread("measurements should not be in fx thread.")
       observableMeasurements.clear()
-      observableMeasurements ++= Proxy.measurements(poolId) 
+      observableMeasurements ++= proxy.measurements(poolId) 
     }.recover { case error: Throwable => onError(error, s"Loading measurements data failed: ${error.getMessage}") }
 
   def chemicals(poolId: Long): Unit =
     Future {
       shouldNotBeInFxThread("chemicals should not be in fx thread.")
       observableChemicals.clear()
-      observableChemicals ++= Proxy.chemicals(poolId) 
+      observableChemicals ++= proxy.chemicals(poolId) 
     }.recover { case error: Throwable => onError(error, s"Loading chemicals data failed: ${error.getMessage}") }
 
   def add(pool: Pool): Future[Pool] =
     Future {
       shouldNotBeInFxThread("add pool should not be in fx thread.")
-      val newPool = Proxy.add(pool)
+      val newPool = proxy.add(pool)
       observablePools += newPool
       observablePools.sort()
       selectedPoolId.value = newPool.id
@@ -129,7 +129,7 @@ final class Model extends LazyLogging:
   def update(selectedIndex: Int, pool: Pool): Future[Unit] =
     Future {
       shouldNotBeInFxThread("update pool should not be in fx thread.")
-      Proxy.update(pool)
+      proxy.update(pool)
       observablePools.update(selectedIndex, pool)
       observablePools.sort()
       selectedPoolId.value = pool.id
@@ -138,7 +138,7 @@ final class Model extends LazyLogging:
   def add(cleaning: Cleaning): Future[Cleaning] =
     Future {
       shouldNotBeInFxThread("add cleaning should not be in fx thread.")
-      val newCleaning = Proxy.add(cleaning)
+      val newCleaning = proxy.add(cleaning)
       observableCleanings += newCleaning
       observableCleanings.sort()
       selectedCleaningId.value = newCleaning.id
@@ -148,7 +148,7 @@ final class Model extends LazyLogging:
   def update(selectedIndex: Int, cleaning: Cleaning): Future[Unit] =
     Future {
       shouldNotBeInFxThread("update cleaning should not be in fx thread.")
-      Proxy.update(cleaning)
+      proxy.update(cleaning)
       observableCleanings.update(selectedIndex, cleaning)
       observableCleanings.sort()
       selectedCleaningId.value = cleaning.id
@@ -157,7 +157,7 @@ final class Model extends LazyLogging:
   def add(measurement: Measurement): Future[Measurement] =
     Future {
       shouldNotBeInFxThread("add measurement should not be in fx thread.")
-      val newMeasurement = Proxy.add(measurement)
+      val newMeasurement = proxy.add(measurement)
       observableMeasurements += newMeasurement
       observableMeasurements.sort()
       selectedMeasurementId.value = newMeasurement.id
@@ -167,7 +167,7 @@ final class Model extends LazyLogging:
   def update(selectedIndex: Int, measurement: Measurement): Future[Unit] =
     Future {
       shouldNotBeInFxThread("update measurement should not be in fx thread.")
-      Proxy.update(measurement)
+      proxy.update(measurement)
       observableMeasurements.update(selectedIndex, measurement)
       observableMeasurements.sort()
       selectedMeasurementId.value = measurement.id
@@ -176,7 +176,7 @@ final class Model extends LazyLogging:
   def add(chemical: Chemical): Future[Chemical] =
     Future {
       shouldNotBeInFxThread("add chemical should not be in fx thread.")
-      val newChemical = Proxy.add(chemical)
+      val newChemical = proxy.add(chemical)
       observableChemicals += newChemical
       observableChemicals.sort()
       selectedChemicalId.value = newChemical.id      
@@ -186,7 +186,7 @@ final class Model extends LazyLogging:
   def update(selectedIndex: Int, chemical: Chemical): Future[Unit] =
     Future {
       shouldNotBeInFxThread("update chemical should not be in fx thread.")
-      Proxy.update(chemical)
+      proxy.update(chemical)
       observableChemicals.update(selectedIndex, chemical)
       observableChemicals.sort()
       selectedChemicalId.value = chemical.id
