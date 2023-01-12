@@ -20,7 +20,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   given executionContext: ExecutionContext = ExecutionContext.fromExecutor( Executors.newVirtualThreadPerTaskExecutor() )
   val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
   val shouldNotBeInFxThread = (message: String) => require(!Platform.isFxApplicationThread, message)
-  
+
   val selectedPoolId = ObjectProperty[Long](0)
   val selectedCleaningId = ObjectProperty[Long](0)
   val selectedMeasurementId = ObjectProperty[Long](0)
@@ -32,6 +32,18 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     cleanings(newPoolId)
     measurements(newPoolId)
     chemicals(newPoolId)
+  }
+
+  selectedCleaningId.onChange { (_, oldId, newId) =>
+    logger.info(s"*** Model: selected cleaning id onchange event: $oldId -> $newId")
+  }
+
+  selectedMeasurementId.onChange { (_, oldId, newId) =>
+    logger.info(s"*** Model: selected measurement id onchange event: $oldId -> $newId")
+  }
+
+  selectedChemicalId.onChange { (_, oldId, newId) =>
+    logger.info(s"*** Model: selected chemical id onchange event: $oldId -> $newId")
   }
 
   val observableErrors = ObservableBuffer[Error]()
