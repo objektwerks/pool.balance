@@ -16,8 +16,9 @@ import scalafx.beans.property.ObjectProperty
 import Entity.given
 import Measurement.*
 
-final class Model(proxy: Proxy) extends LazyLogging:
+final class Model extends LazyLogging:
   given executionContext: ExecutionContext = ExecutionContext.fromExecutor( Executors.newVirtualThreadPerTaskExecutor() )
+  private val proxy = Fetcher()
 
   val selectedPoolId = ObjectProperty[Long](0)
   val selectedCleaningId = ObjectProperty[Long](0)
