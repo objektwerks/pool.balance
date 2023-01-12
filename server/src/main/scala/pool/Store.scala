@@ -8,18 +8,12 @@ import javax.sql.DataSource
 import scalikejdbc.*
 
 final class Store(config: Config):
-  val url = config.getString("db.url")
-  val user = config.getString("db.user")
-  val password = config.getString("db.password")
-  val dataSourceClassName = config.getString("db.dataSourceClassName")
-  val maximumPoolSize = config.getInt("db.maximumPoolSize")
   val dataSource: DataSource = {
     val ds = new HikariDataSource()
-    ds.setDataSourceClassName(dataSourceClassName)
-    ds.addDataSourceProperty("url", url)
-    ds.addDataSourceProperty("user", user)
-    ds.addDataSourceProperty("password", password)
-    ds.setMaximumPoolSize(maximumPoolSize)
+    ds.setDataSourceClassName(config.getString("ds.dataSourceClassName"))
+    ds.setJdbcUrl(config.getString("ds.url"))
+    ds.addDataSourceProperty("user",  config.getString("ds.user"))
+    ds.addDataSourceProperty("password", config.getString("ds.password"))
     ds
   }
   ConnectionPool.singleton(DataSourceConnectionPool(dataSource))
