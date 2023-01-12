@@ -7,7 +7,7 @@ import javax.sql.DataSource
 import scala.jdk.CollectionConverters.*
 import scalafx.scene.image.{Image, ImageView}
 
-final class Context(config: Config, model: Model):
+final case class Context(config: Config, model: Model):
   val windowTitle = config.getString("window.title")
   val windowWidth = config.getDouble("window.width")
   val windowHeight = config.getDouble("window.height")
