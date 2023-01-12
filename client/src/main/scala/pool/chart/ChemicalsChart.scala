@@ -91,25 +91,25 @@ final class ChemicalsChart(context: Context) extends TabPane:
     chart
 
   def buildLiquidChlorineChart(): LineChart[String, Number] =
-    buildChart(typeof = LiquidChlorine, yLabel = context.chartLiquidChlorine)
+    buildChart(typeof = LiquidChlorine.toString, yLabel = context.chartLiquidChlorine)
 
   def buildTrichlorChart(): LineChart[String, Number] =
-    buildChart(typeof = Trichlor, yLabel = context.chartTrichlor)
+    buildChart(typeof = Trichlor.toString, yLabel = context.chartTrichlor)
 
   def buildDichlorChart(): LineChart[String, Number] =
-    buildChart(typeof = Dichlor, yLabel = context.chartDichlor)
+    buildChart(typeof = Dichlor.toString, yLabel = context.chartDichlor)
 
   def buildCalciumHypochloriteChart(): LineChart[String, Number] =
-    buildChart(typeof = CalciumHypochlorite, yLabel = context.chartCalciumHypochlorite)
+    buildChart(typeof = CalciumHypochlorite.toString, yLabel = context.chartCalciumHypochlorite)
 
   def buildStabilizerChart(): LineChart[String, Number] =
-    buildChart(typeof = Stabilizer, yLabel = context.chartStabilizer)
+    buildChart(typeof = Stabilizer.toString, yLabel = context.chartStabilizer)
 
   def buildAlgaecideChart(): LineChart[String, Number] =
-    buildChart(typeof = Algaecide, yLabel = context.chartAlgaecide)
+    buildChart(typeof = Algaecide.toString, yLabel = context.chartAlgaecide)
 
   def buildMuriaticAcidChart(): LineChart[String, Number] =
-    buildChart(typeof = MuriaticAcid, yLabel = context.chartMuriaticAcid)
+    buildChart(typeof = MuriaticAcid.toString, yLabel = context.chartMuriaticAcid)
 
   def buildSaltChart(): LineChart[String, Number] =
-    buildChart(typeof = Salt, yLabel = context.chartSalt)
+    buildChart(typeof = Salt.toString, yLabel = context.chartSalt)
