@@ -3,10 +3,10 @@ package pool
 import com.typesafe.scalalogging.LazyLogging
 
 import java.text.NumberFormat
+import java.util.concurrent.Executors
 
 import scalafx.Includes.*
-import scala.concurrent.Future
-import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.{ExecutionContext, Future}
 import scala.util.Try
 
 import scalafx.application.Platform
@@ -17,6 +17,8 @@ import Entity.given
 import Measurement.*
 
 final class Model extends LazyLogging:
+  given executionContext: ExecutionContext = ExecutionContext.fromExecutor( Executors.newVirtualThreadPerTaskExecutor() )
+
   val selectedPoolId = ObjectProperty[Long](0)
   val selectedCleaningId = ObjectProperty[Long](0)
   val selectedMeasurementId = ObjectProperty[Long](0)
