@@ -18,7 +18,9 @@ import Measurement.*
 
 final class Model(fetcher: Fetcher) extends LazyLogging:
   given executionContext: ExecutionContext = ExecutionContext.fromExecutor( Executors.newVirtualThreadPerTaskExecutor() )
-
+  val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
+  val shouldNotBeInFxThread = (message: String) => require(!Platform.isFxApplicationThread, message)
+  
   val selectedPoolId = ObjectProperty[Long](0)
   val selectedCleaningId = ObjectProperty[Long](0)
   val selectedMeasurementId = ObjectProperty[Long](0)
@@ -201,9 +203,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val currentTemperature = ObjectProperty[Int](0)
   val averageTemperature = ObjectProperty[Int](0)
   def temperatureInRange(value: Int): Boolean = temperatureRange.contains(value)
-
-  val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
-  val shouldNotBeInFxThread = (message: String) => require(!Platform.isFxApplicationThread, message)
 
   private def dashboard(): Unit =
     shouldBeInFxThread("dashboard should be in fx thread.")
