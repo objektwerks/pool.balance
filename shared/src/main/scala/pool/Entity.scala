@@ -16,6 +16,7 @@ sealed trait Entity:
 object Entity:
   def instant: String = DateTimeFormatter.ISO_INSTANT.withZone(ZoneId.systemDefault()).format(Instant.now)
   def parse(instant: String): Instant = Instant.parse(instant)
+  def toInstant(localDate: LocalDate): Instant = localDate.atStartOfDay(ZoneId.systemDefault()).toInstant
   def toLocalDate(instant: String): LocalDate = LocalDate.ofInstant( parse(instant), ZoneId.systemDefault())
 
   def isNotInt(text: String): Boolean = !text.matches("\\d+")

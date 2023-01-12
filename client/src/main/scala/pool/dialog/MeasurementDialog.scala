@@ -26,7 +26,7 @@ final class MeasurementDialog(context: Context, measurement: Measurement) extend
   val saltSlider = saltTextSlider(measurement)
   val temperatureSlider = temperatureTextSlider(measurement)
   val measuredDatePicker = new DatePicker:
-    value = measurement.measured.toLocalDate
+    value = Entity.toLocalDate(measurement.measured)
 
   val controls = List[(String, Region)](
     context.labelTotalChlorine -> totalChlorineSlider,
@@ -58,7 +58,7 @@ final class MeasurementDialog(context: Context, measurement: Measurement) extend
         cyanuricAcid = cyanuricAcidSlider.valueAsInt,
         totalBromine = totalBromineSlider.valueAsInt,
         temperature = temperatureSlider.valueAsInt,
-        measured = applyLocalDate(measuredDatePicker.value.value, measurement.measured)
+        measured = measuredDatePicker.value.value
       )
     else null
   }
