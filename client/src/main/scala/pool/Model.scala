@@ -44,6 +44,11 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     Platform.runLater( dashboard() )
   }
 
+  def init: Unit =
+    logger.info(s"*** Model: initializing ...")
+    pools()
+    logger.info(s"*** Model: initialized.")
+
   val currentTotalChlorine = ObjectProperty[Int](0)
   val averageTotalChlorine = ObjectProperty[Int](0)
   def totalChlorineInRange(value: Int): Boolean = totalChlorineRange.contains(value)
@@ -86,8 +91,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
   val shouldNotBeInFxThread = (message: String) => require(!Platform.isFxApplicationThread, message)
-
-  def init: Unit = pools()
 
   def pools(): Unit =
     Future {
