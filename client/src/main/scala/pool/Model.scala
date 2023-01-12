@@ -80,6 +80,16 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     pools()
     logger.info(s"*** Model: initialized.")
 
+  def onError(message: String): Unit =
+    shouldBeInFxThread("onerror message should be in fx thread.")
+    observableErrors += Error(message)
+    logger.error(message)
+
+  def onError(error: Throwable, message: String): Unit =
+    shouldBeInFxThread("onerror error, message should be in fx thread.")
+    observableErrors += Error(message)
+    logger.error(message, error)
+
   def pools(): Unit =
     Future {
       shouldNotBeInFxThread("pools should not be in fx thread.")
@@ -182,16 +192,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       observableChemicals.sort()
       selectedChemicalId.value = chemical.id
     }
-
-  def onError(message: String): Unit =
-    shouldBeInFxThread("onerror message should be in fx thread.")
-    observableErrors += Error(message)
-    logger.error(message)
-
-  def onError(error: Throwable, message: String): Unit =
-    shouldBeInFxThread("onerror error, message should be in fx thread.")
-    observableErrors += Error(message)
-    logger.error(message, error)
 
   val currentTotalChlorine = ObjectProperty[Int](0)
   val averageTotalChlorine = ObjectProperty[Int](0)
