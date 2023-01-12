@@ -40,4 +40,3 @@ object Server extends LazyLogging:
     logger.info(s"*** Http Server shutdown at: $host:$port")
     println(s"*** Server shutdown at: $host:$port")
   }
-  
