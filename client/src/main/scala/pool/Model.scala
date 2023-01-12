@@ -46,16 +46,33 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     logger.info(s"*** Model: selected chemical id onchange event: $oldId -> $newId")
   }
 
-  val observableErrors = ObservableBuffer[Error]()
+  val observableAccount = ObjectProperty[Account](Account.empty)
   val observablePools = ObservableBuffer[Pool]()
   val observableCleanings = ObservableBuffer[Cleaning]()
   val observableMeasurements = ObservableBuffer[Measurement]()
   val observableChemicals = ObservableBuffer[Chemical]()
+  val observableErrors = ObservableBuffer[Error]()
+
+  observableAccount.onChange { (_, oldAccount, newAccount) =>
+    logger.info(s"*** Model: selected account onchange event: $oldAccount -> $newAccount")
+  }
+
+  observablePools.onChange { (_, changes) =>
+    logger.info(s"*** Model: observable pools onchange event: $changes")
+  }
+
+  observableCleanings.onChange { (_, changes) =>
+    logger.info(s"*** Model: observable cleanings onchange event: $changes")
+  }
 
   observableMeasurements.onChange { (_, _) =>
     shouldNotBeInFxThread("via measurements, observable measurements onchange should not be in fx thread.")
     logger.info(s"observable measurements onchange event.")
     Platform.runLater( dashboard() )
+  }
+
+  observableChemicals.onChange { (_, changes) =>
+    logger.info(s"*** Model: observable chemicals onchange event: $changes")
   }
 
   def init: Unit =
