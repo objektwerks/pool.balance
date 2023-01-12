@@ -29,7 +29,7 @@ final class StoreTest extends AnyFunSuite with Matchers:
   }
 
   def addPool(): Pool =
-    val pool = Pool(name = "pool-a", volume = 10000, unit = UnitOfMeasure.gl)
+    val pool = Pool(name = "pool-a", volume = 10000, unit = UnitOfMeasure.gl.toString)
     val addedPool = store.add(pool)
     addedPool.id should not be 0
     addedPool
@@ -77,7 +77,7 @@ final class StoreTest extends AnyFunSuite with Matchers:
     measurements.head shouldBe measurement
 
   def addChemical(pool: Pool): Chemical =
-    val chemical = Chemical(poolId = pool.id, typeof = TypeOfChemical.Trichlor, amount = 2.0, unit = UnitOfMeasure.gl)
+    val chemical = Chemical(poolId = pool.id, typeof = TypeOfChemical.Trichlor.toString, amount = 2.0, unit = UnitOfMeasure.gl.toString)
     val addedChemcial = store.add(chemical)
     addedChemcial.id should not be 0
     addedChemcial

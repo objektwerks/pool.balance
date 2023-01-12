@@ -18,7 +18,7 @@ final class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[
 
   val typeofComboBox = new ComboBox[String]:
   	items = ObservableBuffer.from( TypeOfChemical.toList )
-  	value = chemical.typeof.display
+  	value = chemical.typeof
   typeofComboBox.prefWidth = 200
 
   val amountTextField = new DoubleTextField:
@@ -32,7 +32,7 @@ final class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[
 
   val addedDatePicker = new DatePicker:
     prefWidth = 200
-    value = chemical.added.toLocalDate
+    value = chemical.added
 
   val controls = List[(String, Region)](
     context.labelTypeof -> typeofComboBox,
@@ -52,9 +52,9 @@ final class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[
   resultConverter = dialogButton => {
     if dialogButton == saveButtonType then
       chemical.copy(
-        typeof = TypeOfChemical.toEnum(typeofComboBox.value.value),
+        typeof = typeofComboBox.value.value,
         amount = amountTextField.text.value.toDoubleOption.getOrElse(chemical.amount),
-        unit = UnitOfMeasure.valueOf(unitComboBox.value.value),
+        unit = unitComboBox.value.value,
         added = applyLocalDate(addedDatePicker.value.value, chemical.added)
       )
     else null

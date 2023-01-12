@@ -11,7 +11,7 @@ import scalafx.scene.control.{Tab, TabPane}
 
 import pool.{Cleaning, Context}
 
-final case class CleaningXY(xDate: LocalDateTime, yCount: Int)
+final case class CleaningXY(xDate: String, yCount: Int)
 
 final class CleaningsChart(context: Context) extends TabPane:
   val cleanings = context.model.observableCleanings.reverse
