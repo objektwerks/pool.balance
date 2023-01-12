@@ -1,7 +1,12 @@
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.4-SNAPSHOT",
-  scalaVersion := "3.2.1"
+  scalaVersion := "3.2.1",
+  libraryDependencies ++= {
+    Seq(
+      "com.typesafe" % "config" % "1.4.2"
+    )
+  }
 )
 
 lazy val poolbalance = (project in file("."))
@@ -83,7 +88,6 @@ lazy val client = project
     libraryDependencies ++= {
       Seq(
         "org.scalafx" %% "scalafx" % "19.0.0-R30",
-        "com.typesafe" % "config" % "1.4.2",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "ch.qos.logback" % "logback-classic" % "1.4.5"
       )
@@ -123,7 +127,6 @@ lazy val server = project
         "com.zaxxer" % "HikariCP" % "5.0.1" exclude("org.slf4j", "slf4j-api"),
         "org.postgresql" % "postgresql" % "42.5.1",
         "org.jodd" % "jodd-mail" % "6.0.5",
-        "com.typesafe" % "config" % "1.4.2",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "org.scalatest" %% "scalatest" % "3.2.14" % Test
       )
