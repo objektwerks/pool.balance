@@ -80,15 +80,15 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     pools()
     logger.info(s"*** Model: initialized.")
 
-  def onFault(message: String): Unit =
-    shouldBeInFxThread("onerror message should be in fx thread.")
-    observableFaults += Fault(message)
-    logger.error(message)
+  def onFault(cause: String): Unit =
+    shouldBeInFxThread("onfault cause should be in fx thread.")
+    observableFaults += Fault(cause)
+    logger.error(cause)
 
-  def onFault(error: Throwable, message: String): Unit =
-    shouldBeInFxThread("onerror error, message should be in fx thread.")
-    observableFaults += Fault(message)
-    logger.error(message, error)
+  def onFault(error: Throwable, cause: String): Unit =
+    shouldBeInFxThread("onfault error, cause should be in fx thread.")
+    observableFaults += Fault(cause)
+    logger.error(cause, error)
 
   def pools(): Unit =
     Future {
