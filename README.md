@@ -4,13 +4,10 @@ Pool Balance
 
 TODO
 ----
-1. Command
-2. Event
-3. Serializer
-4. Validator
-5. Handler
-6. Dispatcher
-7. Fetcher
+1. Serializer
+2. Handler
+3. Dispatcher
+4. Fetcher
 
 Build
 -----
