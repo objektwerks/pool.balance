@@ -24,7 +24,7 @@ final class Store(config: Config):
         rs.long("id"),
         rs.string("name"), 
         rs.int("volume"), 
-        UnitOfMeasure.valueOf( rs.string("unit") ))
+        rs.string("unit") )
       )
       .list()
   }
@@ -56,7 +56,7 @@ final class Store(config: Config):
         rs.boolean("pump_basket"),
         rs.boolean("pump_filter"),
         rs.boolean("vacuum"),
-        rs.localDateTime("cleaned"))
+        rs.string("cleaned"))
       )
       .list()
   }
@@ -95,7 +95,7 @@ final class Store(config: Config):
         rs.int("total_bromine"),
         rs.int("salt"),
         rs.int("temperature"),
-        rs.localDateTime("measured"))
+        rs.string("measured"))
       )
       .list()
   }
@@ -129,10 +129,10 @@ final class Store(config: Config):
       .map(rs => Chemical(
         rs.long("id"),
         rs.long("pool_id"),
-        TypeOfChemical.valueOf( rs.string("typeof") ),
+        rs.string("typeof"),
         rs.double("amount"),
-        UnitOfMeasure.valueOf( rs.string("unit") ),
-        rs.localDateTime("added"))
+        rs.string("unit"),
+        rs.string("added"))
       )
       .list()
   }

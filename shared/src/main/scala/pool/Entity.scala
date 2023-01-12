@@ -53,9 +53,9 @@ object Entity:
   def isNotDouble(text: String): Boolean = !text.matches("\\d{0,7}([\\.]\\d{0,4})?")
 
   given poolOrdering: Ordering[Pool] = Ordering.by[Pool, String](p => p.name).reverse
-  given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => c.cleaned.toLocalDate.toEpochDay).reverse
-  given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => m.measured.toLocalDate.toEpochDay).reverse
-  given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => c.added.toLocalDate.toEpochDay).reverse
+  given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => parse(c.cleaned).toEpochMilli).reverse
+  given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => parse(m.measured).toEpochMilli).reverse
+  given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => parse(c.added).toEpochMilli).reverse
 
 final case class Account(id: Long = 0,
                          emailAddress: String = "",
@@ -99,7 +99,7 @@ object Account:
 final case class Pool(id: Long = 0,
                       name: String = "", 
                       volume: Int = 0,
-                      unit: UnitOfMeasure = UnitOfMeasure.gl) extends Entity:
+                      unit: String = UnitOfMeasure.gl.toString) extends Entity:
   val nameProperty = ObjectProperty[String](this, "name", name)
   val volumeProperty = ObjectProperty[Int](this, "volume", volume)
   val unitProperty = ObjectProperty[String](this, "unit", unit.toString)
@@ -113,14 +113,14 @@ final case class Cleaning(id: Long = 0,
                           pumpBasket: Boolean = false,
                           pumpFilter: Boolean = false,
                           vacuum: Boolean = false,
-                          cleaned: LocalDateTime = LocalDateTime.now) extends Entity:
+                          cleaned: String = Entity.instant) extends Entity:
   val brushProperty = ObjectProperty[Boolean](this, "brush", brush)
   val netProperty = ObjectProperty[Boolean](this, "net", net)
   val skimmerBasketProperty = ObjectProperty[Boolean](this, "skimmerBasket", skimmerBasket)
   val pumpBasketProperty = ObjectProperty[Boolean](this, "pumpBasket", pumpBasket)
   val pumpFilterProperty = ObjectProperty[Boolean](this, "pumpFilter", pumpFilter)
   val vacuumProperty = ObjectProperty[Boolean](this, "vacuum", vacuum)
-  val cleanedProperty = ObjectProperty[String](this, "cleaned", Entity.format(cleaned))
+  val cleanedProperty = ObjectProperty[String](this, "cleaned", cleaned)
   val cleaning = this
 
 object Measurement:
@@ -147,7 +147,7 @@ final case class Measurement(id: Long = 0,
                              totalBromine: Int = 5,
                              salt: Int = 3200,
                              temperature: Int = 85,
-                             measured: LocalDateTime = LocalDateTime.now) extends Entity:
+                             measured: String = Entity.instant) extends Entity:
   val totalChlorineProperty = ObjectProperty[Int](this, "totalChlorine", totalChlorine)
   val freeChlorineProperty = ObjectProperty[Int](this, "freeChlorine", freeChlorine)
   val combinedChlorineProperty = ObjectProperty[Double](this, "combinedChlorine", combinedChlorine)
@@ -158,7 +158,7 @@ final case class Measurement(id: Long = 0,
   val totalBromineProperty = ObjectProperty[Int](this, "totalBromine", totalBromine)
   val saltProperty = ObjectProperty[Int](this, "salt", salt)
   val temperatureProperty = ObjectProperty[Int](this, "temperature", temperature)
-  val measuredProperty = ObjectProperty[String](this, "measured", Entity.format(measured))
+  val measuredProperty = ObjectProperty[String](this, "measured", measured)
   val measurement = this
 
 enum TypeOfChemical(val display: String):
@@ -177,12 +177,12 @@ object TypeOfChemical:
 
 final case class Chemical(id: Long = 0,
                           poolId: Long,
-                          typeof: TypeOfChemical = TypeOfChemical.LiquidChlorine,
+                          typeof: String = TypeOfChemical.LiquidChlorine.toString,
                           amount: Double = 1.0, 
-                          unit: UnitOfMeasure = UnitOfMeasure.gl,
-                          added: LocalDateTime = LocalDateTime.now) extends Entity:
-  val typeofProperty = ObjectProperty[String](this, "typeof", typeof.display)
+                          unit: String = UnitOfMeasure.gl.toString,
+                          added: String = Entity.instant) extends Entity:
+  val typeofProperty = ObjectProperty[String](this, "typeof", typeof)
   val amountProperty = ObjectProperty[Double](this, "amount", amount)
   val unitProperty = ObjectProperty[String](this, "unit", unit.toString)
-  val addedProperty = ObjectProperty[String](this, "added", Entity.format(added))
+  val addedProperty = ObjectProperty[String](this, "added", added)
   val chemical = this

@@ -68,7 +68,7 @@ final class ChemicalsChart(context: Context) extends TabPane:
                muriaticAcidTab,
                saltTab)
 
-  private def buildChart(typeof: TypeOfChemical,
+  private def buildChart(typeof: String,
                          yLabel: String,
                          yLowerBound: Int = 0,
                          yUpperBound: Int = 10,
