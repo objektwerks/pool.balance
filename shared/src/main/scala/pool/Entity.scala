@@ -16,12 +16,7 @@ sealed trait Entity:
 object Entity:
   def instant: String = DateTimeFormatter.ISO_INSTANT.withZone(ZoneId.systemDefault()).format(Instant.now)
   def parse(instant: String): Instant = Instant.parse(instant)
-
-  def applyLocalDate(localDate: LocalDate, localDateTime: LocalDateTime): LocalDateTime =
-    localDateTime
-      .withYear(localDate.getYear)
-      .withMonth(localDate.getMonthValue)
-      .withDayOfMonth(localDate.getDayOfMonth)
+  def toLocalDate(instant: String): LocalDate = LocalDate.ofInstant( parse(instant), ZoneId.systemDefault())
 
   def isNotInt(text: String): Boolean = !text.matches("\\d+")
   def isNotDouble(text: String): Boolean = !text.matches("\\d{0,7}([\\.]\\d{0,4})?")
