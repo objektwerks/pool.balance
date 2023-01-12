@@ -58,7 +58,7 @@ final class MeasurementDialog(context: Context, measurement: Measurement) extend
         cyanuricAcid = cyanuricAcidSlider.valueAsInt,
         totalBromine = totalBromineSlider.valueAsInt,
         temperature = temperatureSlider.valueAsInt,
-        measured = measuredDatePicker.value.value
+        measured = Entity.toString(measuredDatePicker.value.value)
       )
     else null
   }
