@@ -167,10 +167,3 @@ final case class Chemical(id: Long = 0,
   val unitProperty = ObjectProperty[String](this, "unit", unit.toString)
   val addedProperty = ObjectProperty[String](this, "added", added)
   val chemical = this
-
-final case class Error(message: String, occurred: LocalDateTime = LocalDateTime.now):
-  val messageProperty = ObjectProperty[String](this, "message", message)
-  val occurredProperty = ObjectProperty[String](this, "occurred", Error.format(occurred))
-
-object Error:
-  def format(localDateTime: LocalDateTime): String = localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd,HH:mm"))
