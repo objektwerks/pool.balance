@@ -17,17 +17,6 @@ final case class Error(message: String, occurred: LocalDateTime = LocalDateTime.
 object Error:
   def format(localDateTime: LocalDateTime): String = localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd,HH:mm"))
 
-enum UnitOfMeasure:
-  case gl, l, lb, kg, tablet
-
-object UnitOfMeasure:
-  def toList: List[String] = UnitOfMeasure.values.map(uom => uom.toString).toList
-  def toPoolList: List[String] = List( UnitOfMeasure.gl.toString, UnitOfMeasure.l.toString )
-  def gallonsToLiters(gallons: Double): Double = gallons * 3.785
-  def litersToGallons(liters: Double): Double = liters * 0.264
-  def poundsToKilograms(pounds: Double): Double = pounds * 0.454
-  def kilogramsToPounds(kilograms: Double): Double = kilograms * 2.205
-
 sealed trait Entity:
   val id: Long
 
@@ -86,7 +75,6 @@ object Account:
     activated = "",
     deactivated = ""
   )
-
 
 final case class Pool(id: Long = 0,
                       name: String = "", 
@@ -152,6 +140,17 @@ final case class Measurement(id: Long = 0,
   val temperatureProperty = ObjectProperty[Int](this, "temperature", temperature)
   val measuredProperty = ObjectProperty[String](this, "measured", measured)
   val measurement = this
+
+enum UnitOfMeasure:
+  case gl, l, lb, kg, tablet
+
+object UnitOfMeasure:
+  def toList: List[String] = UnitOfMeasure.values.map(uom => uom.toString).toList
+  def toPoolList: List[String] = List( UnitOfMeasure.gl.toString, UnitOfMeasure.l.toString )
+  def gallonsToLiters(gallons: Double): Double = gallons * 3.785
+  def litersToGallons(liters: Double): Double = liters * 0.264
+  def poundsToKilograms(pounds: Double): Double = pounds * 0.454
+  def kilogramsToPounds(kilograms: Double): Double = kilograms * 2.205
 
 enum TypeOfChemical(val display: String):
   case LiquidChlorine extends TypeOfChemical("Liquid Chlorine")
