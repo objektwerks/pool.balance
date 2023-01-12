@@ -1,6 +1,6 @@
 package pool
 
-object Proxy:
+final class Proxy:
   def pools(): List[Pool] = ???
 
   def add(pool: Pool): Pool = ???
