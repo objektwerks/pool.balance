@@ -9,7 +9,7 @@ import scalafx.scene.control.{Button, SelectionMode, Tab, TabPane, TableColumn, 
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import pool.{Context, Pool, UnitOfMeasure}
-import pool.dialog.{ErrorsDialog, PoolDialog}
+import pool.dialog.{FaultsDialog, PoolDialog}
 
 final class PoolsPane(context: Context) extends VBox:
   spacing = 6
@@ -46,10 +46,10 @@ final class PoolsPane(context: Context) extends VBox:
     onAction = { _ => update() }
 
   val errorsButton = new Button:
-    graphic = context.errorsImage
-    text = context.buttonErrors
+    graphic = context.faultsImage
+    text = context.buttonFaults
     disable = true
-    onAction = { _ => errors() }
+    onAction = { _ => faults() }
 
   val buttonBar = new HBox:
     spacing = 6
@@ -71,7 +71,7 @@ final class PoolsPane(context: Context) extends VBox:
   VBox.setVgrow(tableView, Priority.Always)
   VBox.setVgrow(tabPane, Priority.Always)
 
-  model.observableErrors.onChange { (_, _) =>
+  model.observableFaults.onChange { (_, _) =>
     errorsButton.disable = false
   }
 
@@ -94,7 +94,7 @@ final class PoolsPane(context: Context) extends VBox:
         model
           .add(pool)
           .map(pool => tableView.selectionModel().select(pool))
-          .recover { case error: Throwable => model.onError(error, "Pool add failed.") }
+          .recover { case error: Throwable => model.onFault(error, "Pool add failed.") }
       case _ =>
 
   def update(): Unit =
@@ -105,8 +105,8 @@ final class PoolsPane(context: Context) extends VBox:
         model
           .update(selectedIndex, pool)
           .map(_ => tableView.selectionModel().select(selectedIndex))
-          .recover { case error: Throwable => model.onError(error, "Pool update failed.") }
+          .recover { case error: Throwable => model.onFault(error, "Pool update failed.") }
       case _ =>
 
-  def errors(): Unit = ErrorsDialog(context).showAndWait() match
-    case _ => errorsButton.disable = model.observableErrors.isEmpty
+  def faults(): Unit = FaultsDialog(context).showAndWait() match
+    case _ => errorsButton.disable = model.observableFaults.isEmpty

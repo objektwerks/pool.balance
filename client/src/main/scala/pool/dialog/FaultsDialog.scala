@@ -4,28 +4,28 @@ import scalafx.Includes.*
 import scalafx.scene.control.{ButtonType, Dialog, TableColumn, TableView}
 import scalafx.scene.layout.VBox
 
-import pool.{Error, Context}
+import pool.{Fault, Context}
 import pool.Client
 
-final class ErrorsDialog(context: Context) extends Dialog[Unit]:
+final class FaultsDialog(context: Context) extends Dialog[Unit]:
   initOwner(Client.stage)
   title = context.windowTitle
-  headerText = context.dialogErrors
+  headerText = context.dialogFaults
 
   val model = context.model
 
-  val tableView = new TableView[Error]():
+  val tableView = new TableView[Fault]():
     columns ++= List(
-      new TableColumn[Error, String]:
+      new TableColumn[Fault, String]:
         text = context.headerOccurred
         cellValueFactory = _.value.occurredProperty
       ,
-      new TableColumn[Error, String]:
+      new TableColumn[Fault, String]:
         prefWidth = 425
-        text = context.headerError
-        cellValueFactory = _.value.messageProperty
+        text = context.headerFault
+        cellValueFactory = _.value.causeProperty
     )
-    items = model.observableErrors
+    items = model.observableFaults
 
   dialogPane().buttonTypes = List(ButtonType.Close)
   dialogPane().content = new VBox:

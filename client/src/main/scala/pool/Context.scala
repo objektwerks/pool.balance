@@ -16,7 +16,7 @@ final class Context(config: Config, val model: Model):
   val buttonEdit = config.getString("button.edit")
   val buttonSave = config.getString("button.save")
   val buttonChart = config.getString("button.chart")
-  val buttonErrors = config.getString("button.errors")
+  val buttonFaults = config.getString("button.faults")
   val buttonConverter = config.getString("button.converter")
 
   val chartCleanings = config.getString("chart.cleanings")
@@ -88,7 +88,7 @@ final class Context(config: Config, val model: Model):
   val dialogCleaning = config.getString("dialog.cleaning")
   val dialogMeasurement = config.getString("dialog.measurement")
   val dialogChemical = config.getString("dialog.chemical")
-  val dialogErrors = config.getString("dialog.errors")
+  val dialogFaults = config.getString("dialog.faults")
 
   val headerName = config.getString("header.name")
   val headerBuilt = config.getString("header.built")
@@ -116,7 +116,7 @@ final class Context(config: Config, val model: Model):
   val headerAmount = config.getString("header.amount")
   val headerAdded = config.getString("header.added")
   val headerOccurred = config.getString("header.occurred")
-  val headerError = config.getString("header.error")
+  val headerFault = config.getString("header.fault")
 
   val labelPools = config.getString("label.pools")
   val labelCleanings = config.getString("label.cleanings")
@@ -160,7 +160,7 @@ final class Context(config: Config, val model: Model):
   def addImage = loadImageView("/image/add.png")
   def editImage = loadImageView("/image/edit.png")
   def chartImage = loadImageView("/image/chart.png")
-  def errorsImage = loadImageView("/image/errors.png")
+  def faultsImage = loadImageView("/image/faults.png")
 
   def logo = new Image(Image.getClass.getResourceAsStream("/image/logo.png"))
 

@@ -117,7 +117,7 @@ final class MeasurementsPane(context: Context) extends VBox:
         model
           .add(measurement)
           .map(measurement => tableView.selectionModel().select(measurement))
-          .recover { case error: Throwable => model.onError(error, "Measurement add failed.") }
+          .recover { case error: Throwable => model.onFault(error, "Measurement add failed.") }
       case _ =>
 
   def update(): Unit =
@@ -128,7 +128,7 @@ final class MeasurementsPane(context: Context) extends VBox:
         model
           .update(selectedIndex, measurement)
           .map(_ => tableView.selectionModel().select(selectedIndex))
-          .recover { case error: Throwable => model.onError(error, "Measurement update failed.") }
+          .recover { case error: Throwable => model.onFault(error, "Measurement update failed.") }
       case _ =>
 
   def chart(): Unit = MeasurementsChartDialog(context).showAndWait()

@@ -51,7 +51,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val observableCleanings = ObservableBuffer[Cleaning]()
   val observableMeasurements = ObservableBuffer[Measurement]()
   val observableChemicals = ObservableBuffer[Chemical]()
-  val observableErrors = ObservableBuffer[Error]()
+  val observableFaults = ObservableBuffer[Fault]()
 
   observableAccount.onChange { (_, oldAccount, newAccount) =>
     logger.info(s"*** Model: selected account onchange event: $oldAccount -> $newAccount")
@@ -80,42 +80,42 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     pools()
     logger.info(s"*** Model: initialized.")
 
-  def onError(message: String): Unit =
+  def onFault(message: String): Unit =
     shouldBeInFxThread("onerror message should be in fx thread.")
-    observableErrors += Error(message)
+    observableFaults += Fault(message)
     logger.error(message)
 
-  def onError(error: Throwable, message: String): Unit =
+  def onFault(error: Throwable, message: String): Unit =
     shouldBeInFxThread("onerror error, message should be in fx thread.")
-    observableErrors += Error(message)
+    observableFaults += Fault(message)
     logger.error(message, error)
 
   def pools(): Unit =
     Future {
       shouldNotBeInFxThread("pools should not be in fx thread.")
       // observablePools ++= fetcher.pools()
-    }.recover { case error: Throwable => onError(error, s"Loading pools data failed: ${error.getMessage}") }
+    }.recover { case error: Throwable => onFault(error, s"Loading pools data failed: ${error.getMessage}") }
 
   def cleanings(poolId: Long): Unit =
     Future {
       shouldNotBeInFxThread("cleanings should not be in fx thread.")
       observableCleanings.clear()
       // observableCleanings ++= fetcher.cleanings(poolId)
-    }.recover { case error: Throwable => onError(error, s"Loading cleanings data failed: ${error.getMessage}") }
+    }.recover { case error: Throwable => onFault(error, s"Loading cleanings data failed: ${error.getMessage}") }
 
   def measurements(poolId: Long): Unit =
     Future {
       shouldNotBeInFxThread("measurements should not be in fx thread.")
       observableMeasurements.clear()
       // observableMeasurements ++= fetcher.measurements(poolId) 
-    }.recover { case error: Throwable => onError(error, s"Loading measurements data failed: ${error.getMessage}") }
+    }.recover { case error: Throwable => onFault(error, s"Loading measurements data failed: ${error.getMessage}") }
 
   def chemicals(poolId: Long): Unit =
     Future {
       shouldNotBeInFxThread("chemicals should not be in fx thread.")
       observableChemicals.clear()
       // observableChemicals ++= fetcher.chemicals(poolId) 
-    }.recover { case error: Throwable => onError(error, s"Loading chemicals data failed: ${error.getMessage}") }
+    }.recover { case error: Throwable => onFault(error, s"Loading chemicals data failed: ${error.getMessage}") }
 
   def add(pool: Pool): Future[Pool] =
     Future {

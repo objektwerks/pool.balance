@@ -87,7 +87,7 @@ final class ChemicalsPane(context: Context) extends VBox:
         model
           .add(chemical)
           .map(chemical => tableView.selectionModel().select(chemical))
-          .recover { case error: Throwable => model.onError(error, "Chemical add failed.") }
+          .recover { case error: Throwable => model.onFault(error, "Chemical add failed.") }
       case _ =>
 
   def update(): Unit =
@@ -98,7 +98,7 @@ final class ChemicalsPane(context: Context) extends VBox:
         model
           .update(selectedIndex, chemical)
           .map(_ => tableView.selectionModel().select(selectedIndex))
-          .recover { case error: Throwable => model.onError(error, "Chemical update failed.") }
+          .recover { case error: Throwable => model.onFault(error, "Chemical update failed.") }
       case _ =>
 
   def chart(): Unit = ChemicalsChartDialog(context).showAndWait()
