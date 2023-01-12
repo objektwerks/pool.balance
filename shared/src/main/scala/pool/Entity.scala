@@ -32,16 +32,8 @@ sealed trait Entity:
   val id: Long
 
 object Entity:
-  private def dateFormatterInstance: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-  private def timeFormatterInstance: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
-
   def instant: String = DateTimeFormatter.ISO_INSTANT.withZone(ZoneId.systemDefault()).format(Instant.now)
   def parse(instant: String): Instant = Instant.parse(instant)
-  def date(instant:String): Date = new Date( parse(instant).toEpochMilli() )
-
-  def format(localDateTime: LocalDateTime): String = localDateTime.format(dateFormatterInstance)
-  def format(localDate: LocalDate): String = localDate.format(dateFormatterInstance)
-  def format(localTime: LocalTime): String = localTime.format(timeFormatterInstance)
 
   def applyLocalDate(localDate: LocalDate, localDateTime: LocalDateTime): LocalDateTime =
     localDateTime
