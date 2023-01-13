@@ -14,6 +14,7 @@ final class Fetcher(url: String):
       .newBuilder()
       .uri(URI(url))
       .version(HttpClient.Version.HTTP_2)
+      .headers("Content-Type", "application/json; charset=UTF-8", "Accept", "application/json")
       .POST()
       .build()
   
