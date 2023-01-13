@@ -1,11 +1,23 @@
 package pool
 
+import com.github.blemale.scaffeine.{Cache, Scaffeine}
 import com.typesafe.config.Config
 import com.zaxxer.hikari.HikariDataSource
 
 import javax.sql.DataSource
 
 import scalikejdbc.*
+import scala.concurrent.duration.FiniteDuration
+
+object Store:
+  def cache(minSize: Int,
+            maxSize: Int,
+            expireAfter: FiniteDuration): Cache[String, String] =
+    Scaffeine()
+      .initialCapacity(minSize)
+      .maximumSize(maxSize)
+      .expireAfterWrite(expireAfter)
+      .build[String, String]()
 
 final class Store(config: Config):
   val dataSource: DataSource = {
