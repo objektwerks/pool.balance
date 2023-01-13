@@ -2,12 +2,14 @@ package pool
 
 import com.github.blemale.scaffeine.{Cache, Scaffeine}
 import com.typesafe.config.Config
+import com.typesafe.scalalogging.LazyLogging
 import com.zaxxer.hikari.HikariDataSource
 
 import javax.sql.DataSource
 
 import scalikejdbc.*
 import scala.concurrent.duration.FiniteDuration
+import com.typesafe.scalalogging.LazyLogging
 
 object Store:
   def cache(minSize: Int,
@@ -19,7 +21,8 @@ object Store:
       .expireAfterWrite(expireAfter)
       .build[String, String]()
 
-final class Store(config: Config):
+final class Store(config: Config,
+                  cache: Cache[String, String]) extends LazyLogging:
   val dataSource: DataSource = {
     val ds = new HikariDataSource()
     ds.setDataSourceClassName(config.getString("ds.dataSourceClassName"))
@@ -30,44 +33,74 @@ final class Store(config: Config):
   }
   ConnectionPool.singleton(DataSourceConnectionPool(dataSource))
 
-  def authorize(license: String): Boolean = DB readOnly { implicit session =>
-    sql"select license from account where license == $license".list.nonEmpty
-  }
-    run( query[Account].filter( _.license == lift(license) ).nonEmpty )
+  def register(account: Account): Account = addAccount(account)
 
-  def register(account: Account): Long = addAccount(account)
+  def login(email: String, pin: String): Option[Account] =
+    DB readOnly { implicit session =>
+      sql"select * from account where email_address = $email and pin = $pin"
+        .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
+        .single()
+    }
 
-  def login(emailAddress: String, pin: String): Option[Account] =
-    run(
-      query[Account]
-        .filter(_.emailAddress == lift(emailAddress))
-        .filter(_.pin == lift(pin))
-    ).map(result => result.headOption)
+  def isAuthorized(license: String): Boolean =
+    cache.getIfPresent(license) match
+      case Some(_) =>
+        logger.debug(s"*** store cache get: $license")
+        true
+      case None =>
+        val optionalLicense = DB readOnly { implicit session =>
+          sql"select license from account where license = $license"
+            .map(rs => rs.string("license"))
+            .single()
+        }
+        if optionalLicense.isDefined then
+          cache.put(license, license)
+          logger.debug(s"*** store cache put: $license")
+          true
+        else false
 
-  def addAccount(account: Account): Long =
-    transaction(
-      run(query[Account].insertValue(lift(account)).returningGenerated(_.id))
-    )
+  def listAccounts(): List[Account] =
+    DB readOnly { implicit session =>
+      sql"select * from account"
+        .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.int("activated"), rs.int("deactivated")))
+        .list()
+    }
 
-  def deactivateAccount(license: String): Account =
-    transaction(
-      run( 
-        query[Account]
-          .filter( _.license == lift(license) )
-          .update( _.deactivated -> lift(Entity.instant), _.activated -> lift("") )
-          .returning(account => account)
-      )
-    )
+  def addAccount(account: Account): Account =
+    val id = DB localTx { implicit session =>
+      sql"insert into account(license, email_address, pin, activated, deactivated) values(${account.license}, ${account.emailAddress}, ${account.pin}, ${account.activated}, ${account.deactivated})"
+      .update()
+    }
+    account.copy(id = id)
 
-  def reactivateAccount(license: String): Account =
-    transaction(
-      run(
-        query[Account]
-          .filter( _.license == lift(license) )
-          .update( _.activated -> lift(Entity.instant), _.deactivated -> lift("") )
-          .returning(account => account)
-      )
-    )
+  def removeAccount(license: String): Unit =
+    DB localTx { implicit session =>
+      sql"delete account where license = $license"
+      .update()
+    }
+    ()
+
+  def deactivateAccount(license: String): Option[Account] =
+    DB localTx { implicit session =>
+      val deactivated = sql"update account set deactivated = ${Entity.instant}, activated = 0 where license = $license"
+      .update()
+      if deactivated > 0 then
+        sql"select * from account where license = $license"
+          .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.string("activated"), rs.string("deactivated")))
+          .single()
+      else None
+    }
+
+  def reactivateAccount(license: String): Option[Account] =
+    DB localTx { implicit session =>
+      val activated = sql"update account set activated = ${Entity.instant}, deactivated = 0 where license = $license"
+      .update()
+      if activated > 0 then
+        sql"select * from account where license = $license"
+          .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.string("activated"), rs.string("deactivated")))
+          .single()
+      else None
+    }
 
   def pools(): List[Pool] = DB readOnly { implicit session =>
     sql"select * from pool order by name"
