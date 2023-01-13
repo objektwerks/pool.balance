@@ -9,18 +9,18 @@ object Validator:
   extension (command: Command)
     def isValid: Boolean =
       command match
-        case register @ Register(emailAddress)       => register.isValid
-        case login @ Login(_, _)                     => login.isValid
-        case deactivate @ Deactivate(_)              => deactivate.isValid
-        case reactivate @ Reactivate(_)              => reactivate.isValid
-        case listPools @ ListPools(_)                => listPools.isValid
-        case savePool @ SavePool(_, _)               => savePool.isValid
-        case listCleanings @ ListCleanings(_)        => listCleanings.isValid
-        case saveCleaning @ SaveCleaning(_, _)       => saveCleaning.isValid
-        case listMeasurements @ ListMeasurements(_)  => listMeasurements.isValid
-        case saveMeasurement @ SaveMeasurement(_, _) => saveMeasurement.isValid
-        case listChemicals @ ListChemicals(_)        => listChemicals.isValid
-        case saveChemical @ SaveChemical(_, _)       => saveChemical.isValid
+        case register @ Register(emailAddress)         => register.isValid
+        case login @ Login(_, _)                       => login.isValid
+        case deactivate @ Deactivate(_)                => deactivate.isValid
+        case reactivate @ Reactivate(_)                => reactivate.isValid
+        case listPools @ ListPools(_)                  => listPools.isValid
+        case savePool @ SavePool(_, _)                 => savePool.isValid
+        case listCleanings @ ListCleanings(_, _)       => listCleanings.isValid
+        case saveCleaning @ SaveCleaning(_, _)         => saveCleaning.isValid
+        case listMeasurements @ ListMeasurements(_, _) => listMeasurements.isValid
+        case saveMeasurement @ SaveMeasurement(_, _)   => saveMeasurement.isValid
+        case listChemicals @ ListChemicals(_, _)       => listChemicals.isValid
+        case saveChemical @ SaveChemical(_, _)         => saveChemical.isValid
 
   extension (register: Register)
     def isValid: Boolean = register.emailAddress.isEmailAddress
