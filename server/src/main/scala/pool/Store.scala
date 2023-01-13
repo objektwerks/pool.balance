@@ -206,20 +206,22 @@ final class Store(config: Config,
 
   def listMeasurements(poolId: Long): List[Measurement] = DB readOnly { implicit session =>
     sql"select * from measurement where pool_id = $poolId order by measured desc"
-      .map(rs => Measurement(
-        rs.long("id"),
-        rs.long("pool_id"),
-        rs.int("total_chlorine"),
-        rs.int("free_chlorine"),
-        rs.double("combined_chlorine"),
-        rs.double("ph"),
-        rs.int("calcium_hardness"),
-        rs.int("total_alkalinity"),
-        rs.int("cyanuric_acid"),
-        rs.int("total_bromine"),
-        rs.int("salt"),
-        rs.int("temperature"),
-        rs.string("measured"))
+      .map(rs =>
+        Measurement(
+          rs.long("id"),
+          rs.long("pool_id"),
+          rs.int("total_chlorine"),
+          rs.int("free_chlorine"),
+          rs.double("combined_chlorine"),
+          rs.double("ph"),
+          rs.int("calcium_hardness"),
+          rs.int("total_alkalinity"),
+          rs.int("cyanuric_acid"),
+          rs.int("total_bromine"),
+          rs.int("salt"),
+          rs.int("temperature"),
+          rs.string("measured")
+        )
       )
       .list()
   }
