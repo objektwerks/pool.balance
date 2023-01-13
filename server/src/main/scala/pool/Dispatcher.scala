@@ -68,20 +68,14 @@ final class Dispatcher(store: Store, emailer: Emailer):
       id <- if cleaning.id == 0 then store.addCleaning(cleaning) else store.updateCleaning(cleaning)
     yield CleaningSaved(id)
 
-  private def listMeasurements: MeasurementsListed =
-    for
-      measurements <- store.listMeasurements
-    yield MeasurementsListed(measurements)
+  private def listMeasurements(poolId: Long): MeasurementsListed = MeasurementsListed( store.listMeasurements(poolId) )
 
   private def saveMeasurement(measurement: Measurement): MeasurementSaved =
     for
       id <- if measurement.id == 0 then store.addMeasurement(measurement) else store.updateMeasurement(measurement)
     yield MeasurementSaved(id)
 
-  private def listChemicals: ChemicalsListed =
-    for
-      chemicals <- store.listChemicals
-    yield ChemicalsListed(chemicals)
+  private def listChemicals(poolId: Long): ChemicalsListed = ChemicalsListed( store.listChemicals(poolId) )
 
   private def saveChemical(chemical: Chemical): TaskChemicalSaved =
     for
