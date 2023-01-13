@@ -16,11 +16,11 @@ final class Emailer(config: Config) extends LazyLogging:
   private val sender = config.getString("sender")
   private val password = config.getString("password")
 
-  private val smtpServer: SmtpServer = MailServer.create()
+  private val smtpServer: SmtpServer = MailServer.create
     .host(host)
     .ssl(true)
     .auth(sender, password)
-    .buildSmtpMailServer()
+    .buildSmtpMailServer
 
   @tailrec
   private def retry[T](attempts: Int)(fn: => T): T =
@@ -34,13 +34,13 @@ final class Emailer(config: Config) extends LazyLogging:
                         subject: String,
                         message: String): Boolean =
     Using( smtpServer.createSession ) { session =>
-      val email = Email.create()
+      val email = Email.create
         .from(sender)
         .subject(subject)
         .htmlMessage(message, "UTF-8")
         .cc(sender)
       recipients.foreach( recipient => email.to(recipient) )
-      session.open()
+      session.open
       val messageId = session.sendMail(email)
       logger.info("*** Emailer subject: {} to: {} message id: {}", subject, recipients.mkString, messageId)
     }.recover { error =>
