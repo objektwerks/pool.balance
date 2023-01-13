@@ -124,7 +124,16 @@ final class Store(config: Config,
       .update()
       if activated > 0 then
         sql"select * from account where license = $license"
-          .map(rs => Account(rs.long("id"), rs.string("license"), rs.string("email_address"), rs.string("pin"), rs.string("activated"), rs.string("deactivated")))
+          .map(rs =>
+            Account(
+              rs.long("id"),
+              rs.string("license"),
+              rs.string("email_address"),
+              rs.string("pin"),
+              rs.string("activated"),
+              rs.string("deactivated")
+            )
+          )
           .single()
       else None
     }
