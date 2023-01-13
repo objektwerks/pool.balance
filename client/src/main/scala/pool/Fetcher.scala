@@ -4,6 +4,7 @@ import com.github.plokhotnyuk.jsoniter_scala.core.*
 
 import java.net.URI
 import java.net.http.{HttpClient, HttpRequest}
+import java.net.http.HttpResponse.BodyHandlers
 import java.time.Duration
 import java.time.temporal.ChronoUnit.SECONDS
 
@@ -23,3 +24,4 @@ final class Fetcher(url: String):
       .build
     
     val client = HttpClient.newHttpClient
+    val response = client.send(request, BodyHandlers.ofString())
