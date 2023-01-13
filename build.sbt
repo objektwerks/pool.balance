@@ -129,6 +129,7 @@ lazy val server = project
         "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
         "com.zaxxer" % "HikariCP" % "5.0.1" exclude("org.slf4j", "slf4j-api"),
         "org.postgresql" % "postgresql" % "42.5.1",
+        "com.github.blemale" %% "scaffeine" % "5.2.0",
         "org.jodd" % "jodd-mail" % "6.0.5",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "org.scalatest" %% "scalatest" % "3.2.14" % Test

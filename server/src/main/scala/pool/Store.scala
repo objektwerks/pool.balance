@@ -18,6 +18,45 @@ final class Store(config: Config):
   }
   ConnectionPool.singleton(DataSourceConnectionPool(dataSource))
 
+  def authorize(license: String): Boolean = DB readOnly { implicit session =>
+    sql"select license from account where license == $license".list.nonEmpty
+  }
+    run( query[Account].filter( _.license == lift(license) ).nonEmpty )
+
+  def register(account: Account): Long = addAccount(account)
+
+  def login(emailAddress: String, pin: String): Option[Account] =
+    run(
+      query[Account]
+        .filter(_.emailAddress == lift(emailAddress))
+        .filter(_.pin == lift(pin))
+    ).map(result => result.headOption)
+
+  def addAccount(account: Account): Long =
+    transaction(
+      run(query[Account].insertValue(lift(account)).returningGenerated(_.id))
+    )
+
+  def deactivateAccount(license: String): Account =
+    transaction(
+      run( 
+        query[Account]
+          .filter( _.license == lift(license) )
+          .update( _.deactivated -> lift(Entity.instant), _.activated -> lift("") )
+          .returning(account => account)
+      )
+    )
+
+  def reactivateAccount(license: String): Account =
+    transaction(
+      run(
+        query[Account]
+          .filter( _.license == lift(license) )
+          .update( _.activated -> lift(Entity.instant), _.deactivated -> lift("") )
+          .returning(account => account)
+      )
+    )
+
   def pools(): List[Pool] = DB readOnly { implicit session =>
     sql"select * from pool order by name"
       .map(rs => Pool(
