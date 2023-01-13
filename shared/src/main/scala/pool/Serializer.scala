@@ -19,4 +19,6 @@ object Serializer:
   given JsonValueCodec[Reactivate] = JsonCodecMaker.make[Reactivate]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[ListPools] = JsonCodecMaker.make[ListPools]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[SavePool] = JsonCodecMaker.make[SavePool]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[ListCleanings] = JsonCodecMaker.make[ListCleanings]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[SaveCleaning] = JsonCodecMaker.make[SaveCleaning]( CodecMakerConfig.withDiscriminatorFieldName(None) )
 
