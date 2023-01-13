@@ -12,11 +12,11 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case Reactivate(license)             => reactivateAccount(license)
       case ListPools(_)                    => listPools
       case SavePool(_, pool)               => savePool(pool)
-      case ListCleanings(_)                => listCleanings
+      case ListCleanings(_, poolId)        => listCleanings(poolId)
       case SaveCleaning(_, cleaning)       => saveCleaning(cleaning)
-      case ListMeasurements(_)             => listMeasurements
+      case ListMeasurements(_, poolId)     => listMeasurements(poolId)
       case SaveMeasurement(_, measurement) => saveMeasurement(measurement)
-      case ListChemicals(_)                => listChemicals
+      case ListChemicals(_, poolId)        => listChemicals(poolId)
       case SaveChemical(_, chemical)       => saveChemical(chemical)
     else Fault(s"Invalid command: $command")
 
@@ -61,10 +61,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     val id = if pool.id == 0 then store.addPool(pool) else store.updatePool(pool)
     PoolSaved(id)
 
-  private def listCleanings: CleaningsListed =
-    for
-      cleanings <- store.listCleanings
-    yield CleaningsListed(cleanings)
+  private def listCleanings(poolId: Long): CleaningsListed = CleaningsListed( store.listCleanings(poolId) )
 
   private def saveCleaning(cleaning: Cleaning): CleaningSaved =
     for
