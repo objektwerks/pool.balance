@@ -90,7 +90,22 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     observableFaults += Fault(cause)
     logger.error(cause, error)
 
-  def register(emailAddress: String): Unit = ???
+  def onFault(source: String, fault: Fault): Unit =
+    observableFaults += fault
+    logger.error(s"*** $source - $fault")
+
+  def onFault(source: String, entity: Entity, fault: Fault): Unit =
+    observableFaults += fault
+    logger.error(s"*** $source - $entity - $fault")
+
+  def register(emailAddress: String): Unit =
+    fetcher.call(
+      Register(emailAddress),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.register", fault)
+        case Registered(account) => observableAccount.set(account)
+        case _ => ()
+    )
 
   def login(emailAddress: String, pin: String): Unit = ???
 
