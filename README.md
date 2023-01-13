@@ -4,8 +4,7 @@ Pool Balance
 
 TODO
 ----
-1. Fetcher
-2. Model
+1. Model
 
 Build
 -----
