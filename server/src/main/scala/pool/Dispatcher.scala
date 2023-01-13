@@ -48,12 +48,12 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def deactivateAccount(license: String): Deactivated | Fault =
     val optionalAccount = store.deactivateAccount(license)
     if optionalAccount.isDefined then Deactivated(optionalAccount.get)
-    else Fault(s"Invalid license: $license")
+    else Fault(s"Failed to deactivated account due to invalid license: $license")
 
   private def reactivateAccount(license: String): Reactivated | Fault =
     val optionalAccount = store.reactivateAccount(license)
     if optionalAccount.isDefined then Reactivated(optionalAccount.get)
-    else Fault(s"Invalid license: $license")
+    else Fault(s"Failed to reactivate account due to invalid license: $license")
 
   private def listPools: PoolsListed = PoolsListed(store.listPools())
 
