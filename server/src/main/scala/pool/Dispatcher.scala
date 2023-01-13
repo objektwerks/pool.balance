@@ -3,7 +3,8 @@ package pool
 import Serializer.given
 import Validator.*
 
-final class Dispatcher(store: Store, emailer: Emailer):
+final class Dispatcher(store: Store,
+                       emailer: Emailer):
   def dispatch[E <: Event](command: Command): Event =
     if authorize(command) && validate(command) then command match
       case Register(emailAddress)          => register(emailAddress)
