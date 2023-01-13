@@ -91,10 +91,8 @@ final class PoolsPane(context: Context) extends VBox:
   def add(): Unit =
     PoolDialog(context, Pool()).showAndWait() match
       case Some(pool: Pool) =>
-        model
-          .add(pool)
-          .map(pool => tableView.selectionModel().select(pool))
-          .recover { case error: Throwable => model.onFault(error, "Pool add failed.") }
+        model.add(pool)
+        tableView.selectionModel().select(pool)
       case _ =>
 
   def update(): Unit =
@@ -102,10 +100,8 @@ final class PoolsPane(context: Context) extends VBox:
     val pool = tableView.selectionModel().getSelectedItem.pool
     PoolDialog(context, pool).showAndWait() match
       case Some(pool: Pool) =>
-        model
-          .update(selectedIndex, pool)
-          .map(_ => tableView.selectionModel().select(selectedIndex))
-          .recover { case error: Throwable => model.onFault(error, "Pool update failed.") }
+        model.update(pool)
+        tableView.selectionModel().select(selectedIndex)
       case _ =>
 
   def faults(): Unit = FaultsDialog(context).showAndWait() match
