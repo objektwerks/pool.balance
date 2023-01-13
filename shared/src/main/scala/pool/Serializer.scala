@@ -33,3 +33,5 @@ object Serializer:
   given JsonValueCodec[PoolSaved] = JsonCodecMaker.make[PoolSaved]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[CleaningsListed] = JsonCodecMaker.make[CleaningsListed]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[CleaningSaved] = JsonCodecMaker.make[CleaningSaved]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[MeasurementsListed] = JsonCodecMaker.make[MeasurementsListed]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[MeasurementSaved] = JsonCodecMaker.make[MeasurementSaved]( CodecMakerConfig.withDiscriminatorFieldName(None) )
