@@ -140,11 +140,13 @@ final class Store(config: Config,
 
   def listPools(): List[Pool] = DB readOnly { implicit session =>
     sql"select * from pool order by name"
-      .map(rs => Pool(
-        rs.long("id"),
-        rs.string("name"), 
-        rs.int("volume"), 
-        rs.string("unit") )
+      .map(rs =>
+        Pool(
+          rs.long("id"),
+          rs.string("name"), 
+          rs.int("volume"), 
+          rs.string("unit")
+        )
       )
       .list()
   }
