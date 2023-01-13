@@ -252,13 +252,15 @@ final class Store(config: Config,
 
   def listChemicals(poolId: Long): List[Chemical] = DB readOnly { implicit session =>
     sql"select * from chemical where pool_id = $poolId order by added desc"
-      .map(rs => Chemical(
-        rs.long("id"),
-        rs.long("pool_id"),
-        rs.string("typeof"),
-        rs.double("amount"),
-        rs.string("unit"),
-        rs.string("added"))
+      .map(rs =>
+        Chemical(
+          rs.long("id"),
+          rs.long("pool_id"),
+          rs.string("typeof"),
+          rs.double("amount"),
+          rs.string("unit"),
+          rs.string("added")
+        )
       )
       .list()
   }
