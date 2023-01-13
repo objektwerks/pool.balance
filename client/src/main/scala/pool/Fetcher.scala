@@ -14,11 +14,12 @@ final class Fetcher(url: String):
            handler: Event => Unit): Unit =
     val commandJson = writeToString[Command](command)
     val request = HttpRequest
-      .newBuilder()
+      .newBuilder
       .uri(URI(url))
       .timeout(Duration.of(10, SECONDS))
       .version(HttpClient.Version.HTTP_2)
       .headers("Content-Type", "application/json; charset=UTF-8", "Accept", "application/json")
       .POST( HttpRequest.BodyPublishers.ofString(commandJson) )
-      .build()
-  
+      .build
+    
+    val client = HttpClient.newHttpClient
