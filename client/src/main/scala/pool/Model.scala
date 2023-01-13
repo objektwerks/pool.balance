@@ -107,7 +107,14 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def login(emailAddress: String, pin: String): Unit = ???
+  def login(emailAddress: String, pin: String): Unit =
+    fetcher.call(
+      Login(emailAddress, pin),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.login", fault)
+        case LoggedIn(account) => observableAccount.set(account)
+        case _ => ()
+    )
 
   def deactivate(license: String): Unit = ???
 
