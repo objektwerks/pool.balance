@@ -102,7 +102,7 @@ final class Store(config: Config,
       else None
     }
 
-  def pools(): List[Pool] = DB readOnly { implicit session =>
+  def listPools(): List[Pool] = DB readOnly { implicit session =>
     sql"select * from pool order by name"
       .map(rs => Pool(
         rs.long("id"),
@@ -113,7 +113,7 @@ final class Store(config: Config,
       .list()
   }
 
-  def add(pool: Pool): Pool = DB localTx { implicit session =>
+  def addPool(pool: Pool): Pool = DB localTx { implicit session =>
     val id = sql"""
       insert into pool(name, volume, unit) values(${pool.name}, ${pool.volume}, ${pool.unit.toString})
       """
@@ -121,7 +121,7 @@ final class Store(config: Config,
     pool.copy(id = id)
   }
 
-  def update(pool: Pool): Unit = DB localTx { implicit session =>
+  def updatePool(pool: Pool): Unit = DB localTx { implicit session =>
     sql"""
       update pool set name = ${pool.name}, volume = ${pool.volume}, unit = ${pool.unit.toString}
       where id = ${pool.id}
@@ -129,7 +129,7 @@ final class Store(config: Config,
       .update()
   }
 
-  def cleanings(poolId: Long): List[Cleaning] = DB readOnly { implicit session =>
+  def listCleanings(poolId: Long): List[Cleaning] = DB readOnly { implicit session =>
     sql"select * from cleaning where pool_id = $poolId order by cleaned desc"
       .map(rs => Cleaning(
         rs.long("id"),
@@ -145,7 +145,7 @@ final class Store(config: Config,
       .list()
   }
 
-  def add(cleaning: Cleaning): Cleaning = DB localTx { implicit session =>
+  def addCleaning(cleaning: Cleaning): Cleaning = DB localTx { implicit session =>
     val id = sql"""
       insert into cleaning(pool_id, brush, net, skimmer_basket, pump_basket, pump_filter, vacuum, cleaned)
       values(${cleaning.poolId}, ${cleaning.brush}, ${cleaning.net}, ${cleaning.skimmerBasket},
@@ -155,7 +155,7 @@ final class Store(config: Config,
     cleaning.copy(id = id)
   }
 
-  def update(cleaning: Cleaning): Unit = DB localTx { implicit session =>
+  def updateCleaning(cleaning: Cleaning): Unit = DB localTx { implicit session =>
     sql"""
       update cleaning set brush = ${cleaning.brush}, net = ${cleaning.net}, skimmer_basket = ${cleaning.skimmerBasket},
       pump_basket = ${cleaning.pumpBasket}, pump_filter = ${cleaning.pumpFilter}, vacuum = ${cleaning.vacuum},
@@ -164,7 +164,7 @@ final class Store(config: Config,
       .update()
   }
 
-  def measurements(poolId: Long): List[Measurement] = DB readOnly { implicit session =>
+  def listMeasurements(poolId: Long): List[Measurement] = DB readOnly { implicit session =>
     sql"select * from measurement where pool_id = $poolId order by measured desc"
       .map(rs => Measurement(
         rs.long("id"),
@@ -184,7 +184,7 @@ final class Store(config: Config,
       .list()
   }
 
-  def add(measurement: Measurement): Measurement = DB localTx { implicit session =>
+  def addMeasurement(measurement: Measurement): Measurement = DB localTx { implicit session =>
     val id = sql"""
       insert into measurement(pool_id, total_chlorine, free_chlorine, combined_chlorine, ph, calcium_hardness,
       total_alkalinity, cyanuric_acid, total_bromine, salt, temperature, measured)
@@ -196,7 +196,7 @@ final class Store(config: Config,
     measurement.copy(id = id)
   }
 
-  def update(measurement: Measurement): Unit = DB localTx { implicit session =>
+  def updateMeasurement(measurement: Measurement): Unit = DB localTx { implicit session =>
     sql"""
       update measurement set total_chlorine = ${measurement.totalChlorine}, free_chlorine = ${measurement.freeChlorine},
       combined_chlorine = ${measurement.combinedChlorine}, ph = ${measurement.ph}, calcium_hardness = ${measurement.calciumHardness},
@@ -208,7 +208,7 @@ final class Store(config: Config,
       .update()
   }
 
-  def chemicals(poolId: Long): List[Chemical] = DB readOnly { implicit session =>
+  def listChemicals(poolId: Long): List[Chemical] = DB readOnly { implicit session =>
     sql"select * from chemical where pool_id = $poolId order by added desc"
       .map(rs => Chemical(
         rs.long("id"),
@@ -221,7 +221,7 @@ final class Store(config: Config,
       .list()
   }
 
-  def add(chemical: Chemical): Chemical = DB localTx { implicit session =>
+  def addChemical(chemical: Chemical): Chemical = DB localTx { implicit session =>
     val id = sql"""
       insert into chemical(pool_id, typeof, amount, unit, added)
       values(${chemical.poolId}, ${chemical.typeof.toString}, ${chemical.amount}, ${chemical.unit.toString}, ${chemical.added})
@@ -230,7 +230,7 @@ final class Store(config: Config,
     chemical.copy(id = id)
   }
 
-  def update(chemical: Chemical): Unit = DB localTx { implicit session =>
+  def updateChemical(chemical: Chemical): Unit = DB localTx { implicit session =>
     sql"""
       update chemical set typeof = ${chemical.typeof.toString}, amount = ${chemical.amount}, unit = ${chemical.unit.toString},
       added = ${chemical.added} where id = ${chemical.id}

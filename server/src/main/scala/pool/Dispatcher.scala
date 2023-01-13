@@ -55,10 +55,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     if optionalAccount.isDefined then Reactivated(optionalAccount.get)
     else Fault(s"Invalid license: $license")
 
-  private def listPools: PoolsListed =
-    for
-      pools <- store.listPools
-    yield PoolsListed(pools)
+  private def listPools: PoolsListed = PoolsListed(store.listPools)
 
   private def savePool(pool: Pool): PoolSaved =
     for
