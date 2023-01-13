@@ -18,7 +18,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case SaveMeasurement(_, measurement) => saveMeasurement(measurement)
       case ListChemicals(_, poolId)        => listChemicals(poolId)
       case SaveChemical(_, chemical)       => saveChemical(chemical)
-    else Fault(s"Invalid command: $command")
+    else Fault(s"Failed to process invalid command: $command")
 
   private val subject = "Account Registration"
 
