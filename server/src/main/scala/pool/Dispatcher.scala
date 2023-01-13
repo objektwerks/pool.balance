@@ -32,9 +32,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def register(emailAddress: String): Registered | Fault =
     val account = Account(emailAddress = emailAddress)
     val sent = email(account.emailAddress, account.pin)
-    if sent then
-      val id = store.register(account)
-      Registered( account.copy(id = id) )
+    if sent then Registered( store.register(account) )
     else Fault(s"Registration failed for: $emailAddress")
 
   private def email(emailAddress: String, pin: String): Boolean =
@@ -43,9 +41,9 @@ final class Dispatcher(store: Store, emailer: Emailer):
     emailer.send(recipients, subject, message)
 
   private def login(emailAddress: String, pin: String): LoggedIn | Fault =
-    for
-      option <- store.login(emailAddress, pin)
-    yield if option.isDefined then LoggedIn(option.get) else Fault(s"Invalid pin: $pin")
+    val optionalAccount = store.login(emailAddress, pin)
+    if optionalAccount.isDefined then LoggedIn(optionalAccount.get)
+    else Fault(s"Invalid email address: $emailAddress and/or pin: $pin")
 
   private def deactivateAccount(license: String): Deactivated =
     for
