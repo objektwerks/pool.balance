@@ -25,3 +25,5 @@ final class Fetcher(url: String):
     
     val client = HttpClient.newHttpClient
     val response = client.send(request, BodyHandlers.ofString())
+    val event = readFromString[Event]( response.body )
+    handler(event)
