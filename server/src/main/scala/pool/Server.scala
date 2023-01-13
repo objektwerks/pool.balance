@@ -27,8 +27,10 @@ object Server extends LazyLogging:
   private val http = HttpServer.create(InetSocketAddress(port), backlog)
   private val handler = new HttpHandler {
     override def handle(exchange: HttpExchange): Unit =
-      val request = Source.fromInputStream( exchange.getRequestBody )(Codec.UTF8).mkString("")
-      val response = "TODO"
+      val json = Source.fromInputStream( exchange.getRequestBody )(Codec.UTF8).mkString("")
+      val command = readFromString[Command](json)
+      val event = dispatcher.dispatch(command)
+      val response = writeToString[Event](event)
 
       exchange.sendResponseHeaders(200, response.length())
       exchange.getResponseHeaders().add("Content-Type", "application/json; charset=UTF-8")
