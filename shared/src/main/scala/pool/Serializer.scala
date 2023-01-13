@@ -26,3 +26,4 @@ object Serializer:
   given JsonValueCodec[ListChemicals] = JsonCodecMaker.make[ListChemicals]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[SaveChemical] = JsonCodecMaker.make[SaveChemical]( CodecMakerConfig.withDiscriminatorFieldName(None) )
 
+  given JsonValueCodec[Event] = JsonCodecMaker.make[Event]( CodecMakerConfig.withDiscriminatorFieldName(None) )
