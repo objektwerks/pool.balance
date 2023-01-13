@@ -169,16 +169,18 @@ final class Store(config: Config,
 
   def listCleanings(poolId: Long): List[Cleaning] = DB readOnly { implicit session =>
     sql"select * from cleaning where pool_id = $poolId order by cleaned desc"
-      .map(rs => Cleaning(
-        rs.long("id"),
-        rs.long("pool_id"),
-        rs.boolean("brush"),
-        rs.boolean("net"),
-        rs.boolean("skimmer_basket"),
-        rs.boolean("pump_basket"),
-        rs.boolean("pump_filter"),
-        rs.boolean("vacuum"),
-        rs.string("cleaned"))
+      .map(rs =>
+        Cleaning(
+          rs.long("id"),
+          rs.long("pool_id"),
+          rs.boolean("brush"),
+          rs.boolean("net"),
+          rs.boolean("skimmer_basket"),
+          rs.boolean("pump_basket"),
+          rs.boolean("pump_filter"),
+          rs.boolean("vacuum"),
+          rs.string("cleaned")
+        )
       )
       .list()
   }
