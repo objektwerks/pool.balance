@@ -114,10 +114,8 @@ final class MeasurementsPane(context: Context) extends VBox:
   def add(): Unit =
     MeasurementDialog(context, Measurement(poolId = model.selectedPoolId.value)).showAndWait() match
       case Some(measurement: Measurement) =>
-        model
-          .add(measurement)
-          .map(measurement => tableView.selectionModel().select(measurement))
-          .recover { case error: Throwable => model.onFault(error, "Measurement add failed.") }
+        model.add(measurement)
+        tableView.selectionModel().select(measurement)
       case _ =>
 
   def update(): Unit =
@@ -125,10 +123,8 @@ final class MeasurementsPane(context: Context) extends VBox:
     val measurement = tableView.selectionModel().getSelectedItem.measurement
     MeasurementDialog(context, measurement).showAndWait() match
       case Some(measurement: Measurement) =>
-        model
-          .update(selectedIndex, measurement)
-          .map(_ => tableView.selectionModel().select(selectedIndex))
-          .recover { case error: Throwable => model.onFault(error, "Measurement update failed.") }
+        model.update(measurement)
+        tableView.selectionModel().select(selectedIndex)
       case _ =>
 
   def chart(): Unit = MeasurementsChartDialog(context).showAndWait()
