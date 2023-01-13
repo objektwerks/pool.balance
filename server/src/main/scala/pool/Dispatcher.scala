@@ -43,7 +43,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def login(emailAddress: String, pin: String): LoggedIn | Fault =
     val optionalAccount = store.login(emailAddress, pin)
     if optionalAccount.isDefined then LoggedIn(optionalAccount.get)
-    else Fault(s"Invalid email address: $emailAddress and/or pin: $pin")
+    else Fault(s"Failed to login due to invalid email address: $emailAddress and/or pin: $pin")
 
   private def deactivateAccount(license: String): Deactivated | Fault =
     val optionalAccount = store.deactivateAccount(license)
@@ -58,26 +58,31 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def listPools: PoolsListed = PoolsListed(store.listPools())
 
   private def savePool(pool: Pool): PoolSaved =
-    val id = if pool.id == 0 then store.addPool(pool) else store.updatePool(pool)
-    PoolSaved(id)
+    PoolSaved(
+      if pool.id == 0 then store.addPool(pool)
+      else store.updatePool(pool)
+    )
 
   private def listCleanings(poolId: Long): CleaningsListed = CleaningsListed( store.listCleanings(poolId) )
 
   private def saveCleaning(cleaning: Cleaning): CleaningSaved =
-    for
-      id <- if cleaning.id == 0 then store.addCleaning(cleaning) else store.updateCleaning(cleaning)
-    yield CleaningSaved(id)
+    CleaningSaved(
+      if cleaning.id == 0 then store.addCleaning(cleaning)
+      else store.updateCleaning(cleaning)
+    )
 
   private def listMeasurements(poolId: Long): MeasurementsListed = MeasurementsListed( store.listMeasurements(poolId) )
 
   private def saveMeasurement(measurement: Measurement): MeasurementSaved =
-    for
-      id <- if measurement.id == 0 then store.addMeasurement(measurement) else store.updateMeasurement(measurement)
-    yield MeasurementSaved(id)
+    MeasurementSaved(
+      if measurement.id == 0 then store.addMeasurement(measurement)
+      else store.updateMeasurement(measurement)
+    )
 
   private def listChemicals(poolId: Long): ChemicalsListed = ChemicalsListed( store.listChemicals(poolId) )
 
-  private def saveChemical(chemical: Chemical): TaskChemicalSaved =
-    for
-      id <- if chemical.id == 0 then store.addChemical(chemical) else store.updateChemical(chemical)
-    yield ChemicalSaved(id)
+  private def saveChemical(chemical: Chemical): ChemicalSaved =
+    ChemicalSaved(
+      if chemical.id == 0 then store.addChemical(chemical)
+      else store.updateChemical(chemical)
+    )
