@@ -4,7 +4,7 @@ Pool Balance
 
 TODO
 ----
-1. Model
+1. ???
 
 Build
 -----
