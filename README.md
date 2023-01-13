@@ -4,10 +4,8 @@ Pool Balance
 
 TODO
 ----
-1. Handler
-2. Dispatcher
-3. Fetcher
-4. Model
+1. Fetcher
+2. Model
 
 Build
 -----
