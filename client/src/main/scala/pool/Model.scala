@@ -104,27 +104,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       // observablePools ++= fetcher.pools()
     }.recover { case error: Throwable => onFault(error, s"Loading pools data failed: ${error.getMessage}") }
 
-  def cleanings(poolId: Long): Unit =
-    Future {
-      shouldNotBeInFxThread("cleanings should not be in fx thread.")
-      observableCleanings.clear()
-      // observableCleanings ++= fetcher.cleanings(poolId)
-    }.recover { case error: Throwable => onFault(error, s"Loading cleanings data failed: ${error.getMessage}") }
-
-  def measurements(poolId: Long): Unit =
-    Future {
-      shouldNotBeInFxThread("measurements should not be in fx thread.")
-      observableMeasurements.clear()
-      // observableMeasurements ++= fetcher.measurements(poolId) 
-    }.recover { case error: Throwable => onFault(error, s"Loading measurements data failed: ${error.getMessage}") }
-
-  def chemicals(poolId: Long): Unit =
-    Future {
-      shouldNotBeInFxThread("chemicals should not be in fx thread.")
-      observableChemicals.clear()
-      // observableChemicals ++= fetcher.chemicals(poolId) 
-    }.recover { case error: Throwable => onFault(error, s"Loading chemicals data failed: ${error.getMessage}") }
-
   def add(pool: Pool): Future[Pool] =
     Future {
       shouldNotBeInFxThread("add pool should not be in fx thread.")
@@ -144,6 +123,13 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       selectedPoolId.value = pool.id
     }
 
+  def cleanings(poolId: Long): Unit =
+    Future {
+      shouldNotBeInFxThread("cleanings should not be in fx thread.")
+      observableCleanings.clear()
+      // observableCleanings ++= fetcher.cleanings(poolId)
+    }.recover { case error: Throwable => onFault(error, s"Loading cleanings data failed: ${error.getMessage}") }
+
   def add(cleaning: Cleaning): Future[Cleaning] =
     Future {
       shouldNotBeInFxThread("add cleaning should not be in fx thread.")
@@ -162,7 +148,14 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       observableCleanings.sort()
       selectedCleaningId.value = cleaning.id
     }
-  
+
+  def measurements(poolId: Long): Unit =
+    Future {
+      shouldNotBeInFxThread("measurements should not be in fx thread.")
+      observableMeasurements.clear()
+      // observableMeasurements ++= fetcher.measurements(poolId) 
+    }.recover { case error: Throwable => onFault(error, s"Loading measurements data failed: ${error.getMessage}") }
+
   def add(measurement: Measurement): Future[Measurement] =
     Future {
       shouldNotBeInFxThread("add measurement should not be in fx thread.")
@@ -181,6 +174,13 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       observableMeasurements.sort()
       selectedMeasurementId.value = measurement.id
     }
+
+  def chemicals(poolId: Long): Unit =
+    Future {
+      shouldNotBeInFxThread("chemicals should not be in fx thread.")
+      observableChemicals.clear()
+      // observableChemicals ++= fetcher.chemicals(poolId) 
+    }.recover { case error: Throwable => onFault(error, s"Loading chemicals data failed: ${error.getMessage}") }
   
   def add(chemical: Chemical): Future[Chemical] =
     Future {
