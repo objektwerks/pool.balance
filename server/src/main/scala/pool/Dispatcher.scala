@@ -55,12 +55,11 @@ final class Dispatcher(store: Store, emailer: Emailer):
     if optionalAccount.isDefined then Reactivated(optionalAccount.get)
     else Fault(s"Invalid license: $license")
 
-  private def listPools: PoolsListed = PoolsListed(store.listPools)
+  private def listPools: PoolsListed = PoolsListed(store.listPools())
 
   private def savePool(pool: Pool): PoolSaved =
-    for
-      id <- if pool.id == 0 then store.addPool(pool) else store.updatePool(pool)
-    yield PoolSaved(id)
+    val id = if pool.id == 0 then store.addPool(pool) else store.updatePool(pool)
+    PoolSaved(id)
 
   private def listCleanings: CleaningsListed =
     for
