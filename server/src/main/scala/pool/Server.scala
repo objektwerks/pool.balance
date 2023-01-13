@@ -19,8 +19,8 @@ object Server extends LazyLogging:
   private val handler = new HttpHandler {
     override def handle(exchange: HttpExchange): Unit =
       val json = Source.fromInputStream( exchange.getRequestBody() )(Codec.UTF8).mkString("")
-
       val response = "TODO"
+
       exchange.sendResponseHeaders(200, response.length())
       exchange.getResponseHeaders().add("Content-Type", "application/json")
 
@@ -28,7 +28,6 @@ object Server extends LazyLogging:
       outputStream.write(response.getBytes())
       outputStream.flush()
       outputStream.close()
-
   }
 
   @main def main(): Unit =
