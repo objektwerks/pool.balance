@@ -7,7 +7,7 @@ import com.typesafe.scalalogging.LazyLogging
 import java.net.InetSocketAddress
 import java.util.concurrent.Executors
 
-import scala.io.Source
+import scala.io.{Codec, Source}
 
 object Server extends LazyLogging:
   private val config = ConfigFactory.load("server.conf")
@@ -18,7 +18,7 @@ object Server extends LazyLogging:
   private val http = HttpServer.create(InetSocketAddress(port), backlog)
   private val handler = new HttpHandler {
     override def handle(exchange: HttpExchange): Unit =
-      val json = Source.fromInputStream( exchange.getRequestBody() ).mkString
+      val json = Source.fromInputStream( exchange.getRequestBody() )(Codec.UTF8).mkString("")
 
       val response = "TODO"
       exchange.sendResponseHeaders(200, response.length())
@@ -28,6 +28,7 @@ object Server extends LazyLogging:
       outputStream.write(response.getBytes())
       outputStream.flush()
       outputStream.close()
+
   }
 
   @main def main(): Unit =
