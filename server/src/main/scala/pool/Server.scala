@@ -8,7 +8,7 @@ import com.typesafe.scalalogging.LazyLogging
 import java.net.InetSocketAddress
 import java.util.concurrent.Executors
 
-import scala.concurrent.duration._
+import scala.concurrent.duration.*
 import scala.io.{Codec, Source}
 import scala.util.Using
 
