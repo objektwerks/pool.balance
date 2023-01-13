@@ -24,7 +24,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
 
   private def authorize(command: Command): Boolean =
     command match
-      case license: License          => if license.isLicense then store.authorize(license.license) else false
+      case license: License          => if license.isLicense then store.isAuthorized(license.license) else false
       case Register(_) | Login(_, _) => true
 
   private def validate(command: Command): Boolean = command.isValid
@@ -33,9 +33,8 @@ final class Dispatcher(store: Store, emailer: Emailer):
     val account = Account(emailAddress = emailAddress)
     val sent = email(account.emailAddress, account.pin)
     if sent then
-      for
-        id    <- store.register(account)
-      yield Registered( account.copy(id = id) )
+      val id = store.register(account)
+      Registered( account.copy(id = id) )
     else Fault(s"Registration failed for: $emailAddress")
 
   private def email(emailAddress: String, pin: String): Boolean =
