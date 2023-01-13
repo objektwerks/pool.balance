@@ -145,102 +145,110 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def add(pool: Pool): Future[Pool] =
-    Future {
-      shouldNotBeInFxThread("add pool should not be in fx thread.")
-      val newPool = pool // fetcher.add(pool)
-      observablePools += newPool
-      observablePools.sort()
-      selectedPoolId.value = newPool.id
-      newPool
-    }
+  def add(pool: Pool): Unit =
+    fetcher.call(
+      SavePool(observableAccount.get.license, pool),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.add pool", pool, fault)
+        case PoolSaved(id) => observablePools += pool.copy(id = id)
+        case _ => ()
+    )
 
-  def update(selectedIndex: Int, pool: Pool): Future[Unit] =
-    Future {
-      shouldNotBeInFxThread("update pool should not be in fx thread.")
-      // fetcher.update(pool)
-      observablePools.update(selectedIndex, pool)
-      observablePools.sort()
-      selectedPoolId.value = pool.id
-    }
+  def update(pool: Pool): Unit =
+    fetcher.call(
+      SavePool(observableAccount.get.license, pool),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.update pool", pool, fault)
+        case PoolSaved(id) => observablePools.update(observablePools.indexOf(pool), pool)
+        case _ => ()
+    )
 
   def cleanings(poolId: Long): Unit =
-    Future {
-      shouldNotBeInFxThread("cleanings should not be in fx thread.")
-      observableCleanings.clear()
-      // observableCleanings ++= fetcher.cleanings(poolId)
-    }.recover { case error: Throwable => onFault(error, s"Loading cleanings data failed: ${error.getMessage}") }
+    fetcher.call(
+      ListCleanings(observableAccount.get.license, poolId),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.cleanings", fault)
+        case CleaningsListed(cleanings) =>
+          observableCleanings.clear()
+          observableCleanings ++= cleanings
+        case _ => ()
+    )
 
-  def add(cleaning: Cleaning): Future[Cleaning] =
-    Future {
-      shouldNotBeInFxThread("add cleaning should not be in fx thread.")
-      val newCleaning = cleaning // fetcher.add(cleaning)
-      observableCleanings += newCleaning
-      observableCleanings.sort()
-      selectedCleaningId.value = newCleaning.id
-      newCleaning
-    }
+  def add(cleaning: Cleaning): Unit =
+    fetcher.call(
+      SaveCleaning(observableAccount.get.license, cleaning),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.add cleaning", cleaning, fault)
+        case CleaningSaved(id) => observableCleanings += cleaning.copy(id = id)
+        case _ => ()
+    )
 
-  def update(selectedIndex: Int, cleaning: Cleaning): Future[Unit] =
-    Future {
-      shouldNotBeInFxThread("update cleaning should not be in fx thread.")
-      // fetcher.update(cleaning)
-      observableCleanings.update(selectedIndex, cleaning)
-      observableCleanings.sort()
-      selectedCleaningId.value = cleaning.id
-    }
+  def update(cleaning: Cleaning): Unit =
+    fetcher.call(
+      SaveCleaning(observableAccount.get.license, cleaning),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.update cleaning", cleaning, fault)
+        case CleaningSaved(id) => observableCleanings.update(observableCleanings.indexOf(cleaning), cleaning)
+        case _ => ()
+    )
 
   def measurements(poolId: Long): Unit =
-    Future {
-      shouldNotBeInFxThread("measurements should not be in fx thread.")
-      observableMeasurements.clear()
-      // observableMeasurements ++= fetcher.measurements(poolId) 
-    }.recover { case error: Throwable => onFault(error, s"Loading measurements data failed: ${error.getMessage}") }
+    fetcher.call(
+      ListMeasurements(observableAccount.get.license, poolId),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.measurements", fault)
+        case MeasurementsListed(measurements) =>
+          observableMeasurements.clear()
+          observableMeasurements ++= measurements
+        case _ => ()
+    )
 
-  def add(measurement: Measurement): Future[Measurement] =
-    Future {
-      shouldNotBeInFxThread("add measurement should not be in fx thread.")
-      val newMeasurement = measurement // fetcher.add(measurement)
-      observableMeasurements += newMeasurement
-      observableMeasurements.sort()
-      selectedMeasurementId.value = newMeasurement.id
-      newMeasurement
-    }
+  def add(measurement: Measurement): Unit =
+    fetcher.call(
+      SaveMeasurement(observableAccount.get.license, measurement),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.add measurement", measurement, fault)
+        case MeasurementSaved(id) => observableMeasurements += measurement.copy(id = id)
+        case _ => ()
+    )
 
-  def update(selectedIndex: Int, measurement: Measurement): Future[Unit] =
-    Future {
-      shouldNotBeInFxThread("update measurement should not be in fx thread.")
-      // fetcher.update(measurement)
-      observableMeasurements.update(selectedIndex, measurement)
-      observableMeasurements.sort()
-      selectedMeasurementId.value = measurement.id
-    }
+  def update(measurement: Measurement): Unit =
+    fetcher.call(
+      SaveMeasurement(observableAccount.get.license, measurement),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.update measurement", measurement, fault)
+        case MeasurementSaved(id) => observableMeasurements.update(observableMeasurements.indexOf(measurement), measurement)
+        case _ => ()
+    )
 
   def chemicals(poolId: Long): Unit =
-    Future {
-      shouldNotBeInFxThread("chemicals should not be in fx thread.")
-      observableChemicals.clear()
-      // observableChemicals ++= fetcher.chemicals(poolId) 
-    }.recover { case error: Throwable => onFault(error, s"Loading chemicals data failed: ${error.getMessage}") }
+    fetcher.call(
+      ListChemicals(observableAccount.get.license, poolId),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.chemicals", fault)
+        case ChemicalsListed(chemicals) =>
+          observableChemicals.clear()
+          observableChemicals ++= chemicals
+        case _ => ()
+    )
   
-  def add(chemical: Chemical): Future[Chemical] =
-    Future {
-      shouldNotBeInFxThread("add chemical should not be in fx thread.")
-      val newChemical = chemical // fetcher.add(chemical)
-      observableChemicals += newChemical
-      observableChemicals.sort()
-      selectedChemicalId.value = newChemical.id      
-      newChemical
-    }
+  def add(chemical: Chemical): Unit =
+    fetcher.call(
+      SaveChemical(observableAccount.get.license, chemical),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.add chemical", chemical, fault)
+        case ChemicalSaved(id) => observableChemicals += chemical.copy(id = id)
+        case _ => ()
+    )
 
-  def update(selectedIndex: Int, chemical: Chemical): Future[Unit] =
-    Future {
-      shouldNotBeInFxThread("update chemical should not be in fx thread.")
-      // fetcher.update(chemical)
-      observableChemicals.update(selectedIndex, chemical)
-      observableChemicals.sort()
-      selectedChemicalId.value = chemical.id
-    }
+  def update(chemical: Chemical): Unit =
+    fetcher.call(
+      SaveChemical(observableAccount.get.license, chemical),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.update chemical", chemical, fault)
+        case ChemicalSaved(id) => observableChemicals.update(observableChemicals.indexOf(chemical), chemical)
+        case _ => ()
+    )
 
   val currentTotalChlorine = ObjectProperty[Int](0)
   val averageTotalChlorine = ObjectProperty[Int](0)
