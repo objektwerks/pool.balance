@@ -135,10 +135,15 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def pools(): Unit =
-    Future {
-      shouldNotBeInFxThread("pools should not be in fx thread.")
-      // observablePools ++= fetcher.pools()
-    }.recover { case error: Throwable => onFault(error, s"Loading pools data failed: ${error.getMessage}") }
+    fetcher.call(
+      ListPools(observableAccount.get.license),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.pools", fault)
+        case PoolsListed(pools) =>
+          observablePools.clear()
+          observablePools ++= pools
+        case _ => ()
+    )
 
   def add(pool: Pool): Future[Pool] =
     Future {
