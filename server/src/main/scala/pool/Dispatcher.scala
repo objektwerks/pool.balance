@@ -45,15 +45,15 @@ final class Dispatcher(store: Store, emailer: Emailer):
     if optionalAccount.isDefined then LoggedIn(optionalAccount.get)
     else Fault(s"Invalid email address: $emailAddress and/or pin: $pin")
 
-  private def deactivateAccount(license: String): Deactivated =
-    for
-      account <- store.deactivateAccount(license)
-    yield Deactivated(account)
+  private def deactivateAccount(license: String): Deactivated | Fault =
+    val optionalAccount = store.deactivateAccount(license)
+    if optionalAccount.isDefined then Deactivated(optionalAccount.get)
+    else Fault(s"Invalid license: $license")
 
-  private def reactivateAccount(license: String): Reactivated =
-    for
-      account <- store.reactivateAccount(license)
-    yield Reactivated(account)
+  private def reactivateAccount(license: String): Reactivated | Fault =
+    val optionalAccount = store.reactivateAccount(license)
+    if optionalAccount.isDefined then Reactivated(optionalAccount.get)
+    else Fault(s"Invalid license: $license")
 
   private def listPools: PoolsListed =
     for
