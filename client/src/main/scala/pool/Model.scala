@@ -75,11 +75,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     logger.info(s"*** Model: observable chemicals onchange event: $changes")
   }
 
-  def init: Unit = // TODO Enable when server completed!!!
-    logger.info(s"*** Model: initializing ...")
-    pools()
-    logger.info(s"*** Model: initialized.")
-
   def onFault(cause: String): Unit =
     shouldBeInFxThread("onfault cause should be in fx thread.")
     observableFaults += Fault(cause)
