@@ -18,13 +18,14 @@ object Client extends JFXApp3 with LazyLogging:
 
   override def start(): Unit =
     val view = View(context)
-    // TODO Register-Login Dialog
     stage = new JFXApp3.PrimaryStage:
       scene = view.scene
       title = context.windowTitle
       minWidth = context.windowWidth
       minHeight = context.windowHeight
       icons.add(context.logo)
+
+    // TODO Register-Login Dialog
 
     logger.info(s"Client started targeting: $url")
 
