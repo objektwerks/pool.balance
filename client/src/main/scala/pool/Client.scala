@@ -18,6 +18,7 @@ object Client extends JFXApp3 with LazyLogging:
 
   override def start(): Unit =
     val view = View(context)
+    // TODO Register-Login Dialog
     stage = new JFXApp3.PrimaryStage:
       scene = view.scene
       title = context.windowTitle
