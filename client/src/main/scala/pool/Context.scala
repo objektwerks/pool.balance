@@ -84,6 +84,7 @@ final class Context(config: Config, val model: Model):
   val dashboardTemperatureGood = config.getString("dashboard.temperatureGood")
   val dashboardTemperatureIdeal = config.getString("dashboard.temperatureIdeal")
 
+  val dialogRegisterLogin = config.getString("dialog.registerLogin")
   val dialogPool = config.getString("dialog.pool")
   val dialogCleaning = config.getString("dialog.cleaning")
   val dialogMeasurement = config.getString("dialog.measurement")
