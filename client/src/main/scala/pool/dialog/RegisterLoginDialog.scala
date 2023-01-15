@@ -4,7 +4,9 @@ import scalafx.scene.control.Dialog
 
 import pool.Account
 
-final case class RegisterLogin(emailAddress: String, pin: Option[String])
+final case class RegisterLogin(registerEmailAddress: Option[String],
+                               loginEmailAddress: Option[String],
+                               loginPin: Option[String])
 
 final class RegisterLoginDialog extends Dialog[RegisterLogin]:
   
