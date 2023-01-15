@@ -18,3 +18,6 @@ final class RegisterLoginDialog(owner: Stage, context: Context) extends Dialog[R
 
   val registerEmailAddressTextField = new TextField:
     text = registerLogin.registerEmailAddress
+
+  val loginEmailAddressTextField = new TextField:
+    text = registerLogin.loginEmailAddress
