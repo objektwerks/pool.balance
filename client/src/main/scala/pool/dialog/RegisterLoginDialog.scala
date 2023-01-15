@@ -48,14 +48,14 @@ final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends D
   dialogPane().content = registerLoginPane
 
   val registerButtonType = new ButtonType(context.buttonRegister, ButtonData.Left)
+  val loginButtonType = new ButtonType(context.buttonLogin, ButtonData.Right)
+  dialogPane().buttonTypes = List(registerButtonType, loginButtonType)
+
   val registerButton = dialogPane().lookupButton(registerButtonType)
   registerButton.disable = true
 
-  val loginButtonType = new ButtonType(context.buttonLogin, ButtonData.Right)
   val loginButton = dialogPane().lookupButton(loginButtonType)
   loginButton.disable = true
-
-  dialogPane().buttonTypes = List(registerButtonType, loginButtonType)
 
   resultConverter = dialogButton => {
     if dialogButton == registerButtonType then
