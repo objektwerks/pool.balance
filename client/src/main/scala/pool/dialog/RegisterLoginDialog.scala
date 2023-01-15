@@ -45,3 +45,4 @@ final class RegisterLoginDialog(owner: Stage, context: Context) extends Dialog[R
     maxWidth = Double.MaxValue
     maxHeight = Double.MaxValue
     content = ControlGridPane(loginControls)
+
