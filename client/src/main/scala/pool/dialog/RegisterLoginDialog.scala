@@ -15,6 +15,7 @@ final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends D
   initOwner(primaryStage)
   title = context.windowTitle
   headerText = context.dialogRegisterLogin
+  graphic = context.logoImage
 
   val registerEmailAddressTextField = new TextField:
     text = ""
