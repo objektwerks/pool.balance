@@ -57,14 +57,6 @@ final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends D
   val loginButton = dialogPane().lookupButton(loginButtonType)
   loginButton.disable = true
 
-  resultConverter = dialogButton => {
-    if dialogButton == registerButtonType then
-      RegisterLogin(register = Some( Register( registerEmailAddressTextField.text.value ) ) )
-    else if dialogButton == loginButtonType then
-      RegisterLogin(login = Some( Login( loginEmailAddressTextField.text.value, loginPinTextField.text.value ) ) )
-    else null
-  }
-
   registerEmailAddressTextField.text.onChange { (_, _, newValue) =>
     registerButton.disable = !newValue.isEmailAddress
   }
@@ -75,4 +67,12 @@ final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends D
 
   loginPinTextField.text.onChange { (_, _, newValue) =>
     loginButton.disable = !newValue.isPin || !loginEmailAddressTextField.text.value.isEmailAddress
+  }
+
+  resultConverter = dialogButton => {
+    if dialogButton == registerButtonType then
+      RegisterLogin(register = Some( Register( registerEmailAddressTextField.text.value ) ) )
+    else if dialogButton == loginButtonType then
+      RegisterLogin(login = Some( Login( loginEmailAddressTextField.text.value, loginPinTextField.text.value ) ) )
+    else null
   }
