@@ -4,7 +4,7 @@ Pool Balance
 
 TODO
 ----
-1. Register-Login Dialog
+1. Account Dialog
 
 Build
 -----
