@@ -18,11 +18,7 @@ final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends D
   headerText = context.dialogRegisterLogin
   graphic = context.logoImage
 
-  val registerEmailAddressTextField = new TextField:
-    text = ""
-    text.onChange { (_, _, newValue) =>
-      dialogPane().lookupButton(registerButtonType).disable = !newValue.isEmailAddress
-    }
+  val registerEmailAddressTextField = new TextField
 
   val registerControls = List[(String, TextField)](
     context.labelEmailAddress -> registerEmailAddressTextField
@@ -34,14 +30,9 @@ final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends D
     maxHeight = Double.MaxValue
     content = ControlGridPane(registerControls)
 
-  val loginEmailAddressTextField = new TextField:
-    text = ""
-    text.onChange { (_, _, newValue) =>
-      dialogPane().lookupButton(loginButtonType).disable = !newValue.isEmailAddress || !loginPinTextField.text.value.isPin
-    }
+  val loginEmailAddressTextField = new TextField
 
   val loginPinTextField = new TextField:
-    text = ""
     prefColumnCount = 7
 
   val loginControls = List[(String, TextField)](
@@ -56,16 +47,18 @@ final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends D
     content = ControlGridPane(loginControls)
 
   val registerLoginPane = new VBox:
-    spacing = 3
+    spacing = 6
     children = List(registerTitledPane, loginTitledPane)
 
   dialogPane().content = registerLoginPane
 
   val registerButtonType = new ButtonType("Register", ButtonData.Left)
-  dialogPane().lookupButton(registerButtonType).disable = true
+  val registerButton = dialogPane().lookupButton(registerButtonType)
+  registerButton.disable = true
 
   val loginButtonType = new ButtonType("Login", ButtonData.Right)
-  dialogPane().lookupButton(loginButtonType).disable = true
+  val loginButton = dialogPane().lookupButton(loginButtonType)
+  loginButton.disable = true
 
   dialogPane().buttonTypes = List(registerButtonType, loginButtonType)
 
@@ -75,4 +68,16 @@ final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends D
     else if dialogButton == loginButtonType then
       RegisterLogin(login = Some( Login( loginEmailAddressTextField.text.value, loginPinTextField.text.value ) ) )
     else null
+  }
+
+  registerEmailAddressTextField.text.onChange { (_, _, newValue) =>
+    registerButton.disable = !newValue.isEmailAddress
+  }
+
+  loginEmailAddressTextField.text.onChange { (_, _, newValue) =>
+    loginButton.disable = !newValue.isEmailAddress || !loginPinTextField.text.value.isPin
+  }
+
+  loginPinTextField.text.onChange { (_, _, newValue) =>
+    loginButton.disable = !newValue.isPin || !loginEmailAddressTextField.text.value.isEmailAddress
   }
