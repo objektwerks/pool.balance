@@ -2,7 +2,8 @@ package pool.dialog
 
 import scalafx.Includes.*
 import scalafx.scene.layout.VBox
-import scalafx.scene.control.{Dialog, TextField, TitledPane}
+import scalafx.scene.control.{ButtonType, Dialog, TextField, TitledPane}
+import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.stage.Stage
 
 import pool.Context
@@ -53,3 +54,8 @@ final class RegisterLoginDialog(owner: Stage, context: Context) extends Dialog[R
     children = List(registerTitledPane, loginTitledPane)
 
   dialogPane().content = registerLoginPane
+
+  val registerButtonType = new ButtonType("Register", ButtonData.Left)
+  val loginButtonType = new ButtonType("Login", ButtonData.Right)
+
+  dialogPane().buttonTypes = List(registerButtonType, loginButtonType)
