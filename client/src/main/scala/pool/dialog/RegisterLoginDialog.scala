@@ -1,6 +1,6 @@
 package pool.dialog
 
-import scalafx.scene.control.{Dialog, TextField}
+import scalafx.scene.control.{Dialog, TextField, TitledPane}
 import scalafx.stage.Stage
 
 import pool.Context
@@ -24,3 +24,8 @@ final class RegisterLoginDialog(owner: Stage, context: Context) extends Dialog[R
 
   val loginPinTextField = new TextField:
     text = registerLogin.loginPin
+
+  val registerTitlePane = new TitledPane:
+    collapsible = false
+    maxWidth = Double.MaxValue
+    maxHeight = Double.MaxValue
