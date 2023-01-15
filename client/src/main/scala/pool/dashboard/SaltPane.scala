@@ -1,7 +1,6 @@
 package pool.dashboard
 
-import pool.Context
-import pool.Measurement
+import pool.{Context, Measurement}
 
 final class SaltPane(context: Context) extends DashboardTitledPane(context):
   text = context.headerSalt
