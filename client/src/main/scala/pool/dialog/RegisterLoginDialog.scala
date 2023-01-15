@@ -1,6 +1,6 @@
 package pool.dialog
 
-import scalafx.scene.control.Dialog
+import scalafx.scene.control.{Dialog, TextField}
 import scalafx.stage.Stage
 
 import pool.Context
@@ -13,3 +13,6 @@ final class RegisterLoginDialog(owner: Stage, context: Context) extends Dialog[R
   initOwner(owner)
   title = context.windowTitle
   headerText = context.dialogRegisterLogin
+
+  val registerEmailAddressTextField = new TextField:
+    text = pool.name
