@@ -1,12 +1,11 @@
 package pool.dialog
 
 import scalafx.scene.control.Dialog
-
-import pool.Account
+import scalafx.stage.Stage
 
 final case class RegisterLogin(registerEmailAddress: Option[String],
                                loginEmailAddress: Option[String],
                                loginPin: Option[String])
 
-final class RegisterLoginDialog extends Dialog[RegisterLogin]:
-  
+final class RegisterLoginDialog(owner: Stage) extends Dialog[RegisterLogin]:
+  initOwner(owner)
