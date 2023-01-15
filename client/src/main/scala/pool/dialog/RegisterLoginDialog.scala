@@ -6,21 +6,18 @@ import scalafx.scene.control.{ButtonType, Dialog, TextField, TitledPane}
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.stage.Stage
 
-import pool.Context
+import pool.{Context, Register, Login}
 
-final case class RegisterLogin(registerEmailAddress: String = "",
-                               loginEmailAddress: String = "",
-                               loginPin: String = "")
+final case class RegisterLogin(register: Option[Register] = None,
+                               login: Option[Login] = None)
 
 final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends Dialog[RegisterLogin]:
   initOwner(primaryStage)
   title = context.windowTitle
   headerText = context.dialogRegisterLogin
 
-  val registerLogin = RegisterLogin()
-
   val registerEmailAddressTextField = new TextField:
-    text = registerLogin.registerEmailAddress
+    text = ""
 
   val registerControls = List[(String, TextField)](
     context.labelEmailAddress -> registerEmailAddressTextField
@@ -33,10 +30,11 @@ final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends D
     content = ControlGridPane(registerControls)
 
   val loginEmailAddressTextField = new TextField:
-    text = registerLogin.loginEmailAddress
+    text = ""
 
   val loginPinTextField = new TextField:
-    text = registerLogin.loginPin
+    text = ""
+    prefColumnCount = 7
 
   val loginControls = List[(String, TextField)](
     context.labelEmailAddress -> loginEmailAddressTextField,
@@ -59,3 +57,11 @@ final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends D
   val loginButtonType = new ButtonType("Login", ButtonData.Right)
 
   dialogPane().buttonTypes = List(registerButtonType, loginButtonType)
+
+  resultConverter = dialogButton => {
+    if dialogButton == registerButtonType then
+      RegisterLogin(register = Some( Register( registerEmailAddressTextField.text.value ) ) )
+    else if dialogButton == loginButtonType then
+      RegisterLogin(login = Some( Login( loginEmailAddressTextField.text.value, loginPinTextField.text.value ) ) )
+    else null
+  }
