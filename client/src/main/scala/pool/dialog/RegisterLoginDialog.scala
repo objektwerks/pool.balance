@@ -25,7 +25,16 @@ final class RegisterLoginDialog(owner: Stage, context: Context) extends Dialog[R
   val loginPinTextField = new TextField:
     text = registerLogin.loginPin
 
-  val registerTitlePane = new TitledPane:
+  val registerControls = List[(String, TextField)](
+    "Email Address:" -> registerEmailAddressTextField
+  )
+
+  val registerTitledPane = new TitledPane:
+    collapsible = false
+    maxWidth = Double.MaxValue
+    maxHeight = Double.MaxValue
+
+  val loginTitledPane = new TitledPane:
     collapsible = false
     maxWidth = Double.MaxValue
     maxHeight = Double.MaxValue
