@@ -1,7 +1,6 @@
 package pool.dashboard
 
-import pool.Context
-import pool.Measurement
+import pool.{Context, Measurement}
 
 final class FreeChlorinePane(context: Context) extends DashboardTitledPane(context):
   text = context.headerFreeChlorine
