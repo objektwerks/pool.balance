@@ -34,7 +34,6 @@ object Client extends JFXApp3 with LazyLogging:
       case Some(login: Login) => model.login(login)
       case _ => System.exit(-1)
     
-
     logger.info(s"Client started targeting: $url")
 
   override def stopApp(): Unit = logger.info("Client stopped.")
