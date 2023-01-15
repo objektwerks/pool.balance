@@ -9,6 +9,10 @@ import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.layout.VBox
 
+import pool.{Login, Register}
+import pool.dialog.RegisterLogin
+import pool.dialog.RegisterLoginDialog
+
 object Client extends JFXApp3 with LazyLogging:
   private val conf = ConfigFactory.load("client.conf")
   private val url = conf.getString("url")
@@ -24,8 +28,12 @@ object Client extends JFXApp3 with LazyLogging:
       minWidth = context.windowWidth
       minHeight = context.windowHeight
       icons.add(context.logo)
-
-    // TODO Register-Login Dialog
+    
+    RegisterLoginDialog(stage, context).showAndWait() match
+      case Some(register: Register) => model.register(register)
+      case Some(login: Login) => model.login(login)
+      case _ => System.exit(-1)
+    
 
     logger.info(s"Client started targeting: $url")
 
