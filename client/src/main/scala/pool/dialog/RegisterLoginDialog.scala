@@ -12,4 +12,4 @@ final case class RegisterLogin(registerEmailAddress: Option[String],
 final class RegisterLoginDialog(owner: Stage, context: Context) extends Dialog[RegisterLogin]:
   initOwner(owner)
   title = context.windowTitle
-  headerText = context.dialogPool
+  headerText = context.dialogRegisterLogin
