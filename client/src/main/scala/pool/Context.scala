@@ -18,6 +18,8 @@ final class Context(config: Config, val model: Model):
   val buttonChart = config.getString("button.chart")
   val buttonFaults = config.getString("button.faults")
   val buttonConverter = config.getString("button.converter")
+  val buttonRegister = config.getString("button.register")
+  val buttonLogin = config.getString("button.login")
 
   val chartCleanings = config.getString("chart.cleanings")
   val chartChemicals = config.getString("chart.chemicals")
