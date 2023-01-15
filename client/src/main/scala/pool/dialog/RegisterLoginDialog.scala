@@ -19,11 +19,9 @@ final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends D
   graphic = context.logoImage
 
   val registerEmailAddressTextField = new TextField
-
   val registerControls = List[(String, TextField)](
     context.labelEmailAddress -> registerEmailAddressTextField
   )
-
   val registerTitledPane = new TitledPane:
     collapsible = false
     maxWidth = Double.MaxValue
@@ -31,15 +29,12 @@ final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends D
     content = ControlGridPane(registerControls)
 
   val loginEmailAddressTextField = new TextField
-
   val loginPinTextField = new TextField:
     prefColumnCount = 7
-
   val loginControls = List[(String, TextField)](
     context.labelEmailAddress -> loginEmailAddressTextField,
     context.labelPin -> loginPinTextField
   )
-
   val loginTitledPane = new TitledPane:
     collapsible = false
     maxWidth = Double.MaxValue
