@@ -20,8 +20,14 @@ final class RegisterLoginDialog(owner: Stage, context: Context) extends Dialog[R
     text = registerLogin.registerEmailAddress
 
   val registerControls = List[(String, TextField)](
-    "Email Address:" -> registerEmailAddressTextField
+    context.labelEmailAddress -> registerEmailAddressTextField
   )
+
+  val registerTitledPane = new TitledPane:
+    collapsible = false
+    maxWidth = Double.MaxValue
+    maxHeight = Double.MaxValue
+    content = ControlGridPane(registerControls)
 
   val loginEmailAddressTextField = new TextField:
     text = registerLogin.loginEmailAddress
@@ -30,15 +36,9 @@ final class RegisterLoginDialog(owner: Stage, context: Context) extends Dialog[R
     text = registerLogin.loginPin
 
   val loginControls = List[(String, TextField)](
-    "Email Address:" -> loginEmailAddressTextField,
-    "Pin:" -> loginPinTextField
+    context.labelEmailAddress -> loginEmailAddressTextField,
+    context.labelPin -> loginPinTextField
   )
-
-  val registerTitledPane = new TitledPane:
-    collapsible = false
-    maxWidth = Double.MaxValue
-    maxHeight = Double.MaxValue
-    content = ControlGridPane(registerControls)
 
   val loginTitledPane = new TitledPane:
     collapsible = false
