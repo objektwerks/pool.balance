@@ -1,5 +1,6 @@
 package pool.dialog
 
+import scalafx.scene.layout.VBox
 import scalafx.scene.control.{Dialog, TextField, TitledPane}
 import scalafx.stage.Stage
 
@@ -46,3 +47,6 @@ final class RegisterLoginDialog(owner: Stage, context: Context) extends Dialog[R
     maxHeight = Double.MaxValue
     content = ControlGridPane(loginControls)
 
+  val registerLoginPane = new VBox:
+    spacing = 3
+    children = List(registerTitledPane, loginTitledPane)
