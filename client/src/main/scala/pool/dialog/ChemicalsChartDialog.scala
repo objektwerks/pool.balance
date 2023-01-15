@@ -5,8 +5,7 @@ import scalafx.scene.control.{ButtonType, Dialog}
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.layout.VBox
 
-import pool.{Context}
-import pool.Client
+import pool.{Client, Context}
 import pool.chart.ChemicalsChart
 
 final class ChemicalsChartDialog(context: Context) extends Dialog[Unit]:
