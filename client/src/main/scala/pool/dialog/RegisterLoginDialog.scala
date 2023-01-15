@@ -12,8 +12,8 @@ final case class RegisterLogin(registerEmailAddress: String = "",
                                loginEmailAddress: String = "",
                                loginPin: String = "")
 
-final class RegisterLoginDialog(owner: Stage, context: Context) extends Dialog[RegisterLogin]:
-  initOwner(owner)
+final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends Dialog[RegisterLogin]:
+  initOwner(primaryStage)
   title = context.windowTitle
   headerText = context.dialogRegisterLogin
 
