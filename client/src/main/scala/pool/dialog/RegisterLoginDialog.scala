@@ -36,6 +36,9 @@ final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends D
 
   val loginEmailAddressTextField = new TextField:
     text = ""
+    text.onChange { (_, _, newValue) =>
+      dialogPane().lookupButton(loginButtonType).disable = !newValue.isEmailAddress || !loginPinTextField.text.value.isPin
+    }
 
   val loginPinTextField = new TextField:
     text = ""
