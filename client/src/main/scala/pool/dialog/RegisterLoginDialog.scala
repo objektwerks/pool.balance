@@ -7,6 +7,7 @@ import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.stage.Stage
 
 import pool.{Context, Register, Login}
+import pool.Validator.*
 
 final case class RegisterLogin(register: Option[Register] = None,
                                login: Option[Login] = None)
@@ -19,6 +20,9 @@ final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends D
 
   val registerEmailAddressTextField = new TextField:
     text = ""
+    text.onChange { (_, _, newValue) =>
+      dialogPane().lookupButton(registerButtonType).disable = !newValue.isEmailAddress
+    }
 
   val registerControls = List[(String, TextField)](
     context.labelEmailAddress -> registerEmailAddressTextField
