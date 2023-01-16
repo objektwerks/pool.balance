@@ -7,4 +7,4 @@ import pool.{Account, Client, Context}
 final class AccountDialog(context: Context, account: Account) extends Dialog[Account]:
   initOwner(Client.stage)
   title = context.windowTitle
-  headerText = context.dialogPool
+  headerText = context.dialogAccount
