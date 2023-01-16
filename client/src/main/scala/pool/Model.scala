@@ -111,18 +111,18 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def deactivate(license: String): Unit =
+  def deactivate(deactivate: Deactivate): Unit =
     fetcher.call(
-      Deactivate(license),
+      deactivate,
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.deactivate", fault)
         case Deactivated(account) => observableAccount.set(account)
         case _ => ()
     )
 
-  def reactivate(license: String): Unit =
+  def reactivate(reactivate: Reactivate): Unit =
     fetcher.call(
-      Reactivate(license),
+      reactivate,
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.reactivate", fault)
         case Reactivated(account) => observableAccount.set(account)
