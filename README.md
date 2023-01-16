@@ -4,7 +4,7 @@ Pool Balance
 
 TODO
 ----
-1. Account Dialog
+1. ???
 
 Build
 -----
