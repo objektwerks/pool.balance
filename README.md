@@ -4,7 +4,8 @@ Pool Balance
 
 TODO
 ----
-1. ???
+1. Server Tests
+2. Test Client
 
 Build
 -----
