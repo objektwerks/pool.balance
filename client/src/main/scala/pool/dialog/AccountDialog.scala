@@ -21,6 +21,6 @@ final class AccountDialog(context: Context, account: Account) extends Dialog[Acc
 
   dialogPane().content = ControlGridPane(controls)
 
-  val activateButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
-  val deactivateButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
+  val activateButtonType = new ButtonType(context.buttonActivate, ButtonData.OKDone)
+  val deactivateButtonType = new ButtonType(context.buttonDeactivate, ButtonData.OKDone)
   dialogPane().buttonTypes = List(ButtonType.Close, activateButtonType, deactivateButtonType)
