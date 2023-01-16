@@ -1,7 +1,8 @@
 package pool.dialog
 
 import scalafx.Includes.*
-import scalafx.scene.control.{Dialog, Label}
+import scalafx.scene.control.{ButtonType, Dialog, Label}
+import scalafx.scene.control.ButtonBar.ButtonData
 
 import pool.{Account, Client, Context}
 
@@ -19,3 +20,7 @@ final class AccountDialog(context: Context, account: Account) extends Dialog[Acc
   )
 
   dialogPane().content = ControlGridPane(controls)
+
+  val activateButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
+  val deactivateButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
+  dialogPane().buttonTypes = List(ButtonType.Close, activateButtonType, deactivateButtonType)
