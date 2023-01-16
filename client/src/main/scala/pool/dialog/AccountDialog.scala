@@ -10,9 +10,9 @@ final class AccountDialog(context: Context, account: Account) extends Dialog[Acc
   headerText = context.dialogAccount
 
   val controls = List[(String, Label)](
-    "License:" -> Label( account.license ),
-    "Email Address:" -> Label( account.emailAddress ),
-    "Pin:" -> Label( account.pin ),
-    "Activated:" -> Label( account.activated ),
-    "Deactivated:" -> Label( account.deactivated )
+    context.labelLicense -> Label( account.license ),
+    context.labelEmailAddress -> Label( account.emailAddress ),
+    context.labelPin -> Label( account.pin ),
+    context.labelActivated -> Label( account.activated ),
+    context.labelDeactivated -> Label( account.deactivated )
   )
