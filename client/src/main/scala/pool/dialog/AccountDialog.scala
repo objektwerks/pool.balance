@@ -4,9 +4,12 @@ import scalafx.Includes.*
 import scalafx.scene.control.{ButtonType, Dialog, Label}
 import scalafx.scene.control.ButtonBar.ButtonData
 
-import pool.{Account, Client, Context}
+import pool.{Account, Client, Context, Deactivate, Reactivate}
 
-final class AccountDialog(context: Context, account: Account) extends Dialog[Account]:
+final case class DeactivateReactivate(deactivate: Option[Deactivate] = None,
+                                      reactivate: Option[Reactivate] = None)
+
+final class AccountDialog(context: Context, account: Account) extends Dialog[DeactivateReactivate]:
   initOwner(Client.stage)
   title = context.windowTitle
   headerText = context.dialogAccount
@@ -21,6 +24,14 @@ final class AccountDialog(context: Context, account: Account) extends Dialog[Acc
 
   dialogPane().content = ControlGridPane(controls)
 
-  val activateButtonType = new ButtonType(context.buttonActivate, ButtonData.OKDone)
   val deactivateButtonType = new ButtonType(context.buttonDeactivate, ButtonData.OKDone)
-  dialogPane().buttonTypes = List(ButtonType.Close, activateButtonType, deactivateButtonType)
+  val reactivateButtonType = new ButtonType(context.buttonActivate, ButtonData.OKDone)
+  dialogPane().buttonTypes = List(ButtonType.Close, deactivateButtonType, reactivateButtonType)
+
+  resultConverter = dialogButton => {
+    if dialogButton == deactivateButtonType then
+      DeactivateReactivate(deactivate = Some( Deactivate( account.license ) ) )
+    else if dialogButton == reactivateButtonType then
+      DeactivateReactivate(reactivate = Some( Reactivate( account.license) ) )
+    else null
+  }
