@@ -28,7 +28,7 @@ final class View(context: Context):
     orientation = Orientation.Horizontal
     items.addAll(poolsPane, tabbedPane)
   }
-  splitPane.setDividerPositions(0.25, 0.75)
+  splitPane.setDividerPositions(0.30, 0.70)
   VBox.setVgrow(splitPane, Priority.Always)
 
   borderPane.top = dashboardPane
