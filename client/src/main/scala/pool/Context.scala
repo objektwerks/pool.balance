@@ -122,8 +122,11 @@ final class Context(config: Config, val model: Model):
   val headerOccurred = config.getString("header.occurred")
   val headerFault = config.getString("header.fault")
 
+  val labelLicense = config.getString("label.license")
   val labelEmailAddress = config.getString("label.emailAddress")
   val labelPin = config.getString("label.pin")
+  val labelActivated = config.getString("label.activated")
+  val labelDeactivated = config.getString("label.deactivated")
   val labelPools = config.getString("label.pools")
   val labelCleanings = config.getString("label.cleanings")
   val labelMeasurements = config.getString("label.measurements")
