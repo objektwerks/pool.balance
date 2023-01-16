@@ -5,6 +5,8 @@ import scalafx.scene.control.{ButtonType, Dialog, Label}
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import pool.{Account, Client, Context, Deactivate, Reactivate}
+import pool.Validator.isActivated
+import pool.Validator.isDeactivated
 
 final case class DeactivateReactivate(deactivate: Option[Deactivate] = None,
                                       reactivate: Option[Reactivate] = None)
@@ -29,7 +31,10 @@ final class AccountDialog(context: Context, account: Account) extends Dialog[Dea
   dialogPane().buttonTypes = List(ButtonType.Close, deactivateButtonType, reactivateButtonType)
 
   val deactivateButton = dialogPane().lookupButton(deactivateButtonType)
-  deactivateButton.disable = account.deactivated.isEmpty
+  deactivateButton.disable = account.isActivated
+
+  val reactivateButton = dialogPane().lookupButton(reactivateButtonType)
+  reactivateButton.disable = account.isDeactivated
 
   resultConverter = dialogButton => {
     if dialogButton == deactivateButtonType then
