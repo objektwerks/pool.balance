@@ -28,6 +28,9 @@ final class AccountDialog(context: Context, account: Account) extends Dialog[Dea
   val reactivateButtonType = new ButtonType(context.buttonActivate, ButtonData.OKDone)
   dialogPane().buttonTypes = List(ButtonType.Close, deactivateButtonType, reactivateButtonType)
 
+  val deactivateButton = dialogPane().lookupButton(deactivateButtonType)
+  deactivateButton.disable = account.deactivated.isEmpty
+
   resultConverter = dialogButton => {
     if dialogButton == deactivateButtonType then
       DeactivateReactivate(deactivate = Some( Deactivate( account.license ) ) )
