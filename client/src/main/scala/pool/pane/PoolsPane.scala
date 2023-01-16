@@ -114,6 +114,6 @@ final class PoolsPane(context: Context) extends VBox:
     case _ => errorsButton.disable = model.observableFaults.isEmpty
 
   def account(): Unit = AccountDialog(context, model.observableAccount.get).showAndWait() match
-      case Some( DeactivateReactivate( Some(deactivate), None) ) => model.deactivate(register)
-      case Some( DeactivateReactivate( None, Some(reactivate) ) ) => model.reactivate(login)
+      case Some( DeactivateReactivate( Some(deactivate), None) ) => model.deactivate(deactivate)
+      case Some( DeactivateReactivate( None, Some(reactivate) ) ) => model.reactivate(reactivate)
       case _ =>
