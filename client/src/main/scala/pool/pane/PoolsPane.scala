@@ -9,7 +9,7 @@ import scalafx.scene.control.{Button, SelectionMode, Tab, TabPane, TableColumn, 
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import pool.{Context, Pool, UnitOfMeasure}
-import pool.dialog.{FaultsDialog, PoolDialog}
+import pool.dialog.{AccountDialog, FaultsDialog, PoolDialog, DeactivateReactivate}
 
 final class PoolsPane(context: Context) extends VBox:
   spacing = 6
@@ -51,9 +51,15 @@ final class PoolsPane(context: Context) extends VBox:
     disable = true
     onAction = { _ => faults() }
 
+  val accountButton = new Button:
+    graphic = context.faultsImage
+    text = context.buttonFaults
+    disable = false
+    onAction = { _ => account() }
+
   val buttonBar = new HBox:
     spacing = 6
-    children = List(addButton, editButton, errorsButton)
+    children = List(addButton, editButton, errorsButton, accountButton)
   
   val tab = new Tab:
   	text = context.labelPools
@@ -106,3 +112,8 @@ final class PoolsPane(context: Context) extends VBox:
 
   def faults(): Unit = FaultsDialog(context).showAndWait() match
     case _ => errorsButton.disable = model.observableFaults.isEmpty
+
+  def account(): Unit = AccountDialog(context, model.observableAccount.get).showAndWait() match
+      case Some( DeactivateReactivate( Some(deactivate), None) ) => model.deactivate(register)
+      case Some( DeactivateReactivate( None, Some(reactivate) ) ) => model.reactivate(login)
+      case _ =>
