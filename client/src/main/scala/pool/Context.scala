@@ -20,6 +20,7 @@ final class Context(config: Config, val model: Model):
   val buttonConverter = config.getString("button.converter")
   val buttonRegister = config.getString("button.register")
   val buttonLogin = config.getString("button.login")
+  val buttonAccount = config.getString("button.account")
   val buttonActivate = config.getString("button.activate")
   val buttonDeactivate = config.getString("button.deactivate")
 
