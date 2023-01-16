@@ -52,7 +52,7 @@ final class PoolsPane(context: Context) extends VBox:
     onAction = { _ => faults() }
 
   val accountButton = new Button:
-    graphic = context.faultsImage
+    graphic = context.accountImage
     text = context.buttonAccount
     disable = false
     onAction = { _ => account() }
