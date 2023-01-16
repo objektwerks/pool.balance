@@ -1,5 +1,6 @@
 package pool.dialog
 
+import scalafx.Includes.*
 import scalafx.scene.control.{Dialog, Label}
 
 import pool.{Account, Client, Context}
@@ -16,3 +17,5 @@ final class AccountDialog(context: Context, account: Account) extends Dialog[Acc
     context.labelActivated -> Label( account.activated ),
     context.labelDeactivated -> Label( account.deactivated )
   )
+
+  dialogPane().content = ControlGridPane(controls)
