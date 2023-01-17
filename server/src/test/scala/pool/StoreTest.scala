@@ -2,8 +2,6 @@ package pool
 
 import com.typesafe.config.ConfigFactory
 
-import java.time.LocalDate
-
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
