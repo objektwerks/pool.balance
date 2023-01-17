@@ -6,7 +6,6 @@ import java.text.NumberFormat
 import java.util.concurrent.Executors
 
 import scalafx.Includes.*
-import scala.concurrent.{ExecutionContext, Future}
 import scala.util.Try
 
 import scalafx.application.Platform
@@ -17,7 +16,6 @@ import Entity.given
 import Measurement.*
 
 final class Model(fetcher: Fetcher) extends LazyLogging:
-  given executionContext: ExecutionContext = ExecutionContext.fromExecutor( Executors.newVirtualThreadPerTaskExecutor() )
   val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
   val shouldNotBeInFxThread = (message: String) => require(!Platform.isFxApplicationThread, message)
 
