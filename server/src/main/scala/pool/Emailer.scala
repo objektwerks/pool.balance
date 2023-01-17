@@ -12,9 +12,9 @@ import scala.language.postfixOps
 import scala.util.{Failure, Success, Using, Try}
 
 final class Emailer(config: Config) extends LazyLogging:
-  private val host = config.getString("host")
-  private val sender = config.getString("sender")
-  private val password = config.getString("password")
+  private val host = config.getString("email.host")
+  private val sender = config.getString("email.sender")
+  private val password = config.getString("email.password")
 
   private val smtpServer: SmtpServer = MailServer.create
     .host(host)
