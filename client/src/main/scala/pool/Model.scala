@@ -76,25 +76,27 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   }
 
   def onFault(cause: String): Unit =
-    shouldBeInFxThread("onfault cause should be in fx thread.")
+    shouldNotBeInFxThread("onfault cause should not be in fx thread.")
     observableFaults += Fault(cause)
     logger.error(cause)
 
   def onFault(error: Throwable, cause: String): Unit =
-    shouldBeInFxThread("onfault error, cause should be in fx thread.")
+    shouldNotBeInFxThread("onfault error, cause should not be in fx thread.")
     observableFaults += Fault(cause)
     logger.error(cause, error)
 
   def onFault(source: String, fault: Fault): Unit =
+    shouldNotBeInFxThread("onfault source, fault should not be in fx thread.")
     observableFaults += fault
     logger.error(s"*** $source - $fault")
 
   def onFault(source: String, entity: Entity, fault: Fault): Unit =
+    shouldNotBeInFxThread("onfault source, entity, fault should not be in fx thread.")
     observableFaults += fault
     logger.error(s"*** $source - $entity - $fault")
 
   def register(register: Register): Unit =
-    shouldBeInFxThread("onfault cause should be in fx thread.")
+    shouldBeInFxThread("register should be in fx thread.")
     fetcher.call(
       register,
       (event: Event) => event match
@@ -104,7 +106,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def login(login: Login): Unit =
-    shouldBeInFxThread("onfault cause should be in fx thread.")
+    shouldBeInFxThread("login should be in fx thread.")
     fetcher.call(
       login,
       (event: Event) => event match
@@ -114,7 +116,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def deactivate(deactivate: Deactivate): Unit =
-    shouldBeInFxThread("onfault cause should be in fx thread.")
+    shouldBeInFxThread("deactivate should be in fx thread.")
     fetcher.call(
       deactivate,
       (event: Event) => event match
@@ -124,7 +126,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def reactivate(reactivate: Reactivate): Unit =
-    shouldBeInFxThread("onfault cause should be in fx thread.")
+    shouldBeInFxThread("reactivate should be in fx thread.")
     fetcher.call(
       reactivate,
       (event: Event) => event match
