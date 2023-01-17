@@ -14,7 +14,7 @@ CREATE TABLE pool (
   id BIGSERIAL PRIMARY KEY,
   name VARCHAR(24) NOT NULL,
   volume INT NOT NULL,
-  unit INT NOT NULL
+  unit VARCHAR NOT NULL
 );
 
 CREATE TABLE cleaning (
