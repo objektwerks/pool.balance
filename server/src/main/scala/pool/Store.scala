@@ -23,15 +23,19 @@ object Store:
 
 final class Store(config: Config,
                   cache: Cache[String, String]) extends LazyLogging:
-  val dataSource: DataSource = {
-    val ds = new HikariDataSource()
-    ds.setDataSourceClassName(config.getString("ds.dataSourceClassName"))
-    ds.setJdbcUrl(config.getString("ds.url"))
-    ds.addDataSourceProperty("user",  config.getString("ds.user"))
-    ds.addDataSourceProperty("password", config.getString("ds.password"))
-    ds
-  }
-  ConnectionPool.singleton(DataSourceConnectionPool(dataSource))
+  private val url = config.getString("db.url")
+  private val user = config.getString("db.user")
+  private val password = config.getString("db.password")
+  private val initialSize = config.getInt("db.initialSize")
+  private val maxSize = config.getInt("db.maxSize")
+  private val connectionTimeoutMillis = config.getLong("db.connectionTimeoutMillis")
+
+  private val settings = ConnectionPoolSettings(
+    initialSize = initialSize,
+    maxSize = maxSize,
+    connectionTimeoutMillis = connectionTimeoutMillis)
+
+  ConnectionPool.singleton(url, user, password, settings)
 
   def register(account: Account): Account = addAccount(account)
 
