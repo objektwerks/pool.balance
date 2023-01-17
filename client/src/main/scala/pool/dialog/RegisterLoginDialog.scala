@@ -23,6 +23,7 @@ final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends D
     context.labelEmailAddress -> registerEmailAddressTextField
   )
   val registerTitledPane = new TitledPane:
+    text = context.buttonRegister
     collapsible = false
     maxWidth = Double.MaxValue
     maxHeight = Double.MaxValue
