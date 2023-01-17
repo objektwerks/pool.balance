@@ -37,6 +37,7 @@ final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends D
     context.labelPin -> loginPinTextField
   )
   val loginTitledPane = new TitledPane:
+    text = context.buttonLogin
     collapsible = false
     maxWidth = Double.MaxValue
     maxHeight = Double.MaxValue
