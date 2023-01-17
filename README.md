@@ -16,15 +16,11 @@ Test
 
 Server Run
 ----------
-1. sbt ( interactive session )
-2. project server
-3. run
+1. sbt server/run
 
 Client Run
 ----------
-1. sbt ( interactive session )
-2. project client
-3. run
+1. sbt client/run
 
 Package Server
 --------------
