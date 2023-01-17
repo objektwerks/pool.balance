@@ -19,12 +19,8 @@ final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends D
   title = context.windowTitle
   headerText = context.dialogRegisterLogin
   graphic = context.logoImage
-
-  val screenSize = Toolkit.getDefaultToolkit.getScreenSize
-  val centerX = screenSize.width / 2.4
-  val centerY = screenSize.height / 6
-  this.setX(centerX)
-  this.setY(centerY)
+  x = Toolkit.getDefaultToolkit.getScreenSize.width / 2.4
+  y = Toolkit.getDefaultToolkit.getScreenSize.height / 6
 
   val registerEmailAddressTextField = new TextField
   val registerControls = List[(String, TextField)](
