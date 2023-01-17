@@ -8,8 +8,11 @@ import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
 import scala.concurrent.duration.*
+import scala.sys.process.Process
 
 final class StoreTest extends AnyFunSuite with Matchers:
+  val exitCode = Process("psql -d poolbalance -f ddl.sql").run().exitValue()
+
   val store = Store( ConfigFactory.load("test.conf"), Store.cache(minSize = 1, maxSize = 2, expireAfter = 1.hour) )
 
   test("store") {
