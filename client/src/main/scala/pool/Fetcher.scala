@@ -11,6 +11,8 @@ import java.time.temporal.ChronoUnit.SECONDS
 import Serializer.given
 
 final class Fetcher(url: String):
+  private val client = HttpClient.newHttpClient
+
   def call(command: Command,
            handler: Event => Unit): Unit =
     val commandJson = writeToString[Command](command)
@@ -24,7 +26,6 @@ final class Fetcher(url: String):
       .POST( HttpRequest.BodyPublishers.ofString(commandJson) )
       .build
     
-    val client = HttpClient.newHttpClient
     val response = client.send( request, BodyHandlers.ofString )
 
     val event = readFromString[Event]( response.body )
