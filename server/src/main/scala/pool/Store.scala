@@ -33,7 +33,8 @@ final class Store(config: Config,
   private val settings = ConnectionPoolSettings(
     initialSize = initialSize,
     maxSize = maxSize,
-    connectionTimeoutMillis = connectionTimeoutMillis)
+    connectionTimeoutMillis = connectionTimeoutMillis
+  )
 
   ConnectionPool.singleton(url, user, password, settings)
 
