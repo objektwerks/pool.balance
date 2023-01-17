@@ -7,12 +7,15 @@ import java.net.http.{HttpClient, HttpRequest}
 import java.net.http.HttpResponse.BodyHandlers
 import java.time.Duration
 import java.time.temporal.ChronoUnit.SECONDS
+import java.util.concurrent.Executors
 
 import Serializer.given
 
 final class Fetcher(url: String):
-  private val client = HttpClient.newHttpClient
-
+  private val client = HttpClient
+                         .newBuilder()
+                         .executor( Executors.newVirtualThreadPerTaskExecutor() )
+                         .build()
   def call(command: Command,
            handler: Event => Unit): Unit =
     val commandJson = writeToString[Command](command)
