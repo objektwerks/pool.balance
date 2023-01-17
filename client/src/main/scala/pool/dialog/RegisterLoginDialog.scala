@@ -1,5 +1,7 @@
 package pool.dialog
 
+import java.awt.Toolkit
+
 import scalafx.Includes.*
 import scalafx.scene.layout.VBox
 import scalafx.scene.control.{ButtonType, Dialog, TextField, TitledPane}
@@ -17,6 +19,12 @@ final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends D
   title = context.windowTitle
   headerText = context.dialogRegisterLogin
   graphic = context.logoImage
+
+  val screenSize = Toolkit.getDefaultToolkit.getScreenSize
+  val centerX = screenSize.width / 2.4
+  val centerY = screenSize.height / 6
+  this.setX(centerX)
+  this.setY(centerY)
 
   val registerEmailAddressTextField = new TextField
   val registerControls = List[(String, TextField)](
