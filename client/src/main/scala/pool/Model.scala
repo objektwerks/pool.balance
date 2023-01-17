@@ -32,18 +32,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     chemicals(newPoolId)
   }
 
-  selectedCleaningId.onChange { (_, oldId, newId) =>
-    logger.info(s"*** Model: selected cleaning id onchange event: $oldId -> $newId")
-  }
-
-  selectedMeasurementId.onChange { (_, oldId, newId) =>
-    logger.info(s"*** Model: selected measurement id onchange event: $oldId -> $newId")
-  }
-
-  selectedChemicalId.onChange { (_, oldId, newId) =>
-    logger.info(s"*** Model: selected chemical id onchange event: $oldId -> $newId")
-  }
-
   val observableAccount = ObjectProperty[Account](Account.empty)
   val observablePools = ObservableBuffer[Pool]()
   val observableCleanings = ObservableBuffer[Cleaning]()
