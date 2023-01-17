@@ -24,10 +24,7 @@ Client Run
 
 Package Server
 --------------
-1. sbt ( interactive session )
-2. project client
-3. test
-4. universal:packageBin
+1. sbt server/universal:packageBin
 
 Client Assembly
 ---------------
