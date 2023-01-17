@@ -166,7 +166,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def cleanings(poolId: Long): Unit =
-    shouldBeInFxThread("onfault cause should be in fx thread.")
+    shouldBeInFxThread("cleanings should be in fx thread.")
     fetcher.call(
       ListCleanings(observableAccount.get.license, poolId),
       (event: Event) => event match
@@ -178,7 +178,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def add(cleaning: Cleaning): Unit =
-    shouldBeInFxThread("onfault cause should be in fx thread.")
+    shouldBeInFxThread("cleaing add should be in fx thread.")
     fetcher.call(
       SaveCleaning(observableAccount.get.license, cleaning),
       (event: Event) => event match
@@ -188,7 +188,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def update(cleaning: Cleaning): Unit =
-    shouldBeInFxThread("onfault cause should be in fx thread.")
+    shouldBeInFxThread("cleaning update should be in fx thread.")
     fetcher.call(
       SaveCleaning(observableAccount.get.license, cleaning),
       (event: Event) => event match
