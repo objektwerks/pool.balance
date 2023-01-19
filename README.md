@@ -4,8 +4,7 @@ Pool Balance
 
 TODO
 ----
-1. Integration Test
-2. Test Client
+1. Test Client
 
 Build
 -----
