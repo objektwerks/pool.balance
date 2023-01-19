@@ -86,14 +86,14 @@ class IntegrationTest extends AnyFunSuite with Matchers:
         testCleaning = testCleaning.copy(poolId = id)
         testMeasurement = testMeasurement.copy(poolId = id)
         testChemical = testChemical.copy(poolId = id)
-      case fault => fail("Invalid pool saved event.")
+      case fault => fail(s"Invalid pool saved event: $fault")
 
   def updatePool: Unit =
     testPool = testPool.copy(volume = 10000)
     val savePool = SavePool(testAccount.license, testPool)
     dispatcher.dispatch(savePool) match
       case PoolSaved(id) => id shouldBe testPool.id
-      case fault => fail("Invalid pool saved event.")
+      case fault => fail(s"Invalid pool saved event: $fault")
     
   def listPools: Unit =
     val listPools = ListPools(testAccount.license)
@@ -101,7 +101,7 @@ class IntegrationTest extends AnyFunSuite with Matchers:
       case PoolsListed(pools) =>
         pools.length shouldBe 1
         pools.head shouldBe testPool
-      case fault => fail("Invalid pools listed event.")
+      case fault => fail(s"Invalid pools listed event: $fault")
 
   def addCleaning: Unit =
     val saveCleaning = SaveCleaning(testAccount.license, testCleaning)
