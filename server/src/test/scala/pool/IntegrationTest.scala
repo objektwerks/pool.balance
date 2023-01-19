@@ -16,7 +16,7 @@ class IntegrationTest extends AnyFunSuite with Matchers:
 
   val config = ConfigFactory.load("test.conf")
 
-  val store = Store(config, Store.cache(minSize = 1, maxSize = 2, expireAfter = 1.hour))
+  val store = Store(config, Store.cache(minSize = 1, maxSize = 1, expireAfter = 1.hour))
   val emailer = Emailer(config)
   val dispatcher = Dispatcher(store, emailer)
 
