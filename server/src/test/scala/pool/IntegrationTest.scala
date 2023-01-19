@@ -156,14 +156,14 @@ class IntegrationTest extends AnyFunSuite with Matchers:
       case ChemicalSaved(id) =>
         id should not be 0
         testChemical = testChemical.copy(id = id)
-      case fault => fail("Invalid chemical saved event.")    
+      case fault => fail(s"Invalid chemical saved event: $fault")    
 
   def updateChemical: Unit =
     testChemical = testChemical.copy(amount = 2.0)
     val saveChemical = SaveChemical(testAccount.license, testChemical)
     dispatcher.dispatch(saveChemical) match
       case ChemicalSaved(id) => id shouldBe testChemical.id
-      case fault => fail("Invalid chemical saved event.")
+      case fault => fail(s"Invalid chemical saved event: $fault")
 
   def listChemicals: Unit =
     val listChemicals = ListChemicals(testAccount.license, testPool.id)
@@ -171,4 +171,4 @@ class IntegrationTest extends AnyFunSuite with Matchers:
       case ChemicalsListed(chemicals) =>
         chemicals.length shouldBe 1
         chemicals.head shouldBe testChemical
-      case fault => fail("Invalid chemicals listed event.")
+      case fault => fail(s"Invalid chemicals listed event: $fault")
