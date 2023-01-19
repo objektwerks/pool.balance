@@ -85,4 +85,12 @@ class IntegrationTest extends AnyFunSuite with Matchers:
         pools.length shouldBe 1
         pools.head shouldBe testPool
       case _ => fail("Invalid pools listed event.")
+
+  def addCleaning: Unit =
+    val saveCleaning = SaveCleaning(testAccount.license, testCleaning)
+    dispatcher.dispatch(saveCleaning) match
+      case CleaningSaved(id) =>
+        id should not be 0
+        testCleaning = testCleaning.copy(id = id)
+      case _ => fail("Invalid cleaning saved event.")
     
