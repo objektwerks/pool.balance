@@ -172,7 +172,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def measurements(poolId: Long): Unit =
-    shouldNotBeInFxThread("measurements should not be in fx thread.")
     fetcher.call(
       ListMeasurements(observableAccount.get.license, poolId),
       (event: Event) => event match
@@ -184,7 +183,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def add(measurement: Measurement): Unit =
-    shouldNotBeInFxThread("measurement add should not be in fx thread.")
     fetcher.call(
       SaveMeasurement(observableAccount.get.license, measurement),
       (event: Event) => event match
@@ -194,7 +192,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def update(measurement: Measurement): Unit =
-    shouldNotBeInFxThread("measurement update should not be in fx thread.")
     fetcher.call(
       SaveMeasurement(observableAccount.get.license, measurement),
       (event: Event) => event match
