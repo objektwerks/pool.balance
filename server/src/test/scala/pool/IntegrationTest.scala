@@ -40,6 +40,10 @@ class IntegrationTest extends AnyFunSuite with Matchers:
     addCleaning
     updateCleaning
     listCleanings
+
+    addMeasurement
+    updateMeasurement
+    listMeasurements
   }
 
   def register: Unit =
