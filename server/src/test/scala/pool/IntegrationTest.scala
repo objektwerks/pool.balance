@@ -126,7 +126,6 @@ class IntegrationTest extends AnyFunSuite with Matchers:
         id should not be 0
         testMeasurement = testMeasurement.copy(id = id)
       case _ => fail("Invalid measurement saved event.")
-    
 
   def updateMeasurement: Unit =
     testMeasurement = testMeasurement.copy(temperature = 82)
@@ -151,6 +150,11 @@ class IntegrationTest extends AnyFunSuite with Matchers:
         testChemical = testChemical.copy(id = id)
       case _ => fail("Invalid chemical saved event.")    
 
-  def updateChemical: Unit = ???
+  def updateChemical: Unit =
+    testChemical = testChemical.copy(amount = 2.0)
+    val saveChemical = SaveChemical(testAccount.license, testChemical)
+    dispatcher.dispatch(saveChemical) match
+      case ChemicalSaved(id) => id shouldBe testChemical.id
+      case _ => fail("Invalid chemical saved event.")
 
   def listChemicals: Unit = ???
