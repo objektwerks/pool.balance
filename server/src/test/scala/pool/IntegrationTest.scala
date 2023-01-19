@@ -8,6 +8,8 @@ import org.scalatest.matchers.should.Matchers
 import scala.concurrent.duration.*
 import scala.sys.process.Process
 
+import Validator.*
+
 class IntegrationTest extends AnyFunSuite with Matchers:
   val exitCode = Process("psql -d poolbalance -f ddl.sql").run().exitValue()
 
@@ -18,5 +20,13 @@ class IntegrationTest extends AnyFunSuite with Matchers:
   val dispatcher = Dispatcher(store, emailer)
 
   test("integration") {
-    
+
   }
+
+  def register: Unit =
+    val register = Register(config.getString("email.sender"))
+    dispatcher.dispatch(register) match
+      case Registered(account) => assert( account.isActivated )
+      case _ => fail("Invalid event!")
+    
+    
