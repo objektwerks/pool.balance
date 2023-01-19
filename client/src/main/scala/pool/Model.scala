@@ -114,7 +114,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def pools(): Unit =
-    shouldNotBeInFxThread("pools should not be in fx thread.")
     fetcher.call(
       ListPools(observableAccount.get.license),
       (event: Event) => event match
@@ -126,7 +125,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def add(pool: Pool): Unit =
-    shouldNotBeInFxThread("pool add should not be in fx thread.")
     fetcher.call(
       SavePool(observableAccount.get.license, pool),
       (event: Event) => event match
@@ -136,7 +134,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def update(pool: Pool): Unit =
-    shouldNotBeInFxThread("pool update should not be in fx thread.")
     fetcher.call(
       SavePool(observableAccount.get.license, pool),
       (event: Event) => event match
