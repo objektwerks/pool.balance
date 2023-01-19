@@ -11,7 +11,8 @@ import scala.sys.process.Process
 import Validator.*
 
 class IntegrationTest extends AnyFunSuite with Matchers:
-  Process("psql -d poolbalance -f ddl.sql").run().exitValue()
+  val exitCode = Process("psql -d poolbalance -f ddl.sql").run().exitValue()
+  exitCode shouldBe 0
 
   val config = ConfigFactory.load("test.conf")
 
