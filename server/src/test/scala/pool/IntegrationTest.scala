@@ -22,6 +22,9 @@ class IntegrationTest extends AnyFunSuite with Matchers:
 
   var testAccount = Account()
   var testPool = Pool()
+  var testCleaning = Cleaning(poolId = testPool.id)
+  var testMeasurement = Measurement(poolId = testPool.id)
+  var testChemical = Chemical(poolId = testPool.id)
 
   test("integration") {
     register
