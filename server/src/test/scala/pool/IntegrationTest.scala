@@ -131,7 +131,13 @@ class IntegrationTest extends AnyFunSuite with Matchers:
       case MeasurementSaved(id) => id shouldBe testMeasurement.id
       case _ => fail("Invalid measurement saved event.")
 
-  def listMeasurements: Unit = ???
+  def listMeasurements: Unit =
+    val listMeasurements = ListMeasurements(testAccount.license, testPool.id)
+    dispatcher.dispatch(listMeasurements) match
+      case MeasurementsListed(measurements) =>
+        measurements.length shouldBe 1
+        measurements.head shouldBe testMeasurement
+      case _ => fail("Invalid measurements listed event.")
 
   def addChemical: Unit = ???
 
