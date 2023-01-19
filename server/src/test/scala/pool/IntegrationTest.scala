@@ -68,13 +68,13 @@ class IntegrationTest extends AnyFunSuite with Matchers:
     val deactivate = Deactivate(testAccount.license)
     dispatcher.dispatch(deactivate) match
       case Deactivated(account) => assert( account.isDeactivated )
-      case fault => fail("Invalid deactivated event.")
+      case fault => fail(s"Invalid deactivated event: $fault")
 
   def reactivate: Unit =
     val reactivate = Reactivate(testAccount.license)
     dispatcher.dispatch(reactivate) match
       case Reactivated(account) => assert( account.isActivated )
-      case fault => fail("Invalid reactivated event.")
+      case fault => fail(s"Invalid reactivated event: $fault")
 
   def addPool: Unit =
     testPool = Pool(id = 0, name = "a", volume = 8000, unit = UnitOfMeasure.gl.toString)
