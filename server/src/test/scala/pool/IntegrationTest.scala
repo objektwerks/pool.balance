@@ -21,12 +21,14 @@ class IntegrationTest extends AnyFunSuite with Matchers:
   val dispatcher = Dispatcher(store, emailer)
 
   var testAccount = Account()
+  var testPool = Pool()
 
   test("integration") {
     register
     login
     deactivate
     reactivate
+    addPool
   }
 
   def register: Unit =
@@ -54,3 +56,13 @@ class IntegrationTest extends AnyFunSuite with Matchers:
     dispatcher.dispatch(reactivate) match
       case Reactivated(account) => assert( account.isActivated )
       case _ => fail("Invalid reactivated event.")
+
+  def addPool: Unit =
+    testPool = Pool(id = 0, name = "a", volume = 8000, unit = UnitOfMeasure.gl.toString)
+    val savePool = SavePool(testAccount.license, testPool)
+    dispatcher.dispatch(savePool) match
+      case PoolSaved(id) =>
+        assert( id != 0)
+        testPool.copy(id = id)
+      case _ => fail("Invalid save pool event.")
+    
