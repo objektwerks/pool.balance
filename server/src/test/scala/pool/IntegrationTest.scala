@@ -25,6 +25,8 @@ class IntegrationTest extends AnyFunSuite with Matchers:
   test("integration") {
     register
     login
+    deactivate
+    reactivate
   }
 
   def register: Unit =
