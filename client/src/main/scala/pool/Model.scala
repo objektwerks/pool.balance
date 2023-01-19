@@ -78,7 +78,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     logger.error(s"*** $source - $entity - $fault")
 
   def register(register: Register): Unit =
-    shouldNotBeInFxThread("register should not be in fx thread.")
     fetcher.call(
       register,
       (event: Event) => event match
@@ -88,7 +87,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def login(login: Login): Unit =
-    shouldNotBeInFxThread("login should not be in fx thread.")
     fetcher.call(
       login,
       (event: Event) => event match
@@ -98,7 +96,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def deactivate(deactivate: Deactivate): Unit =
-    shouldNotBeInFxThread("deactivate should not be in fx thread.")
     fetcher.call(
       deactivate,
       (event: Event) => event match
@@ -108,7 +105,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def reactivate(reactivate: Reactivate): Unit =
-    shouldNotBeInFxThread("reactivate should not be in fx thread.")
     fetcher.call(
       reactivate,
       (event: Event) => event match
