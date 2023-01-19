@@ -40,4 +40,9 @@ class IntegrationTest extends AnyFunSuite with Matchers:
     dispatcher.dispatch(login) match
       case LoggedIn(account) => account shouldBe this.account
       case _ => fail("Invalid loggedin event.")
-    
+
+  def deactivate: Unit =
+    val deactivate = Deactivate(account.license)
+    dispatcher.dispatch(deactivate) match
+      case Deactivated(account) => assert( account.isDeactivated )
+      case _ => fail("Invalid deactivated event.")
