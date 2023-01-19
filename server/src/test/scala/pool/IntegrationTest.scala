@@ -30,6 +30,7 @@ class IntegrationTest extends AnyFunSuite with Matchers:
     reactivate
     addPool
     updatePool
+    listPools
   }
 
   def register: Unit =
@@ -63,15 +64,22 @@ class IntegrationTest extends AnyFunSuite with Matchers:
     val savePool = SavePool(testAccount.license, testPool)
     dispatcher.dispatch(savePool) match
       case PoolSaved(id) =>
-        assert( id != 0)
-        testPool.copy(id = id)
-      case _ => fail("Invalid save pool event.")
+        id should not be 0
+        testPool = testPool.copy(id = id)
+      case _ => fail("Invalid pool saved event.")
 
   def updatePool: Unit =
     testPool = testPool.copy(volume = 10000)
     val savePool = SavePool(testAccount.license, testPool)
     dispatcher.dispatch(savePool) match
-      case PoolSaved(id) => assert(id == testPool.id)
-      case _ => fail("Invalid save pool event.")
+      case PoolSaved(id) => id shouldBe testPool.id
+      case _ => fail("Invalid pool saved event.")
     
-  
+  def listPools: Unit =
+    val listPools = ListPools(testAccount.license)
+    dispatcher.dispatch(listPools) match
+      case PoolsListed(pools) =>
+        pools.length shouldBe 1
+        pools.head shouldBe testPool
+      case _ => fail("Invalid pools listed event.")
+    
