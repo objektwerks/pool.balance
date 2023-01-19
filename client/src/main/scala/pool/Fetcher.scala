@@ -9,6 +9,8 @@ import java.time.Duration
 import java.time.temporal.ChronoUnit.SECONDS
 import java.util.concurrent.Executors
 
+import scalafx.application.Platform
+
 import Serializer.given
 
 final class Fetcher(url: String):
@@ -19,6 +21,7 @@ final class Fetcher(url: String):
 
   def call(command: Command,
            handler: Event => Unit): Unit =
+    require(!Platform.isFxApplicationThread, s"fetcher call should not be in fx thread, command: $command")
     val commandJson = writeToString[Command](command)
 
     val request = HttpRequest
