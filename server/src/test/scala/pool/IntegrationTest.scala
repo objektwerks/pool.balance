@@ -19,14 +19,18 @@ class IntegrationTest extends AnyFunSuite with Matchers:
   val emailer = Emailer(config)
   val dispatcher = Dispatcher(store, emailer)
 
-  test("integration") {
+  var account = Account()
 
+  test("integration") {
+    register
   }
 
   def register: Unit =
     val register = Register(config.getString("email.sender"))
     dispatcher.dispatch(register) match
-      case Registered(account) => assert( account.isActivated )
+      case Registered(account) =>
+        assert( account.isActivated )
+        this.account = account
       case _ => fail("Invalid event!")
     
     
