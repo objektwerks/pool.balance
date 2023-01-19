@@ -16,3 +16,7 @@ class IntegrationTest extends AnyFunSuite with Matchers:
   val store = Store(config, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
   val emailer = Emailer(config)
   val dispatcher = Dispatcher(store, emailer)
+
+  test("integration") {
+    
+  }
