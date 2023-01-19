@@ -36,7 +36,7 @@ class IntegrationTest extends AnyFunSuite with Matchers:
     addPool
     updatePool
     listPools
-    
+
     addCleaning
     updateCleaning
     listCleanings
@@ -115,4 +115,14 @@ class IntegrationTest extends AnyFunSuite with Matchers:
         cleanings.head shouldBe testCleaning
       case _ => fail("Invalid cleanings listed event.")
     
-  
+  def addMeasurement: Unit = ???
+
+  def updateMeasurement: Unit = ???
+
+  def listMeasurements: Unit = ???
+
+  def addChemical: Unit = ???
+
+  def updateChemical: Unit = ???
+
+  def listChemicals: Unit = ???
