@@ -44,6 +44,10 @@ class IntegrationTest extends AnyFunSuite with Matchers:
     addMeasurement
     updateMeasurement
     listMeasurements
+
+    addChemical
+    updateChemical
+    listChemicals
   }
 
   def register: Unit =
