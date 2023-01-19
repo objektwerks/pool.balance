@@ -115,7 +115,14 @@ class IntegrationTest extends AnyFunSuite with Matchers:
         cleanings.head shouldBe testCleaning
       case _ => fail("Invalid cleanings listed event.")
     
-  def addMeasurement: Unit = ???
+  def addMeasurement: Unit =
+    val saveMeasurement = SaveMeasurement(testAccount.license, testMeasurement)
+    dispatcher.dispatch(saveMeasurement) match
+      case MeasurementSaved(id) =>
+        id should not be 0
+        testMeasurement = testMeasurement.copy(id = id)
+      case _ => fail("Invalid measurement saved event.")
+    
 
   def updateMeasurement: Unit = ???
 
