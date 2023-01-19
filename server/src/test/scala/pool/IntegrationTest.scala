@@ -20,7 +20,7 @@ class IntegrationTest extends AnyFunSuite with Matchers:
   val emailer = Emailer(config)
   val dispatcher = Dispatcher(store, emailer)
 
-  var account = Account()
+  var testAccount = Account()
 
   test("integration") {
     register
@@ -34,23 +34,23 @@ class IntegrationTest extends AnyFunSuite with Matchers:
     dispatcher.dispatch(register) match
       case Registered(account) =>
         assert( account.isActivated )
-        this.account = account
+        testAccount = account
       case _ => fail("Invalid registered event.")
     
   def login: Unit =
-    val login = Login(account.emailAddress, account.pin)
+    val login = Login(testAccount.emailAddress, testAccount.pin)
     dispatcher.dispatch(login) match
-      case LoggedIn(account) => account shouldBe this.account
+      case LoggedIn(account) => account shouldBe testAccount
       case _ => fail("Invalid loggedin event.")
 
   def deactivate: Unit =
-    val deactivate = Deactivate(account.license)
+    val deactivate = Deactivate(testAccount.license)
     dispatcher.dispatch(deactivate) match
       case Deactivated(account) => assert( account.isDeactivated )
       case _ => fail("Invalid deactivated event.")
 
   def reactivate: Unit =
-    val reactivate = Reactivate(account.license)
+    val reactivate = Reactivate(testAccount.license)
     dispatcher.dispatch(reactivate) match
       case Reactivated(account) => assert( account.isActivated )
       case _ => fail("Invalid reactivated event.")
