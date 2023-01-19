@@ -62,22 +62,18 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   }
 
   def onFault(cause: String): Unit =
-    shouldNotBeInFxThread("onfault cause should not be in fx thread.")
     observableFaults += Fault(cause)
     logger.error(cause)
 
   def onFault(error: Throwable, cause: String): Unit =
-    shouldNotBeInFxThread("onfault error, cause should not be in fx thread.")
     observableFaults += Fault(cause)
     logger.error(cause, error)
 
   def onFault(source: String, fault: Fault): Unit =
-    shouldNotBeInFxThread("onfault source, fault should not be in fx thread.")
     observableFaults += fault
     logger.error(s"*** $source - $fault")
 
   def onFault(source: String, entity: Entity, fault: Fault): Unit =
-    shouldNotBeInFxThread("onfault source, entity, fault should not be in fx thread.")
     observableFaults += fault
     logger.error(s"*** $source - $entity - $fault")
 
