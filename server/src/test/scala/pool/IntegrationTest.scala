@@ -29,13 +29,17 @@ class IntegrationTest extends AnyFunSuite with Matchers:
   test("integration") {
     register
     login
+
     deactivate
     reactivate
+
     addPool
     updatePool
     listPools
+    
     addCleaning
     updateCleaning
+    listCleanings
   }
 
   def register: Unit =
@@ -103,6 +107,12 @@ class IntegrationTest extends AnyFunSuite with Matchers:
       case CleaningSaved(id) => id shouldBe testCleaning.id
       case _ => fail("Invalid cleaning saved event.")
 
+  def listCleanings: Unit =
+    val listCleanings = ListCleanings(testAccount.license, testPool.id)
+    dispatcher.dispatch(listCleanings) match
+      case CleaningsListed(cleanings) =>
+        cleanings.length shouldBe 1
+        cleanings.head shouldBe testCleaning
+      case _ => fail("Invalid cleanings listed event.")
+    
   
-    
-    
