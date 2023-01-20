@@ -8,6 +8,7 @@ import java.util.concurrent.Executors
 import scalafx.Includes.*
 import scalafx.scene.control.Alert
 import scalafx.scene.control.Alert.AlertType
+import scalafx.stage.Stage
 import scala.util.Try
 
 import scalafx.application.Platform
@@ -81,7 +82,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def log(source: String, fault: Fault): Unit = logger.error(s"*** $source - $fault")
 
-  def register(register: Register, context: Context): Unit =
+  def register(register: Register, context: Context, stage: Stage): Unit =
     fetcher.call(
       register,
       (event: Event) => event match
@@ -89,7 +90,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           log("Model.register", fault)
           Platform.runLater(
             new Alert(AlertType.Error) {
-              initOwner(null)
+              initOwner(stage)
               title = context.windowTitle
               headerText = "Register"
               contentText = "Register failed."
@@ -99,7 +100,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def login(login: Login, context: Context): Unit =
+  def login(login: Login, context: Context, stage: Stage): Unit =
     fetcher.call(
       login,
       (event: Event) => event match
@@ -107,7 +108,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           log("Model.login", fault)
           Platform.runLater(
             new Alert(AlertType.Error) {
-              initOwner(null)
+              initOwner(stage)
               title = context.windowTitle
               headerText = "Login"
               contentText = "Login failed."              
