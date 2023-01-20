@@ -114,7 +114,7 @@ lazy val shared = project
          exclude("org.openjfx", "javafx-media")
          exclude("org.openjfx", "javafx-swing")
          exclude("org.openjfx", "javafx-web"),
-        "org.scalatest" %% "scalatest" % "3.2.14" % Test
+        "org.scalatest" %% "scalatest" % "3.2.15" % Test
       )
     }
   )
