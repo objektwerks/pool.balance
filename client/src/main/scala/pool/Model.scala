@@ -83,7 +83,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.call(
       register,
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFault("Model.register", fault)
+        case fault @ Fault(_, _) => log("Model.register", fault)
         case Registered(account) => observableAccount.set(account)
         case _ => ()
     )
@@ -92,7 +92,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.call(
       login,
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFault("Model.login", fault)
+        case fault @ Fault(_, _) => log("Model.login", fault)
         case LoggedIn(account) => observableAccount.set(account)
         case _ => ()
     )
