@@ -16,7 +16,7 @@ import scala.util.Try
 
 import Entity.given
 import Measurement.*
-import pool.dialog.Alerts
+import dialog.Alerts
 
 final class Model(fetcher: Fetcher) extends LazyLogging:
   val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
@@ -88,7 +88,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       (event: Event) => event match
         case fault @ Fault(_, _) =>
           log("Model.register", fault)
-          Alerts.showRegisterAlert(context, stage)
+          Platform.runLater( Alerts.showRegisterAlert(context, stage) )
         case Registered(account) => observableAccount.set(account)
         case _ => ()
     )
@@ -99,7 +99,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       (event: Event) => event match
         case fault @ Fault(_, _) =>
           log("Model.login", fault)
-          Alerts.showLoginAlert(context, stage)
+          Platform.runLater( Alerts.showLoginAlert(context, stage) )
         case LoggedIn(account) => observableAccount.set(account)
         case _ => ()
     )
