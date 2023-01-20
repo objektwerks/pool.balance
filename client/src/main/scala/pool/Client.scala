@@ -5,9 +5,6 @@ import com.typesafe.scalalogging.LazyLogging
 
 import scalafx.Includes.*
 import scalafx.application.JFXApp3
-import scalafx.geometry.Insets
-import scalafx.scene.Scene
-import scalafx.scene.layout.VBox
 
 import pool.{Login, Register}
 import pool.dialog.{Alerts, RegisterLogin, RegisterLoginDialog}
