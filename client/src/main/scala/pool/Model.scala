@@ -9,14 +9,10 @@ import scalafx.Includes.*
 import scalafx.application.Platform
 import scalafx.collections.ObservableBuffer
 import scalafx.beans.property.ObjectProperty
-import scalafx.scene.control.Alert
-import scalafx.scene.control.Alert.AlertType
-import scalafx.stage.Stage
 import scala.util.Try
 
 import Entity.given
 import Measurement.*
-import dialog.Alerts
 
 final class Model(fetcher: Fetcher) extends LazyLogging:
   val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
@@ -85,7 +81,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def log(source: String, fault: Fault): Unit = logger.error(s"*** $source - $fault")
 
-  def register(register: Register, context: Context, stage: Stage): Unit =
+  def register(register: Register): Unit =
     fetcher.call(
       register,
       (event: Event) => event match
@@ -96,7 +92,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def login(login: Login, context: Context, stage: Stage): Unit =
+  def login(login: Login): Unit =
     fetcher.call(
       login,
       (event: Event) => event match
