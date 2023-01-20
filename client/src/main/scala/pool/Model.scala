@@ -90,7 +90,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           Platform.runLater(
             new Alert(AlertType.Error) {
               initOwner(null)
-              title = "Pool Balance"
+              title = context.windowTitle
               headerText = "Register"
               contentText = "Register failed."
             }.showAndWait()
@@ -108,7 +108,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           Platform.runLater(
             new Alert(AlertType.Error) {
               initOwner(null)
-              title = "Pool Balance"
+              title = context.windowTitle
               headerText = "Login"
               contentText = "Login failed."              
             }.showAndWait()
