@@ -87,7 +87,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       (event: Event) => event match
         case fault @ Fault(_, _) =>
           log("Model.register", fault)
-          Alert(AlertType.Information, "Register failed.").showAndWait()
+          Alert(AlertType.Error, "Register failed.").showAndWait()
         case Registered(account) => observableAccount.set(account)
         case _ => ()
     )
@@ -98,7 +98,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       (event: Event) => event match
         case fault @ Fault(_, _) =>
           log("Model.login", fault)
-          Alert(AlertType.Information, "Login failed.").showAndWait()
+          Alert(AlertType.Error, "Login failed.").showAndWait()
         case LoggedIn(account) => observableAccount.set(account)
         case _ => ()
     )
