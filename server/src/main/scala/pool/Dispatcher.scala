@@ -1,25 +1,31 @@
 package pool
 
+import scala.util.Try
+
 import Serializer.given
 import Validator.*
 
 final class Dispatcher(store: Store,
                        emailer: Emailer):
   def dispatch[E <: Event](command: Command): Event =
-    if authorize(command) && validate(command) then command match
-      case Register(emailAddress)          => register(emailAddress)
-      case Login(emailAddress, pin)        => login(emailAddress, pin)
-      case Deactivate(license)             => deactivateAccount(license)
-      case Reactivate(license)             => reactivateAccount(license)
-      case ListPools(_)                    => listPools
-      case SavePool(_, pool)               => savePool(pool)
-      case ListCleanings(_, poolId)        => listCleanings(poolId)
-      case SaveCleaning(_, cleaning)       => saveCleaning(cleaning)
-      case ListMeasurements(_, poolId)     => listMeasurements(poolId)
-      case SaveMeasurement(_, measurement) => saveMeasurement(measurement)
-      case ListChemicals(_, poolId)        => listChemicals(poolId)
-      case SaveChemical(_, chemical)       => saveChemical(chemical)
-    else Fault(s"Failed to process invalid command: $command")
+    Try {
+      if authorize(command) && validate(command) then command match
+        case Register(emailAddress)          => register(emailAddress)
+        case Login(emailAddress, pin)        => login(emailAddress, pin)
+        case Deactivate(license)             => deactivateAccount(license)
+        case Reactivate(license)             => reactivateAccount(license)
+        case ListPools(_)                    => listPools
+        case SavePool(_, pool)               => savePool(pool)
+        case ListCleanings(_, poolId)        => listCleanings(poolId)
+        case SaveCleaning(_, cleaning)       => saveCleaning(cleaning)
+        case ListMeasurements(_, poolId)     => listMeasurements(poolId)
+        case SaveMeasurement(_, measurement) => saveMeasurement(measurement)
+        case ListChemicals(_, poolId)        => listChemicals(poolId)
+        case SaveChemical(_, chemical)       => saveChemical(chemical)
+      else Fault(s"Failed to process invalid command: $command")
+    }.recover {
+      case error: Throwable => Fault(s"Failed to process command: $command, due to: ${error.getMessage}")
+    }.get
 
   private val subject = "Account Registration"
 
