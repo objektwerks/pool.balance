@@ -77,6 +77,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     observableFaults += fault
     logger.error(s"*** $source - $entity - $fault")
 
+  def log(source: String, fault: Fault): Unit = logger.error(s"*** $source - $fault")
+
   def register(register: Register): Unit =
     fetcher.call(
       register,
