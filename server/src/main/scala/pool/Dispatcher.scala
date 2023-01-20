@@ -39,7 +39,8 @@ final class Dispatcher(store: Store,
   private def register(emailAddress: String): Registered | Fault =
     val account = Account(emailAddress = emailAddress)
     val sent = email(account.emailAddress, account.pin)
-    if sent then Registered( store.register(account) )
+    val unique = store.isEmailAddressUnique(emailAddress)
+    if sent && unique then Registered( store.register(account) )
     else Fault(s"Registration failed for: $emailAddress")
 
   private def email(emailAddress: String, pin: String): Boolean =
