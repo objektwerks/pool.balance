@@ -93,7 +93,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
               initOwner(stage)
               title = context.windowTitle
               headerText = context.buttonRegister
-              contentText = "Register failed."
+              contentText = context.errorRegister
             }.showAndWait()
           )
         case Registered(account) => observableAccount.set(account)
@@ -111,7 +111,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
               initOwner(stage)
               title = context.windowTitle
               headerText = context.buttonLogin
-              contentText = "Login failed."              
+              contentText = context.errorLogin
             }.showAndWait()
           )
         case LoggedIn(account) => observableAccount.set(account)
