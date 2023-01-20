@@ -56,6 +56,14 @@ final class Store(config: Config,
         .single()
     }
 
+  def isEmailAddressUnique(emailAddress: String): Boolean =
+    val count = DB readOnly { implicit session =>
+      sql"select id from account where email_address = $emailAddress"
+        .list
+        .fetchSize
+    }
+    if count.isDefined then false else true
+
   def isAuthorized(license: String): Boolean =
     cache.getIfPresent(license) match
       case Some(_) =>
