@@ -59,8 +59,8 @@ final class Store(config: Config,
   def isEmailAddressUnique(emailAddress: String): Boolean =
     val count = DB readOnly { implicit session =>
       sql"select id from account where email_address = $emailAddress"
-        .list
-        .fetchSize
+        .map(rs => rs.long("id"))
+        .single()
     }
     if count.isDefined then false else true
 
