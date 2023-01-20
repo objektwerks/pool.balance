@@ -12,6 +12,9 @@ final class Context(config: Config, val model: Model):
   val windowWidth = config.getDouble("window.width")
   val windowHeight = config.getDouble("window.height")
 
+  val errorRegister = config.getString("error.register")
+  val errorLogin = config.getString("error.login")
+
   val buttonAdd = config.getString("button.add")
   val buttonEdit = config.getString("button.edit")
   val buttonSave = config.getString("button.save")
