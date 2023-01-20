@@ -92,7 +92,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
             new Alert(AlertType.Error) {
               initOwner(stage)
               title = context.windowTitle
-              headerText = "Register"
+              headerText = context.buttonRegister
               contentText = "Register failed."
             }.showAndWait()
           )
@@ -110,7 +110,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
             new Alert(AlertType.Error) {
               initOwner(stage)
               title = context.windowTitle
-              headerText = "Login"
+              headerText = context.buttonLogin
               contentText = "Login failed."              
             }.showAndWait()
           )
