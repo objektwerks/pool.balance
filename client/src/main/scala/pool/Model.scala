@@ -6,17 +6,17 @@ import java.text.NumberFormat
 import java.util.concurrent.Executors
 
 import scalafx.Includes.*
+import scalafx.application.Platform
+import scalafx.collections.ObservableBuffer
+import scalafx.beans.property.ObjectProperty
 import scalafx.scene.control.Alert
 import scalafx.scene.control.Alert.AlertType
 import scalafx.stage.Stage
 import scala.util.Try
 
-import scalafx.application.Platform
-import scalafx.collections.ObservableBuffer
-import scalafx.beans.property.ObjectProperty
-
 import Entity.given
 import Measurement.*
+import pool.dialog.Alerts
 
 final class Model(fetcher: Fetcher) extends LazyLogging:
   val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
@@ -88,14 +88,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       (event: Event) => event match
         case fault @ Fault(_, _) =>
           log("Model.register", fault)
-          Platform.runLater(
-            new Alert(AlertType.Error) {
-              initOwner(stage)
-              title = context.windowTitle
-              headerText = context.buttonRegister
-              contentText = context.errorRegister
-            }.showAndWait()
-          )
+          Alerts.showRegisterAlert(context, stage)
         case Registered(account) => observableAccount.set(account)
         case _ => ()
     )
@@ -106,14 +99,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       (event: Event) => event match
         case fault @ Fault(_, _) =>
           log("Model.login", fault)
-          Platform.runLater(
-            new Alert(AlertType.Error) {
-              initOwner(stage)
-              title = context.windowTitle
-              headerText = context.buttonLogin
-              contentText = context.errorLogin
-            }.showAndWait()
-          )
+          Alerts.showLoginAlert(context, stage)
         case LoggedIn(account) => observableAccount.set(account)
         case _ => ()
     )
