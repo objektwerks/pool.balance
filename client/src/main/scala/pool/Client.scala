@@ -41,9 +41,9 @@ object Client extends JFXApp3 with LazyLogging:
       case Some( RegisterLogin( Some(register), None) ) => model.register(register)
       case Some( RegisterLogin( None, Some(login) ) ) => model.login(login)
       case _ =>
-        logger.info("Register or login failed.")
+        logger.info("Register or login failed. Client is stopping ...")
         sys.exit(-1)
     
-    logger.info(s"Client started targeting: $url")
+    logger.info(s"Client started, targeting: $url")
 
   override def stopApp(): Unit = logger.info("Client stopped.")
