@@ -81,7 +81,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def log(source: String, fault: Fault): Unit = logger.error(s"*** $source - $fault")
 
-  def register(register: Register): Unit =
+  def register(register: Register, context: Context): Unit =
     fetcher.call(
       register,
       (event: Event) => event match
@@ -99,13 +99,20 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def login(login: Login): Unit =
+  def login(login: Login, context: Context): Unit =
     fetcher.call(
       login,
       (event: Event) => event match
         case fault @ Fault(_, _) =>
           log("Model.login", fault)
-          Platform.runLater( Alert(AlertType.Error, "Login failed.").showAndWait() )
+          Platform.runLater(
+            new Alert(AlertType.Error) {
+              initOwner(null)
+              title = "Pool Balance"
+              headerText = "Login"
+              contentText = "Login failed."              
+            }.showAndWait()
+          )
         case LoggedIn(account) => observableAccount.set(account)
         case _ => ()
     )

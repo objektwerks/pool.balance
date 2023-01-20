@@ -30,8 +30,8 @@ object Client extends JFXApp3 with LazyLogging:
       icons.add(context.logo)
     
     RegisterLoginDialog(stage, context).showAndWait() match
-      case Some( RegisterLogin( Some(register), None) ) => model.register(register)
-      case Some( RegisterLogin( None, Some(login) ) ) => model.login(login)
+      case Some( RegisterLogin( Some(register), None) ) => model.register(register, context)
+      case Some( RegisterLogin( None, Some(login) ) ) => model.login(login, context)
       case _ =>
         logger.info("Client register or login failed!")
         sys.exit(-1)
