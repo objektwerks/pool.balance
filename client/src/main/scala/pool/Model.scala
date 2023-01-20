@@ -85,7 +85,9 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.call(
       register,
       (event: Event) => event match
-        case fault @ Fault(_, _) => log("Model.register", fault)
+        case fault @ Fault(_, _) =>
+          log("Model.register", fault)
+          Alert(AlertType.Information, "Register failed.").showAndWait()
         case Registered(account) => observableAccount.set(account)
         case _ => ()
     )
