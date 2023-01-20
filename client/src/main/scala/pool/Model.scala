@@ -6,6 +6,8 @@ import java.text.NumberFormat
 import java.util.concurrent.Executors
 
 import scalafx.Includes.*
+import scalafx.scene.control.Alert
+import scalafx.scene.control.Alert.AlertType
 import scala.util.Try
 
 import scalafx.application.Platform
@@ -92,7 +94,9 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.call(
       login,
       (event: Event) => event match
-        case fault @ Fault(_, _) => log("Model.login", fault)
+        case fault @ Fault(_, _) =>
+          log("Model.login", fault)
+          Alert(AlertType.Information, "Login failed.").showAndWait()
         case LoggedIn(account) => observableAccount.set(account)
         case _ => ()
     )
