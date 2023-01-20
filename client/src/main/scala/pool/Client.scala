@@ -10,8 +10,7 @@ import scalafx.scene.Scene
 import scalafx.scene.layout.VBox
 
 import pool.{Login, Register}
-import pool.dialog.RegisterLogin
-import pool.dialog.RegisterLoginDialog
+import pool.dialog.{Alerts, RegisterLogin, RegisterLoginDialog}
 
 object Client extends JFXApp3 with LazyLogging:
   private val conf = ConfigFactory.load("client.conf")
@@ -28,12 +27,24 @@ object Client extends JFXApp3 with LazyLogging:
       minWidth = context.windowWidth
       minHeight = context.windowHeight
       icons.add(context.logo)
+
+    model.registered.onChange { (_, _, newValue) =>
+      Alerts.showRegisterAlert(context, stage)
+      logger.info("Register failed. Client stopping ...")
+      sys.exit(-1)
+    }
+
+    model.loggedin.onChange { (_, _, newValue) =>
+      Alerts.showLoginAlert(context, stage)
+      logger.info("Login failed. Client stopping ...")
+      sys.exit(-1)
+    }
     
     RegisterLoginDialog(stage, context).showAndWait() match
       case Some( RegisterLogin( Some(register), None) ) => model.register(register, context, stage)
       case Some( RegisterLogin( None, Some(login) ) ) => model.login(login, context, stage)
       case _ =>
-        logger.info("Client register or login failed!")
+        logger.info("Register or login failed.")
         sys.exit(-1)
     
     logger.info(s"Client started targeting: $url")
