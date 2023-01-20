@@ -45,7 +45,7 @@ final class Dispatcher(store: Store,
 
   private def email(emailAddress: String, pin: String): Boolean =
     val recipients = List(emailAddress)
-    val message = s"Store this pin: ${pin} in a safe place; then delete this email."
+    val message = s"<p>Store this pin: <b>${pin}</b> in a safe place; then delete this email.</p>"
     emailer.send(recipients, subject, message)
 
   private def login(emailAddress: String, pin: String): LoggedIn | Fault =
