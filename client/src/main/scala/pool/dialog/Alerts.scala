@@ -8,6 +8,14 @@ import scalafx.stage.Stage
 import pool.Context
 
 object Alerts:
+  def showServerAlert(context: Context, stage: Stage): Option[ButtonType] =
+    new Alert(AlertType.Error) {
+      initOwner(stage)
+      title = context.windowTitle
+      headerText = context.buttonRegister
+      contentText = context.errorRegister
+    }.showAndWait()
+
   def showRegisterAlert(context: Context, stage: Stage): Option[ButtonType] =
     new Alert(AlertType.Error) {
       initOwner(stage)
