@@ -63,8 +63,7 @@ final class Fetcher(context: Context) extends LazyLogging:
         if error.getMessage == null then connectError
         else error.getMessage
       )
-    }
-     .get
+    }.get
 
     logger.info(s"*** event: $event")
     handler(event)
