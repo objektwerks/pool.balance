@@ -79,15 +79,11 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     observableFaults += fault
     logger.error(s"*** $source - $entity - $fault")
 
-  def log(source: String, fault: Fault): Unit = logger.error(s"*** $source - $fault")
-
   def register(register: Register): Unit =
     fetcher.call(
       register,
       (event: Event) => event match
-        case fault @ Fault(_, _) =>
-          log("Model.register", fault)
-          registered.set(false)
+        case fault @ Fault(_, _) => registered.set(false)
         case Registered(account) => observableAccount.set(account)
         case _ => ()
     )
@@ -96,9 +92,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.call(
       login,
       (event: Event) => event match
-        case fault @ Fault(_, _) =>
-          log("Model.login", fault)
-          loggedin.set(false)
+        case fault @ Fault(_, _) => loggedin.set(false)
         case LoggedIn(account) => observableAccount.set(account)
         case _ => ()
     )
