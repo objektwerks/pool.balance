@@ -10,7 +10,7 @@ import java.time.temporal.ChronoUnit.SECONDS
 import java.util.concurrent.Executors
 
 import scalafx.application.Platform
-import scala.concurrent.{blocking, Await, ExecutionContext, Future}
+import scala.concurrent.{Await, ExecutionContext, Future}
 import scala.concurrent.duration.*
 import scala.util.Try
 
@@ -40,10 +40,8 @@ final class Fetcher(url: String):
 
   private def sendAsyncHttpRequest(httpRequest: HttpRequest): HttpResponse[String] =
     val future = Future {
-      blocking {
-        require(!Platform.isFxApplicationThread, "Http client should not send request in fx thread.")
-        client.send( httpRequest, BodyHandlers.ofString )
-      }
+      require(!Platform.isFxApplicationThread, "Http client should not send request in fx thread.")
+      client.send( httpRequest, BodyHandlers.ofString )
     }
     Await.result(future, 30.seconds)
 
