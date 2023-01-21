@@ -9,9 +9,15 @@ import java.time.Duration
 import java.time.temporal.ChronoUnit.SECONDS
 import java.util.concurrent.Executors
 
+import scalafx.application.Platform
+import scala.concurrent.{blocking, Await, ExecutionContext, Future}
+import scala.concurrent.duration.*
+
 import Serializer.given
 
 final class Fetcher(url: String):
+  implicit private val executionContext: ExecutionContext = ExecutionContext.fromExecutor( Executors.newVirtualThreadPerTaskExecutor() )
+
   private val uri = URI(url)
   private val client = HttpClient
                          .newBuilder
@@ -32,14 +38,21 @@ final class Fetcher(url: String):
           .POST( HttpRequest.BodyPublishers.ofString(json) )
           .build
 
-  private def sendHttpRequest(httpRequest: HttpRequest): HttpResponse[String] = client.send( httpRequest, BodyHandlers.ofString )
+  private def sendAsyncHttpRequest(httpRequest: HttpRequest): HttpResponse[String] =
+    val future = Future {
+      blocking {
+        require(!Platform.isFxApplicationThread, "Http client should not send request in fx thread.")
+        client.send( httpRequest, BodyHandlers.ofString )
+      }
+    }
+    Await.result( future, 30.seconds )
 
   def call(command: Command,
            handler: Event => Unit): Any =
     val commandJson = fromCommandToJson(command)
     val httpRequest = buildHttpRequest(commandJson)
 
-    val httpResponse = sendHttpRequest(httpRequest)
+    val httpResponse = sendAsyncHttpRequest(httpRequest)
     val eventJson = httpResponse.body 
     val event = fromJsonToEvent(eventJson)
 
