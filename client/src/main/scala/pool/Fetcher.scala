@@ -40,7 +40,6 @@ final class Fetcher(url: String) extends LazyLogging:
           .build
 
   private def sendAsyncHttpRequest(httpRequest: HttpRequest): HttpResponse[String] =
-    logger.info(s"Http request: $httpRequest")
     val future = Future {
       require(!Platform.isFxApplicationThread, "Http client should not send request in fx thread.")
       client.send( httpRequest, BodyHandlers.ofString )
@@ -49,6 +48,7 @@ final class Fetcher(url: String) extends LazyLogging:
 
   def call(command: Command,
            handler: Event => Unit): Any =
+    logger.info(s"command: $command")
     val commandJson = fromCommandToJson(command)
     val httpRequest = buildHttpRequest(commandJson)
 
@@ -60,4 +60,5 @@ final class Fetcher(url: String) extends LazyLogging:
     }.recover { case error: Exception => Fault(error.getMessage) }
      .get
 
+    logger.info(s"event: $event")
     handler(event)
