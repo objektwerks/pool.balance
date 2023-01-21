@@ -5,6 +5,7 @@ import com.typesafe.scalalogging.LazyLogging
 
 import scalafx.Includes.*
 import scalafx.application.JFXApp3
+import scala.util.Try
 
 import pool.{Login, Register}
 import pool.dialog.{Alerts, RegisterLogin, RegisterLoginDialog}
@@ -37,12 +38,18 @@ object Client extends JFXApp3 with LazyLogging:
       sys.exit(-1)
     }
     
-    RegisterLoginDialog(stage, context).showAndWait() match
-      case Some( RegisterLogin( Some(register), None) ) => model.register(register)
-      case Some( RegisterLogin( None, Some(login) ) ) => model.login(login)
-      case _ =>
-        logger.info("Register or login failed. Client is stopping ...")
-        sys.exit(-1)
+    Try {
+      RegisterLoginDialog(stage, context).showAndWait() match
+        case Some( RegisterLogin( Some(register), None) ) => model.register(register)
+        case Some( RegisterLogin( None, Some(login) ) ) => model.login(login)
+        case _ =>
+          logger.info("Register or login failed. Client is stopping ...")
+          sys.exit(-1)
+    }.recover { case error: Exception =>
+      logger.error(s"Client failed to connect to server: $url with error: ${error.getMessage}")
+      Alerts.showServerAlert(context, stage)
+      sys.exit(-1)
+    }
     
     logger.info(s"Client started, targeting: $url")
 
