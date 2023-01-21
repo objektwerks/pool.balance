@@ -40,6 +40,7 @@ final class Fetcher(url: String):
     val httpRequest = buildHttpRequest(commandJson)
 
     val httpResponse = sendHttpRequest(httpRequest)
-    val event = fromJsonToEvent( httpResponse.body )
+    val eventJson = httpResponse.body 
+    val event = fromJsonToEvent(eventJson)
 
     handler(event)
