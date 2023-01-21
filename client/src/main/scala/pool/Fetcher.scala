@@ -1,6 +1,7 @@
 package pool
 
 import com.github.plokhotnyuk.jsoniter_scala.core.*
+import com.typesafe.scalalogging.LazyLogging
 
 import java.net.URI
 import java.net.http.{HttpClient, HttpRequest, HttpResponse}
@@ -16,7 +17,7 @@ import scala.util.Try
 
 import Serializer.given
 
-final class Fetcher(url: String):
+final class Fetcher(url: String) extends LazyLogging:
   implicit private val executionContext: ExecutionContext = ExecutionContext.fromExecutor( Executors.newVirtualThreadPerTaskExecutor() )
   private val uri = URI(url)
   private val client = HttpClient
