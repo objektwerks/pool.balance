@@ -17,9 +17,12 @@ final class Fetcher(url: String):
                          .executor( Executors.newVirtualThreadPerTaskExecutor() )
                          .build()
 
+  private def toJson(command: Command): String = writeToString[Command](command)
+  private def fromJson(json: String): Event = readFromString[Event](json)
+
   def call(command: Command,
            handler: Event => Unit): Any =
-    val commandJson = writeToString[Command](command)
+    val commandJson = toJson(command)
     val request = HttpRequest
       .newBuilder
       .uri(URI(url))
@@ -29,7 +32,7 @@ final class Fetcher(url: String):
       .POST( HttpRequest.BodyPublishers.ofString(commandJson) )
       .build
     
-    val eventJson = client.send( request, BodyHandlers.ofString )
-    val event = readFromString[Event]( eventJson.body )
+    val response = client.send( request, BodyHandlers.ofString )
+    val event = fromJson( response.body )
 
     handler(event)
