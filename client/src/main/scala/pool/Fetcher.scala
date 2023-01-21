@@ -14,9 +14,9 @@ import Serializer.given
 final class Fetcher(url: String):
   private val uri = URI(url)
   private val client = HttpClient
-                         .newBuilder()
+                         .newBuilder
                          .executor( Executors.newVirtualThreadPerTaskExecutor() )
-                         .build()
+                         .build
 
   private def fromCommandToJson(command: Command): String = writeToString[Command](command)
 
