@@ -20,7 +20,6 @@ final class Fetcher(url: String):
   def call(command: Command,
            handler: Event => Unit): Any =
     val commandJson = writeToString[Command](command)
-
     val request = HttpRequest
       .newBuilder
       .uri(URI(url))
@@ -30,7 +29,7 @@ final class Fetcher(url: String):
       .POST( HttpRequest.BodyPublishers.ofString(commandJson) )
       .build
     
-    val response = client.send( request, BodyHandlers.ofString )
+    val eventJson = client.send( request, BodyHandlers.ofString )
+    val event = readFromString[Event]( eventJson.body )
 
-    val event = readFromString[Event]( response.body )
     handler(event)
