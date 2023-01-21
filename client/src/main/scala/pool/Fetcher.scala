@@ -48,17 +48,17 @@ final class Fetcher(url: String) extends LazyLogging:
 
   def call(command: Command,
            handler: Event => Unit): Any =
-    logger.info(s"command: $command")
+    logger.info(s"*** command: $command")
     val commandJson = fromCommandToJson(command)
     val httpRequest = buildHttpRequest(commandJson)
 
     val event = Try {
       val httpResponse = sendAsyncHttpRequest(httpRequest)
-      logger.info(s"Http response: $httpResponse")
+      logger.info(s"*** Http response: $httpResponse")
       val eventJson = httpResponse.body 
       fromJsonToEvent(eventJson)
     }.recover { case error: Exception => Fault(error.getMessage) }
      .get
 
-    logger.info(s"event: $event")
+    logger.info(s"*** event: $event")
     handler(event)
