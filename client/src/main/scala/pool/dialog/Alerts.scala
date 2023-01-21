@@ -13,7 +13,7 @@ object Alerts:
       initOwner(stage)
       title = context.windowTitle
       headerText = context.buttonRegister
-      contentText = context.errorRegister
+      contentText = context.errorServer
     }.showAndWait()
 
   def showRegisterAlert(context: Context, stage: Stage): Option[ButtonType] =
