@@ -57,7 +57,12 @@ final class Fetcher(url: String) extends LazyLogging:
       logger.info(s"*** Http response: $httpResponse")
       val eventJson = httpResponse.body 
       fromJsonToEvent(eventJson)
-    }.recover { case error: Exception => Fault(error.getMessage) }
+    }.recover { case error: Exception =>
+      Fault(
+        if error.getMessage == null then "Fetcher failed to connect with server."
+        else error.getMessage
+      )
+    }
      .get
 
     logger.info(s"*** event: $event")
