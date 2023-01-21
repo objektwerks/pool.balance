@@ -1,19 +1,19 @@
 package pool.dashboard
 
-import pool.{Context, Measurement}
+import pool.{Context, Measurement, Model}
 
-final class CalciumHardnessPane(context: Context) extends DashboardTitledPane(context):
+final class CalciumHardnessPane(context: Context, model: Model) extends DashboardTitledPane(context):
   text = context.headerCalciumHardness
   range.text = context.dashboardCalciumHardnessRange
   good.text = context.dashboardCalciumHardnessGood
   ideal.text = context.dashboardCalciumHardnessIdeal
-  current.text <== context.model.currentCalciumHardness.asString
-  average.text <== context.model.averageCalciumHardness.asString
+  current.text <== model.currentCalciumHardness.asString
+  average.text <== model.averageCalciumHardness.asString
 
-  context.model.currentCalciumHardness.onChange { (_, _, newValue) =>
-    if context.model.calciumHardnessInRange(newValue) then inRangeCurrent else outOfRangeCurrent
+  model.currentCalciumHardness.onChange { (_, _, newValue) =>
+    if model.calciumHardnessInRange(newValue) then inRangeCurrent else outOfRangeCurrent
   }
 
-  context.model.averageCalciumHardness.onChange { (_, _, newValue) =>
-    if context.model.calciumHardnessInRange(newValue) then inRangeAverage else outOfRangeAverage
+  model.averageCalciumHardness.onChange { (_, _, newValue) =>
+    if model.calciumHardnessInRange(newValue) then inRangeAverage else outOfRangeAverage
   }

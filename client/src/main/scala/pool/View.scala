@@ -9,19 +9,19 @@ import scalafx.scene.layout.{BorderPane, HBox, Priority, VBox}
 import pool.pane.{PoolsPane, TabbedPane}
 import pool.dashboard.DashboardPane
 
-final class View(context: Context):
+final class View(context: Context, model: Model):
   val borderPane = new BorderPane:
     prefWidth = context.windowWidth
     prefHeight = context.windowHeight
     padding = Insets(6)
 
-  val dashboardPane = DashboardPane(context)
+  val dashboardPane = DashboardPane(context, model)
   HBox.setHgrow(dashboardPane, Priority.Always)
 
-  val poolsPane = PoolsPane(context)
+  val poolsPane = PoolsPane(context, model)
   VBox.setVgrow(poolsPane, Priority.Always)
 
-  val tabbedPane = TabbedPane(context)
+  val tabbedPane = TabbedPane(context, model)
   VBox.setVgrow(tabbedPane, Priority.Always)
 
   val splitPane = new SplitPane {

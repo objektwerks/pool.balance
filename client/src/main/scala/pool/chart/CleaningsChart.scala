@@ -9,12 +9,12 @@ import scalafx.geometry.Insets
 import scalafx.scene.chart.{LineChart, XYChart}
 import scalafx.scene.control.{Tab, TabPane}
 
-import pool.{Cleaning, Context}
+import pool.{Cleaning, Context, Model}
 
 final case class CleaningXY(xDate: String, yCount: Int)
 
-final class CleaningsChart(context: Context) extends TabPane:
-  val cleanings = context.model.observableCleanings.reverse
+final class CleaningsChart(context: Context, model: Model) extends TabPane:
+  val cleanings = model.observableCleanings.reverse
   val dateFormat = DateTimeFormatter.ofPattern("M.dd")
   val minDate = cleanings.map(c => c.cleaned).min.format(dateFormat)
   val maxDate = cleanings.map(c => c.cleaned).max.format(dateFormat)

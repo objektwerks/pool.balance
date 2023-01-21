@@ -8,14 +8,12 @@ import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
-import pool.{Cleaning, Context}
+import pool.{Cleaning, Context, Model}
 import pool.dialog.{CleaningDialog, CleaningsChartDialog}
 
-final class CleaningsPane(context: Context) extends VBox:
+final class CleaningsPane(context: Context, model: Model) extends VBox:
   spacing = 6
   padding = Insets(6)
-
-  val model = context.model
 
   val yesOrNo = (bool: Boolean) => if bool then context.columnYes else context.columnNo
 
@@ -116,4 +114,4 @@ final class CleaningsPane(context: Context) extends VBox:
         tableView.selectionModel().select(selectedIndex)
       case _ =>
 
-  def chart(): Unit = CleaningsChartDialog(context).showAndWait()
+  def chart(): Unit = CleaningsChartDialog(context, model).showAndWait()

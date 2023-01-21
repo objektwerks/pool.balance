@@ -1,19 +1,19 @@
 package pool.dashboard
 
-import pool.{Context, Measurement}
+import pool.{Context, Measurement, Model}
 
-final class SaltPane(context: Context) extends DashboardTitledPane(context):
+final class SaltPane(context: Context, model: Model) extends DashboardTitledPane(context):
   text = context.headerSalt
   range.text = context.dashboardSaltRange
   good.text = context.dashboardSaltGood
   ideal.text = context.dashboardSaltIdeal
-  current.text <== context.model.currentSalt.asString
-  average.text <== context.model.averageSalt.asString
+  current.text <== model.currentSalt.asString
+  average.text <== model.averageSalt.asString
 
-  context.model.currentSalt.onChange { (_, _, newValue) =>
-    if context.model.saltInRange(newValue) then inRangeCurrent else outOfRangeCurrent
+  model.currentSalt.onChange { (_, _, newValue) =>
+    if model.saltInRange(newValue) then inRangeCurrent else outOfRangeCurrent
   }
 
-  context.model.averageSalt.onChange { (_, _, newValue) =>
-    if context.model.saltInRange(newValue) then inRangeAverage else outOfRangeAverage
+  model.averageSalt.onChange { (_, _, newValue) =>
+    if model.saltInRange(newValue) then inRangeAverage else outOfRangeAverage
   }

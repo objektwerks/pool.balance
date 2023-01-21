@@ -1,19 +1,19 @@
 package pool.dashboard
 
-import pool.{Context, Measurement}
+import pool.{Context, Measurement, Model}
 
-final class CyanuricAcidPane(context: Context) extends DashboardTitledPane(context):
+final class CyanuricAcidPane(context: Context, model: Model) extends DashboardTitledPane(context):
   text = context.headerCyanuricAcid
   range.text = context.dashboardCyanuricAcidRange
   good.text = context.dashboardCyanuricAcidGood
   ideal.text = context.dashboardCyanuricAcidIdeal
-  current.text <== context.model.currentCyanuricAcid.asString
-  average.text <== context.model.averageCyanuricAcid.asString
+  current.text <== model.currentCyanuricAcid.asString
+  average.text <== model.averageCyanuricAcid.asString
 
-  context.model.currentCyanuricAcid.onChange { (_, _, newValue) =>
-    if context.model.cyanuricAcidInRange(newValue) then inRangeCurrent else outOfRangeCurrent
+  model.currentCyanuricAcid.onChange { (_, _, newValue) =>
+    if model.cyanuricAcidInRange(newValue) then inRangeCurrent else outOfRangeCurrent
   }
 
-  context.model.averageCyanuricAcid.onChange { (_, _, newValue) =>
-    if context.model.cyanuricAcidInRange(newValue) then inRangeAverage else outOfRangeAverage
+  model.averageCyanuricAcid.onChange { (_, _, newValue) =>
+    if model.cyanuricAcidInRange(newValue) then inRangeAverage else outOfRangeAverage
   }

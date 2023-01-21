@@ -1,19 +1,19 @@
 package pool.dashboard
 
-import pool.{Context, Measurement}
+import pool.{Context, Measurement, Model}
 
-final class FreeChlorinePane(context: Context) extends DashboardTitledPane(context):
+final class FreeChlorinePane(context: Context, model: Model) extends DashboardTitledPane(context):
   text = context.headerFreeChlorine
   range.text = context.dashboardFreeChlorineRange
   good.text = context.dashboardFreeChlorineGood
   ideal.text = context.dashboardFreeChlorineIdeal
-  current.text <== context.model.currentFreeChlorine.asString
-  average.text <== context.model.averageFreeChlorine.asString
+  current.text <== model.currentFreeChlorine.asString
+  average.text <== model.averageFreeChlorine.asString
 
-  context.model.currentFreeChlorine.onChange { (_, _, newValue) =>
-    if context.model.freeChlorineInRange(newValue) then inRangeCurrent else outOfRangeCurrent
+  model.currentFreeChlorine.onChange { (_, _, newValue) =>
+    if model.freeChlorineInRange(newValue) then inRangeCurrent else outOfRangeCurrent
   }
 
-  context.model.averageFreeChlorine.onChange { (_, _, newValue) =>
-    if context.model.freeChlorineInRange(newValue) then inRangeAverage else outOfRangeAverage
+  model.averageFreeChlorine.onChange { (_, _, newValue) =>
+    if model.freeChlorineInRange(newValue) then inRangeAverage else outOfRangeAverage
   }

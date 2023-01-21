@@ -8,14 +8,12 @@ import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, Tab, TabPane, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
-import pool.{Context, Pool, UnitOfMeasure}
+import pool.{Context, Model, Pool, UnitOfMeasure}
 import pool.dialog.{AccountDialog, FaultsDialog, PoolDialog, DeactivateReactivate}
 
-final class PoolsPane(context: Context) extends VBox:
+final class PoolsPane(context: Context, model: Model) extends VBox:
   spacing = 6
   padding = Insets(6)
-
-  val model = context.model
 
   val tableView = new TableView[Pool]():
     columns ++= List(
@@ -110,7 +108,7 @@ final class PoolsPane(context: Context) extends VBox:
         tableView.selectionModel().select(selectedIndex)
       case _ =>
 
-  def faults(): Unit = FaultsDialog(context).showAndWait() match
+  def faults(): Unit = FaultsDialog(context, model).showAndWait() match
     case _ => errorsButton.disable = model.observableFaults.isEmpty
 
   def account(): Unit = AccountDialog(context, model.observableAccount.get).showAndWait() match

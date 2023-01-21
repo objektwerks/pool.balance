@@ -4,14 +4,12 @@ import scalafx.Includes.*
 import scalafx.scene.control.{ButtonType, Dialog, TableColumn, TableView}
 import scalafx.scene.layout.VBox
 
-import pool.{Client, Context, Fault}
+import pool.{Client, Context, Fault, Model}
 
-final class FaultsDialog(context: Context) extends Dialog[Unit]:
+final class FaultsDialog(context: Context, model: Model) extends Dialog[Unit]:
   initOwner(Client.stage)
   title = context.windowTitle
   headerText = context.dialogFaults
-
-  val model = context.model
 
   val tableView = new TableView[Fault]():
     columns ++= List(

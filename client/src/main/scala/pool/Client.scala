@@ -16,7 +16,7 @@ object Client extends JFXApp3 with LazyLogging:
   private val model = Model(fetcher)
 
   override def start(): Unit =
-    val view = View(context)
+    val view = View(context, model)
     stage = new JFXApp3.PrimaryStage:
       scene = view.scene
       title = context.windowTitle
@@ -44,6 +44,6 @@ object Client extends JFXApp3 with LazyLogging:
       case _ =>
     
     stage.show()
-    logger.info(s"*** Client started, targeting: $url")
+    logger.info(s"*** Client started, targeting: ${context.url}")
 
   override def stopApp(): Unit = logger.info("*** Client stopped.")

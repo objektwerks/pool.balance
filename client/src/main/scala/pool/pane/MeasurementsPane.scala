@@ -8,14 +8,12 @@ import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
-import pool.{Measurement, Context}
+import pool.{Measurement, Context, Model}
 import pool.dialog.{MeasurementDialog, MeasurementsChartDialog}
 
-final class MeasurementsPane(context: Context) extends VBox:
+final class MeasurementsPane(context: Context, model: Model) extends VBox:
   spacing = 6
   padding = Insets(6)
-
-  val model = context.model
 
   val tableView = new TableView[Measurement]():
     columns ++= List(
@@ -127,4 +125,4 @@ final class MeasurementsPane(context: Context) extends VBox:
         tableView.selectionModel().select(selectedIndex)
       case _ =>
 
-  def chart(): Unit = MeasurementsChartDialog(context).showAndWait()
+  def chart(): Unit = MeasurementsChartDialog(context, model).showAndWait()

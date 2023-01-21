@@ -8,11 +8,11 @@ import scalafx.geometry.Insets
 import scalafx.scene.chart.{LineChart, XYChart}
 import scalafx.scene.control.{Tab, TabPane}
 
-import pool.{Chemical, Context, TypeOfChemical}
+import pool.{Chemical, Context, Model, TypeOfChemical}
 import pool.TypeOfChemical.*
 
-final class ChemicalsChart(context: Context) extends TabPane:
-  val chemicals = context.model.observableChemicals.reverse
+final class ChemicalsChart(context: Context, model: Model) extends TabPane:
+  val chemicals = model.observableChemicals.reverse
   val dateFormat = DateTimeFormatter.ofPattern("M.dd")
   val minDate = chemicals.map(c => c.added).min.format(dateFormat)
   val maxDate = chemicals.map(c => c.added).max.format(dateFormat)

@@ -8,10 +8,10 @@ import scalafx.geometry.Insets
 import scalafx.scene.chart.{LineChart, XYChart}
 import scalafx.scene.control.{Tab, TabPane}
 
-import pool.Context
+import pool.{Context, Model}
 
-final class MeasurementsChart(context: Context) extends TabPane:
-  val measurements = context.model.observableMeasurements.reverse
+final class MeasurementsChart(context: Context, model: Model) extends TabPane:
+  val measurements = model.observableMeasurements.reverse
   val dateFormat = DateTimeFormatter.ofPattern("M.dd")
   val minDate = measurements.map(m => m.measured).min.format(dateFormat)
   val maxDate = measurements.map(m => m.measured).max.format(dateFormat)

@@ -1,19 +1,19 @@
 package pool.dashboard
 
-import pool.{Context, Measurement}
+import pool.{Context, Measurement, Model}
 
-final class PhPane(context: Context) extends DashboardTitledPane(context):
+final class PhPane(context: Context, model: Model) extends DashboardTitledPane(context):
   text = context.headerPh
   range.text = context.dashboardPhRange
   good.text = context.dashboardPhGood
   ideal.text = context.dashboardPhIdeal
-  current.text <== context.model.currentPh.asString
-  average.text <== context.model.averagePh.asString
+  current.text <== model.currentPh.asString
+  average.text <== model.averagePh.asString
 
-  context.model.currentPh.onChange { (_, _, newValue) =>
-    if context.model.phInRange(newValue) then inRangeCurrent else outOfRangeCurrent
+  model.currentPh.onChange { (_, _, newValue) =>
+    if model.phInRange(newValue) then inRangeCurrent else outOfRangeCurrent
   }
 
-  context.model.averagePh.onChange { (_, _, newValue) =>
-    if context.model.phInRange(newValue) then inRangeAverage else outOfRangeAverage
+  model.averagePh.onChange { (_, _, newValue) =>
+    if model.phInRange(newValue) then inRangeAverage else outOfRangeAverage
   }

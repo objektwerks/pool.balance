@@ -4,25 +4,25 @@ import scalafx.geometry.Insets
 import scalafx.scene.control.{Tab, TabPane}
 import scalafx.scene.layout.{Priority, VBox}
 
-import pool.Context
+import pool.{Context, Model}
 
-final class TabbedPane(context: Context) extends VBox:
+final class TabbedPane(context: Context, model: Model) extends VBox:
   padding = Insets(6)
 
   val cleaningsTab = new Tab:
     text = context.tabCleanings
     closable = false
-    content = CleaningsPane(context)
+    content = CleaningsPane(context, model)
 
   val measurementsTab = new Tab:
   	text = context.tabMeasurements
   	closable = false
-  	content = MeasurementsPane(context)
+  	content = MeasurementsPane(context, model)
 
   val chemicalsTab = new Tab:
   	text = context.tabChemicals
   	closable = false
-  	content = ChemicalsPane(context)
+  	content = ChemicalsPane(context, model)
 
   val tabPane = new TabPane:
     tabs = List(cleaningsTab, measurementsTab, chemicalsTab)
