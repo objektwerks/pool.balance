@@ -1,5 +1,7 @@
 package pool.dialog
 
+import java.awt.Toolkit
+
 import scalafx.application.Platform
 import scalafx.scene.control.{Alert, ButtonType}
 import scalafx.scene.control.Alert.AlertType
@@ -8,12 +10,17 @@ import scalafx.stage.Stage
 import pool.Context
 
 object Alerts:
+  val centerX = Toolkit.getDefaultToolkit.getScreenSize.width / 2.4
+  val centerY = Toolkit.getDefaultToolkit.getScreenSize.height / 6
+
   def showServerAlert(context: Context, stage: Stage): Option[ButtonType] =
     new Alert(AlertType.Error) {
       initOwner(stage)
       title = context.windowTitle
       headerText = context.headerServer
       contentText = context.errorServer
+      x = centerX
+      y = centerY
     }.showAndWait()
 
   def showRegisterAlert(context: Context, stage: Stage): Option[ButtonType] =
@@ -22,6 +29,8 @@ object Alerts:
       title = context.windowTitle
       headerText = context.buttonRegister
       contentText = context.errorRegister
+      x = centerX
+      y = centerY
     }.showAndWait()
 
   def showLoginAlert(context: Context, stage: Stage): Option[ButtonType] =
@@ -30,4 +39,6 @@ object Alerts:
       title = context.windowTitle
       headerText = context.buttonLogin
       contentText = context.errorLogin
+      x = centerX
+      y = centerY
     }.showAndWait()
