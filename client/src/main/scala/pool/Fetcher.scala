@@ -17,7 +17,6 @@ import Serializer.given
 
 final class Fetcher(url: String):
   implicit private val executionContext: ExecutionContext = ExecutionContext.fromExecutor( Executors.newVirtualThreadPerTaskExecutor() )
-
   private val uri = URI(url)
   private val client = HttpClient
                          .newBuilder
