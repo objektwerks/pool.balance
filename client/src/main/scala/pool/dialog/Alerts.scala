@@ -12,7 +12,7 @@ object Alerts:
     new Alert(AlertType.Error) {
       initOwner(stage)
       title = context.windowTitle
-      headerText = context.buttonRegister
+      headerText = context.headerServer
       contentText = context.errorServer
     }.showAndWait()
 
