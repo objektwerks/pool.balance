@@ -12,6 +12,7 @@ import java.util.concurrent.Executors
 import scalafx.application.Platform
 import scala.concurrent.{blocking, Await, ExecutionContext, Future}
 import scala.concurrent.duration.*
+import scala.util.Try
 
 import Serializer.given
 
@@ -51,8 +52,11 @@ final class Fetcher(url: String):
     val commandJson = fromCommandToJson(command)
     val httpRequest = buildHttpRequest(commandJson)
 
-    val httpResponse = sendAsyncHttpRequest(httpRequest)
-    val eventJson = httpResponse.body 
-    val event = fromJsonToEvent(eventJson)
+    val event = Try {
+      val httpResponse = sendAsyncHttpRequest(httpRequest)
+      val eventJson = httpResponse.body 
+      fromJsonToEvent(eventJson)
+    }.recover { case error: Exception => Fault(error.getMessage, Entity.instant) }
+     .get
 
     handler(event)
