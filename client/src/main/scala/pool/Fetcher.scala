@@ -44,7 +44,7 @@ final class Fetcher(url: String):
         client.send( httpRequest, BodyHandlers.ofString )
       }
     }
-    Await.result( future, 30.seconds )
+    Await.result(future, 30.seconds)
 
   def call(command: Command,
            handler: Event => Unit): Any =
