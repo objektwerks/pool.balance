@@ -13,16 +13,6 @@ object Alerts:
   val centerX = Toolkit.getDefaultToolkit.getScreenSize.width / 2.4
   val centerY = Toolkit.getDefaultToolkit.getScreenSize.height / 6
 
-  def showServerAlert(context: Context, stage: Stage): Option[ButtonType] =
-    new Alert(AlertType.Error) {
-      initOwner(stage)
-      title = context.windowTitle
-      headerText = context.headerServer
-      contentText = context.errorServer
-      x = centerX
-      y = centerY
-    }.showAndWait()
-
   def showRegisterAlert(context: Context, stage: Stage): Option[ButtonType] =
     new Alert(AlertType.Error) {
       initOwner(stage)

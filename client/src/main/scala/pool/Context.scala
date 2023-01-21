@@ -12,7 +12,6 @@ final class Context(config: Config, val model: Model):
   val windowWidth = config.getDouble("window.width")
   val windowHeight = config.getDouble("window.height")
 
-  val errorServer = config.getString("error.server")
   val errorRegister = config.getString("error.register")
   val errorLogin = config.getString("error.login")
 
@@ -101,7 +100,6 @@ final class Context(config: Config, val model: Model):
   val dialogChemical = config.getString("dialog.chemical")
   val dialogFaults = config.getString("dialog.faults")
 
-  val headerServer = config.getString("header.server")
   val headerName = config.getString("header.name")
   val headerBuilt = config.getString("header.built")
   val headerVolume = config.getString("header.volume")
