@@ -12,6 +12,8 @@ final class Context(config: Config):
   val windowWidth = config.getDouble("window.width")
   val windowHeight = config.getDouble("window.height")
 
+  val url = config.getString("url")
+
   val errorServer = config.getString("error.server")
   val errorRegister = config.getString("error.register")
   val errorLogin = config.getString("error.login")

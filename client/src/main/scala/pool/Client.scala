@@ -11,10 +11,9 @@ import pool.dialog.{Alerts, RegisterLogin, RegisterLoginDialog}
 
 object Client extends JFXApp3 with LazyLogging:
   private val conf = ConfigFactory.load("client.conf")
-  private val url = conf.getString("url")
-  private val fetcher = Fetcher(url)
+  private val context = Context(conf)
+  private val fetcher = Fetcher(context)
   private val model = Model(fetcher)
-  private val context = Context(conf, model)
 
   override def start(): Unit =
     val view = View(context)

@@ -17,9 +17,10 @@ import scala.util.Try
 
 import Serializer.given
 
-final class Fetcher(url: String) extends LazyLogging:
+final class Fetcher(context: Context) extends LazyLogging:
   implicit private val executionContext: ExecutionContext = ExecutionContext.fromExecutor( Executors.newVirtualThreadPerTaskExecutor() )
-  private val uri = URI(url)
+  private val uri = URI(context.url)
+  private val connectError = context.errorServer
   private val client = HttpClient
                          .newBuilder
                          .executor( Executors.newVirtualThreadPerTaskExecutor() )
@@ -59,7 +60,7 @@ final class Fetcher(url: String) extends LazyLogging:
       fromJsonToEvent(eventJson)
     }.recover { case error: Exception =>
       Fault(
-        if error.getMessage == null then "Fetcher failed to connect with server."
+        if error.getMessage == null then connectError
         else error.getMessage
       )
     }
