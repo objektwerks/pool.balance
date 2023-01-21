@@ -26,6 +26,8 @@ object Client extends JFXApp3 with LazyLogging:
       minHeight = context.windowHeight
       icons.add(context.logo)
 
+    stage.hide()
+
     model.registered.onChange { (_, _, _) =>
       Alerts.showRegisterAlert(context, stage)
       logger.info("Register failed. Client stopping ...")
@@ -51,6 +53,7 @@ object Client extends JFXApp3 with LazyLogging:
       sys.exit(-1)
     }
     
+    stage.show()
     logger.info(s"Client started, targeting: $url")
 
   override def stopApp(): Unit = logger.info("Client stopped.")
