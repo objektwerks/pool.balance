@@ -56,7 +56,7 @@ final class Fetcher(url: String):
       val httpResponse = sendAsyncHttpRequest(httpRequest)
       val eventJson = httpResponse.body 
       fromJsonToEvent(eventJson)
-    }.recover { case error: Exception => Fault(error.getMessage, Entity.instant) }
+    }.recover { case error: Exception => Fault(error.getMessage) }
      .get
 
     handler(event)
