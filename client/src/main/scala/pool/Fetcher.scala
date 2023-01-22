@@ -31,6 +31,12 @@ final class Fetcher(context: Context) extends LazyLogging:
 
   private def fromJsonToEvent(json: String): Event = readFromString[Event](json)
 
+  private def toFault(error: Exception): Fault =
+    Fault(
+      if error.getMessage == null then connectError
+      else error.getMessage
+    )
+
   private def buildHttpRequest(json: String): HttpRequest =
     HttpRequest
           .newBuilder
