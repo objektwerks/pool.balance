@@ -40,7 +40,7 @@ final class Fetcher(context: Context) extends LazyLogging:
           .POST( HttpRequest.BodyPublishers.ofString(json) )
           .build
 
-  private def sendAsyncBlockingHttpRequest(httpRequest: HttpRequest): HttpResponse[String] =
+  private def sendBlockingHttpRequest(httpRequest: HttpRequest): HttpResponse[String] =
     val future = Future {
       require(!Platform.isFxApplicationThread, "Http client should not send request in fx thread.")
       blocking {
@@ -56,7 +56,7 @@ final class Fetcher(context: Context) extends LazyLogging:
     val httpRequest = buildHttpRequest(commandJson)
 
     val event = Try {
-      val httpResponse = sendAsyncBlockingHttpRequest(httpRequest)
+      val httpResponse = sendBlockingHttpRequest(httpRequest)
       logger.info(s"*** Http response: $httpResponse")
       val eventJson = httpResponse.body 
       fromJsonToEvent(eventJson)
