@@ -13,6 +13,7 @@ import java.util.concurrent.Executors
 import scalafx.application.Platform
 import scala.concurrent.{blocking, Await, ExecutionContext, Future}
 import scala.concurrent.duration.*
+import scala.jdk.FutureConverters.*
 import scala.util.Try
 
 import Serializer.given
@@ -39,6 +40,9 @@ final class Fetcher(context: Context) extends LazyLogging:
           .headers("Content-Type", "application/json; charset=UTF-8", "Accept", "application/json")
           .POST( HttpRequest.BodyPublishers.ofString(json) )
           .build
+
+  private def sendAsyncHttpRequest(httpRequest: HttpRequest): Future[HttpResponse[String]] =
+    client.sendAsync( httpRequest, BodyHandlers.ofString ).asScala
 
   private def sendBlockingHttpRequest(httpRequest: HttpRequest): HttpResponse[String] =
     val future = Future {
