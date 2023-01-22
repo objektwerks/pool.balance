@@ -54,7 +54,10 @@ final class Fetcher(context: Context) extends LazyLogging:
     Await.result(future, 30.seconds)
 
   def call(command: Command,
-           handler: Event => Unit): Unit =
+           handler: Event => Unit): Unit = ???
+
+  def fetch(command: Command,
+            handler: Event => Unit): Unit =
     logger.info(s"*** command: $command")
     val commandJson = fromCommandToJson(command)
     val httpRequest = buildHttpRequest(commandJson)
