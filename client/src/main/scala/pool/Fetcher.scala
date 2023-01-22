@@ -27,6 +27,8 @@ final class Fetcher(context: Context) extends LazyLogging:
                          .executor( Executors.newVirtualThreadPerTaskExecutor() )
                          .build
 
+  logger.info(s"*** Fetcher fetching on: ${context.url}")
+
   private def fromCommandToJson(command: Command): String = writeToString[Command](command)
 
   private def fromJsonToEvent(json: String): Event = readFromString[Event](json)
