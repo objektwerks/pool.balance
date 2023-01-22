@@ -80,7 +80,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     logger.error(s"*** $source - $entity - $fault")
 
   def register(register: Register): Unit =
-    fetcher.call(
+    fetcher.fetch(
       register,
       (event: Event) => event match
         case fault @ Fault(_, _) => registered.set(false)
@@ -89,7 +89,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def login(login: Login): Unit =
-    fetcher.call(
+    fetcher.fetch(
       login,
       (event: Event) => event match
         case fault @ Fault(_, _) => loggedin.set(false)
