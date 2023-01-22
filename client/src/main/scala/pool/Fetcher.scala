@@ -82,12 +82,8 @@ final class Fetcher(context: Context) extends LazyLogging:
       val httpResponse = sendBlockingHttpRequest(httpRequest)
       val eventJson = httpResponse.body 
       fromJsonToEvent(eventJson)
-    }.recover { case error: Exception =>
-      Fault(
-        if error.getMessage == null then connectError
-        else error.getMessage
-      )
-    }.get
+    }.recover { case error: Exception => toFault(error) }
+     .get
 
     logger.info(s"*** fetch event: $event")
     handler(event)
