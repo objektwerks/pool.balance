@@ -11,7 +11,7 @@ import java.time.temporal.ChronoUnit.SECONDS
 import java.util.concurrent.Executors
 
 import scalafx.application.Platform
-import scala.concurrent.{Await, ExecutionContext, Future}
+import scala.concurrent.{blocking, Await, ExecutionContext, Future}
 import scala.concurrent.duration.*
 import scala.util.Try
 
@@ -40,10 +40,12 @@ final class Fetcher(context: Context) extends LazyLogging:
           .POST( HttpRequest.BodyPublishers.ofString(json) )
           .build
 
-  private def sendAsyncHttpRequest(httpRequest: HttpRequest): HttpResponse[String] =
+  private def sendAsyncBlockingHttpRequest(httpRequest: HttpRequest): HttpResponse[String] =
     val future = Future {
       require(!Platform.isFxApplicationThread, "Http client should not send request in fx thread.")
-      client.send( httpRequest, BodyHandlers.ofString )
+      blocking {
+        client.send( httpRequest, BodyHandlers.ofString )
+      }
     }
     Await.result(future, 30.seconds)
 
@@ -54,7 +56,7 @@ final class Fetcher(context: Context) extends LazyLogging:
     val httpRequest = buildHttpRequest(commandJson)
 
     val event = Try {
-      val httpResponse = sendAsyncHttpRequest(httpRequest)
+      val httpResponse = sendAsyncBlockingHttpRequest(httpRequest)
       logger.info(s"*** Http response: $httpResponse")
       val eventJson = httpResponse.body 
       fromJsonToEvent(eventJson)
