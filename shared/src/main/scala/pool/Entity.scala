@@ -7,6 +7,31 @@ import scalafx.Includes.*
 import scalafx.beans.property.ObjectProperty
 import scala.util.Random
 
+enum UnitOfMeasure:
+  case gl, l, lb, kg, tablet
+
+object UnitOfMeasure:
+  def toList: List[String] = UnitOfMeasure.values.map(uom => uom.toString).toList
+  def toPoolList: List[String] = List( UnitOfMeasure.gl.toString, UnitOfMeasure.l.toString )
+  def gallonsToLiters(gallons: Double): Double = gallons * 3.785
+  def litersToGallons(liters: Double): Double = liters * 0.264
+  def poundsToKilograms(pounds: Double): Double = pounds * 0.454
+  def kilogramsToPounds(kilograms: Double): Double = kilograms * 2.205
+
+enum TypeOfChemical(val display: String):
+  case LiquidChlorine extends TypeOfChemical("Liquid Chlorine")
+  case Trichlor extends TypeOfChemical("Trichlor")
+  case Dichlor extends TypeOfChemical("Dichlor")
+  case CalciumHypochlorite extends TypeOfChemical("Calcium Hypochlorite")
+  case Stabilizer extends TypeOfChemical("Stabilizer")
+  case Algaecide extends TypeOfChemical("Algaecide")
+  case MuriaticAcid extends TypeOfChemical("Muriatic Acid")
+  case Salt extends TypeOfChemical("Salt")
+
+object TypeOfChemical:
+  def toEnum(display: String): TypeOfChemical = TypeOfChemical.valueOf(display.filterNot(_.isWhitespace))
+  def toList: List[String] = TypeOfChemical.values.map(toc => toc.display).toList
+
 sealed trait Entity:
   val id: Long
 
@@ -128,31 +153,6 @@ final case class Measurement(id: Long = 0,
   val temperatureProperty = ObjectProperty[Int](this, "temperature", temperature)
   val measuredProperty = ObjectProperty[String](this, "measured", measured)
   val measurement = this
-
-enum UnitOfMeasure:
-  case gl, l, lb, kg, tablet
-
-object UnitOfMeasure:
-  def toList: List[String] = UnitOfMeasure.values.map(uom => uom.toString).toList
-  def toPoolList: List[String] = List( UnitOfMeasure.gl.toString, UnitOfMeasure.l.toString )
-  def gallonsToLiters(gallons: Double): Double = gallons * 3.785
-  def litersToGallons(liters: Double): Double = liters * 0.264
-  def poundsToKilograms(pounds: Double): Double = pounds * 0.454
-  def kilogramsToPounds(kilograms: Double): Double = kilograms * 2.205
-
-enum TypeOfChemical(val display: String):
-  case LiquidChlorine extends TypeOfChemical("Liquid Chlorine")
-  case Trichlor extends TypeOfChemical("Trichlor")
-  case Dichlor extends TypeOfChemical("Dichlor")
-  case CalciumHypochlorite extends TypeOfChemical("Calcium Hypochlorite")
-  case Stabilizer extends TypeOfChemical("Stabilizer")
-  case Algaecide extends TypeOfChemical("Algaecide")
-  case MuriaticAcid extends TypeOfChemical("Muriatic Acid")
-  case Salt extends TypeOfChemical("Salt")
-
-object TypeOfChemical:
-  def toEnum(display: String): TypeOfChemical = TypeOfChemical.valueOf(display.filterNot(_.isWhitespace))
-  def toList: List[String] = TypeOfChemical.values.map(toc => toc.display).toList
 
 final case class Chemical(id: Long = 0,
                           poolId: Long,
