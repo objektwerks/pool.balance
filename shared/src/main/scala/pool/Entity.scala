@@ -12,7 +12,7 @@ sealed trait Entity:
 
 object Entity:
   def localDate: String = LocalDate.now.toString
-  def toLocalDate(localDate: String): LocalDate = LocalDate.parse(localDate)
+  def toLocalDate(localDateAsString: String): LocalDate = LocalDate.parse(localDateAsString)
 
   def applyLocalDateChanges(sourceLocalDate: LocalDate, targetLocalDateAsString: String): String =
     val targetLocalDate = toLocalDate(targetLocalDateAsString)
