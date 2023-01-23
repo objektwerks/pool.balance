@@ -58,7 +58,7 @@ final class CleaningDialog(context: Context, cleaning: Cleaning) extends Dialog[
         pumpBasket = pumpBasketCheckBox.selected.value,
         pumpFilter = pumpFilterCheckBox.selected.value,
         vacuum = vacuumCheckBox.selected.value,
-        cleaned = Entity.toString(cleanedDatePicker.value.value)
+        cleaned = Entity.applyLocalDateChanges(cleanedDatePicker.value.value, cleaning.cleaned)
       )
     else null
   }

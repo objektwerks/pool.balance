@@ -54,7 +54,7 @@ final class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[
         typeof = typeofComboBox.value.value,
         amount = amountTextField.text.value.toDoubleOption.getOrElse(chemical.amount),
         unit = unitComboBox.value.value,
-        added = Entity.toString(addedDatePicker.value.value)
+        added = Entity.applyLocalDateChanges(addedDatePicker.value.value, chemical.added)
       )
     else null
   }

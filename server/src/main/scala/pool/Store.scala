@@ -113,7 +113,7 @@ final class Store(config: Config,
 
   def deactivateAccount(license: String): Option[Account] =
     DB localTx { implicit session =>
-      val deactivated = sql"update account set deactivated = ${Entity.instant}, activated = '' where license = $license"
+      val deactivated = sql"update account set deactivated = ${Entity.localDate}, activated = '' where license = $license"
       .update()
       if deactivated > 0 then
         sql"select * from account where license = $license"
@@ -133,7 +133,7 @@ final class Store(config: Config,
 
   def reactivateAccount(license: String): Option[Account] =
     DB localTx { implicit session =>
-      val activated = sql"update account set activated = ${Entity.instant}, deactivated = '' where license = $license"
+      val activated = sql"update account set activated = ${Entity.localDate}, deactivated = '' where license = $license"
       .update()
       if activated > 0 then
         sql"select * from account where license = $license"
