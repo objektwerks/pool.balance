@@ -14,11 +14,12 @@ sealed trait Entity:
   val id: Long
 
 object Entity:
-  def instant: String = DateTimeFormatter.ISO_INSTANT.withZone(ZoneId.systemDefault()).format(Instant.now)
+  def instant: String = Instant.now.toString
   def parse(instant: String): Instant = Instant.parse(instant)
+
   def toInstant(localDate: LocalDate): Instant = localDate.atStartOfDay(ZoneId.systemDefault()).toInstant
   def toLocalDate(instant: String): LocalDate = LocalDate.ofInstant(parse(instant), ZoneId.systemDefault())
-  def toString(localDate: LocalDate): String = DateTimeFormatter.ISO_INSTANT.withZone(ZoneId.systemDefault()).format(toInstant(localDate))
+  def toString(localDate: LocalDate): String = toInstant(localDate).toString
 
   def isNotInt(text: String): Boolean = !text.matches("\\d+")
   def isNotDouble(text: String): Boolean = !text.matches("\\d{0,7}([\\.]\\d{0,4})?")
