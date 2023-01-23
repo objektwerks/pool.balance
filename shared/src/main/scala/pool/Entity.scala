@@ -22,9 +22,6 @@ object Entity:
       .withDayOfMonth(sourceLocalDate.getDayOfMonth)
       .toString
 
-  def isNotInt(text: String): Boolean = !text.matches("\\d+")
-  def isNotDouble(text: String): Boolean = !text.matches("\\d{0,7}([\\.]\\d{0,4})?")
-
   given poolOrdering: Ordering[Pool] = Ordering.by[Pool, String](p => p.name).reverse
   given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => toLocalDate(c.cleaned).toEpochDay).reverse
   given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => toLocalDate(m.measured).toEpochDay).reverse
