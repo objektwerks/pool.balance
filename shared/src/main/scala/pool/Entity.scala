@@ -15,8 +15,7 @@ object Entity:
   def toLocalDate(localDateAsString: String): LocalDate = LocalDate.parse(localDateAsString)
 
   def applyLocalDateChanges(sourceLocalDate: LocalDate, targetLocalDateAsString: String): String =
-    val targetLocalDate = toLocalDate(targetLocalDateAsString)
-    targetLocalDate
+    toLocalDate(targetLocalDateAsString)
       .withYear(sourceLocalDate.getYear)
       .withMonth(sourceLocalDate.getMonthValue)
       .withDayOfMonth(sourceLocalDate.getDayOfMonth)
