@@ -1,6 +1,6 @@
 package pool.chart
 
-import java.time.LocalDateTime
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 import scalafx.Includes._
@@ -16,8 +16,8 @@ final case class CleaningXY(xDate: String, yCount: Int)
 final class CleaningsChart(context: Context, model: Model) extends TabPane:
   val cleanings = model.observableCleanings.reverse
   val dateFormat = DateTimeFormatter.ofPattern("M.dd")
-  val minDate = cleanings.map(c => c.cleaned).min.format(dateFormat)
-  val maxDate = cleanings.map(c => c.cleaned).max.format(dateFormat)
+  val minDate = LocalDate.ofEpochDay( cleanings.map(c => c.cleaned).min).format(dateFormat)
+  val maxDate = LocalDate.ofEpochDay( cleanings.map(c => c.cleaned).max).format(dateFormat)
 
   val tab = new Tab:
     closable = false
@@ -38,7 +38,7 @@ final class CleaningsChart(context: Context, model: Model) extends TabPane:
     count
 
   def buildChart(): LineChart[String, Number] =
-    val filtered = cleanings.map(c => CleaningXY(c.cleaned, cleaningsToInt(c)))
+    val filtered = cleanings.map(c => CleaningXY( LocalDate.ofEpochDay(c.cleaned).format(dateFormat), cleaningsToInt(c)))
     val (chart, series) = LineChartBuilder.build(context = context,
                                                  xLabel = context.chartMonthDay,
                                                  xMinDate = minDate,
