@@ -1,5 +1,7 @@
 package pool.dialog
 
+import java.time.LocalDate
+
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.Region
@@ -33,7 +35,7 @@ final class CleaningDialog(context: Context, cleaning: Cleaning) extends Dialog[
     selected = cleaning.vacuum
 
   val cleanedDatePicker = new DatePicker:
-    value = Entity.toLocalDate(cleaning.cleaned)
+    value = LocalDate.ofEpochDay(cleaning.cleaned)
 
   val controls = List[(String, Region)](
     context.labelBrush -> brushCheckBox,
