@@ -176,7 +176,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       SaveMeasurement(observableAccount.get.license, measurement),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFault("Model.add measurement", measurement, fault)
+        case fault @ Fault(_, _) => onFault("Model.save measurement", measurement, fault)
         case MeasurementSaved(id) =>
           observableMeasurements += measurement.copy(id = id)
           observableMeasurements.sort()
@@ -195,25 +195,13 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
   
-  def add(chemical: Chemical): Unit =
+  def save(chemical: Chemical): Unit =
     fetcher.fetchAsync(
       SaveChemical(observableAccount.get.license, chemical),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFault("Model.add chemical", chemical, fault)
+        case fault @ Fault(_, _) => onFault("Model.save chemical", chemical, fault)
         case ChemicalSaved(id) =>
           observableChemicals += chemical.copy(id = id)
-          observableChemicals.sort()
-          selectedChemicalId.set(chemical.id)
-        case _ => ()
-    )
-
-  def update(chemical: Chemical): Unit =
-    fetcher.fetchAsync(
-      SaveChemical(observableAccount.get.license, chemical),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFault("Model.update chemical", chemical, fault)
-        case ChemicalSaved(id) =>
-          observableChemicals.update(observableChemicals.indexOf(chemical), chemical)
           observableChemicals.sort()
           selectedChemicalId.set(chemical.id)
         case _ => ()
