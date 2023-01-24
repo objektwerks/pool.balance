@@ -180,7 +180,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.save measurement", measurement, fault)
         case MeasurementSaved(id) =>
-          observableMeasurements += measurement.copy(id = id)
+          if measurement.id == 0 then observableMeasurements += measurement.copy(id = id)
+          else observableMeasurements.update(observableMeasurements.indexOf(measurement), measurement)
           observableMeasurements.sort()
           selectedMeasurementId.set(measurement.id)
         case _ => ()
