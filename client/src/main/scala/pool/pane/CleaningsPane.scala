@@ -101,7 +101,7 @@ final class CleaningsPane(context: Context, model: Model) extends VBox:
   def add(): Unit =
     CleaningDialog(context, Cleaning(poolId = model.selectedPoolId.value)).showAndWait() match
       case Some(cleaning: Cleaning) =>
-        model.add(cleaning)
+        model.save(cleaning)
         tableView.selectionModel().select(cleaning)
       case _ =>
 
@@ -110,7 +110,7 @@ final class CleaningsPane(context: Context, model: Model) extends VBox:
     val cleaning = tableView.selectionModel().getSelectedItem.cleaning
     CleaningDialog(context, cleaning).showAndWait() match
       case Some(cleaning: Cleaning) =>
-        model.update(cleaning)
+        model.save(cleaning)
         tableView.selectionModel().select(selectedIndex)
       case _ =>
 
