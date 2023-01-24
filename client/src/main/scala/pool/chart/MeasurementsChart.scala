@@ -1,5 +1,6 @@
 package pool.chart
 
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 import scalafx.Includes._
@@ -13,8 +14,8 @@ import pool.{Context, Model}
 final class MeasurementsChart(context: Context, model: Model) extends TabPane:
   val measurements = model.observableMeasurements.reverse
   val dateFormat = DateTimeFormatter.ofPattern("M.dd")
-  val minDate = measurements.map(m => m.measured).min.format(dateFormat)
-  val maxDate = measurements.map(m => m.measured).max.format(dateFormat)
+  val minDate = LocalDate.ofEpochDay( measurements.map(m => m.measured).min).format(dateFormat)
+  val maxDate = LocalDate.ofEpochDay( measurements.map(m => m.measured).max).format(dateFormat)
 
   val totalChlorineTab = new Tab:
     closable = false
@@ -83,7 +84,7 @@ final class MeasurementsChart(context: Context, model: Model) extends TabPane:
                                                  yTickUnit = 1,
                                                  yValues = measurements.map(m => m.totalChlorine))
     measurements foreach { m =>
-      series.data() += XYChart.Data[String, Number](m.measured.format(dateFormat), m.totalChlorine)
+      series.data() += XYChart.Data[String, Number](LocalDate.ofEpochDay(m.measured).format(dateFormat), m.totalChlorine)
     }
     chart.data = series
     LineChartBuilder.addTooltip(chart)
@@ -100,7 +101,7 @@ final class MeasurementsChart(context: Context, model: Model) extends TabPane:
                                                  yTickUnit = 1,
                                                  yValues = measurements.map(m => m.freeChlorine))
     measurements foreach { m =>
-      series.data() += XYChart.Data[String, Number](m.measured.format(dateFormat), m.freeChlorine)
+      series.data() += XYChart.Data[String, Number](LocalDate.ofEpochDay(m.measured).format(dateFormat), m.freeChlorine)
     }
     chart.data = series
     LineChartBuilder.addTooltip(chart)
@@ -117,7 +118,7 @@ final class MeasurementsChart(context: Context, model: Model) extends TabPane:
                                                  yTickUnit = 0.1,
                                                  yValues = measurements.map(m => m.combinedChlorine))
     measurements foreach { m =>
-      series.data() += XYChart.Data[String, Number](m.measured.format(dateFormat), m.combinedChlorine)
+      series.data() += XYChart.Data[String, Number](LocalDate.ofEpochDay(m.measured).format(dateFormat), m.combinedChlorine)
     }
     chart.data = series
     LineChartBuilder.addTooltip(chart)
@@ -134,7 +135,7 @@ final class MeasurementsChart(context: Context, model: Model) extends TabPane:
                                                  yTickUnit = 0.1,
                                                  yValues = measurements.map(m => m.ph))
     measurements foreach { m =>
-      series.data() += XYChart.Data[String, Number](m.measured.format(dateFormat), m.ph)
+      series.data() += XYChart.Data[String, Number](LocalDate.ofEpochDay(m.measured).format(dateFormat), m.ph)
     }
     chart.data = series
     LineChartBuilder.addTooltip(chart)
@@ -151,7 +152,7 @@ final class MeasurementsChart(context: Context, model: Model) extends TabPane:
                                                  yTickUnit = 100,
                                                  yValues = measurements.map(m => m.calciumHardness))
     measurements foreach { m =>
-      series.data() += XYChart.Data[String, Number](m.measured.format(dateFormat), m.calciumHardness)
+      series.data() += XYChart.Data[String, Number](LocalDate.ofEpochDay(m.measured).format(dateFormat), m.calciumHardness)
     }
     chart.data = series
     LineChartBuilder.addTooltip(chart)
@@ -168,7 +169,7 @@ final class MeasurementsChart(context: Context, model: Model) extends TabPane:
                                                  yTickUnit = 20,
                                                  yValues = measurements.map(m => m.totalAlkalinity))
     measurements foreach { m =>
-      series.data() += XYChart.Data[String, Number](m.measured.format(dateFormat), m.totalAlkalinity)
+      series.data() += XYChart.Data[String, Number](LocalDate.ofEpochDay(m.measured).format(dateFormat), m.totalAlkalinity)
     }
     chart.data = series
     LineChartBuilder.addTooltip(chart)
@@ -185,7 +186,7 @@ final class MeasurementsChart(context: Context, model: Model) extends TabPane:
                                                  yTickUnit = 30,
                                                  yValues = measurements.map(m => m.cyanuricAcid))
     measurements foreach { m =>
-      series.data() += XYChart.Data[String, Number](m.measured.format(dateFormat), m.cyanuricAcid)
+      series.data() += XYChart.Data[String, Number](LocalDate.ofEpochDay(m.measured).format(dateFormat), m.cyanuricAcid)
     }
     chart.data = series
     LineChartBuilder.addTooltip(chart)
@@ -202,7 +203,7 @@ final class MeasurementsChart(context: Context, model: Model) extends TabPane:
                                                  yTickUnit = 1,
                                                  yValues = measurements.map(m => m.totalBromine))
     measurements foreach { m =>
-      series.data() += XYChart.Data[String, Number](m.measured.format(dateFormat), m.totalBromine)
+      series.data() += XYChart.Data[String, Number](LocalDate.ofEpochDay(m.measured).format(dateFormat), m.totalBromine)
     }
     chart.data = series
     LineChartBuilder.addTooltip(chart)
@@ -219,7 +220,7 @@ final class MeasurementsChart(context: Context, model: Model) extends TabPane:
                                                  yTickUnit = 300,
                                                  yValues = measurements.map(m => m.salt))
     measurements foreach { m =>
-      series.data() += XYChart.Data[String, Number](m.measured.format(dateFormat), m.salt)
+      series.data() += XYChart.Data[String, Number](LocalDate.ofEpochDay(m.measured).format(dateFormat), m.salt)
     }
     chart.data = series
     LineChartBuilder.addTooltip(chart)
