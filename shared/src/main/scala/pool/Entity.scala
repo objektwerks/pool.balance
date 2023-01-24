@@ -36,27 +36,24 @@ sealed trait Entity:
   val id: Long
 
 object Entity:
-  def localDate: String = LocalDate.now.toString
-  def toLocalDate(localDateAsString: String): LocalDate = LocalDate.parse(localDateAsString)
-
-  def applyLocalDateChanges(sourceLocalDate: LocalDate, targetLocalDateAsString: String): String =
-    toLocalDate(targetLocalDateAsString)
+  def applyLocalDateChanges(sourceLocalDate: LocalDate, targetLocalDate: LocalDate): String =
+    targetLocalDate
       .withYear(sourceLocalDate.getYear)
       .withMonth(sourceLocalDate.getMonthValue)
       .withDayOfMonth(sourceLocalDate.getDayOfMonth)
       .toString
 
   given poolOrdering: Ordering[Pool] = Ordering.by[Pool, String](p => p.name).reverse
-  given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => toLocalDate(c.cleaned).toEpochDay).reverse
-  given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => toLocalDate(m.measured).toEpochDay).reverse
-  given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => toLocalDate(c.added).toEpochDay).reverse
+  given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => c.cleaned).reverse
+  given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => m.measured).reverse
+  given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => c.added).reverse
 
 final case class Account(id: Long = 0,
                          license: String = newLicense,
                          emailAddress: String = "",
                          pin: String = newPin,
-                         activated: String = Entity.localDate,
-                         deactivated: String = "") extends Entity:
+                         activated: Long = LocalDate.now.toEpochDay,
+                         deactivated: Long = 0) extends Entity:
   def toArray: Array[Any] = Array(id, license, pin, activated, deactivated)
 
 object Account:
@@ -85,8 +82,8 @@ object Account:
     license = "",
     emailAddress = "",
     pin = "",
-    activated = "",
-    deactivated = ""
+    activated = 0,
+    deactivated = 0
   )
 
 final case class Pool(id: Long = 0,
@@ -106,14 +103,14 @@ final case class Cleaning(id: Long = 0,
                           pumpBasket: Boolean = false,
                           pumpFilter: Boolean = false,
                           vacuum: Boolean = false,
-                          cleaned: String = Entity.localDate) extends Entity:
+                          cleaned: Long = LocalDate.now.toEpochDay) extends Entity:
   val brushProperty = ObjectProperty[Boolean](this, "brush", brush)
   val netProperty = ObjectProperty[Boolean](this, "net", net)
   val skimmerBasketProperty = ObjectProperty[Boolean](this, "skimmerBasket", skimmerBasket)
   val pumpBasketProperty = ObjectProperty[Boolean](this, "pumpBasket", pumpBasket)
   val pumpFilterProperty = ObjectProperty[Boolean](this, "pumpFilter", pumpFilter)
   val vacuumProperty = ObjectProperty[Boolean](this, "vacuum", vacuum)
-  val cleanedProperty = ObjectProperty[String](this, "cleaned", cleaned)
+  val cleanedProperty = ObjectProperty[Long](this, "cleaned", cleaned)
   val cleaning = this
 
 object Measurement:
@@ -140,7 +137,7 @@ final case class Measurement(id: Long = 0,
                              totalBromine: Int = 5,
                              salt: Int = 3200,
                              temperature: Int = 85,
-                             measured: String = Entity.localDate) extends Entity:
+                             measured: Long = LocalDate.now.toEpochDay) extends Entity:
   val totalChlorineProperty = ObjectProperty[Int](this, "totalChlorine", totalChlorine)
   val freeChlorineProperty = ObjectProperty[Int](this, "freeChlorine", freeChlorine)
   val combinedChlorineProperty = ObjectProperty[Double](this, "combinedChlorine", combinedChlorine)
@@ -151,7 +148,7 @@ final case class Measurement(id: Long = 0,
   val totalBromineProperty = ObjectProperty[Int](this, "totalBromine", totalBromine)
   val saltProperty = ObjectProperty[Int](this, "salt", salt)
   val temperatureProperty = ObjectProperty[Int](this, "temperature", temperature)
-  val measuredProperty = ObjectProperty[String](this, "measured", measured)
+  val measuredProperty = ObjectProperty[Long](this, "measured", measured)
   val measurement = this
 
 final case class Chemical(id: Long = 0,
@@ -159,9 +156,9 @@ final case class Chemical(id: Long = 0,
                           typeof: String = TypeOfChemical.LiquidChlorine.toString,
                           amount: Double = 1.0, 
                           unit: String = UnitOfMeasure.gl.toString,
-                          added: String = Entity.localDate) extends Entity:
+                          added: Long = LocalDate.now.toEpochDay) extends Entity:
   val typeofProperty = ObjectProperty[String](this, "typeof", typeof)
   val amountProperty = ObjectProperty[Double](this, "amount", amount)
   val unitProperty = ObjectProperty[String](this, "unit", unit.toString)
-  val addedProperty = ObjectProperty[String](this, "added", added)
+  val addedProperty = ObjectProperty[Long](this, "added", added)
   val chemical = this
