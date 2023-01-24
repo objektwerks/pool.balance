@@ -166,7 +166,10 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       SaveCleaning(observableAccount.get.license, cleaning),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.add cleaning", cleaning, fault)
-        case CleaningSaved(id) => observableCleanings += cleaning.copy(id = id)
+        case CleaningSaved(id) =>
+          observableCleanings += cleaning.copy(id = id)
+          observableCleanings.sort()
+          selectedCleaningId.set(cleaning.id)
         case _ => ()
     )
 
@@ -175,7 +178,10 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       SaveCleaning(observableAccount.get.license, cleaning),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.update cleaning", cleaning, fault)
-        case CleaningSaved(id) => observableCleanings.update(observableCleanings.indexOf(cleaning), cleaning)
+        case CleaningSaved(id) =>
+          observableCleanings.update(observableCleanings.indexOf(cleaning), cleaning)
+          observableCleanings.sort()
+          selectedCleaningId.set(cleaning.id)
         case _ => ()
     )
 
