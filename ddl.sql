@@ -6,8 +6,8 @@ CREATE TABLE account (
   license VARCHAR(36) UNIQUE NOT NULL,
   email_address VARCHAR UNIQUE NOT NULL,
   pin VARCHAR(7) NOT NULL,
-  activated VARCHAR NOT NULL,
-  deactivated VARCHAR NOT NULL
+  activated BIGINT NOT NULL,
+  deactivated BIGINT NOT NULL
 );
 
 CREATE TABLE pool (
@@ -26,7 +26,7 @@ CREATE TABLE cleaning (
   pump_basket BOOL NOT NULL,
   pump_filter BOOL NOT NULL,
   vacuum BOOL NOT NULL,
-  cleaned VARCHAR NOT NULL
+  cleaned BIGINT NOT NULL
 );
 
 CREATE TABLE measurement (
@@ -42,7 +42,7 @@ CREATE TABLE measurement (
   total_bromine INT NOT NULL,
   salt INT NOT NULL,
   temperature INT NOT NUll,
-  measured VARCHAR NOT NULL
+  measured BIGINT NOT NULL
 );
 
 CREATE TABLE chemical (
@@ -51,5 +51,5 @@ CREATE TABLE chemical (
   typeof VARCHAR NOT NULL,
   amount NUMERIC(5, 2),
   unit VARCHAR NOT NULL,
-  added VARCHAR NOT NULL
+  added BIGINT NOT NULL
 );
