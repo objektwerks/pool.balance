@@ -126,25 +126,13 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def add(pool: Pool): Unit =
+  def save(pool: Pool): Unit =
     fetcher.fetchAsync(
       SavePool(observableAccount.get.license, pool),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.add pool", pool, fault)
         case PoolSaved(id) =>
           observablePools += pool.copy(id = id)
-          observablePools.sort()
-          selectedPoolId.set(pool.id)
-        case _ => ()
-    )
-
-  def update(pool: Pool): Unit =
-    fetcher.fetchAsync(
-      SavePool(observableAccount.get.license, pool),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFault("Model.update pool", pool, fault)
-        case PoolSaved(id) =>
-          observablePools.update(observablePools.indexOf(pool), pool)
           observablePools.sort()
           selectedPoolId.set(pool.id)
         case _ => ()
