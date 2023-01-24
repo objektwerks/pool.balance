@@ -5,11 +5,11 @@ import com.typesafe.config.Config
 import com.typesafe.scalalogging.LazyLogging
 import com.zaxxer.hikari.HikariDataSource
 
+import java.time.LocalDate
 import javax.sql.DataSource
 
 import scalikejdbc.*
 import scala.concurrent.duration.FiniteDuration
-import com.typesafe.scalalogging.LazyLogging
 
 object Store:
   def cache(minSize: Int,
@@ -49,8 +49,8 @@ final class Store(config: Config,
             rs.string("license"),
             rs.string("email_address"),
             rs.string("pin"),
-            rs.string("activated"),
-            rs.string("deactivated")
+            rs.long("activated"),
+            rs.long("deactivated")
           )
         )
         .single()
@@ -90,8 +90,8 @@ final class Store(config: Config,
             rs.string("license"),
             rs.string("email_address"),
             rs.string("pin"),
-            rs.string("activated"),
-            rs.string("deactivated")
+            rs.long("activated"),
+            rs.long("deactivated")
           )
         )
         .list()
@@ -113,7 +113,7 @@ final class Store(config: Config,
 
   def deactivateAccount(license: String): Option[Account] =
     DB localTx { implicit session =>
-      val deactivated = sql"update account set deactivated = ${Entity.localDate}, activated = '' where license = $license"
+      val deactivated = sql"update account set deactivated = ${LocalDate.now.toEpochDay}, activated = '' where license = $license"
       .update()
       if deactivated > 0 then
         sql"select * from account where license = $license"
@@ -123,8 +123,8 @@ final class Store(config: Config,
               rs.string("license"),
               rs.string("email_address"),
               rs.string("pin"),
-              rs.string("activated"),
-              rs.string("deactivated")
+              rs.long("activated"),
+              rs.long("deactivated")
             )
           )
           .single()
@@ -133,7 +133,7 @@ final class Store(config: Config,
 
   def reactivateAccount(license: String): Option[Account] =
     DB localTx { implicit session =>
-      val activated = sql"update account set activated = ${Entity.localDate}, deactivated = '' where license = $license"
+      val activated = sql"update account set activated = ${LocalDate.now.toEpochDay}, deactivated = '' where license = $license"
       .update()
       if activated > 0 then
         sql"select * from account where license = $license"
@@ -143,8 +143,8 @@ final class Store(config: Config,
               rs.string("license"),
               rs.string("email_address"),
               rs.string("pin"),
-              rs.string("activated"),
-              rs.string("deactivated")
+              rs.long("activated"),
+              rs.long("deactivated")
             )
           )
           .single()
@@ -192,7 +192,7 @@ final class Store(config: Config,
           rs.boolean("pump_basket"),
           rs.boolean("pump_filter"),
           rs.boolean("vacuum"),
-          rs.string("cleaned")
+          rs.long("cleaned")
         )
       )
       .list()
@@ -233,7 +233,7 @@ final class Store(config: Config,
           rs.int("total_bromine"),
           rs.int("salt"),
           rs.int("temperature"),
-          rs.string("measured")
+          rs.long("measured")
         )
       )
       .list()
@@ -272,7 +272,7 @@ final class Store(config: Config,
           rs.string("typeof"),
           rs.double("amount"),
           rs.string("unit"),
-          rs.string("added")
+          rs.long("added")
         )
       )
       .list()
