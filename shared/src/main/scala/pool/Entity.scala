@@ -36,12 +36,12 @@ sealed trait Entity:
   val id: Long
 
 object Entity:
-  def applyLocalDateChanges(sourceLocalDate: LocalDate, targetLocalDate: LocalDate): String =
-    targetLocalDate
+  def applyLocalDateChanges(sourceLocalDate: LocalDate, targetLocalDateAsLong: Long): Long =
+    LocalDate.ofEpochDay(targetLocalDateAsLong)
       .withYear(sourceLocalDate.getYear)
       .withMonth(sourceLocalDate.getMonthValue)
       .withDayOfMonth(sourceLocalDate.getDayOfMonth)
-      .toString
+      .toEpochDay
 
   given poolOrdering: Ordering[Pool] = Ordering.by[Pool, String](p => p.name).reverse
   given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => c.cleaned).reverse

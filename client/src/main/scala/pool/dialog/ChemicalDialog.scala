@@ -1,5 +1,7 @@
 package pool.dialog
 
+import java.time.LocalDate
+
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.{Region, VBox}
@@ -31,7 +33,7 @@ final class ChemicalDialog(context: Context, chemical: Chemical) extends Dialog[
 
   val addedDatePicker = new DatePicker:
     prefWidth = 200
-    value = Entity.toLocalDate(chemical.added)
+    value = LocalDate.ofEpochDay(chemical.added)
 
   val controls = List[(String, Region)](
     context.labelTypeof -> typeofComboBox,
