@@ -110,7 +110,7 @@ final case class Cleaning(id: Long = 0,
   val pumpBasketProperty = ObjectProperty[Boolean](this, "pumpBasket", pumpBasket)
   val pumpFilterProperty = ObjectProperty[Boolean](this, "pumpFilter", pumpFilter)
   val vacuumProperty = ObjectProperty[Boolean](this, "vacuum", vacuum)
-  val cleanedProperty = ObjectProperty[Long](this, "cleaned", cleaned)
+  val cleanedProperty = ObjectProperty[String](this, "cleaned", LocalDate.ofEpochDay(cleaned).toString)
   val cleaning = this
 
 object Measurement:
@@ -148,7 +148,7 @@ final case class Measurement(id: Long = 0,
   val totalBromineProperty = ObjectProperty[Int](this, "totalBromine", totalBromine)
   val saltProperty = ObjectProperty[Int](this, "salt", salt)
   val temperatureProperty = ObjectProperty[Int](this, "temperature", temperature)
-  val measuredProperty = ObjectProperty[Long](this, "measured", measured)
+  val measuredProperty = ObjectProperty[String](this, "measured", LocalDate.ofEpochDay(measured).toString)
   val measurement = this
 
 final case class Chemical(id: Long = 0,
@@ -160,5 +160,5 @@ final case class Chemical(id: Long = 0,
   val typeofProperty = ObjectProperty[String](this, "typeof", typeof)
   val amountProperty = ObjectProperty[Double](this, "amount", amount)
   val unitProperty = ObjectProperty[String](this, "unit", unit.toString)
-  val addedProperty = ObjectProperty[Long](this, "added", added)
+  val addedProperty = ObjectProperty[String](this, "added", LocalDate.ofEpochDay(added).toString)
   val chemical = this
