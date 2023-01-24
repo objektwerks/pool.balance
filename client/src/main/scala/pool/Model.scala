@@ -131,7 +131,10 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       SavePool(observableAccount.get.license, pool),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.add pool", pool, fault)
-        case PoolSaved(id) => observablePools += pool.copy(id = id)
+        case PoolSaved(id) =>
+          observablePools += pool.copy(id = id)
+          observablePools.sort()
+          selectedPoolId.set(pool.id)
         case _ => ()
     )
 
@@ -140,7 +143,10 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       SavePool(observableAccount.get.license, pool),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.update pool", pool, fault)
-        case PoolSaved(id) => observablePools.update(observablePools.indexOf(pool), pool)
+        case PoolSaved(id) =>
+          observablePools.update(observablePools.indexOf(pool), pool)
+          observablePools.sort()
+          selectedPoolId.set(pool.id)
         case _ => ()
     )
 
