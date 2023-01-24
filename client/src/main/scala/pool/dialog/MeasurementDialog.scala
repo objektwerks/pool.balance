@@ -1,5 +1,7 @@
 package pool.dialog
 
+import java.time.LocalDate
+
 import scalafx.Includes.*
 import scalafx.scene.layout.Region
 import scalafx.scene.control.{ButtonType, DatePicker, Dialog, TextField}
@@ -25,7 +27,7 @@ final class MeasurementDialog(context: Context, measurement: Measurement) extend
   val saltSlider = saltTextSlider(measurement)
   val temperatureSlider = temperatureTextSlider(measurement)
   val measuredDatePicker = new DatePicker:
-    value = Entity.toLocalDate(measurement.measured)
+    value = LocalDate.ofEpochDay(measurement.measured)
 
   val controls = List[(String, Region)](
     context.labelTotalChlorine -> totalChlorineSlider,
