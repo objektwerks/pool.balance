@@ -69,15 +69,15 @@ object Validator:
       account.license.isLicense &&
       account.emailAddress.isEmailAddress &&
       account.pin.isPin &&
-      account.activated.nonEmpty &&
-      account.deactivated.isEmpty
+      account.activated > 0 &&
+      account.deactivated == 0
     def isDeactivated: Boolean =
       account.id > 0 &&
       account.license.isLicense &&
       account.emailAddress.isEmailAddress &&
       account.pin.isPin &&
-      account.activated.isEmpty &&
-      account.deactivated.nonEmpty
+      account.activated == 0 &&
+      account.deactivated > 0
 
   extension (pool: Pool)
     def isValid =
@@ -90,7 +90,7 @@ object Validator:
     def isValid: Boolean =
       cleaning.id >= 0 &&
       cleaning.poolId > 0 &&
-      cleaning.cleaned.nonEmpty
+      cleaning.cleaned > 0
 
   extension (measurement: Measurement)
     def isValid: Boolean =
@@ -108,7 +108,7 @@ object Validator:
       totalBromineRange.contains(measurement.totalBromine) &&
       saltRange.contains(measurement.salt) &&
       temperatureRange.contains(measurement.temperature) &&
-      measurement.measured.nonEmpty
+      measurement.measured > 0
 
   extension (chemical: Chemical)
     def isValid: Boolean =
@@ -117,4 +117,4 @@ object Validator:
       chemical.typeof.nonEmpty &&
       chemical.amount > 0.00 &&
       chemical.unit.nonEmpty
-      chemical.added.nonEmpty
+      chemical.added > 0
