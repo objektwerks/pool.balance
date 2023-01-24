@@ -204,7 +204,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.save chemical", chemical, fault)
         case ChemicalSaved(id) =>
-          observableChemicals += chemical.copy(id = id)
+          if chemical.id == 0 then observableChemicals += chemical.copy(id = id)
+          else observableChemicals.update(observableChemicals.indexOf(chemical), chemical)
           observableChemicals.sort()
           selectedChemicalId.set(chemical.id)
         case _ => ()
