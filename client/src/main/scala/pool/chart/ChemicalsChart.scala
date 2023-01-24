@@ -1,5 +1,6 @@
 package pool.chart
 
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 import scalafx.Includes._
@@ -14,8 +15,8 @@ import pool.TypeOfChemical.*
 final class ChemicalsChart(context: Context, model: Model) extends TabPane:
   val chemicals = model.observableChemicals.reverse
   val dateFormat = DateTimeFormatter.ofPattern("M.dd")
-  val minDate = chemicals.map(c => c.added).min.format(dateFormat)
-  val maxDate = chemicals.map(c => c.added).max.format(dateFormat)
+  val minDate = LocalDate.ofEpochDay( chemicals.map(c => c.added).min ).format(dateFormat)
+  val maxDate = LocalDate.ofEpochDay( chemicals.map(c => c.added).max ).format(dateFormat)
 
   val liquidChlorineTab = new Tab:
     closable = false
@@ -83,7 +84,7 @@ final class ChemicalsChart(context: Context, model: Model) extends TabPane:
                                                  yTickUnit = yTickUnit,
                                                  yValues = filtered.map(c => c.amount))
     filtered foreach { c =>
-      series.data() += XYChart.Data[String, Number](c.added.format(dateFormat), c.amount)
+      series.data() += XYChart.Data[String, Number]( LocalDate.ofEpochDay(c.added).format(dateFormat), c.amount)
     }
     chart.data = series
     LineChartBuilder.addTooltip(chart)
