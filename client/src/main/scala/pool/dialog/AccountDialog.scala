@@ -1,5 +1,7 @@
 package pool.dialog
 
+import java.time.LocalDate
+
 import scalafx.Includes.*
 import scalafx.scene.control.{ButtonType, Dialog, Label}
 import scalafx.scene.control.ButtonBar.ButtonData
@@ -20,8 +22,8 @@ final class AccountDialog(context: Context, account: Account) extends Dialog[Dea
     context.labelLicense -> Label( account.license ),
     context.labelEmailAddress -> Label( account.emailAddress ),
     context.labelPin -> Label( account.pin ),
-    context.labelActivated -> Label( account.activated ),
-    context.labelDeactivated -> Label( account.deactivated )
+    context.labelActivated -> Label( LocalDate.ofEpochDay(account.activated).toString ),
+    context.labelDeactivated -> Label( LocalDate.ofEpochDay(account.deactivated).toString )
   )
 
   dialogPane().content = ControlGridPane(controls)
