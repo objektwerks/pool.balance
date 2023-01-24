@@ -1,5 +1,7 @@
 package pool
 
+import java.time.LocalDate
+
 import scalafx.beans.property.ObjectProperty
 
 sealed trait Event
@@ -22,6 +24,6 @@ final case class MeasurementSaved(id: Long) extends Event
 final case class ChemicalsListed(chemicals: List[Chemical]) extends Event
 final case class ChemicalSaved(id: Long) extends Event
 
-final case class Fault(cause: String, occurred: String = Entity.localDate) extends Event:
+final case class Fault(cause: String, occurred: Long = LocalDate.now.toEpochDay) extends Event:
   val causeProperty = ObjectProperty[String](this, "cause", cause)
-  val occurredProperty = ObjectProperty[String](this, "occurred", occurred)
+  val occurredProperty = ObjectProperty[Long](this, "occurred", occurred)
