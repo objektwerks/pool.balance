@@ -130,7 +130,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       SavePool(observableAccount.get.license, pool),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFault("Model.add pool", pool, fault)
+        case fault @ Fault(_, _) => onFault("Model.save pool", pool, fault)
         case PoolSaved(id) =>
           observablePools += pool.copy(id = id)
           observablePools.sort()
@@ -149,25 +149,13 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def add(cleaning: Cleaning): Unit =
+  def save(cleaning: Cleaning): Unit =
     fetcher.fetchAsync(
       SaveCleaning(observableAccount.get.license, cleaning),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFault("Model.add cleaning", cleaning, fault)
+        case fault @ Fault(_, _) => onFault("Model.save cleaning", cleaning, fault)
         case CleaningSaved(id) =>
           observableCleanings += cleaning.copy(id = id)
-          observableCleanings.sort()
-          selectedCleaningId.set(cleaning.id)
-        case _ => ()
-    )
-
-  def update(cleaning: Cleaning): Unit =
-    fetcher.fetchAsync(
-      SaveCleaning(observableAccount.get.license, cleaning),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFault("Model.update cleaning", cleaning, fault)
-        case CleaningSaved(id) =>
-          observableCleanings.update(observableCleanings.indexOf(cleaning), cleaning)
           observableCleanings.sort()
           selectedCleaningId.set(cleaning.id)
         case _ => ()
