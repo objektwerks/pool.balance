@@ -1,5 +1,7 @@
 package pool.dialog
 
+import java.time.LocalDate
+
 import scalafx.Includes.*
 import scalafx.scene.control.{ButtonType, Dialog, TableColumn, TableView}
 import scalafx.scene.layout.VBox
