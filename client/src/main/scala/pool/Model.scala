@@ -132,7 +132,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.save pool", pool, fault)
         case PoolSaved(id) =>
-          observablePools += pool.copy(id = id)
+          if pool.id == 0 then observablePools += pool.copy(id = id)
+          else observablePools.update(observablePools.indexOf(pool), pool)
           observablePools.sort()
           selectedPoolId.set(pool.id)
         case _ => ()
