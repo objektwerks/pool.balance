@@ -1,6 +1,6 @@
 Pool Balance
 ------------
->Pool cleaning, measurement and chemical balancing app using Scala3, ScalaFX and PostgreSql.
+>Pool cleaning, measurement and chemical balancing distributed app using Scala3, ScalaFX and PostgreSql.
 
 TODO
 ----
