@@ -64,18 +64,18 @@ Measurements
 ------------
 >Measured in ppm ( parts per million ).
 
-| Measurement                       | Range       | Good        | Ideal |
-| --------------------------------- | ----------- | ----------- | ----- |
-| total chlorine (tc = fc + cc)     | 0 - 10      | 1 - 5       | 3     |
-| free chlorine (fc)                | 0 - 10      | 1 - 5       | 3     |
-| combinded chlorine (cc = tc - fc) | 0.0 - 0.5   | 0.0 - 0.2   | 0.0   |
-| ph                                | 6.2 - 8.4   | 7.2 - 7.6   | 7.4   |
-| calcium hardness                  | 0 - 1000    | 250 - 500   | 375   |
-| total alkalinity                  | 0 - 240     | 80 - 120    | 100   |
-| cyanuric acid                     | 0 - 300     | 30 - 100    | 50    |
-| total bromine                     | 0 - 20      | 2 - 10      | 5     |
-| salt                              | 0 - 3600    | 2700 - 3400 | 3200  |
-| temperature                       | 50 - 100    | 75 - 85     | 82    |
+| Measurement                       | Range     | Good        | Ideal |
+|-----------------------------------|-----------|-------------|-------|
+| total chlorine (tc = fc + cc)     | 0 - 10    | 1 - 5       | 3     |
+| free chlorine (fc)                | 0 - 10    | 1 - 5       | 3     |
+| combinded chlorine (cc = tc - fc) | 0.0 - 0.5 | 0.0 - 0.2   | 0.0   |
+| ph                                | 6.2 - 8.4 | 7.2 - 7.6   | 7.4   |
+| calcium hardness                  | 0 - 1000  | 250 - 500   | 375   |
+| total alkalinity                  | 0 - 240   | 80 - 120    | 100   |
+| cyanuric acid                     | 0 - 300   | 30 - 100    | 50    |
+| total bromine                     | 0 - 20    | 2 - 10      | 5     |
+| salt                              | 0 - 3600  | 2700 - 3400 | 3200  |
+| temperature                       | 50 - 100  | 75 - 85     | 82    |
 
 Chemicals
 ---------
@@ -179,7 +179,7 @@ Resources
 
 License
 -------
->Copyright (c) [2022, 2023] [Objektwerks]
+>Copyright (c) [2022, 2023], Objektwerks
 
 >Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
