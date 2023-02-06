@@ -12,6 +12,7 @@ CREATE TABLE account (
 
 CREATE TABLE pool (
   id BIGSERIAL PRIMARY KEY,
+  license VARCHAR(36) REFERENCES account(license),
   name VARCHAR(24) NOT NULL,
   volume INT NOT NULL,
   unit VARCHAR NOT NULL
