@@ -14,7 +14,7 @@ final class Dispatcher(store: Store,
         case Login(emailAddress, pin)        => login(emailAddress, pin)
         case Deactivate(license)             => deactivateAccount(license)
         case Reactivate(license)             => reactivateAccount(license)
-        case ListPools(_)                    => listPools
+        case ListPools(license)              => listPools(license)
         case SavePool(_, pool)               => savePool(pool)
         case ListCleanings(_, poolId)        => listCleanings(poolId)
         case SaveCleaning(_, cleaning)       => saveCleaning(cleaning)
@@ -63,7 +63,7 @@ final class Dispatcher(store: Store,
     if optionalAccount.isDefined then Reactivated(optionalAccount.get)
     else Fault(s"Failed to reactivate account due to invalid license: $license")
 
-  private def listPools: PoolsListed = PoolsListed(store.listPools())
+  private def listPools(license: String): PoolsListed = PoolsListed(store.listPools(license))
 
   private def savePool(pool: Pool): PoolSaved =
     PoolSaved(
