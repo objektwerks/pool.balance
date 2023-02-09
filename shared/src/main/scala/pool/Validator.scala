@@ -40,25 +40,25 @@ object Validator:
     def isValid: Boolean = true
 
   extension (savePool: SavePool)
-    def isValid: Boolean = savePool.pool.isValid
+    def isValid: Boolean = savePool.license.isLicense && savePool.pool.isValid
 
   extension (listCleanings: ListCleanings)
-    def isValid: Boolean = true
+    def isValid: Boolean = listCleanings.license.isLicense
 
   extension (saveCleaning: SaveCleaning)
-    def isValid: Boolean = saveCleaning.cleaning.isValid
+    def isValid: Boolean = saveCleaning.license.isLicense && saveCleaning.cleaning.isValid
 
   extension (listMeasurements: ListMeasurements)
-    def isValid: Boolean = true
+    def isValid: Boolean = listMeasurements.license.isLicense
 
   extension (saveMeasurement: SaveMeasurement)
-    def isValid: Boolean = saveMeasurement.measurement.isValid
+    def isValid: Boolean = saveMeasurement.license.isLicense && saveMeasurement.measurement.isValid
 
   extension (listChemicals: ListChemicals)
-    def isValid: Boolean = true
+    def isValid: Boolean = listChemicals.license.isLicense
 
   extension (saveChemical: SaveChemical)
-    def isValid: Boolean = saveChemical.chemical.isValid
+    def isValid: Boolean = saveChemical.license.isLicense && saveChemical.chemical.isValid
 
   extension  (license: License)
     def isLicense: Boolean = license.license.isLicense
@@ -82,6 +82,7 @@ object Validator:
   extension (pool: Pool)
     def isValid =
       pool.id >= 0 &&
+      pool.license.isLicense &&
       pool.name.nonEmpty &&
       pool.volume > 1000 &&
       pool.unit.nonEmpty
