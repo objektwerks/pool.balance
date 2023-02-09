@@ -93,7 +93,7 @@ final class PoolsPane(context: Context, model: Model) extends VBox:
   }
 
   def add(): Unit =
-    PoolDialog(context, Pool()).showAndWait() match
+    PoolDialog(context, Pool(license = model.observableAccount.get.license)).showAndWait() match
       case Some(pool: Pool) =>
         model.save(pool)
         tableView.selectionModel().select(pool)
