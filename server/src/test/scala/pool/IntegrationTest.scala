@@ -77,7 +77,7 @@ class IntegrationTest extends AnyFunSuite with Matchers:
       case fault => fail(s"Invalid reactivated event: $fault")
 
   def addPool: Unit =
-    testPool = Pool(id = 0, name = "a", volume = 8000, unit = UnitOfMeasure.gl.toString)
+    testPool = Pool(id = 0, license = testAccount.license, name = "a", volume = 8000, unit = UnitOfMeasure.gl.toString)
     val savePool = SavePool(testAccount.license, testPool)
     dispatcher.dispatch(savePool) match
       case PoolSaved(id) =>
