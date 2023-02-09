@@ -37,7 +37,7 @@ object Validator:
     def isValid: Boolean = reactivate.license.isLicense
 
   extension (listPools: ListPools)
-    def isValid: Boolean = true
+    def isValid: Boolean = listPools.license.isLicense
 
   extension (savePool: SavePool)
     def isValid: Boolean = savePool.license.isLicense && savePool.pool.isValid
