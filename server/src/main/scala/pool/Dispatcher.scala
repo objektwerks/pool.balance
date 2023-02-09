@@ -9,7 +9,7 @@ final class Dispatcher(store: Store,
                        emailer: Emailer):
   def dispatch[E <: Event](command: Command): Event =
     Try {
-      if command.isValid && authorize(command) then command match
+      if command.isValid && isAuthorized(command) then command match
         case Register(emailAddress)          => register(emailAddress)
         case Login(emailAddress, pin)        => login(emailAddress, pin)
         case Deactivate(license)             => deactivateAccount(license)
@@ -29,7 +29,7 @@ final class Dispatcher(store: Store,
 
   private val subject = "Account Registration"
 
-  private def authorize(command: Command): Boolean =
+  private def isAuthorized(command: Command): Boolean =
     command match
       case license: License          => store.isAuthorized(license.license)
       case Register(_) | Login(_, _) => true
