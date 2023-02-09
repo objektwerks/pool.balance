@@ -128,7 +128,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def save(pool: Pool): Unit =
     fetcher.fetchAsync(
-      SavePool(observableAccount.get.license, pool),
+      SavePool(observableAccount.get.license, pool.copy(license = observableAccount.get.license)),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.save pool", pool, fault)
         case PoolSaved(id) =>
