@@ -4,6 +4,7 @@ import scala.util.Try
 
 import Serializer.given
 import Validator.*
+import scala.util.control.NonFatal
 
 final class Dispatcher(store: Store,
                        emailer: Emailer):
@@ -34,14 +35,17 @@ final class Dispatcher(store: Store,
       case license: License          => store.isAuthorized(license.license)
       case Register(_) | Login(_, _) => true
 
-  private def register(emailAddress: String): Registered | Fault =
-    val account = Account(emailAddress = emailAddress)
-    val sent = email(account.emailAddress, account.pin)
-    val unique = store.isEmailAddressUnique(emailAddress)
-    if sent && unique then Registered( store.register(account) )
-    else Fault(s"Registration failed for: $emailAddress")
+  private def register(emailAddress: String): Event =
+    Try {
+      val account = Account(emailAddress = emailAddress)
+      if store.isEmailAddressUnique(emailAddress) then
+        email(account.emailAddress, account.pin)
+        Registered( store.register(account) )
+      else Fault(s"Registration failed for: $emailAddress")
+    }.recover { case NonFatal(error) => Fault(s"Registration failed for: $emailAddress, because: ${error.getMessage}") }
+     .get
 
-  private def email(emailAddress: String, pin: String): Boolean =
+  private def email(emailAddress: String, pin: String): Unit =
     val recipients = List(emailAddress)
     val message = s"<p>Save this pin: <b>${pin}</b> in a safe place; then delete this email.</p>"
     emailer.send(recipients, subject, message)
