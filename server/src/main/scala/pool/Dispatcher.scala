@@ -1,10 +1,10 @@
 package pool
 
 import scala.util.Try
+import scala.util.control.NonFatal
 
 import Serializer.given
 import Validator.*
-import scala.util.control.NonFatal
 
 final class Dispatcher(store: Store,
                        emailer: Emailer):
