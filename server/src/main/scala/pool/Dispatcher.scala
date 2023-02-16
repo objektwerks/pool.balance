@@ -24,7 +24,7 @@ final class Dispatcher(store: Store,
         case SaveChemical(_, chemical)       => saveChemical(chemical)
       else Fault(s"Failed to process invalid command: $command")
     }.recover {
-      case error: Throwable => Fault(s"Failed to process command: $command, due to this error: ${error.getMessage}")
+      case error: Throwable => Fault(s"Failed to process command: $command, because: ${error.getMessage}")
     }.get
 
   private val subject = "Account Registration"
