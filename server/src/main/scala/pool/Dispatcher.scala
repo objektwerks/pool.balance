@@ -1,5 +1,7 @@
 package pool
 
+import com.typesafe.scalalogging.LazyLogging
+
 import scala.util.Try
 import scala.util.control.NonFatal
 
@@ -7,7 +9,7 @@ import Serializer.given
 import Validator.*
 
 final class Dispatcher(store: Store,
-                       emailer: Emailer):
+                       emailer: Emailer) extends LazyLogging:
   def dispatch[E <: Event](command: Command): Event =
     Try {
       if command.isValid && isAuthorized(command) then command match
@@ -25,7 +27,10 @@ final class Dispatcher(store: Store,
         case SaveChemical(_, chemical)       => saveChemical(chemical)
       else Fault(s"Failed to process invalid command: $command")
     }.recover {
-      case error: Throwable => Fault(s"Failed to process command: $command, because: ${error.getMessage}")
+      case NonFatal(error) =>
+        val message = s"Failed to process command: $command, because: ${error.getMessage}"
+        logger.error(message)
+        Fault(message)
     }.get
 
   private val subject = "Account Registration"
