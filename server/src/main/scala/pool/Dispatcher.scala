@@ -55,22 +55,22 @@ final class Dispatcher(store: Store,
     val message = s"<p>Save this pin: <b>${pin}</b> in a safe place; then delete this email.</p>"
     emailer.send(recipients, subject, message)
 
-  private def login(emailAddress: String, pin: String): LoggedIn | Fault =
+  private def login(emailAddress: String, pin: String): Event =
     val optionalAccount = store.login(emailAddress, pin)
     if optionalAccount.isDefined then LoggedIn(optionalAccount.get)
     else Fault(s"Failed to login due to invalid email address: $emailAddress and/or pin: $pin")
 
-  private def deactivateAccount(license: String): Deactivated | Fault =
+  private def deactivateAccount(license: String): Event =
     val optionalAccount = store.deactivateAccount(license)
     if optionalAccount.isDefined then Deactivated(optionalAccount.get)
     else Fault(s"Failed to deactivated account due to invalid license: $license")
 
-  private def reactivateAccount(license: String): Reactivated | Fault =
+  private def reactivateAccount(license: String): Event =
     val optionalAccount = store.reactivateAccount(license)
     if optionalAccount.isDefined then Reactivated(optionalAccount.get)
     else Fault(s"Failed to reactivate account due to invalid license: $license")
 
-  private def listPools(license: String): PoolsListed = PoolsListed(store.listPools(license))
+  private def listPools(license: String): Event = PoolsListed(store.listPools(license))
 
   private def savePool(pool: Pool): PoolSaved =
     PoolSaved(
@@ -78,7 +78,7 @@ final class Dispatcher(store: Store,
       else store.updatePool(pool)
     )
 
-  private def listCleanings(poolId: Long): CleaningsListed = CleaningsListed( store.listCleanings(poolId) )
+  private def listCleanings(poolId: Long): Event = CleaningsListed( store.listCleanings(poolId) )
 
   private def saveCleaning(cleaning: Cleaning): CleaningSaved =
     CleaningSaved(
@@ -86,17 +86,17 @@ final class Dispatcher(store: Store,
       else store.updateCleaning(cleaning)
     )
 
-  private def listMeasurements(poolId: Long): MeasurementsListed = MeasurementsListed( store.listMeasurements(poolId) )
+  private def listMeasurements(poolId: Long): Event = MeasurementsListed( store.listMeasurements(poolId) )
 
-  private def saveMeasurement(measurement: Measurement): MeasurementSaved =
+  private def saveMeasurement(measurement: Measurement): Event =
     MeasurementSaved(
       if measurement.id == 0 then store.addMeasurement(measurement)
       else store.updateMeasurement(measurement)
     )
 
-  private def listChemicals(poolId: Long): ChemicalsListed = ChemicalsListed( store.listChemicals(poolId) )
+  private def listChemicals(poolId: Long): Event = ChemicalsListed( store.listChemicals(poolId) )
 
-  private def saveChemical(chemical: Chemical): ChemicalSaved =
+  private def saveChemical(chemical: Chemical): Event =
     ChemicalSaved(
       if chemical.id == 0 then store.addChemical(chemical)
       else store.updateChemical(chemical)
