@@ -79,13 +79,20 @@ final class Dispatcher(store: Store,
         else Fault(s"Reactivate account failed for license: $license")
     )
 
-  private def listPools(license: String): Event = PoolsListed(store.listPools(license))
+  private def listPools(license: String): Event =
+    Try {
+      PoolsListed(store.listPools(license))
+    }.recover { case NonFatal(error) => Fault("List pools failed:", error) }
+     .get
 
-  private def savePool(pool: Pool): PoolSaved =
-    PoolSaved(
-      if pool.id == 0 then store.addPool(pool)
-      else store.updatePool(pool)
-    )
+  private def savePool(pool: Pool): Event =
+    Try {
+      PoolSaved(
+        if pool.id == 0 then store.addPool(pool)
+        else store.updatePool(pool)
+      )
+    }.recover { case NonFatal(error) => Fault("List pools failed:", error) }
+     .get
 
   private def listCleanings(poolId: Long): Event = CleaningsListed( store.listCleanings(poolId) )
 
