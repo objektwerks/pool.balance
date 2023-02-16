@@ -18,7 +18,7 @@ object Server extends LazyLogging:
   private val config = ConfigFactory.load("server.conf")
   private val host = config.getString("host")
   private val port = config.getInt("port")
-  private val backlog = config.getInt("backlog")
+  private val backlog = 0
 
   private val store = Store(config, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
   private val emailer = Emailer(config)
@@ -50,13 +50,12 @@ object Server extends LazyLogging:
     http.createContext("/command", handler)
 
     http.start()
-    logger.info(s"*** Http Server started at: $host:$port")
     println(s"*** Press Control-C to shutdown server at: $host:$port")
+    logger.info(s"*** Http Server started at: $host:$port")
+
+    sys.addShutdownHook {
+      http.stop(10)
+      logger.info(s"*** Http Server shutdown at: $host:$port")
+    }
 
     Thread.currentThread().join()
-
-  sys.addShutdownHook {
-    http.stop(10)
-    logger.info(s"*** Http Server shutdown at: $host:$port")
-    println(s"*** Server shutdown at: $host:$port")
-  }
