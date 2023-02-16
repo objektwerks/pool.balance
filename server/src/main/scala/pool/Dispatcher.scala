@@ -56,17 +56,17 @@ final class Dispatcher(store: Store,
     emailer.send(recipients, subject, message)
 
   private def login(emailAddress: String, pin: String): Event =
-    val optionalAccount = store.login(emailAddress, pin)
+    val optionalAccount = Try { store.login(emailAddress, pin) }.getOrElse(None)
     if optionalAccount.isDefined then LoggedIn(optionalAccount.get)
     else Fault(s"Failed to login due to invalid email address: $emailAddress and/or pin: $pin")
 
   private def deactivateAccount(license: String): Event =
-    val optionalAccount = store.deactivateAccount(license)
+    val optionalAccount = Try { store.deactivateAccount(license) }.getOrElse(None)
     if optionalAccount.isDefined then Deactivated(optionalAccount.get)
     else Fault(s"Failed to deactivated account due to invalid license: $license")
 
   private def reactivateAccount(license: String): Event =
-    val optionalAccount = store.reactivateAccount(license)
+    val optionalAccount = Try { store.reactivateAccount(license) }.getOrElse(None)
     if optionalAccount.isDefined then Reactivated(optionalAccount.get)
     else Fault(s"Failed to reactivate account due to invalid license: $license")
 
