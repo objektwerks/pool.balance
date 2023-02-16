@@ -91,16 +91,24 @@ final class Dispatcher(store: Store,
         if pool.id == 0 then store.addPool(pool)
         else store.updatePool(pool)
       )
-    }.recover { case NonFatal(error) => Fault("List pools failed:", error) }
+    }.recover { case NonFatal(error) => Fault("Save pool failed:", error) }
      .get
 
-  private def listCleanings(poolId: Long): Event = CleaningsListed( store.listCleanings(poolId) )
+  private def listCleanings(poolId: Long): Event =
+    Try {
+      CleaningsListed( store.listCleanings(poolId) )
+    }.recover { case NonFatal(error) => Fault("List cleanings failed:", error) }
+     .get
 
-  private def saveCleaning(cleaning: Cleaning): CleaningSaved =
-    CleaningSaved(
-      if cleaning.id == 0 then store.addCleaning(cleaning)
-      else store.updateCleaning(cleaning)
-    )
+  private def saveCleaning(cleaning: Cleaning): Event =
+    Try {
+      CleaningSaved(
+        if cleaning.id == 0 then store.addCleaning(cleaning)
+        else store.updateCleaning(cleaning)
+      )
+    }.recover { case NonFatal(error) => Fault("Save pool failed:", error) }
+     .get
+
 
   private def listMeasurements(poolId: Long): Event = MeasurementsListed( store.listMeasurements(poolId) )
 
