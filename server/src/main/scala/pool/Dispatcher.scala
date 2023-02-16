@@ -46,7 +46,7 @@ final class Dispatcher(store: Store,
       if store.isEmailAddressUnique(emailAddress) then
         email(account.emailAddress, account.pin)
         Registered( store.register(account) )
-      else Fault(s"Registration failed for: $emailAddress")
+      else Fault(s"Registration failed because: $emailAddress is already registered.")
     }.recover { case NonFatal(error) => Fault(s"Registration failed for: $emailAddress, because: ${error.getMessage}") }
      .get
 
