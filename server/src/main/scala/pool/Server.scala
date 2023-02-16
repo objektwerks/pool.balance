@@ -29,7 +29,11 @@ object Server extends LazyLogging:
     override def handle(exchange: HttpExchange): Unit =
       val json = Source.fromInputStream( exchange.getRequestBody )(Codec.UTF8).mkString("")
       val command = readFromString[Command](json)
+
       val event = dispatcher.dispatch(command)
+      event match
+        case Fault(cause, _) => logger.error(cause)
+        case _ =>
       val response = writeToString[Event](event)
 
       exchange.sendResponseHeaders(200, response.length())
