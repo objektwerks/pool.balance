@@ -1,6 +1,6 @@
 package pool
 
-import java.time.LocalDate
+import java.time.Instant
 
 import scalafx.beans.property.ObjectProperty
 
@@ -27,6 +27,6 @@ final case class ChemicalSaved(id: Long) extends Event
 object Fault:
   def apply(message: String, throwable: Throwable): Fault = Fault(s"$message ${throwable.getMessage}")
 
-final case class Fault(cause: String, occurred: Long = LocalDate.now.toEpochDay) extends Event:
+final case class Fault(cause: String, occurred: String = Instant.now.toString) extends Event:
   val causeProperty = ObjectProperty[String](this, "cause", cause)
-  val occurredProperty = ObjectProperty[String](this, "occurred", LocalDate.ofEpochDay(occurred).toString)
+  val occurredProperty = ObjectProperty[String](this, "occurred", occurred)
