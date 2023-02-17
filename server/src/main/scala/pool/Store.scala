@@ -295,3 +295,21 @@ final class Store(config: Config,
       .update()
     chemical.id
   }
+
+  def listFaults(): List[Fault] = DB readOnly { implicit session =>
+    sql"select * from fault order by occurred desc"
+      .map(rs =>
+        Fault(
+          rs.string("cause"),
+          rs.string("occurred")
+        )
+      )
+      .list()
+  }
+
+  def addFault(fault: Fault): Long = DB localTx { implicit session =>
+    sql"""
+      insert into fault(cause, occurred) values(${fault.cause}, ${fault.occurred})
+      """
+      .updateAndReturnGeneratedKey()
+  }
