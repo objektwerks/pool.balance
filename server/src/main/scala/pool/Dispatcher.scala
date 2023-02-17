@@ -25,7 +25,7 @@ final class Dispatcher(store: Store,
         case SaveMeasurement(_, measurement) => saveMeasurement(measurement)
         case ListChemicals(_, poolId)        => listChemicals(poolId)
         case SaveChemical(_, chemical)       => saveChemical(chemical)
-      else Fault(s"Failed to process invalid or unauthorized command: $command")
+      else Fault(s"Command validation or authorization failed for: $command")
     }.recover {
       case NonFatal(error) => Fault(s"Failed to process command: $command, because: ${error.getMessage}")
     }.get
