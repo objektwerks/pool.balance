@@ -12,23 +12,19 @@ final class Dispatcher(store: Store, emailer: Emailer) extends LazyLogging:
   def dispatch[E <: Event](command: Command): Event =
     if !command.isValid then Fault(s"Command is invalid: $command")
     if !isAuthorized(command) then Fault(s"Command is unauthorized: $command")
-    Try {
-      command match
-        case Register(emailAddress)          => register(emailAddress)
-        case Login(emailAddress, pin)        => login(emailAddress, pin)
-        case Deactivate(license)             => deactivateAccount(license)
-        case Reactivate(license)             => reactivateAccount(license)
-        case ListPools(license)              => listPools(license)
-        case SavePool(_, pool)               => savePool(pool)
-        case ListCleanings(_, poolId)        => listCleanings(poolId)
-        case SaveCleaning(_, cleaning)       => saveCleaning(cleaning)
-        case ListMeasurements(_, poolId)     => listMeasurements(poolId)
-        case SaveMeasurement(_, measurement) => saveMeasurement(measurement)
-        case ListChemicals(_, poolId)        => listChemicals(poolId)
-        case SaveChemical(_, chemical)       => saveChemical(chemical)
-    }.recover {
-      case NonFatal(error) => Fault(s"Failed to process command: $command, because: ${error.getMessage}")
-    }.get
+    command match
+      case Register(emailAddress)          => register(emailAddress)
+      case Login(emailAddress, pin)        => login(emailAddress, pin)
+      case Deactivate(license)             => deactivateAccount(license)
+      case Reactivate(license)             => reactivateAccount(license)
+      case ListPools(license)              => listPools(license)
+      case SavePool(_, pool)               => savePool(pool)
+      case ListCleanings(_, poolId)        => listCleanings(poolId)
+      case SaveCleaning(_, cleaning)       => saveCleaning(cleaning)
+      case ListMeasurements(_, poolId)     => listMeasurements(poolId)
+      case SaveMeasurement(_, measurement) => saveMeasurement(measurement)
+      case ListChemicals(_, poolId)        => listChemicals(poolId)
+      case SaveChemical(_, chemical)       => saveChemical(chemical)
 
   private val subject = "Account Registration"
 
