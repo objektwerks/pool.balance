@@ -32,7 +32,9 @@ object Server extends LazyLogging:
 
       val event = dispatcher.dispatch(command)
       event match
-        case Fault(cause, _) => logger.error(cause)
+        case fault @ Fault(cause, _) =>
+          logger.error(cause)
+          store.addFault(fault)
         case _ =>
       val response = writeToString[Event](event)
 
