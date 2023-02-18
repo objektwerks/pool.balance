@@ -26,8 +26,6 @@ final class Dispatcher(store: Store, emailer: Emailer) extends LazyLogging:
       case ListChemicals(_, poolId)        => listChemicals(poolId)
       case SaveChemical(_, chemical)       => saveChemical(chemical)
 
-  private val subject = "Account Registration"
-
   private def isAuthorized(command: Command): Boolean =
     command match
       case license: License =>
@@ -50,6 +48,8 @@ final class Dispatcher(store: Store, emailer: Emailer) extends LazyLogging:
       else Fault(s"Registration failed because: $emailAddress is already registered.")
     }.recover { case NonFatal(error) => Fault(s"Registration failed for: $emailAddress, because: ${error.getMessage}") }
      .get
+
+  private val subject = "Account Registration"
 
   private def email(emailAddress: String, pin: String): Unit =
     val recipients = List(emailAddress)
