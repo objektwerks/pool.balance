@@ -11,7 +11,7 @@ import Validator.*
 final class Dispatcher(store: Store, emailer: Emailer) extends LazyLogging:
   def dispatch[E <: Event](command: Command): Event =
     if !command.isValid then Fault(s"Command is invalid: $command")
-    if !isAuthorized(command) then Fault(s"Command is unauthorized: $command")
+    if !isAuthorized(command) then Fault(s"License is unauthorized: $command")
     command match
       case Register(emailAddress)          => register(emailAddress)
       case Login(emailAddress, pin)        => login(emailAddress, pin)
