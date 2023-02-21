@@ -55,7 +55,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   observableMeasurements.onChange { (_, _) =>
     shouldNotBeInFxThread("observable measurements onchange should not be in fx thread.")
-    logger.info(s"observable measurements onchange event.")
+    logger.info(s"*** observable measurements onchange event.")
     Platform.runLater( dashboard() )
   }
 
