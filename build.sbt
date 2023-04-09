@@ -90,7 +90,7 @@ lazy val client = project
   .settings(
     libraryDependencies ++= {
       Seq(
-        "org.scalafx" %% "scalafx" % "19.0.0-R30",
+        "org.scalafx" %% "scalafx" % "20.0.0-R31",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "ch.qos.logback" % "logback-classic" % "1.4.5"
       )
