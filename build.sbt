@@ -1,7 +1,7 @@
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.14-SNAPSHOT",
-  scalaVersion := "3.2.2",
+  scalaVersion := "3.3.0-RC4",
   libraryDependencies ++= {
     val jsoniterVersion = "2.22.2"
     Seq(
