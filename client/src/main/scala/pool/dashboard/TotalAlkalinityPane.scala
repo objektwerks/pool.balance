@@ -1,6 +1,6 @@
 package pool.dashboard
 
-import pool.{Context, Measurement, Model}
+import pool.{Context, Model}
 
 final class TotalAlkalinityPane(context: Context, model: Model) extends DashboardTitledPane(context):
   text = context.headerTotalAlkalinity
