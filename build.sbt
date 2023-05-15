@@ -9,7 +9,10 @@ lazy val common = Defaults.coreDefaultSettings ++ Seq(
       "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % jsoniterVersion % Provided,
       "com.typesafe" % "config" % "1.4.2"
     )
-  }
+  },
+  scalacOptions ++= Seq(
+    "-Wunused:all"
+  )
 )
 
 lazy val poolbalance = (project in file("."))
