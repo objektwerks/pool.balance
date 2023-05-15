@@ -1,6 +1,5 @@
 package pool.control
 
-import scalafx.Includes.*
 import scalafx.geometry.Insets
 import scalafx.scene.control.Label
 import scalafx.scene.layout.GridPane
