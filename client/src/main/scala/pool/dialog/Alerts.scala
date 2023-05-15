@@ -2,7 +2,6 @@ package pool.dialog
 
 import java.awt.Toolkit
 
-import scalafx.application.Platform
 import scalafx.scene.control.{Alert, ButtonType}
 import scalafx.scene.control.Alert.AlertType
 import scalafx.stage.Stage
