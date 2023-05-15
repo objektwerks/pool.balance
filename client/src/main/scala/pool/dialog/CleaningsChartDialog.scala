@@ -2,7 +2,6 @@ package pool.dialog
 
 import scalafx.Includes.*
 import scalafx.scene.control.{ButtonType, Dialog}
-import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.layout.VBox
 
 import pool.{Client, Context, Model}
