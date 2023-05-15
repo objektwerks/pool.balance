@@ -1,6 +1,6 @@
 package pool.dashboard
 
-import pool.{Context, Measurement, Model}
+import pool.{Context, Model}
 
 final class CalciumHardnessPane(context: Context, model: Model) extends DashboardTitledPane(context):
   text = context.headerCalciumHardness
