@@ -6,8 +6,7 @@ import scalafx.scene.layout.Region
 import scalafx.scene.control.{ButtonType, ComboBox, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 
-import pool.{Client, Context, Entity, Pool, UnitOfMeasure}
-import pool.Entity.*
+import pool.{Client, Context, Pool, UnitOfMeasure}
 import pool.control.IntTextField
 
 final class PoolDialog(context: Context, pool: Pool) extends Dialog[Pool]:
