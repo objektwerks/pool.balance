@@ -4,12 +4,11 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 import scalafx.Includes._
-import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
 import scalafx.scene.chart.{LineChart, XYChart}
 import scalafx.scene.control.{Tab, TabPane}
 
-import pool.{Chemical, Context, Model, TypeOfChemical}
+import pool.{Context, Model, TypeOfChemical}
 import pool.TypeOfChemical.*
 
 final class ChemicalsChart(context: Context, model: Model) extends TabPane:
