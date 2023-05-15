@@ -3,10 +3,8 @@ package pool
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
-import scalafx.Includes.*
 import scalafx.application.JFXApp3
 
-import pool.{Login, Register}
 import pool.dialog.{Alerts, RegisterLogin, RegisterLoginDialog}
 
 object Client extends JFXApp3 with LazyLogging:
