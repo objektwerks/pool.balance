@@ -1,14 +1,11 @@
 package pool.pane
 
-import scala.concurrent.ExecutionContext.Implicits.global
-
 import scalafx.Includes.*
-import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
-import pool.{Chemical, Context, Model, Pool}
+import pool.{Chemical, Context, Model}
 import pool.dialog.{ChemicalDialog, ChemicalsChartDialog}
 
 final class ChemicalsPane(context: Context, model: Model) extends VBox:
