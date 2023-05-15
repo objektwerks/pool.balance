@@ -3,8 +3,7 @@ package pool.chart
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-import scalafx.Includes._
-import scalafx.collections.ObservableBuffer
+import scalafx.Includes.*
 import scalafx.geometry.Insets
 import scalafx.scene.chart.{LineChart, XYChart}
 import scalafx.scene.control.{Tab, TabPane}
