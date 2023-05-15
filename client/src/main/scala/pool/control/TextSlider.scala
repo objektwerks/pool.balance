@@ -2,19 +2,15 @@ package pool.control
 
 import java.text.{DecimalFormat, NumberFormat}
 
-import math.BigDecimal.double2bigDecimal
-
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Slider, TextField, TextFormatter}
 import scalafx.scene.layout.HBox
 import scalafx.util.converter.FormatStringConverter
 
-import pool.{Context, Measurement}
+import pool.Measurement
 
 class TextSlider(textFieldText: String,
                  formatConverter: FormatStringConverter[Number]) extends HBox:
-  import TextSlider.*
-
   val slider = new Slider:
     prefWidth = 600
     showTickLabels = true
