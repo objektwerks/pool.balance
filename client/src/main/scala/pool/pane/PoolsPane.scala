@@ -1,14 +1,11 @@
 package pool.pane
 
-import scala.concurrent.ExecutionContext.Implicits.global
-
 import scalafx.Includes.*
-import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, Tab, TabPane, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
-import pool.{Context, Model, Pool, UnitOfMeasure}
+import pool.{Context, Model, Pool}
 import pool.dialog.{AccountDialog, FaultsDialog, PoolDialog, DeactivateReactivate}
 
 final class PoolsPane(context: Context, model: Model) extends VBox:
