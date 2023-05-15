@@ -5,7 +5,7 @@ import java.time.LocalDate
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.{Region, VBox}
-import scalafx.scene.control.{ButtonType, ComboBox, DatePicker, Dialog, Separator, TextField}
+import scalafx.scene.control.{ButtonType, ComboBox, DatePicker, Dialog, Separator}
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import pool.{Client, Chemical, Context, Entity, UnitOfMeasure, TypeOfChemical}
