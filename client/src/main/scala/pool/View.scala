@@ -1,6 +1,5 @@
 package pool
 
-import scalafx.Includes.*
 import scalafx.geometry.{Insets, Orientation}
 import scalafx.scene.Scene
 import scalafx.scene.control.SplitPane
