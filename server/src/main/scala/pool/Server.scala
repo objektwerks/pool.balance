@@ -10,7 +10,6 @@ import java.util.concurrent.Executors
 
 import scala.concurrent.duration.*
 import scala.io.{Codec, Source}
-import scala.util.Using
 
 import Serializer.given
 
