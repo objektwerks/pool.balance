@@ -1,8 +1,6 @@
 package pool
 
-import com.typesafe.config.{Config, ConfigFactory}
-
-import javax.sql.DataSource
+import com.typesafe.config.Config
 
 import scala.jdk.CollectionConverters.*
 import scalafx.scene.image.{Image, ImageView}
