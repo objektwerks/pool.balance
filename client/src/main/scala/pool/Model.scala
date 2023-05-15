@@ -3,13 +3,10 @@ package pool
 import com.typesafe.scalalogging.LazyLogging
 
 import java.text.NumberFormat
-import java.util.concurrent.Executors
 
-import scalafx.Includes.*
 import scalafx.application.Platform
 import scalafx.collections.ObservableBuffer
 import scalafx.beans.property.ObjectProperty
-import scala.util.Try
 
 import Entity.given
 import Measurement.*
