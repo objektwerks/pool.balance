@@ -136,7 +136,7 @@ lazy val server = project
         "org.jodd" % "jodd-mail" % "6.0.5",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "ch.qos.logback" % "logback-classic" % "1.4.7",
-        "org.scalatest" %% "scalatest" % "3.2.15" % Test
+        "org.scalatest" %% "scalatest" % "3.2.16" % Test
       )
     }
   )
