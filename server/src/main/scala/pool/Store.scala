@@ -165,14 +165,14 @@ final class Store(config: Config,
 
   def addPool(pool: Pool): Long = DB localTx { implicit session =>
     sql"""
-      insert into pool(name, license, volume, unit) values(${pool.name}, ${pool.license}, ${pool.volume}, ${pool.unit.toString})
+      insert into pool(name, license, volume, unit) values(${pool.name}, ${pool.license}, ${pool.volume}, ${pool.unit})
       """
       .updateAndReturnGeneratedKey()
   }
 
   def updatePool(pool: Pool): Long = DB localTx { implicit session =>
     sql"""
-      update pool set name = ${pool.name}, volume = ${pool.volume}, unit = ${pool.unit.toString}
+      update pool set name = ${pool.name}, volume = ${pool.volume}, unit = ${pool.unit}
       where id = ${pool.id}
       """
       .update()
