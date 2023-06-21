@@ -112,7 +112,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def pools(): Unit = {}
+  def pools(): Unit =
     fetcher.fetchAsync(
       ListPools(observableAccount.get.license),
       (event: Event) => event match
