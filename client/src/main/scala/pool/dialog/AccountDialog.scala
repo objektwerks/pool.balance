@@ -7,8 +7,7 @@ import scalafx.scene.control.{ButtonType, Dialog, Label}
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import pool.{Account, Client, Context, Deactivate, Reactivate}
-import pool.Validator.isActivated
-import pool.Validator.isDeactivated
+import pool.Validator.*
 
 final case class DeactivateReactivate(deactivate: Option[Deactivate] = None,
                                       reactivate: Option[Reactivate] = None)
