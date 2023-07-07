@@ -25,7 +25,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   selectedPoolId.onChange { (_, oldPoolId, newPoolId) =>
     shouldBeInFxThread("selected pool id onchange should be in fx thread.")
-    logger.info(s"selected pool id onchange event: $oldPoolId -> $newPoolId")
+    logger.info(s"*** selected pool id onchange event: $oldPoolId -> $newPoolId")
     cleanings(newPoolId)
     measurements(newPoolId)
     chemicals(newPoolId)
@@ -39,15 +39,15 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val observableFaults = ObservableBuffer[Fault]()
 
   observableAccount.onChange { (_, oldAccount, newAccount) =>
-    logger.info(s"*** Model: selected account onchange event: $oldAccount -> $newAccount")
+    logger.info(s"*** selected account onchange event: $oldAccount -> $newAccount")
   }
 
   observablePools.onChange { (_, changes) =>
-    logger.info(s"*** Model: observable pools onchange event: $changes")
+    logger.info(s"*** observable pools onchange event: $changes")
   }
 
   observableCleanings.onChange { (_, changes) =>
-    logger.info(s"*** Model: observable cleanings onchange event: $changes")
+    logger.info(s"*** observable cleanings onchange event: $changes")
   }
 
   observableMeasurements.onChange { (_, _) =>
@@ -57,7 +57,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   }
 
   observableChemicals.onChange { (_, changes) =>
-    logger.info(s"*** Model: observable chemicals onchange event: $changes")
+    logger.info(s"*** observable chemicals onchange event: $changes")
   }
 
   def onFault(cause: String): Unit =
