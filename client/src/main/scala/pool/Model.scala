@@ -24,8 +24,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val selectedChemicalId = ObjectProperty[Long](0)
 
   selectedPoolId.onChange { (_, oldPoolId, newPoolId) =>
-    shouldBeInFxThread("selected pool id onchange should be in fx thread.")
     logger.info(s"*** selected pool id onchange event: $oldPoolId -> $newPoolId")
+    shouldBeInFxThread("*** selected pool id onchange should be in fx thread.")
     cleanings(newPoolId)
     measurements(newPoolId)
     chemicals(newPoolId)
@@ -51,8 +51,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   }
 
   observableMeasurements.onChange { (_, _) =>
-    shouldNotBeInFxThread("observable measurements onchange should not be in fx thread.")
     logger.info(s"*** observable measurements onchange event.")
+    shouldNotBeInFxThread("***observable measurements onchange should not be in fx thread.")
     Platform.runLater( dashboard() )
   }
 
@@ -62,11 +62,11 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def onFault(cause: String): Unit =
     observableFaults += Fault(cause)
-    logger.error(cause)
+    logger.error(s"*** Cause: $cause")
 
   def onFault(error: Throwable, cause: String): Unit =
     observableFaults += Fault(cause)
-    logger.error(cause, error)
+    logger.error(s"*** Cause: $cause", error)
 
   def onFault(source: String, fault: Fault): Unit =
     observableFaults += fault
@@ -249,7 +249,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   def temperatureInRange(value: Int): Boolean = temperatureRange.contains(value)
 
   private def dashboard(): Unit =
-    shouldBeInFxThread("dashboard should be in fx thread.")
+    shouldBeInFxThread("*** dashboard should be in fx thread.")
     val numberFormat = NumberFormat.getNumberInstance()
     numberFormat.setMaximumFractionDigits(1)
     observableMeasurements.headOption.foreach { measurement =>
@@ -258,7 +258,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     }
 
   private def calculateCurrentMeasurements(measurement: Measurement, numberFormat: NumberFormat): Unit =
-    shouldBeInFxThread("oncurrent should be in fx thread.")
+    shouldBeInFxThread("*** calculateCurrentMeasurements should be in fx thread.")
     currentTotalChlorine.value = measurement.totalChlorine
     currentFreeChlorine.value = measurement.freeChlorine
     currentCombinedChlorine.value = numberFormat.format( measurement.combinedChlorine ).toDouble
@@ -271,7 +271,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     currentTemperature.value = measurement.temperature
 
   private def calculateAverageMeasurements(numberFormat: NumberFormat): Unit =
-    shouldBeInFxThread("onaverage should be in fx thread.")
+    shouldBeInFxThread("*** calculateAverageMeasurements should be in fx thread.")
     val count = observableMeasurements.length
     averageTotalChlorine.value = observableMeasurements.map(_.totalChlorine).sum / count
     averageFreeChlorine.value = observableMeasurements.map(_.freeChlorine).sum / count
