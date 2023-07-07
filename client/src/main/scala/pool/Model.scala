@@ -31,15 +31,15 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     chemicals(newPoolId)
   }
 
-  val observableAccount = ObjectProperty[Account](Account.empty)
+  val objectAccount = ObjectProperty[Account](Account.empty)
   val observablePools = ObservableBuffer[Pool]()
   val observableCleanings = ObservableBuffer[Cleaning]()
   val observableMeasurements = ObservableBuffer[Measurement]()
   val observableChemicals = ObservableBuffer[Chemical]()
   val observableFaults = ObservableBuffer[Fault]()
 
-  observableAccount.onChange { (_, oldAccount, newAccount) =>
-    logger.info(s"*** selected account onchange event: $oldAccount -> $newAccount")
+  objectAccount.onChange { (_, oldAccount, newAccount) =>
+    logger.info(s"*** object account onchange event: $oldAccount -> $newAccount")
   }
 
   observablePools.onChange { (_, changes) =>
@@ -81,7 +81,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       register,
       (event: Event) => event match
         case fault @ Fault(_, _) => registered.set(false)
-        case Registered(account) => observableAccount.set(account)
+        case Registered(account) => objectAccount.set(account)
         case _ => ()
     )
 
@@ -90,7 +90,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       login,
       (event: Event) => event match
         case fault @ Fault(_, _) => loggedin.set(false)
-        case LoggedIn(account) => observableAccount.set(account)
+        case LoggedIn(account) => objectAccount.set(account)
         case _ => ()
     )
 
@@ -99,7 +99,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       deactivate,
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.deactivate", fault)
-        case Deactivated(account) => observableAccount.set(account)
+        case Deactivated(account) => objectAccount.set(account)
         case _ => ()
     )
 
@@ -108,13 +108,13 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       reactivate,
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.reactivate", fault)
-        case Reactivated(account) => observableAccount.set(account)
+        case Reactivated(account) => objectAccount.set(account)
         case _ => ()
     )
 
   def pools(): Unit =
     fetcher.fetchAsync(
-      ListPools(observableAccount.get.license),
+      ListPools(objectAccount.get.license),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.pools", fault)
         case PoolsListed(pools) =>
@@ -125,7 +125,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def save(pool: Pool): Unit =
     fetcher.fetchAsync(
-      SavePool(observableAccount.get.license, pool),
+      SavePool(objectAccount.get.license, pool),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.save pool", pool, fault)
         case PoolSaved(id) =>
@@ -138,7 +138,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def cleanings(poolId: Long): Unit =
     fetcher.fetchAsync(
-      ListCleanings(observableAccount.get.license, poolId),
+      ListCleanings(objectAccount.get.license, poolId),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.cleanings", fault)
         case CleaningsListed(cleanings) =>
@@ -149,7 +149,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def save(cleaning: Cleaning): Unit =
     fetcher.fetchAsync(
-      SaveCleaning(observableAccount.get.license, cleaning),
+      SaveCleaning(objectAccount.get.license, cleaning),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.save cleaning", cleaning, fault)
         case CleaningSaved(id) =>
@@ -162,7 +162,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def measurements(poolId: Long): Unit =
     fetcher.fetchAsync(
-      ListMeasurements(observableAccount.get.license, poolId),
+      ListMeasurements(objectAccount.get.license, poolId),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.measurements", fault)
         case MeasurementsListed(measurements) =>
@@ -173,7 +173,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def save(measurement: Measurement): Unit =
     fetcher.fetchAsync(
-      SaveMeasurement(observableAccount.get.license, measurement),
+      SaveMeasurement(objectAccount.get.license, measurement),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.save measurement", measurement, fault)
         case MeasurementSaved(id) =>
@@ -186,7 +186,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def chemicals(poolId: Long): Unit =
     fetcher.fetchAsync(
-      ListChemicals(observableAccount.get.license, poolId),
+      ListChemicals(objectAccount.get.license, poolId),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.chemicals", fault)
         case ChemicalsListed(chemicals) =>
@@ -197,7 +197,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   
   def save(chemical: Chemical): Unit =
     fetcher.fetchAsync(
-      SaveChemical(observableAccount.get.license, chemical),
+      SaveChemical(objectAccount.get.license, chemical),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFault("Model.save chemical", chemical, fault)
         case ChemicalSaved(id) =>

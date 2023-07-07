@@ -90,7 +90,7 @@ final class PoolsPane(context: Context, model: Model) extends VBox:
   }
 
   def add(): Unit =
-    PoolDialog(context, Pool(license = model.observableAccount.get.license)).showAndWait() match
+    PoolDialog(context, Pool(license = model.objectAccount.get.license)).showAndWait() match
       case Some(pool: Pool) =>
         model.save(pool)
         tableView.selectionModel().select(pool)
@@ -108,7 +108,7 @@ final class PoolsPane(context: Context, model: Model) extends VBox:
   def faults(): Unit = FaultsDialog(context, model).showAndWait() match
     case _ => errorsButton.disable = model.observableFaults.isEmpty
 
-  def account(): Unit = AccountDialog(context, model.observableAccount.get).showAndWait() match
+  def account(): Unit = AccountDialog(context, model.objectAccount.get).showAndWait() match
       case Some( DeactivateReactivate( Some(deactivate), None) ) => model.deactivate(deactivate)
       case Some( DeactivateReactivate( None, Some(reactivate) ) ) => model.reactivate(reactivate)
       case _ =>
