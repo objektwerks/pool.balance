@@ -25,7 +25,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   selectedPoolId.onChange { (_, oldPoolId, newPoolId) =>
     shouldBeInFxThread("selected pool id onchange should be in fx thread.")
-    logger.info(s"selected oool id onchange event: $oldPoolId -> $newPoolId")
+    logger.info(s"selected pool id onchange event: $oldPoolId -> $newPoolId")
     cleanings(newPoolId)
     measurements(newPoolId)
     chemicals(newPoolId)
