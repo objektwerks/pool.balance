@@ -7,10 +7,11 @@ import Validator.*
 
 final class Dispatcher(store: Store, emailer: Emailer):
   def dispatch[E <: Event](command: Command): Event =
-    if !command.isValid then Fault(s"Command is invalid: $command")
+    if !command.isValid then store.addFault( Fault(s"Command is invalid: $command") )
+    
     isAuthorized(command) match
-      case Authorized(isAuthorized) => if !isAuthorized then Fault(s"License is unauthorized: $command")
-      case fault @ Fault(_, _) => fault
+      case Authorized(isAuthorized) => if !isAuthorized then store.addFault( Fault(s"License is unauthorized: $command") )
+      case fault @ Fault(_, _) => store.addFault(fault)
       case _ =>
         
     command match
