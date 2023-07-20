@@ -9,6 +9,7 @@ import scalafx.collections.ObservableBuffer
 import scalafx.beans.property.ObjectProperty
 
 import Entity.given
+import Fault.given
 import Measurement.*
 
 final class Model(fetcher: Fetcher) extends LazyLogging:
