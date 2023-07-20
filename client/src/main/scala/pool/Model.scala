@@ -68,13 +68,24 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     observableFaults += Fault(cause)
     logger.error(s"*** Cause: $cause", error)
 
-  def onFault(source: String, fault: Fault): Unit =
+  def onFetchFault(source: String, fault: Fault): Unit =
     observableFaults += fault
     logger.error(s"*** $source - $fault")
 
-  def onFault(source: String, entity: Entity, fault: Fault): Unit =
+  def onFetchFault(source: String, entity: Entity, fault: Fault): Unit =
     observableFaults += fault
     logger.error(s"*** $source - $entity - $fault")
+
+  def add(fault: Fault): Unit =
+    fetcher.fetchAsync(
+      AddFault(objectAccount.get.license, fault),
+      (event: Event) => event match
+        case fault @ Fault(cause, _) => onFetchFault("Model.add fault", fault)
+        case FaultAdded() =>
+          observableFaults += fault
+          observableFaults.sort()
+        case _ => ()
+    )
 
   def register(register: Register): Unit =
     fetcher.fetch(
