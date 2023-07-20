@@ -61,14 +61,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     logger.info(s"*** observable chemicals onchange event: $changes")
   }
 
-  def onUIFault(cause: String): Unit =
-    observableFaults += Fault(cause)
-    logger.error(s"*** Cause: $cause")
-
-  def onUIFault(error: Throwable, cause: String): Unit =
-    observableFaults += Fault(cause)
-    logger.error(s"*** Cause: $cause", error)
-
   def onFetchFault(source: String, fault: Fault): Unit =
     observableFaults += fault
     logger.error(s"*** $source - $fault")
