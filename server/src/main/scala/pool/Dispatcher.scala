@@ -26,6 +26,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case SaveMeasurement(_, measurement) => saveMeasurement(measurement)
       case ListChemicals(_, poolId)        => listChemicals(poolId)
       case SaveChemical(_, chemical)       => saveChemical(chemical)
+      case AddFault(_, fault)              => addFault(fault)
 
   private def isAuthorized(command: Command): Event =
     command match
@@ -135,4 +136,11 @@ final class Dispatcher(store: Store, emailer: Emailer):
         else store.updateChemical(chemical)
       )
     }.recover { case NonFatal(error) => Fault("Save chemical failed:", error) }
+     .get
+
+  private def addFault(fault: Fault): Event =
+    Try {
+      store.addFault(fault)
+      FaultAdded()
+    }.recover { case NonFatal(error) => Fault("Add fault failed:", error) }
      .get
