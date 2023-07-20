@@ -23,6 +23,10 @@ object Validator:
         case saveMeasurement @ SaveMeasurement(_, _)   => saveMeasurement.isValid
         case listChemicals @ ListChemicals(_, _)       => listChemicals.isValid
         case saveChemical @ SaveChemical(_, _)         => saveChemical.isValid
+        case addFault @ AddFault(_, _)                 => addFault.isValid
+
+  extension (addFault: AddFault)
+    def isValid: Boolean = addFault.license.isLicense && addFault.fault.cause.nonEmpty
 
   extension (register: Register)
     def isValid: Boolean = register.emailAddress.isEmailAddress
