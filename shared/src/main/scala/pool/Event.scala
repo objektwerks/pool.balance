@@ -32,3 +32,5 @@ object Fault:
 final case class Fault(cause: String, occurred: String = Instant.now.toString) extends Event:
   val causeProperty = ObjectProperty[String](this, "cause", cause)
   val occurredProperty = ObjectProperty[String](this, "occurred", occurred)
+
+final case class FaultAdded() extends Event
