@@ -22,3 +22,5 @@ final case class SaveMeasurement(license: String, measurement: Measurement) exte
 
 final case class ListChemicals(license: String, poolId: Long) extends Command with License
 final case class SaveChemical(license: String, chemical: Chemical) extends Command with License
+
+final case class AddFault(license: String, fault: Fault) extends Command with License
