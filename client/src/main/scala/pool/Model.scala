@@ -98,7 +98,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case fault @ Fault(_, _) => loggedin.set(false)
         case LoggedIn(account) =>
           objectAccount.set(account)
-          pools() // Added to load pools on successful login!
+          pools()
         case _ => ()
     )
 
