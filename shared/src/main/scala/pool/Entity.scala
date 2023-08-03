@@ -43,7 +43,7 @@ object Entity:
       .withDayOfMonth(sourceLocalDate.getDayOfMonth)
       .toEpochDay
 
-  given poolOrdering: Ordering[Pool] = Ordering.by[Pool, String](p => p.name).reverse
+  given poolOrdering: Ordering[Pool] = Ordering.by[Pool, String](p => p.name)
   given cleaningOrdering: Ordering[Cleaning] = Ordering.by[Cleaning, Long](c => c.cleaned).reverse
   given measurementOrdering: Ordering[Measurement] = Ordering.by[Measurement, Long](m => m.measured).reverse
   given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => c.added).reverse
