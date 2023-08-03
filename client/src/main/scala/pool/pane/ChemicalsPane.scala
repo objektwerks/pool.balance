@@ -79,8 +79,9 @@ final class ChemicalsPane(context: Context, model: Model) extends VBox:
   def add(): Unit =
     ChemicalDialog(context, Chemical(poolId = model.selectedPoolId.value)).showAndWait() match
       case Some(chemical: Chemical) =>
-        model.save(chemical)
-        tableView.selectionModel().select(chemical)
+        val selectedIndex = tableView.selectionModel().getSelectedIndex
+        model.save(selectedIndex, chemical)
+        tableView.selectionModel().select(selectedIndex)
       case _ =>
 
   def update(): Unit =
@@ -88,7 +89,7 @@ final class ChemicalsPane(context: Context, model: Model) extends VBox:
     val chemical = tableView.selectionModel().getSelectedItem.chemical
     ChemicalDialog(context, chemical).showAndWait() match
       case Some(chemical: Chemical) =>
-        model.save(chemical)
+        model.save(selectedIndex, chemical)
         tableView.selectionModel().select(selectedIndex)
       case _ =>
 
