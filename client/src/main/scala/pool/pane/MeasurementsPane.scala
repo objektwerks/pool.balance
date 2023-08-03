@@ -109,9 +109,8 @@ final class MeasurementsPane(context: Context, model: Model) extends VBox:
   def add(): Unit =
     MeasurementDialog(context, Measurement(poolId = model.selectedPoolId.value)).showAndWait() match
       case Some(measurement: Measurement) =>
-        val selectedIndex = tableView.selectionModel().getSelectedIndex
-        model.save(selectedIndex, measurement)
-        tableView.selectionModel().select(selectedIndex)
+        model.save(0, measurement)
+        tableView.selectionModel().select(measurement)
       case _ =>
 
   def update(): Unit =
