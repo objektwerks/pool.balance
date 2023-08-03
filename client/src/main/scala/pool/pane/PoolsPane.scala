@@ -92,8 +92,9 @@ final class PoolsPane(context: Context, model: Model) extends VBox:
   def add(): Unit =
     PoolDialog(context, Pool(license = model.objectAccount.get.license)).showAndWait() match
       case Some(pool: Pool) =>
-        model.save(pool)
-        tableView.selectionModel().select(pool)
+        val selectedIndex = tableView.selectionModel().getSelectedIndex
+        model.save(selectedIndex, pool)
+        tableView.selectionModel().select(selectedIndex)
       case _ =>
 
   def update(): Unit =
@@ -101,7 +102,7 @@ final class PoolsPane(context: Context, model: Model) extends VBox:
     val pool = tableView.selectionModel().getSelectedItem.pool
     PoolDialog(context, pool).showAndWait() match
       case Some(pool: Pool) =>
-        model.save(pool)
+        model.save(selectedIndex, pool)
         tableView.selectionModel().select(selectedIndex)
       case _ =>
 
