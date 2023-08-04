@@ -1,6 +1,7 @@
 package pool.pane
 
 import scalafx.Includes.*
+import scalafx.application.Platform
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
@@ -110,7 +111,7 @@ final class MeasurementsPane(context: Context, model: Model) extends VBox:
     MeasurementDialog(context, Measurement(poolId = model.selectedPoolId.value)).showAndWait() match
       case Some(measurement: Measurement) =>
         model.save(0, measurement)
-        tableView.selectionModel().select(0)
+        Platform.runLater(tableView.selectionModel().select(0))
       case _ =>
 
   def update(): Unit =
@@ -119,7 +120,7 @@ final class MeasurementsPane(context: Context, model: Model) extends VBox:
     MeasurementDialog(context, measurement).showAndWait() match
       case Some(measurement: Measurement) =>
         model.save(selectedIndex, measurement)
-        tableView.selectionModel().select(selectedIndex)
+        Platform.runLater(tableView.selectionModel().select(selectedIndex))
       case _ =>
 
   def chart(): Unit = MeasurementsChartDialog(context, model).showAndWait()
