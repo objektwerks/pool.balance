@@ -1,6 +1,7 @@
 package pool.pane
 
 import scalafx.Includes.*
+import scalafx.application.Platform
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, Tab, TabPane, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
@@ -93,7 +94,7 @@ final class PoolsPane(context: Context, model: Model) extends VBox:
     PoolDialog(context, Pool(license = model.objectAccount.get.license)).showAndWait() match
       case Some(pool: Pool) =>
         model.save(0, pool)
-        tableView.selectionModel().select(pool.copy(id = model.selectedPoolId.value))
+        Platform.runLater(tableView.selectionModel().select(pool.copy(id = model.selectedPoolId.value)))
       case _ =>
 
   def update(): Unit =
@@ -102,7 +103,7 @@ final class PoolsPane(context: Context, model: Model) extends VBox:
     PoolDialog(context, pool).showAndWait() match
       case Some(pool: Pool) =>
         model.save(selectedIndex, pool)
-        tableView.selectionModel().select(selectedIndex)
+        Platform.runLater(tableView.selectionModel().select(selectedIndex))
       case _ =>
 
   def faults(): Unit = FaultsDialog(context, model).showAndWait() match
