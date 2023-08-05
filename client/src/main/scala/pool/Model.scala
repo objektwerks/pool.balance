@@ -166,16 +166,27 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def save(selectedIndex: Int, cleaning: Cleaning): Unit =
+  def add(selectedIndex: Int, cleaning: Cleaning)(runLast: => Unit): Unit =
     fetcher.fetchAsync(
       SaveCleaning(objectAccount.get.license, cleaning),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchAsyncFault("Model.save cleaning", cleaning, fault)
         case CleaningSaved(id) =>
-          if cleaning.id == 0 then observableCleanings += cleaning.copy(id = id)
-          else observableCleanings.update(selectedIndex, cleaning)
+          observableCleanings += cleaning.copy(id = id)
+          runLast
+        case _ => ()
+    )
+
+  def update(selectedIndex: Int, cleaning: Cleaning)(runLast: => Unit): Unit =
+    fetcher.fetchAsync(
+      SaveCleaning(objectAccount.get.license, cleaning),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.save cleaning", cleaning, fault)
+        case CleaningSaved(id) =>
+          observableCleanings.update(selectedIndex, cleaning)
           observableCleanings.sort()
           selectedCleaningId.set(cleaning.id)
+          runLast
         case _ => ()
     )
 
