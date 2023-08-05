@@ -1,8 +1,6 @@
 package pool.pane
 
-
 import scalafx.Includes.*
-import scalafx.application.Platform
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
@@ -108,8 +106,7 @@ final class CleaningsPane(context: Context, model: Model) extends VBox:
     val cleaning = tableView.selectionModel().getSelectedItem.cleaning
     CleaningDialog(context, cleaning).showAndWait() match
       case Some(cleaning: Cleaning) =>
-        model.save(selectedIndex, cleaning)
-        Platform.runLater(tableView.selectionModel().select(selectedIndex))
+        model.update(selectedIndex, cleaning){ tableView.selectionModel().select(selectedIndex) }
       case _ =>
 
   def chart(): Unit = CleaningsChartDialog(context, model).showAndWait()
