@@ -201,16 +201,27 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def save(selectedIndex: Int, measurement: Measurement): Unit =
+  def add(selectedIndex: Int, measurement: Measurement)(runLast: => Unit): Unit =
     fetcher.fetchAsync(
       SaveMeasurement(objectAccount.get.license, measurement),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchAsyncFault("Model.save measurement", measurement, fault)
         case MeasurementSaved(id) =>
-          if measurement.id == 0 then observableMeasurements += measurement.copy(id = id)
-          else observableMeasurements.update(selectedIndex, measurement)
+          observableMeasurements += measurement.copy(id = id)
+          runLast
+        case _ => ()
+    )
+
+  def update(selectedIndex: Int, measurement: Measurement)(runLast: => Unit): Unit =
+    fetcher.fetchAsync(
+      SaveMeasurement(objectAccount.get.license, measurement),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.save measurement", measurement, fault)
+        case MeasurementSaved(id) =>
+          observableMeasurements.update(selectedIndex, measurement)
           observableMeasurements.sort()
           selectedMeasurementId.set(measurement.id)
+          runLast
         case _ => ()
     )
 
