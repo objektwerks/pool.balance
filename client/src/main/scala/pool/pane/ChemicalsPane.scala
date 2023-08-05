@@ -1,7 +1,6 @@
 package pool.pane
 
 import scalafx.Includes.*
-import scalafx.application.Platform
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
@@ -88,8 +87,7 @@ final class ChemicalsPane(context: Context, model: Model) extends VBox:
     val chemical = tableView.selectionModel().getSelectedItem.chemical
     ChemicalDialog(context, chemical).showAndWait() match
       case Some(chemical: Chemical) =>
-        model.save(selectedIndex, chemical)
-        Platform.runLater(tableView.selectionModel().select(selectedIndex))
+        model.update(selectedIndex, chemical){ tableView.selectionModel().select(selectedIndex) }
       case _ =>
 
   def chart(): Unit = ChemicalsChartDialog(context, model).showAndWait()
