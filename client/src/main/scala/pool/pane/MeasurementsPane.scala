@@ -110,8 +110,7 @@ final class MeasurementsPane(context: Context, model: Model) extends VBox:
   def add(): Unit =
     MeasurementDialog(context, Measurement(poolId = model.selectedPoolId.value)).showAndWait() match
       case Some(measurement: Measurement) =>
-        model.save(0, measurement)
-        Platform.runLater(tableView.selectionModel().select(0))
+        model.add(0, measurement){ tableView.selectionModel().select(0) }
       case _ =>
 
   def update(): Unit =
