@@ -97,16 +97,14 @@ final class CleaningsPane(context: Context, model: Model) extends VBox:
 
   def add(): Unit =
     CleaningDialog(context, Cleaning(poolId = model.selectedPoolId.value)).showAndWait() match
-      case Some(cleaning: Cleaning) =>
-        model.add(0, cleaning){ tableView.selectionModel().select(0) }
+      case Some(cleaning: Cleaning) => model.add(0, cleaning){ tableView.selectionModel().select(0) }
       case _ =>
 
   def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
     val cleaning = tableView.selectionModel().getSelectedItem.cleaning
     CleaningDialog(context, cleaning).showAndWait() match
-      case Some(cleaning: Cleaning) =>
-        model.update(selectedIndex, cleaning){ tableView.selectionModel().select(selectedIndex) }
+      case Some(cleaning: Cleaning) => model.update(selectedIndex, cleaning){ tableView.selectionModel().select(selectedIndex) }
       case _ =>
 
   def chart(): Unit = CleaningsChartDialog(context, model).showAndWait()
