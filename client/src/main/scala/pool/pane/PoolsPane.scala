@@ -91,16 +91,14 @@ final class PoolsPane(context: Context, model: Model) extends VBox:
 
   def add(): Unit =
     PoolDialog(context, Pool(license = model.objectAccount.get.license)).showAndWait() match
-      case Some(pool: Pool) =>
-        model.add(0, pool){ tableView.selectionModel().select(pool.copy(id = model.selectedPoolId.value)) }
+      case Some(pool: Pool) => model.add(0, pool){ tableView.selectionModel().select(pool.copy(id = model.selectedPoolId.value)) }
       case _ =>
 
   def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
     val pool = tableView.selectionModel().getSelectedItem.pool
     PoolDialog(context, pool).showAndWait() match
-      case Some(pool: Pool) =>
-        model.update(selectedIndex, pool){ tableView.selectionModel().select(selectedIndex) }
+      case Some(pool: Pool) => model.update(selectedIndex, pool){ tableView.selectionModel().select(selectedIndex) }
       case _ =>
 
   def faults(): Unit = FaultsDialog(context, model).showAndWait() match
