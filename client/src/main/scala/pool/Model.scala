@@ -138,6 +138,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case fault @ Fault(_, _) => onFetchAsyncFault("Model.save pool", pool, fault)
         case PoolSaved(id) =>
           observablePools += pool.copy(id = id)
+          observablePools.sort()
+          selectedPoolId.set(id)
           runLast
         case _ => ()
     )
@@ -149,8 +151,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case fault @ Fault(_, _) => onFetchAsyncFault("Model.save pool", pool, fault)
         case PoolSaved(id) =>
           observablePools.update(selectedIndex, pool)
-          observablePools.sort()
-          selectedPoolId.set(pool.id)
           runLast
         case _ => ()
     )
