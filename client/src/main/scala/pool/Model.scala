@@ -243,6 +243,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case fault @ Fault(_, _) => onFetchAsyncFault("Model.save chemical", chemical, fault)
         case ChemicalSaved(id) =>
           observableChemicals += chemical.copy(id = id)
+          observableChemicals.sort()
+          selectedChemicalId.set(id)
           runLast
         case _ => ()
     )
