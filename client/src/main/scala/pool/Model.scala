@@ -208,6 +208,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case fault @ Fault(_, _) => onFetchAsyncFault("Model.save measurement", measurement, fault)
         case MeasurementSaved(id) =>
           observableMeasurements += measurement.copy(id = id)
+          observableMeasurements.sort()
+          selectedMeasurementId.set(id)
           runLast
         case _ => ()
     )
