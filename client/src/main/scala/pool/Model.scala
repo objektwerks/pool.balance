@@ -184,8 +184,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case fault @ Fault(_, _) => onFetchAsyncFault("Model.save cleaning", cleaning, fault)
         case CleaningSaved(id) =>
           observableCleanings.update(selectedIndex, cleaning)
-          observableCleanings.sort()
-          selectedCleaningId.set(cleaning.id)
           runLast
         case _ => ()
     )
