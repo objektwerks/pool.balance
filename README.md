@@ -2,6 +2,10 @@ Pool Balance
 ------------
 >Pool cleaning, measurement and chemical balancing distributed app using Scala3, ScalaFX, Jsoniter, JoddMail and PostgreSql.
 
+Todo
+----
+1. Refactor dashboard <== bindings.
+   
 Build
 -----
 1. sbt clean compile
