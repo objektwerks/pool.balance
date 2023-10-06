@@ -28,13 +28,6 @@ enum TypeOfChemical(val display: String):
   case MuriaticAcid extends TypeOfChemical("Muriatic Acid")
   case Salt extends TypeOfChemical("Salt")
 
-object TypeOfChemical:
-  def toEnum(display: String): TypeOfChemical = TypeOfChemical.valueOf(display.filterNot(_.isWhitespace))
-  def toList: List[String] = TypeOfChemical.values.map(toc => toc.display).toList
-
-sealed trait Entity:
-  val id: Long
-
 object Pin:
   private val specialChars = "~!@#$%^&*-+=<>?/:;".toList
   private val random = new Random
@@ -50,6 +43,13 @@ object Pin:
         .prepended(newSpecialChar)
         .appended(newSpecialChar)
     ).mkString
+
+object TypeOfChemical:
+  def toEnum(display: String): TypeOfChemical = TypeOfChemical.valueOf(display.filterNot(_.isWhitespace))
+  def toList: List[String] = TypeOfChemical.values.map(toc => toc.display).toList
+
+sealed trait Entity:
+  val id: Long
 
 object Entity:
   def applyLocalDateChanges(sourceLocalDate: LocalDate, targetLocalDateAsLong: Long): Long =
