@@ -41,10 +41,6 @@ object Pin:
 
   private def newSpecialChar: Char = specialChars(random.nextInt(specialChars.length))
 
-  /**
-   * 26 letters + 10 numbers + 18 special characters = 54 combinations
-   * 7 alphanumeric char pin = 54^7 ( 1,338,925,209,984 )
-   */
   def newInstance: String =
     Random.shuffle(
       Random
