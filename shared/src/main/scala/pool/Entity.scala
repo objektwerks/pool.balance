@@ -65,7 +65,7 @@ object Entity:
   given chemicalOrdering: Ordering[Chemical] = Ordering.by[Chemical, Long](c => c.added).reverse
 
 final case class Account(id: Long = 0,
-                         license: String = newLicense,
+                         license: String = UUID.randomUUID.toString,
                          emailAddress: String = "",
                          pin: String = Pin.newInstance,
                          activated: Long = LocalDate.now.toEpochDay,
@@ -73,8 +73,6 @@ final case class Account(id: Long = 0,
   def toArray: Array[Any] = Array(id, license, pin, activated, deactivated)
 
 object Account:
-  private def newLicense: String = UUID.randomUUID.toString
-
   val empty = Account(
     license = "",
     emailAddress = "",
