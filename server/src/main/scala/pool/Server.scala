@@ -24,7 +24,7 @@ object Server extends LazyLogging:
   private val dispatcher = Dispatcher(store, emailer)
 
   private val http = HttpServer.create(InetSocketAddress(port), backlog)
-  private val handler = new HttpHandler {
+  private val handler = new HttpHandler:
     override def handle(exchange: HttpExchange): Unit =
       val json = Source.fromInputStream( exchange.getRequestBody )(Codec.UTF8).mkString("")
       val command = readFromString[Command](json)
@@ -44,7 +44,6 @@ object Server extends LazyLogging:
       outputStream.write(response.getBytes())
       outputStream.flush()
       outputStream.close()
-  }
 
   @main def main(): Unit =
     http.setExecutor(Executors.newVirtualThreadPerTaskExecutor())
@@ -52,11 +51,10 @@ object Server extends LazyLogging:
 
     http.start()
     println(s"*** Press Control-C to shutdown server at: $host:$port")
-    logger.info(s"*** Http Server started at: $host:$port")
+    logger.info(s"*** Pool Balance Http Server started at: $host:$port")
 
-    sys.addShutdownHook {
+    sys.addShutdownHook:
       http.stop(10)
-      logger.info(s"*** Http Server shutdown at: $host:$port")
-    }
+      logger.info(s"*** Pool Balance Http Server shutdown at: $host:$port")
 
     Thread.currentThread().join()
