@@ -1,3 +1,5 @@
+val logbackVersion = "1.4.11"
+
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.25-SNAPSHOT",
@@ -95,7 +97,7 @@ lazy val client = project
       Seq(
         "org.scalafx" %% "scalafx" % "20.0.0-R31",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
-        "ch.qos.logback" % "logback-classic" % "1.4.11"
+        "ch.qos.logback" % "logback-classic" % logbackVersion
       )
     }
   )
@@ -135,7 +137,7 @@ lazy val server = project
         "com.github.blemale" %% "scaffeine" % "5.2.1",
         "org.jodd" % "jodd-mail" % "7.0.1",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
-        "ch.qos.logback" % "logback-classic" % "1.4.11",
+        "ch.qos.logback" % "logback-classic" % logbackVersion,
         "org.scalatest" %% "scalatest" % "3.2.16" % Test
       )
     }
