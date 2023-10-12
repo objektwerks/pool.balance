@@ -19,3 +19,5 @@ class IntTextField extends TextField:
   val formatter = new TextFormatter[Int](converter, 0, filter)
 
   textFormatter = formatter
+
+  def int(default: Int): Int = text.value.toIntOption.getOrElse(default)
