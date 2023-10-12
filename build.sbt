@@ -2,7 +2,7 @@ val logbackVersion = "1.4.11"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
-  version := "0.25-SNAPSHOT",
+  version := "0.25",
   scalaVersion := "3.3.1",
   libraryDependencies ++= {
     val jsoniterVersion = "2.23.5"
