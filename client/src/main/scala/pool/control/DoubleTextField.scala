@@ -22,3 +22,5 @@ class DoubleTextField extends TextField:
   val formatter = new TextFormatter[Double](converter, 0.0, filter)
 
   textFormatter = formatter
+
+  def double(default: Double): Double = text.value.toDoubleOption.getOrElse(default)
