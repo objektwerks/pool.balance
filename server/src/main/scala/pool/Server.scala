@@ -1,7 +1,6 @@
 package pool
 
-import com.github.plokhotnyuk.jsoniter_scala.core.*
-import com.sun.net.httpserver.{HttpExchange, HttpHandler, HttpServer}
+import com.sun.net.httpserver.HttpServer
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
@@ -9,9 +8,6 @@ import java.net.InetSocketAddress
 import java.util.concurrent.Executors
 
 import scala.concurrent.duration.*
-import scala.io.{Codec, Source}
-
-import Serializer.given
 
 object Server extends LazyLogging:
   private val config = ConfigFactory.load("server.conf")
@@ -24,26 +20,7 @@ object Server extends LazyLogging:
   private val dispatcher = Dispatcher(store, emailer)
 
   private val http = HttpServer.create(InetSocketAddress(port), backlog)
-  private val handler = new HttpHandler:
-    override def handle(exchange: HttpExchange): Unit =
-      val json = Source.fromInputStream( exchange.getRequestBody )(Codec.UTF8).mkString("")
-      val command = readFromString[Command](json)
-
-      val event = dispatcher.dispatch(command)
-      event match
-        case fault @ Fault(cause, _) =>
-          logger.error(cause)
-          store.addFault(fault)
-        case _ =>
-      val response = writeToString[Event](event)
-
-      exchange.sendResponseHeaders(200, response.length())
-      exchange.getResponseHeaders().add("Content-Type", "application/json; charset=UTF-8")
-
-      val outputStream = exchange.getResponseBody
-      outputStream.write(response.getBytes())
-      outputStream.flush()
-      outputStream.close()
+  private val handler = Handler(dispatcher, store, logger)
 
   @main def main(): Unit =
     http.setExecutor(Executors.newVirtualThreadPerTaskExecutor())
