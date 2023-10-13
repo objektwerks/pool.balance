@@ -38,10 +38,10 @@ Client Assembly
 Execute Client
 --------------
 >To execute an assembled jar locally:
-1. java -jar .assembly/pool-balance-mac-0.27.jar
-2. java -jar .assembly/pool-balance-m1-0.27.jar
-3. java -jar .assembly/pool-balance-win-0.27.jar
-4. java -jar .assembly/pool-balance-linux-0.27.jar
+1. java -jar .assembly/pool-balance-mac-0.28.jar
+2. java -jar .assembly/pool-balance-m1-0.28.jar
+3. java -jar .assembly/pool-balance-win-0.28.jar
+4. java -jar .assembly/pool-balance-linux-0.28.jar
 
 Deploy
 ------
