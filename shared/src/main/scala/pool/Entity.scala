@@ -5,7 +5,6 @@ import java.util.UUID
 
 import scalafx.Includes.*
 import scalafx.beans.property.ObjectProperty
-import scala.util.Random
 
 enum UnitOfMeasure:
   case gl, l, lb, kg, tablet
@@ -27,22 +26,6 @@ enum TypeOfChemical(val display: String):
   case Algaecide extends TypeOfChemical("Algaecide")
   case MuriaticAcid extends TypeOfChemical("Muriatic Acid")
   case Salt extends TypeOfChemical("Salt")
-
-object Pin:
-  private val specialChars = "~!@#$%^&*-+=<>?/:;".toList
-  private val random = new Random
-
-  private def newSpecialChar: Char = specialChars(random.nextInt(specialChars.length))
-
-  def newInstance: String =
-    Random.shuffle(
-      Random
-        .alphanumeric
-        .take(5)
-        .mkString
-        .prepended(newSpecialChar)
-        .appended(newSpecialChar)
-    ).mkString
 
 object TypeOfChemical:
   def toEnum(display: String): TypeOfChemical = TypeOfChemical.valueOf(display.filterNot(_.isWhitespace))
