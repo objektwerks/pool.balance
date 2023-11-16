@@ -5,7 +5,8 @@ Pool Balance
 Todo
 ----
 1. Refactor dashboard <== bindings.
-   
+2. Test client.
+
 Build
 -----
 1. sbt clean compile
