@@ -177,6 +177,7 @@ Environment
 ```
 export POOL_BALANCE_HOST="127.0.0.1"
 export POOL_BALANCE_PORT=7272
+export POOL_BALANCE_ENDPOINT="/command"
 
 export POOL_BALANCE_POSTGRESQL_URL="jdbc:postgresql://localhost:5432/poolbalance"
 export POOL_BALANCE_POSTGRESQL_USER="yourusername"
