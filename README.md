@@ -1,6 +1,6 @@
 Pool Balance
 ------------
->Pool cleaning, measurement and chemical balancing distributed app using ScalaFX, ScalikeJdbc, Jsoniter, JoddMail, Helidon, PostgreSql and Scala 3.
+>Pool cleaning, measurement and chemical balancing distributed app using ScalaFX, ScalikeJdbc, Jsoniter, JoddMail, PostgreSql, Helidon and Scala 3.
 
 Todo
 ----
