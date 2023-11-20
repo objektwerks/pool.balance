@@ -72,7 +72,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     observableFaults += fault.copy(cause = cause)
 
   def add(fault: Fault): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       AddFault(objectAccount.get.license, fault),
       (event: Event) => event match
         case fault @ Fault(cause, _) => onFetchFault("Model.add fault", fault)
@@ -83,7 +83,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def register(register: Register): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       register,
       (event: Event) => event match
         case fault @ Fault(_, _) => registered.set(false)
@@ -92,7 +92,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def login(login: Login): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       login,
       (event: Event) => event match
         case fault @ Fault(_, _) => loggedin.set(false)
@@ -103,7 +103,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def deactivate(deactivate: Deactivate): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       deactivate,
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.deactivate", fault)
@@ -112,7 +112,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def reactivate(reactivate: Reactivate): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       reactivate,
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.reactivate", fault)
@@ -121,7 +121,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def pools(): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       ListPools(objectAccount.get.license),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.pools", fault)
@@ -132,7 +132,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def add(selectedIndex: Int, pool: Pool)(runLast: => Unit): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       SavePool(objectAccount.get.license, pool),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.save pool", pool, fault)
@@ -145,7 +145,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def update(selectedIndex: Int, pool: Pool)(runLast: => Unit): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       SavePool(objectAccount.get.license, pool),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.save pool", pool, fault)
@@ -156,7 +156,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def cleanings(poolId: Long): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       ListCleanings(objectAccount.get.license, poolId),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.cleanings", fault)
@@ -167,7 +167,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def add(selectedIndex: Int, cleaning: Cleaning)(runLast: => Unit): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       SaveCleaning(objectAccount.get.license, cleaning),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.save cleaning", cleaning, fault)
@@ -180,7 +180,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def update(selectedIndex: Int, cleaning: Cleaning)(runLast: => Unit): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       SaveCleaning(objectAccount.get.license, cleaning),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.save cleaning", cleaning, fault)
@@ -191,7 +191,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def measurements(poolId: Long): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       ListMeasurements(objectAccount.get.license, poolId),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.measurements", fault)
@@ -202,7 +202,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def add(selectedIndex: Int, measurement: Measurement)(runLast: => Unit): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       SaveMeasurement(objectAccount.get.license, measurement),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.save measurement", measurement, fault)
@@ -215,7 +215,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def update(selectedIndex: Int, measurement: Measurement)(runLast: => Unit): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       SaveMeasurement(objectAccount.get.license, measurement),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.save measurement", measurement, fault)
@@ -226,7 +226,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def chemicals(poolId: Long): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       ListChemicals(objectAccount.get.license, poolId),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.chemicals", fault)
@@ -237,7 +237,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
   
   def add(selectedIndex: Int, chemical: Chemical)(runLast: => Unit): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       SaveChemical(objectAccount.get.license, chemical),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.save chemical", chemical, fault)
@@ -250,7 +250,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def update(selectedIndex: Int, chemical: Chemical)(runLast: => Unit): Unit =
-    fetcher.fetchAsync(
+    fetcher.fetch(
       SaveChemical(objectAccount.get.license, chemical),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.save chemical", chemical, fault)
