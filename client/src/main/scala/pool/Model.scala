@@ -25,7 +25,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val selectedChemicalId = ObjectProperty[Long](0)
 
   selectedPoolId.onChange { (_, oldPoolId, newPoolId) =>
-    logger.info(s"*** selected pool id onchange event: $oldPoolId -> $newPoolId")
+    logger.info("*** selected pool id onchange event: {} -> {}", oldPoolId, newPoolId)
     shouldBeInFxThread("*** selected pool id onchange should be in fx thread.")
     cleanings(newPoolId)
     measurements(newPoolId)
@@ -40,35 +40,35 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val observableFaults = ObservableBuffer[Fault]()
 
   objectAccount.onChange { (_, oldAccount, newAccount) =>
-    logger.info(s"*** object account onchange event: $oldAccount -> $newAccount")
+    logger.info("*** object account onchange event: {} -> {}", oldAccount, newAccount)
   }
 
   observablePools.onChange { (_, changes) =>
-    logger.info(s"*** observable pools onchange event: $changes")
+    logger.info("*** observable pools onchange event: {}", changes)
   }
 
   observableCleanings.onChange { (_, changes) =>
-    logger.info(s"*** observable cleanings onchange event: $changes")
+    logger.info("*** observable cleanings onchange event: {}", changes)
   }
 
-  observableMeasurements.onChange { (_, _) =>
-    logger.info(s"*** observable measurements onchange event.")
+  observableMeasurements.onChange { (_, changes) =>
+    logger.info("*** observable measurements onchange event: {}", changes)
     shouldNotBeInFxThread("***observable measurements onchange should not be in fx thread.")
     Platform.runLater( dashboard() )
   }
 
   observableChemicals.onChange { (_, changes) =>
-    logger.info(s"*** observable chemicals onchange event: $changes")
+    logger.info("*** observable chemicals onchange event: {}", changes)
   }
 
   def onFetchFault(source: String, fault: Fault): Unit =
     val cause = s"$source - $fault"
-    logger.error(s"*** Cause: $cause")
+    logger.error(s"*** cause: $cause")
     observableFaults += fault.copy(cause = cause)
 
   def onFetchFault(source: String, entity: Entity, fault: Fault): Unit =
     val cause = s"$source - $entity - $fault"
-    logger.error(s"*** Cause: $cause")
+    logger.error(s"*** cause: $cause")
     observableFaults += fault.copy(cause = cause)
 
   def add(fault: Fault): Unit =
