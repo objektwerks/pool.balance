@@ -4,7 +4,7 @@ val scalatestVersion = "3.2.17"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
-  version := "0.34",
+  version := "0.35-SNAPSHOT",
   scalaVersion := "3.3.1",
   scalacOptions ++= Seq(
     "-Wunused:all"
@@ -70,11 +70,11 @@ lazy val poolbalance = (project in file("."))
     case _ => ""
   }
 
-  if (OS == "mac") assemblyJarName := "pool-balance-mac-0.34.jar"
-  else if (OS == "mac-aarch64") assemblyJarName := "pool-balance-m1-0.34.jar"
-  else if (OS == "win") assemblyJarName := "pool-balance-win-0.34.jar"
-  else if (OS == "linux") assemblyJarName := "pool-balance-linux-0.34.jar"
-  else assemblyJarName := "pool-balance-no-valid-target-specified-0.34.jar"
+  if (OS == "mac") assemblyJarName := "pool-balance-mac-0.35.jar"
+  else if (OS == "mac-aarch64") assemblyJarName := "pool-balance-m1-0.35.jar"
+  else if (OS == "win") assemblyJarName := "pool-balance-win-0.35.jar"
+  else if (OS == "linux") assemblyJarName := "pool-balance-linux-0.35.jar"
+  else assemblyJarName := "pool-balance-no-valid-target-specified-0.35.jar"
 
   client / assembly / assemblyMergeStrategy := {
     case PathList("META-INF", xs @ _*) => MergeStrategy.discard
