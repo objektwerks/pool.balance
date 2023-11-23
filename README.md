@@ -4,8 +4,7 @@ Pool Balance
 
 Todo
 ----
-1. Refactor dashboard <== bindings.
-2. Test client.
+1. Test client.
 
 Build
 -----
