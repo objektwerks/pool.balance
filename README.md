@@ -83,9 +83,9 @@ UI
 
 Charts
 ------
-* cleanings - line chart ( x = cleaned, y = count of true cleanings )
+* cleanings - line chart ( x = cleaned, y = count of [true] cleanings )
+* chemicals - line chart ( x = added, y = chemical )
 * measurements - line chart ( x = measured, y = measurement )
-* chemicals - bar chart ( x = added, y = amount/typeof )
 
 Measurements
 ------------
