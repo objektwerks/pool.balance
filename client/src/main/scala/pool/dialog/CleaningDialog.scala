@@ -8,7 +8,6 @@ import scalafx.scene.control.{ButtonType, CheckBox, DatePicker, Dialog}
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import pool.{Client, Context, Entity, Cleaning}
-import pool.Entity.*
 
 final class CleaningDialog(context: Context, cleaning: Cleaning) extends Dialog[Cleaning]:
   initOwner(Client.stage)
