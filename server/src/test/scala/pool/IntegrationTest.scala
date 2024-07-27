@@ -5,7 +5,6 @@ import com.typesafe.config.ConfigFactory
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
-import scala.concurrent.duration.*
 import scala.sys.process.Process
 
 import Validator.*
@@ -16,7 +15,9 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
 
   val config = ConfigFactory.load("test.conf")
 
-  val store = Store(config, Store.cache(minSize = 1, maxSize = 1, expireAfter = 1.hour))
+  val cache = Store.cache(config)
+  val dataSource = Store.dataSource(config)
+  val store = Store(cache, dataSource)
   val emailer = Emailer(config)
   val dispatcher = Dispatcher(store, emailer)
 
