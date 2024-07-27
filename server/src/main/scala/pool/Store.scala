@@ -5,6 +5,7 @@ import com.typesafe.config.Config
 import com.typesafe.scalalogging.LazyLogging
 import com.zaxxer.hikari.HikariDataSource
 
+import java.util.concurrent.TimeUnit
 import java.time.LocalDate
 import javax.sql.DataSource
 
@@ -12,13 +13,11 @@ import scalikejdbc.*
 import scala.concurrent.duration.FiniteDuration
 
 object Store:
-  def cache(minSize: Int,
-            maxSize: Int,
-            expireAfter: FiniteDuration): Cache[String, String] =
+  def cache(config: Config): Cache[String, String] =
     Scaffeine()
-      .initialCapacity(minSize)
-      .maximumSize(maxSize)
-      .expireAfterWrite(expireAfter)
+      .initialCapacity(config.getInt("cache.initialSize"))
+      .maximumSize(config.getInt("cache.maxSize"))
+      .expireAfterWrite( FiniteDuration( config.getLong("cache.expireAfter"), TimeUnit.HOURS) )
       .build[String, String]()
 
 final class Store(config: Config,
