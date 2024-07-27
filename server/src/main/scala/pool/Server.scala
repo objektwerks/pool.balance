@@ -6,8 +6,6 @@ import com.typesafe.scalalogging.LazyLogging
 import io.helidon.webserver.WebServer
 import io.helidon.webserver.http.HttpRouting
 
-import scala.concurrent.duration.DurationInt
-
 object Server extends LazyLogging:
   @main def main(): Unit =
     val config = ConfigFactory.load("server.conf")
@@ -15,7 +13,9 @@ object Server extends LazyLogging:
     val port = config.getInt("server.port")
     val endpoint = config.getString("server.endpoint")
 
-    val store = Store(config, Store.cache(minSize = 4, maxSize = 10, expireAfter = 24.hour))
+    val cache = Store.cache(config)
+    val dataSource = Store.dataSource(config)
+    val store = Store(cache, dataSource)
     val emailer = Emailer(config)
     val dispatcher = Dispatcher(store, emailer)
 
