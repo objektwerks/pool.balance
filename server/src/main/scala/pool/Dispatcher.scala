@@ -150,8 +150,9 @@ final class Dispatcher(store: Store,
   private def saveMeasurement(measurement: Measurement)(using IO): Event =
     Try:
       MeasurementSaved(
-        if measurement.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addMeasurement(measurement) )
-        else retry( RetryConfig.delay(1, 100.millis) )( store.updateMeasurement(measurement) )
+        supervised:
+          if measurement.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addMeasurement(measurement) )
+          else retry( RetryConfig.delay(1, 100.millis) )( store.updateMeasurement(measurement) )
       )
     .recover:
       case NonFatal(error) => Fault("Save measurement failed:", error)
