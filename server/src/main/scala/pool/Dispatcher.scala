@@ -126,14 +126,15 @@ final class Dispatcher(store: Store,
       case NonFatal(error) => Fault("List cleanings failed:", error)
     .get
 
-  private def saveCleaning(cleaning: Cleaning): Event =
-    Try {
+  private def saveCleaning(cleaning: Cleaning)(using IO): Event =
+    Try:
       CleaningSaved(
-        if cleaning.id == 0 then store.addCleaning(cleaning)
-        else store.updateCleaning(cleaning)
+        if cleaning.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addCleaning(cleaning) )
+        else retry( RetryConfig.delay(1, 100.millis) )( store.updateCleaning(cleaning) )
       )
-    }.recover { case NonFatal(error) => Fault("Save cleaning failed:", error) }
-     .get
+    .recover:
+      case NonFatal(error) => Fault("Save cleaning failed:", error)
+    .get
 
   private def listMeasurements(poolId: Long): Event =
     Try {
