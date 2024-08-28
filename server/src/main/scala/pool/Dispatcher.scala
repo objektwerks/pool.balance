@@ -5,10 +5,6 @@ import scala.util.control.NonFatal
 
 import Validator.*
 
-sealed trait Security
-case object Authorized extends Security
-final case class Unauthorized(cause: String) extends Security
-
 final class Dispatcher(store: Store,
                        emailer: Emailer):
   def dispatch(command: Command): Event =
@@ -132,7 +128,7 @@ final class Dispatcher(store: Store,
     Try {
       ChemicalsListed( store.listChemicals(poolId) )
     }.recover { case NonFatal(error) => Fault("List chemicals failed:", error) }
-     .get    
+     .get
 
   private def saveChemical(chemical: Chemical): Event =
     Try {
