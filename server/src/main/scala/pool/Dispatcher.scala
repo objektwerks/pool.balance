@@ -105,14 +105,16 @@ final class Dispatcher(store: Store,
       case NonFatal(error) => Fault("List pools failed:", error)
     .get
 
-  private def savePool(pool: Pool): Event =
-    Try {
+  private def savePool(pool: Pool)(using IO): Event =
+    Try:
       PoolSaved(
-        if pool.id == 0 then store.addPool(pool)
-        else store.updatePool(pool)
+        supervised:
+          if pool.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addPool(pool) )
+          else retry( RetryConfig.delay(1, 100.millis) )( store.updatePool(pool) )
       )
-    }.recover { case NonFatal(error) => Fault("Save pool failed:", error) }
-     .get
+    .recover:
+      case NonFatal(error) => Fault("Save pool failed:", error)
+    .get
 
   private def listCleanings(poolId: Long): Event =
     Try {
