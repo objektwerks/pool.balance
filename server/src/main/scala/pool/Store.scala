@@ -52,14 +52,6 @@ final class Store(cache: Cache[String, String],
         .single()
     }
 
-  def isEmailAddressUnique(emailAddress: String): Boolean =
-    val count = DB readOnly { implicit session =>
-      sql"select id from account where email_address = $emailAddress"
-        .map(rs => rs.long("id"))
-        .single()
-    }
-    if count.isDefined then false else true
-
   def isAuthorized(license: String): Boolean =
     cache.getIfPresent(license) match
       case Some(_) => true
@@ -151,8 +143,8 @@ final class Store(cache: Cache[String, String],
           Pool(
             rs.long("id"),
             rs.string("license"),
-            rs.string("name"), 
-            rs.int("volume"), 
+            rs.string("name"),
+            rs.int("volume"),
             rs.string("unit")
           )
         )
