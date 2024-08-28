@@ -129,8 +129,9 @@ final class Dispatcher(store: Store,
   private def saveCleaning(cleaning: Cleaning)(using IO): Event =
     Try:
       CleaningSaved(
-        if cleaning.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addCleaning(cleaning) )
-        else retry( RetryConfig.delay(1, 100.millis) )( store.updateCleaning(cleaning) )
+        supervised:
+          if cleaning.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addCleaning(cleaning) )
+          else retry( RetryConfig.delay(1, 100.millis) )( store.updateCleaning(cleaning) )
       )
     .recover:
       case NonFatal(error) => Fault("Save cleaning failed:", error)
