@@ -168,14 +168,16 @@ final class Dispatcher(store: Store,
       case NonFatal(error) => Fault("List chemicals failed:", error)
     .get
 
-  private def saveChemical(chemical: Chemical): Event =
-    Try {
+  private def saveChemical(chemical: Chemical)(using IO): Event =
+    Try:
       ChemicalSaved(
-        if chemical.id == 0 then store.addChemical(chemical)
-        else store.updateChemical(chemical)
+        supervised:
+          if chemical.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addChemical(chemical) )
+          else retry( RetryConfig.delay(1, 100.millis) )( store.updateChemical(chemical) )
       )
-    }.recover { case NonFatal(error) => Fault("Save chemical failed:", error) }
-     .get
+    .recover:
+      case NonFatal(error) => Fault("Save chemical failed:", error)
+    .get
 
   private def addFault(fault: Fault): Event =
     Try {
