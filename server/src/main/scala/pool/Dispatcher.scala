@@ -9,8 +9,7 @@ import scala.util.control.NonFatal
 
 import Validator.*
 
-final class Dispatcher(store: Store,
-                       emailer: Emailer):
+final class Dispatcher(store: Store, emailer: Emailer):
   def dispatch(command: Command): Event =
     IO.unsafe:
       command.isValid match
