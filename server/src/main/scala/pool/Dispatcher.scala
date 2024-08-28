@@ -158,11 +158,15 @@ final class Dispatcher(store: Store,
       case NonFatal(error) => Fault("Save measurement failed:", error)
     .get
 
-  private def listChemicals(poolId: Long): Event =
-    Try {
-      ChemicalsListed( store.listChemicals(poolId) )
-    }.recover { case NonFatal(error) => Fault("List chemicals failed:", error) }
-     .get
+  private def listChemicals(poolId: Long)(using IO): Event =
+    Try:
+      ChemicalsListed(
+        supervised:
+          retry( RetryConfig.delay(1, 100.millis) )( store.listChemicals(poolId) )
+      )
+    .recover:
+      case NonFatal(error) => Fault("List chemicals failed:", error)
+    .get
 
   private def saveChemical(chemical: Chemical): Event =
     Try {
