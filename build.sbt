@@ -1,7 +1,7 @@
 val helidonVersion = "4.1.0"
 val scalafxVersion = "22.0.0-R33"
 val logbackVersion = "1.5.7"
-val scalatestVersion = "3.2.19"
+val scalaTestVersion = "3.2.19"
 val oxVersion = "0.3.3"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
@@ -120,7 +120,7 @@ lazy val shared = project
          exclude("org.openjfx", "javafx-media")
          exclude("org.openjfx", "javafx-swing")
          exclude("org.openjfx", "javafx-web"),
-        "org.scalatest" %% "scalatest" % scalatestVersion % Test
+        "org.scalatest" %% "scalatest" % scalaTestVersion % Test
       )
     }
   )
