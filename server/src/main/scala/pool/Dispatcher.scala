@@ -94,14 +94,13 @@ final class Dispatcher(store: Store, emailer: Emailer):
     )
 
   private def listPools(license: String)(using IO): Event =
-    Try:
+    try
       PoolsListed(
         supervised:
           retry( RetryConfig.delay(1, 100.millis) )( store.listPools(license) )
       )
-    .recover:
+    catch
       case NonFatal(error) => Fault("List pools failed:", error)
-    .get
 
   private def savePool(pool: Pool)(using IO): Event =
     Try:
