@@ -103,15 +103,14 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case NonFatal(error) => Fault("List pools failed:", error)
 
   private def savePool(pool: Pool)(using IO): Event =
-    Try:
+    try
       PoolSaved(
         supervised:
           if pool.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addPool(pool) )
           else retry( RetryConfig.delay(1, 100.millis) )( store.updatePool(pool) )
       )
-    .recover:
+    catch
       case NonFatal(error) => Fault("Save pool failed:", error)
-    .get
 
   private def listCleanings(poolId: Long)(using IO): Event =
     Try:
