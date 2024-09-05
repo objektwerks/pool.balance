@@ -122,15 +122,14 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case NonFatal(error) => Fault("List cleanings failed:", error)
 
   private def saveCleaning(cleaning: Cleaning)(using IO): Event =
-    Try:
+    try
       CleaningSaved(
         supervised:
           if cleaning.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addCleaning(cleaning) )
           else retry( RetryConfig.delay(1, 100.millis) )( store.updateCleaning(cleaning) )
       )
-    .recover:
+    catch
       case NonFatal(error) => Fault("Save cleaning failed:", error)
-    .get
 
   private def listMeasurements(poolId: Long)(using IO): Event =
     Try:
