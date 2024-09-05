@@ -160,15 +160,14 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case NonFatal(error) => Fault("List chemicals failed:", error)
 
   private def saveChemical(chemical: Chemical)(using IO): Event =
-    Try:
+    try
       ChemicalSaved(
         supervised:
           if chemical.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addChemical(chemical) )
           else retry( RetryConfig.delay(1, 100.millis) )( store.updateChemical(chemical) )
       )
-    .recover:
+    catch
       case NonFatal(error) => Fault("Save chemical failed:", error)
-    .get
 
   private def addFault(fault: Fault)(using IO): Event =
     Try:
