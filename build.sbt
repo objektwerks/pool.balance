@@ -21,8 +21,7 @@ lazy val poolbalance = (project in file("."))
     publishLocal := {}
   )
 
-// Begin: Client Assembly Tasks
-
+// Begin: Assembly Tasks
   lazy val createAssemblyDir = taskKey[File]("Create assembly dir.")
   createAssemblyDir := {
     import java.nio.file._
@@ -52,8 +51,7 @@ lazy val poolbalance = (project in file("."))
 
     Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING)
   }
-
-// End: Client Assembly Tasks
+// End: Assembly Tasks
 
 // Begin: Client Assembly
 
