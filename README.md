@@ -1,6 +1,6 @@
 Pool Balance
 ------------
->Pool balance app using ScalaFx, ScalikeJdbc, Jsoniter, JoddMail, PostgreSql, Helidon, Ox and Scala 3.
+>Pool balance app using ScalaFx, ScalikeJdbc, Jsoniter, JoddMail, PostgreSql, HikariCP, Helidon, Ox and Scala 3.
 
 Todo
 ----
