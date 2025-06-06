@@ -1,7 +1,8 @@
 package pool
 
 import ox.supervised
-import ox.resilience.{retry, RetryConfig}
+import ox.resilience.retry
+import ox.scheduling.Schedule
 
 import scala.concurrent.duration.*
 import scala.util.Try
@@ -37,7 +38,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case license: License =>
         try
           supervised:
-            retry( RetryConfig.delay(1, 100.millis) )(
+            retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )(
               if store.isAuthorized(license.license) then Authorized
               else Unauthorized(s"Unauthorized: $command")
             )
@@ -54,7 +55,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
       supervised:
         val account = Account(emailAddress = emailAddress)
         val message = s"Your new pin is: ${account.pin}\n\nWelcome aboard!"
-        val result = retry( RetryConfig.delay(1, 600.millis) )( sendEmail(account.emailAddress, message) )
+        val result = retry( Schedule.fixedInterval(600.millis).maxRepeats(1) )( sendEmail(account.emailAddress, message) )
         if result then
           Registered( store.register(account) )
         else
@@ -65,7 +66,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def login(emailAddress: String, pin: String): Event =
     Try:
       supervised:
-        retry( RetryConfig.delay(1, 100.millis) )( store.login(emailAddress, pin) )
+        retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.login(emailAddress, pin) )
     .fold(
       error => Fault("Login failed:", error),
       optionalAccount =>
@@ -76,7 +77,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def deactivateAccount(license: String): Event =
     Try:
       supervised:
-        retry( RetryConfig.delay(1, 100.millis) )( store.deactivateAccount(license) )
+        retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.deactivateAccount(license) )
     .fold(
       error => Fault("Deactivate account failed:", error),
       optionalAccount =>
@@ -87,7 +88,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def reactivateAccount(license: String): Event =
     Try:
       supervised:
-        retry( RetryConfig.delay(1, 100.millis) )( store.reactivateAccount(license) )
+        retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.reactivateAccount(license) )
     .fold(
       error => Fault("Reactivate account failed:", error),
       optionalAccount =>
@@ -99,7 +100,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       PoolsListed(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.listPools(license) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listPools(license) )
       )
     catch
       case NonFatal(error) => Fault("List pools failed:", error)
@@ -108,8 +109,8 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       PoolSaved(
         supervised:
-          if pool.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addPool(pool) )
-          else retry( RetryConfig.delay(1, 100.millis) )( store.updatePool(pool) )
+          if pool.id == 0 then retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addPool(pool) )
+          else retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updatePool(pool) )
       )
     catch
       case NonFatal(error) => Fault("Save pool failed:", error)
@@ -118,7 +119,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       CleaningsListed(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.listCleanings(poolId) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listCleanings(poolId) )
       )
     catch
       case NonFatal(error) => Fault("List cleanings failed:", error)
@@ -127,8 +128,8 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       CleaningSaved(
         supervised:
-          if cleaning.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addCleaning(cleaning) )
-          else retry( RetryConfig.delay(1, 100.millis) )( store.updateCleaning(cleaning) )
+          if cleaning.id == 0 then retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addCleaning(cleaning) )
+          else retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateCleaning(cleaning) )
       )
     catch
       case NonFatal(error) => Fault("Save cleaning failed:", error)
@@ -137,7 +138,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       MeasurementsListed(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.listMeasurements(poolId) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listMeasurements(poolId) )
       )
     catch
       case NonFatal(error) => Fault("List measurements failed:", error)
@@ -146,8 +147,8 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       MeasurementSaved(
         supervised:
-          if measurement.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addMeasurement(measurement) )
-          else retry( RetryConfig.delay(1, 100.millis) )( store.updateMeasurement(measurement) )
+          if measurement.id == 0 then retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addMeasurement(measurement) )
+          else retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateMeasurement(measurement) )
       )
     catch
       case NonFatal(error) => Fault("Save measurement failed:", error)
@@ -156,7 +157,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       ChemicalsListed(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.listChemicals(poolId) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listChemicals(poolId) )
       )
     catch
       case NonFatal(error) => Fault("List chemicals failed:", error)
@@ -165,8 +166,8 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       ChemicalSaved(
         supervised:
-          if chemical.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addChemical(chemical) )
-          else retry( RetryConfig.delay(1, 100.millis) )( store.updateChemical(chemical) )
+          if chemical.id == 0 then retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addChemical(chemical) )
+          else retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateChemical(chemical) )
       )
     catch
       case NonFatal(error) => Fault("Save chemical failed:", error)
@@ -174,7 +175,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def addFault(fault: Fault): Event =
     try
       supervised:
-        retry( RetryConfig.delay(1, 100.millis) )( store.addFault(fault) )
+        retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addFault(fault) )
         FaultAdded()
     catch
       case NonFatal(error) => Fault("Add fault failed:", error)
