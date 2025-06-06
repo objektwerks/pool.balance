@@ -29,19 +29,11 @@ Package Server
 
 Client Assembly
 ---------------
->To build for a "mac", "m1', "win" or "linux" os target:
-1. sbt -Dtarget="mac" clean test assembly copyAssemblyJar
-2. sbt -Dtarget="m1" clean test assembly copyAssemblyJar
-3. sbt -Dtarget="win" clean test assembly copyAssemblyJar
-4. sbt -Dtarget="linux" clean test assembly copyAssemblyJar
+1. sbt clean test assembly copyAssemblyJar
 
 Execute Client
 --------------
->To execute an assembled jar locally:
-1. java -jar .assembly/pool-balance-mac-0.50.jar
-2. java -jar .assembly/pool-balance-m1-0.50.jar
-3. java -jar .assembly/pool-balance-win-0.50.jar
-4. java -jar .assembly/pool-balance-linux-0.50.jar
+1. java -jar .assembly/pool-balance-$version.jar ( or double-click executable jar )
 
 Deploy
 ------
