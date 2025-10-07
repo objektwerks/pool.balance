@@ -237,9 +237,12 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         (event: Event) => event match
           case fault @ Fault(_, _) => onFetchFault("Model.save measurement", measurement, fault)
           case MeasurementSaved(id) =>
-            observableMeasurements.update(selectedIndex, measurement)
-            logger.info(s"Updated measurement from: $selectedIndex to: $measurement")
-            runLast
+            if selectedIndex > -1 then
+              observableMeasurements.update(selectedIndex, measurement)
+              logger.info(s"Updated measurement from: $selectedIndex to: $measurement")
+              runLast
+            else
+              logger.error(s"Update of measurement: $measurement \nfailed due to invalid index: $selectedIndex")
           case _ => ()
       )
 
