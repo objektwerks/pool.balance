@@ -109,8 +109,8 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       PoolSaved(
         supervised:
-          if pool.id == 0 then retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addPool(pool) )
-          else retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updatePool(pool) )
+          if pool.id == 0 then retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.addPool(pool) )
+          else retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.updatePool(pool) )
       )
     catch
       case NonFatal(error) => Fault("Save pool failed:", error)
