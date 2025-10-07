@@ -97,7 +97,7 @@ final class CleaningsPane(context: Context, model: Model) extends VBox:
 
   def add(): Unit =
     CleaningDialog(context, Cleaning(poolId = model.selectedPoolId.value)).showAndWait() match
-      case Some(cleaning: Cleaning) => model.add(0, cleaning){ tableView.selectionModel().select(0) }
+      case Some(cleaning: Cleaning) => model.add(cleaning){ tableView.selectionModel().select(0) }
       case _ =>
 
   def update(): Unit =

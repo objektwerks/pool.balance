@@ -86,7 +86,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetch(
       register,
       (event: Event) => event match
-        case fault @ Fault(_, _) => registered.set(false)
+        case _ @ Fault(_, _) => registered.set(false)
         case Registered(account) => objectAccount.set(account)
         case _ => ()
     )
@@ -95,7 +95,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetch(
       login,
       (event: Event) => event match
-        case fault @ Fault(_, _) => loggedin.set(false)
+        case _ @ Fault(_, _) => loggedin.set(false)
         case LoggedIn(account) =>
           objectAccount.set(account)
           pools()
@@ -131,7 +131,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def add(selectedIndex: Int, pool: Pool)(runLast: => Unit): Unit =
+  def add(pool: Pool)(runLast: => Unit): Unit =
     fetcher.fetch(
       SavePool(objectAccount.get.license, pool),
       (event: Event) => event match
@@ -166,7 +166,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def add(selectedIndex: Int, cleaning: Cleaning)(runLast: => Unit): Unit =
+  def add(cleaning: Cleaning)(runLast: => Unit): Unit =
     fetcher.fetch(
       SaveCleaning(objectAccount.get.license, cleaning),
       (event: Event) => event match
@@ -201,7 +201,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def add(selectedIndex: Int, measurement: Measurement)(runLast: => Unit): Unit =
+  def add(measurement: Measurement)(runLast: => Unit): Unit =
     fetcher.fetch(
       SaveMeasurement(objectAccount.get.license, measurement),
       (event: Event) => event match
@@ -236,7 +236,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
   
-  def add(selectedIndex: Int, chemical: Chemical)(runLast: => Unit): Unit =
+  def add(chemical: Chemical)(runLast: => Unit): Unit =
     fetcher.fetch(
       SaveChemical(objectAccount.get.license, chemical),
       (event: Event) => event match
