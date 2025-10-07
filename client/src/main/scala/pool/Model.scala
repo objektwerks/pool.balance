@@ -128,17 +128,20 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       )
 
   def add(pool: Pool)(runLast: => Unit): Unit =
-    fetcher.fetch(
-      SavePool(objectAccount.get.license, pool),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.save pool", pool, fault)
-        case PoolSaved(id) =>
-          observablePools += pool.copy(id = id)
-          observablePools.sort()
-          selectedPoolId.set(id)
-          runLast
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"add pool: $pool")
+      fetcher.fetch(
+        SavePool(objectAccount.get.license, pool),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("add pool", pool, fault)
+          case PoolSaved(id) =>
+            observablePools.insert(0, pool.copy(id = id))
+            observablePools.sort()
+            selectedPoolId.set(id)
+            logger.info(s"Added pool: $pool")
+            runLast
+          case _ => ()
+      )
 
   def update(selectedIndex: Int, pool: Pool)(runLast: => Unit): Unit =
     fetcher.fetch(
