@@ -232,15 +232,17 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def chemicals(poolId: Long): Unit =
-    fetcher.fetch(
-      ListChemicals(objectAccount.get.license, poolId),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.chemicals", fault)
-        case ChemicalsListed(chemicals) =>
-          observableChemicals.clear()
-          observableChemicals ++= chemicals
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"list chemicals, pool id: $poolId")
+      fetcher.fetch(
+        ListChemicals(objectAccount.get.license, poolId),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("chemicals", fault)
+          case ChemicalsListed(chemicals) =>
+            observableChemicals.clear()
+            observableChemicals ++= chemicals
+          case _ => ()
+      )
   
   def add(chemical: Chemical)(runLast: => Unit): Unit =
     fetcher.fetch(
