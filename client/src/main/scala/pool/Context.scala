@@ -12,6 +12,9 @@ final class Context(config: Config):
   val url = config.getString("url")
   val endpoint = config.getString("endpoint")
 
+  val aboutAlertHeaderText = config.getString("about.alert.headerText")
+  val aboutAlertContentText = config.getString("about.alert.contentText")
+
   val errorServer = config.getString("error.server")
   val errorRegister = config.getString("error.register")
   val errorLogin = config.getString("error.login")
