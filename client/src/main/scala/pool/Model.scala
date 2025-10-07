@@ -171,17 +171,20 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       )
 
   def add(cleaning: Cleaning)(runLast: => Unit): Unit =
-    fetcher.fetch(
-      SaveCleaning(objectAccount.get.license, cleaning),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.save cleaning", cleaning, fault)
-        case CleaningSaved(id) =>
-          observableCleanings += cleaning.copy(id = id)
-          observableCleanings.sort()
-          selectedCleaningId.set(id)
-          runLast
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"add cleaning: $cleaning")
+      fetcher.fetch(
+        SaveCleaning(objectAccount.get.license, cleaning),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("add cleaning", cleaning, fault)
+          case CleaningSaved(id) =>
+            observableCleanings.insert(0, cleaning.copy(id = id))
+            observableCleanings.sort()
+            selectedCleaningId.set(id)
+            logger.info(s"Added cleaning: $cleaning")
+            runLast
+          case _ => ()
+      )
 
   def update(selectedIndex: Int, cleaning: Cleaning)(runLast: => Unit): Unit =
     fetcher.fetch(
