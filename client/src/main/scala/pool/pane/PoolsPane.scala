@@ -87,6 +87,7 @@ final class PoolsPane(context: Context, model: Model) extends VBox:
     if selectedItem != null then
       model.selectedPoolId.value = selectedItem.id
       editButton.disable = false
+    else editButton.disable = true
   }
 
   def add(): Unit =
