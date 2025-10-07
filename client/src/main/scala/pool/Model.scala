@@ -273,15 +273,18 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       )
 
   def update(selectedIndex: Int, chemical: Chemical)(runLast: => Unit): Unit =
-    fetcher.fetch(
-      SaveChemical(objectAccount.get.license, chemical),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.save chemical", chemical, fault)
-        case ChemicalSaved(id) =>
-          observableChemicals.update(selectedIndex, chemical)
-          runLast
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"update chemical from: $selectedIndex to: $chemical")
+      fetcher.fetch(
+        SaveChemical(objectAccount.get.license, chemical),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("update chemical", chemical, fault)
+          case ChemicalSaved(id) =>
+            observableChemicals.update(selectedIndex, chemical)
+            logger.info(s"Updated chemical from: $selectedIndex to: $chemical")
+            runLast
+          case _ => ()
+      )
 
   val currentTotalChlorine = ObjectProperty[Int](0)
   val averageTotalChlorine = ObjectProperty[Int](0)
