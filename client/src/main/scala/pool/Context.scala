@@ -15,6 +15,10 @@ final class Context(config: Config):
   val aboutAlertHeaderText = config.getString("about.alert.headerText")
   val aboutAlertContentText = config.getString("about.alert.contentText")
 
+  val menuMenu = config.getString("menu.menu")
+  val menuAbout = config.getString("menu.about")
+  val menuExit = config.getString("menu.exit")
+
   val errorServer = config.getString("error.server")
   val errorRegister = config.getString("error.register")
   val errorLogin = config.getString("error.login")
