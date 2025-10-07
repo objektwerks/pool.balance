@@ -3,7 +3,6 @@ package pool
 import java.time.LocalDate
 import java.util.UUID
 
-import scalafx.Includes.*
 import scalafx.beans.property.ObjectProperty
 
 enum UnitOfMeasure:
