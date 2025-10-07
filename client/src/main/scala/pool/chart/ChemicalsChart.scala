@@ -8,7 +8,7 @@ import scalafx.geometry.Insets
 import scalafx.scene.chart.{LineChart, XYChart}
 import scalafx.scene.control.{Tab, TabPane}
 
-import pool.{Context, Model, TypeOfChemical}
+import pool.{Context, Model}
 import pool.TypeOfChemical.*
 
 final class ChemicalsChart(context: Context, model: Model) extends TabPane:
