@@ -104,13 +104,15 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       )
 
   def reactivate(reactivate: Reactivate): Unit =
-    fetcher.fetch(
-      reactivate,
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.reactivate", fault)
-        case Reactivated(account) => objectAccount.set(account)
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"reactivate: $reactivate")
+      fetcher.fetch(
+        reactivate,
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("Model.reactivate", fault)
+          case Reactivated(account) => objectAccount.set(account)
+          case _ => ()
+      )
 
   def pools(): Unit =
     fetcher.fetch(
