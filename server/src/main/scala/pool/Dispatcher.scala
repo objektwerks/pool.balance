@@ -128,8 +128,8 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       CleaningSaved(
         supervised:
-          if cleaning.id == 0 then retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addCleaning(cleaning) )
-          else retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateCleaning(cleaning) )
+          if cleaning.id == 0 then retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.addCleaning(cleaning) )
+          else retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.updateCleaning(cleaning) )
       )
     catch
       case NonFatal(error) => Fault("Save cleaning failed:", error)
