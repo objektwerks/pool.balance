@@ -61,7 +61,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       fetcher.fetch(
         AddFault(objectAccount.get.license, fault),
         (event: Event) => event match
-          case fault @ Fault(cause, _) => onFetchFault("Model.add fault", fault)
+          case fault @ Fault(cause, _) => onFetchFault("add fault", fault)
           case FaultAdded() =>
             observableFaults += fault
             observableFaults.sort()
@@ -98,7 +98,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       fetcher.fetch(
         deactivate,
         (event: Event) => event match
-          case fault @ Fault(_, _) => onFetchFault("Model.deactivate", fault)
+          case fault @ Fault(_, _) => onFetchFault("deactivate", fault)
           case Deactivated(account) => objectAccount.set(account)
           case _ => ()
       )
@@ -109,21 +109,23 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       fetcher.fetch(
         reactivate,
         (event: Event) => event match
-          case fault @ Fault(_, _) => onFetchFault("Model.reactivate", fault)
+          case fault @ Fault(_, _) => onFetchFault("reactivate", fault)
           case Reactivated(account) => objectAccount.set(account)
           case _ => ()
       )
 
   def pools(): Unit =
-    fetcher.fetch(
-      ListPools(objectAccount.get.license),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.pools", fault)
-        case PoolsListed(pools) =>
-          observablePools.clear()
-          observablePools ++= pools
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread("list pools")
+      fetcher.fetch(
+        ListPools(objectAccount.get.license),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("pools", fault)
+          case PoolsListed(pools) =>
+            observablePools.clear()
+            observablePools ++= pools
+          case _ => ()
+      )
 
   def add(pool: Pool)(runLast: => Unit): Unit =
     fetcher.fetch(
