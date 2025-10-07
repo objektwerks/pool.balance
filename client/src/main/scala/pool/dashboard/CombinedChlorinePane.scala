@@ -10,10 +10,10 @@ final class CombinedChlorinePane(context: Context, model: Model) extends Dashboa
   current.text <== model.currentCombinedChlorine.asString
   average.text <== model.averageCombinedChlorine.asString
 
-  model.currentCombinedChlorine.onChange { (_, oldValue, newValue) =>
+  model.currentCombinedChlorine.onChange { (_, _, newValue) =>
     if model.combinedChlorineInRange(newValue) then inRangeCurrent else outOfRangeCurrent
   }
 
-  model.averageCombinedChlorine.onChange { (_, oldValue, newValue) =>
+  model.averageCombinedChlorine.onChange { (_, _, newValue) =>
     if model.combinedChlorineInRange(newValue) then inRangeAverage else outOfRangeAverage
   }
