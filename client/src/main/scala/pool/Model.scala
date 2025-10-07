@@ -194,9 +194,12 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         (event: Event) => event match
           case fault @ Fault(_, _) => onFetchFault("update cleaning", cleaning, fault)
           case CleaningSaved(id) =>
-            observableCleanings.update(selectedIndex, cleaning)
-            logger.info(s"Updated cleaning from: $selectedIndex to: $cleaning")
-            runLast
+            if selectedIndex > -1 then
+              observableCleanings.update(selectedIndex, cleaning)
+              logger.info(s"Updated cleaning from: $selectedIndex to: $cleaning")
+              runLast
+            else
+              logger.error(s"Update of cleaning: $cleaning \nfailed due to invalid index: $selectedIndex")
           case _ => ()
       )
 
