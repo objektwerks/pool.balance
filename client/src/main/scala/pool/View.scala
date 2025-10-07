@@ -3,13 +3,15 @@ package pool
 import scalafx.geometry.{Insets, Orientation}
 import scalafx.scene.Scene
 import scalafx.scene.control.SplitPane
-import scalafx.scene.layout.{BorderPane, HBox, Priority, VBox}
+import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import pool.pane.{PoolsPane, TabbedPane}
 import pool.dashboard.DashboardPane
 
 final class View(context: Context, model: Model):
-  val borderPane = new BorderPane:
+  val menu = Menu(context)
+
+  val vbox = new VBox:
     prefWidth = context.windowWidth
     prefHeight = context.windowHeight
     padding = Insets(6)
@@ -30,9 +32,8 @@ final class View(context: Context, model: Model):
   splitPane.setDividerPositions(0.30, 0.70)
   VBox.setVgrow(splitPane, Priority.Always)
 
-  borderPane.top = dashboardPane
-  borderPane.center = splitPane
+  vbox.children = List(menu, dashboardPane, splitPane)
 
   val scene = new Scene:
-    root = borderPane
+    root = vbox
     stylesheets = List("/style.css")
