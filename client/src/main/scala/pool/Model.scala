@@ -159,7 +159,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def cleanings(poolId: Long): Unit =
     supervised:
-      assertNotInFxThread(s"list cleanings, swimmer id: $poolId")
+      assertNotInFxThread(s"list cleanings, pool id: $poolId")
       fetcher.fetch(
         ListCleanings(objectAccount.get.license, poolId),
         (event: Event) => event match
@@ -195,15 +195,17 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def measurements(poolId: Long): Unit =
-    fetcher.fetch(
-      ListMeasurements(objectAccount.get.license, poolId),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.measurements", fault)
-        case MeasurementsListed(measurements) =>
-          observableMeasurements.clear()
-          observableMeasurements ++= measurements
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"list measurements, pool id: $poolId")
+      fetcher.fetch(
+        ListMeasurements(objectAccount.get.license, poolId),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("measurements", fault)
+          case MeasurementsListed(measurements) =>
+            observableMeasurements.clear()
+            observableMeasurements ++= measurements
+          case _ => ()
+      )
 
   def add(measurement: Measurement)(runLast: => Unit): Unit =
     fetcher.fetch(
