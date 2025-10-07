@@ -251,17 +251,20 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       )
   
   def add(chemical: Chemical)(runLast: => Unit): Unit =
-    fetcher.fetch(
-      SaveChemical(objectAccount.get.license, chemical),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.save chemical", chemical, fault)
-        case ChemicalSaved(id) =>
-          observableChemicals += chemical.copy(id = id)
-          observableChemicals.sort()
-          selectedChemicalId.set(id)
-          runLast
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"add measurement: $measurement")
+      fetcher.fetch(
+        SaveChemical(objectAccount.get.license, chemical),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("add chemical", chemical, fault)
+          case ChemicalSaved(id) =>
+            observableChemicals.insert(0, chemical.copy(id = id))
+            observableChemicals.sort()
+            selectedChemicalId.set(id)
+            logger.info(s"Added chemical: $chemical")
+            runLast
+          case _ => ()
+      )
 
   def update(selectedIndex: Int, chemical: Chemical)(runLast: => Unit): Unit =
     fetcher.fetch(
