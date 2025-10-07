@@ -13,6 +13,11 @@ import Fault.given
 import Measurement.*
 
 final class Model(fetcher: Fetcher) extends LazyLogging:
+  def assertInFxThread(message: String, suffix: String = " should be in fx thread!"): Unit =
+    require(Platform.isFxApplicationThread, message + suffix)
+  def assertNotInFxThread(message: String, suffix: String = " should not be in fx thread!"): Unit =
+    require(!Platform.isFxApplicationThread, message + suffix)
+  
   val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
   val shouldNotBeInFxThread = (message: String) => require(!Platform.isFxApplicationThread, message)
 
