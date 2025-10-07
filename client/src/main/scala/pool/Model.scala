@@ -187,15 +187,18 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       )
 
   def update(selectedIndex: Int, cleaning: Cleaning)(runLast: => Unit): Unit =
-    fetcher.fetch(
-      SaveCleaning(objectAccount.get.license, cleaning),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.save cleaning", cleaning, fault)
-        case CleaningSaved(id) =>
-          observableCleanings.update(selectedIndex, cleaning)
-          runLast
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"update session from: $selectedIndex to: $cleaning")
+      fetcher.fetch(
+        SaveCleaning(objectAccount.get.license, cleaning),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("update cleaning", cleaning, fault)
+          case CleaningSaved(id) =>
+            observableCleanings.update(selectedIndex, cleaning)
+            logger.info(s"Updated cleaning from: $selectedIndex to: $cleaning")
+            runLast
+          case _ => ()
+      )
 
   def measurements(poolId: Long): Unit =
     supervised:
@@ -252,7 +255,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   
   def add(chemical: Chemical)(runLast: => Unit): Unit =
     supervised:
-      assertNotInFxThread(s"add measurement: $measurement")
+      assertNotInFxThread(s"add chemical: $chemical")
       fetcher.fetch(
         SaveChemical(objectAccount.get.license, chemical),
         (event: Event) => event match
