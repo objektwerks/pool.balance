@@ -280,9 +280,12 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         (event: Event) => event match
           case fault @ Fault(_, _) => onFetchFault("update chemical", chemical, fault)
           case ChemicalSaved(id) =>
-            observableChemicals.update(selectedIndex, chemical)
-            logger.info(s"Updated chemical from: $selectedIndex to: $chemical")
-            runLast
+            if selectedIndex > -1 then
+              observableChemicals.update(selectedIndex, chemical)
+              logger.info(s"Updated chemical from: $selectedIndex to: $chemical")
+              runLast
+            else
+              logger.error(s"Update of chemical: $chemical \nfailed due to invalid index: $selectedIndex")
           case _ => ()
       )
 
