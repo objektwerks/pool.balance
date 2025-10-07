@@ -166,8 +166,8 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       ChemicalSaved(
         supervised:
-          if chemical.id == 0 then retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addChemical(chemical) )
-          else retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateChemical(chemical) )
+          if chemical.id == 0 then retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.addChemical(chemical) )
+          else retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.updateChemical(chemical) )
       )
     catch
       case NonFatal(error) => Fault("Save chemical failed:", error)
