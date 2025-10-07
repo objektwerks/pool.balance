@@ -147,8 +147,8 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       MeasurementSaved(
         supervised:
-          if measurement.id == 0 then retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addMeasurement(measurement) )
-          else retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateMeasurement(measurement) )
+          if measurement.id == 0 then retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.addMeasurement(measurement) )
+          else retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.updateMeasurement(measurement) )
       )
     catch
       case NonFatal(error) => Fault("Save measurement failed:", error)
