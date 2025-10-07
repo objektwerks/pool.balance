@@ -119,7 +119,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       CleaningsListed(
         supervised:
-          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listCleanings(poolId) )
+          retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.listCleanings(poolId) )
       )
     catch
       case NonFatal(error) => Fault("List cleanings failed:", error)
