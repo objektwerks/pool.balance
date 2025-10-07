@@ -29,9 +29,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val selectedMeasurementId = ObjectProperty[Long](0)
   val selectedChemicalId = ObjectProperty[Long](0)
 
-  selectedPoolId.onChange { (_, oldPoolId, newPoolId) =>
-    logger.info("*** selected pool id onchange event: {} -> {}", oldPoolId, newPoolId)
-    shouldBeInFxThread("*** selected pool id onchange should be in fx thread.")
+  selectedPoolId.onChange { (_, _, newPoolId) =>
     cleanings(newPoolId)
     measurements(newPoolId)
     chemicals(newPoolId)
